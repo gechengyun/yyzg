@@ -1,0 +1,82 @@
+<!-- <import src="../public/editProductSearch.wxml" />
+<!--商品搜索 -->
+<!-- <import src="../public/warning.wxml" /> -->
+<!--警告提示-->
+<view class="container {{pageTheme}}">
+    <view class="top">
+        <view class="site" bind:tap="selectSite">
+            <text class="iconfont icon-dizhi text" style="color:#c8c8c8;"></text>
+            {{activeSite}}
+        </view>
+        <view class="map" bindtap="selectSite">
+            <text class="iconfont icon-qiehuan"style="color:#c8c8c8;"></text>
+            切换城市
+        </view>
+    </view>
+    <view class="shopList" wx:if="{{shopShow}}">
+        <block wx:for="{{shopHomeData}}">
+            <view class="shopListItem"    
+            data-pigcmsid="{{item.pigcms_id}}" 
+            catchtap="goShopList" 
+            data-id="{{item.pigcms_id}}" 
+            data-city="{{activeSite}}" 
+            data-status="{{item.status}}" 
+            data-shopname="{{item.name}}"
+            >
+                <view class="shopInfo">
+                    <view class="shopimg">
+                        <image src="{{item.images}}"></image>
+                    </view>
+                    <view class="shopText">
+                        <view class="shopName">
+                            <view class="name">
+                                {{item.name}}<text data-id="{{item.pigcms_id}}" class="shop_sign shop_sign_main" style='color:#F6A414;font-weight:bold;' wx:if="{{item.main_store*1}}">(总店)</text>
+                            </view>
+                            <view class="kilom" data-lat="{{item.lat}}" data-long="{{item.long}}" catchtap="oppeMap">
+                                {{item.distance  ? item.distance : '未知'}}
+                               <text class="iconfont icon-dizhi text" style="color:#c8c8c8;"></text>
+                            </view>
+                        </view>
+                        <view class="shopTime">
+                            营业时间： <text>{{item.business_time[0].open_time}} —— {{item.business_time[0].close_time}}</text>
+                        </view>
+                        <view class="shopSite">
+                            <view class="site">
+                                {{item.address}}
+                            </view>
+                            <view class="goShopList">
+                                <text class="iconfont icon-xiayibu"></text>
+                            </view>
+                        </view>
+                    </view>
+
+                </view>
+      
+            </view>
+        </block>
+
+    </view>
+    <view class="provinceList" wx:if="{{provinceShow}}">
+        <view class="item" wx:for="{{provinceList}}" data-citylist="{{item.city_list}}" data-name="{{item.province_name}}" bind:tap="provinceClick">
+            <view>
+                {{item.province_name}}
+            </view>
+            <view>
+               <text class="arrow iconfont icon-xiayibu"style="color:#c8c8c8"></text>
+            </view>
+        </view>
+
+    </view>
+    <view class="cityList" wx:if="{{cityShow}}">
+        <view class="item" wx:for="{{cityList}}" data-citycode="{{item.city}}" bind:tap="cityClick" data-name="{{item.city_name}}">
+            <view>
+                {{item.city_name}}
+            </view>
+            <view>
+               <text class="arrow iconfont icon-xiayibu"style="color:#c8c8c8"></text>
+            </view>
+        </view>
+    </view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

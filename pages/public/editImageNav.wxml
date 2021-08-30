@@ -1,0 +1,13 @@
+<!-- 图片导航 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="image_nav">
+    <view class="clearfix editImageNav" data-page="page.public.editImageNav">
+        <view wx:for="{{content.content}}" wx:key="index" style="width:{{100/content.content.length}}%;" bindtap="{{item.url=='ad_scan'?'ad_scan':''}}">
+            <navigator url="{{filter.urlTransform(item.url)}}" data-type="{{item.type}}" hover-class="none" open-type="{{item.type == 'switchTab' ? 'reLaunch' : 'navigate'}}">
+                 <image src="{{item.image}}" wx:if='{{item.image}}' mode="widthFix"  style="height:{{(winWidth-content.content.length*6)/content.content.length}}px;width:{{(winWidth-content.content.length*6)/content.content.length}}px" ></image> 
+                 <!-- <image src="{{item.image}}" mode="aspectFit" ></image> -->
+                <view style="height:50rpx;line-height:50rpx;">{{item.title}}</view>
+            </navigator>
+        </view>
+    </view>
+</template>

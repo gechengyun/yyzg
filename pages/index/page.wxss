@@ -1,0 +1,425 @@
+/* pages/index/index.wxss */
+@import "../../wxParse/wxParse.wxss";
+@import "../../wxss/new_activity_module.wxss";
+@import "../../wxss/activities.wxss";
+@import "../../wxss/public/store_map.wxss";
+@import "../../wxss/public/image_ad2.wxss";
+
+.productTitle {
+        height:auto;
+}
+.no-data {
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  padding-bottom:10rpx;
+  padding-top:10rpx;
+}
+.website .banner-list.bordered .banner-swiper{
+  width: 100%;
+  margin-left: 0rpx;
+  border-radius: 0!important;
+}
+.website .banner-list.bordered .banner-swiper image{
+  border-radius: 0!important;
+}
+.website .rich_text{
+  margin-bottom: 60rpx;
+}
+.website .wxParse-img{
+  margin-top: 32rpx;
+}
+.website .editStoreTextNavigation {
+  padding: 40rpx;
+  margin-top: 30rpx;
+}
+.website .videoed{
+  padding: 0 40rpx;
+}  
+page{
+  overflow-x: hidden;
+}
+/* 限时折扣 */
+.discount_allContainer .discount_topImageContainer {
+  width: 702rpx;
+  height: 150rpx;
+  margin: 0 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #fff; */
+}
+.topImage {
+  width: 50%;
+}
+.discount_allContainer .discount_scrollTab {
+  width: 100%;
+  height: 100rpx;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  background: #fff;
+} 
+.tab-fiexd{
+  position:fixed;
+  left:0;
+  top: 0;
+  z-index: 101;
+}
+.discount_allContainer .discount_timeContainer {
+  width: calc(100% - 175rpx);
+  padding: 12rpx 31rpx;
+  display: flex;
+  white-space: nowrap;
+  flex-direction: row; 
+  display: inline-block;
+}
+.discount_timeContainer .discount_timeItem {
+  margin: 0 13rpx;
+  height: 90rpx;
+  display: inline-block;
+}
+.discount_time {
+  width: auto;
+	height: 26rpx;
+	font-family: STHeitiSC-Medium;
+	font-size: 28rpx;
+	font-weight: bold;
+	font-stretch: normal;
+  color: #333333;
+  margin-bottom: 18rpx;
+  text-align: center;
+}
+.discount_title {
+  width: auto;
+	height: 24rpx;
+	font-family: PingFang-SC-Medium;
+	font-size: 22rpx;
+	font-weight: normal;
+	font-stretch: normal;
+  color: #333333;
+  text-align: center;
+}
+.discount_timeContainer .discount_timeItem:first-child {
+  margin-left: 0;
+}
+.discount_timeContainer .discount_timeItem:last-child {
+  margin-right: 0;
+}
+.discount_scrollTab .discount_header {
+  width: 64rpx;
+	height: 70rpx;
+	font-family: AdobeHeitiStd-Regular;
+	font-size: 72rpx;
+	font-stretch: normal;
+	line-height: 39prx;
+  display: inline-block;
+  margin-right: 12rpx;
+  margin-left: 24rpx;
+  margin-top: 14rpx;
+}
+.discount_active {
+  color: #fff;
+  height: 38rpx;
+  line-height: 38rpx;
+  border-radius: 20rpx;
+  padding: 0 10rpx;
+}
+.discount_contentContainer {
+  margin-top: 31rpx;
+}
+.discount_contentContainer .discount_contentItem {
+  width: 702rpx;
+  height: auto;
+  background-color: #fff;
+  display: block;
+  margin-left: 24rpx;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+}
+.discount_contentItem .discount_imgContainer {
+  width: 702rpx;
+  height: 292rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+.discount_imgContainer .discount_img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+  position: relative;
+}
+.discount_label {
+  width: 18%;
+  height: 20%;
+  position: absolute;
+  top: 0rpx;
+  left: 42rpx;
+}
+.discount_label .discount_labelImg {
+  width: 82%;
+  height: 43%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.discount_imgContainer .discount_img_style_1 {
+  width: 60%;
+  height: 100%;
+}
+.discount_shoppingContainer {
+  width: 702rpx;
+  height: auto;
+}
+.discount_shoppingTop {
+  width: 702rpx;
+  height: 81rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.discount_shoppingTimeContainer {
+  width: 572rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 28rpx;
+  /* justify-content: space-between; */
+}
+.discount_shoppingTimeContainer .discount_shoppingTitle {
+  color:white;
+  font-size:24rpx;
+  font-weight:normal;
+  width: 72rpx;
+  height: 30rpx;
+  margin-right: 18rpx;
+  margin-top: -8rpx;
+  white-space: nowrap;
+}
+.discount_shoppingTime {
+  width: auto;
+  height: 46rpx;
+  white-space: nowrap;
+}
+.discount_shoppingTime_item {
+  width: 38rpx;
+  height: 38rpx;
+  text-align: center;
+  line-height: 38rpx;
+  display: inline-block;
+  background: #fff;
+  font-size: 24rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  font-stretch: normal;
+  letter-spacing: 0rpx;
+  border-radius: 6rpx;
+}
+.discount_shoppingTime em {
+  color: #fff;
+  font-size: 22rpx;
+  margin: 0 10rpx;
+}
+.discount_progressBarContainer {
+  width: 180rpx;
+  height: 38rpx;
+  margin-left: 80rpx;
+  margin-top: 5rpx;
+  border-radius: 16px;
+  position: relative;
+}
+.discount_progressBar {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  opacity: 0.6;
+  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.discount_progressBarContainer .discount_progressBarPercent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 19rpx;
+  font-family: PingFang SC;
+  line-height: 38rpx;
+  font-weight:500;
+  white-space:nowrap;
+  overflow: hidden;
+}
+.discount_progressBarOver {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 19rpx;
+  font-family: PingFang SC;
+  line-height: 38rpx;
+  font-weight:500;
+  white-space:nowrap;
+}
+.discount_shoppingTop .discount_shoppingShare{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 36rpx;
+  margin-top: 5rpx;
+  padding: 5rpx;
+  border-radius: 50%;
+}
+.discount_shoppingBottom {
+  width: 702rpx;
+  height: auto;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  position: relative;
+  padding-bottom: 10rpx;
+}
+.discount_shoppingBottomTitle {
+  width: 624rpx;
+	height: auto;
+	font-family: PingFang-SC-Bold;
+	font-size: 30rpx;
+	font-weight: 600;
+	line-height: 36rpx;
+  color: #060606;
+  margin-left: 30rpx;
+  overflow: hidden;
+  margin-top: 16rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.discount_bottomTopicContainer {
+  width: auto;
+  /* height: 36rpx; */
+  display: flex;
+  align-items: center;
+  font-size:24rpx;
+  font-family:PingFang SC;
+  font-weight:500;
+  line-height:36rpx;
+  margin-top: 20rpx;
+  margin-left: 32rpx;
+}
+.discount_bottomTopic {
+  height: 34rpx;
+  position: relative;
+  margin-right: 20rpx;
+}
+.discount_bottomTopicBg {
+  width: 100%;
+  height: 100%;
+  border-radius: 17rpx;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.discount_bottomTopicTitle {
+  text-align: center;
+  line-height: 34rpx;
+  padding: 0 20rpx;
+}
+.discount_shoppingBottomPrice {
+  width: auto;
+  height: 80rpx;
+  margin-left: 29rpx;
+  margin-top: 18rpx;
+  position: relative;
+}
+
+.discount_discountPrice {
+  height:34rpx;
+  font-size:40rpx;
+  font-family:STHeitiSC;
+  font-weight:bold;
+  line-height:48rpx;
+  display: inline-block;
+  margin-top: 26rpx;
+}
+.discount_originalPrice {
+  height:20rpx;
+  font-size:24rpx;
+  font-family:STHeitiSC;
+  font-weight:bold;
+  text-decoration:line-through;
+  color:rgba(153,153,153,1);
+  line-height:48px;
+  margin-left: 15rpx;
+  position: relative;
+}
+.discount_shoppingBottomPrice em {
+  font-size: 26rpx;
+  font-family:STHeitiSC;
+  font-weight:bold;
+  margin-right: 4rpx;
+}
+.discount_shoppingBottom .discount_profit {
+  width:146rpx;
+  height:60rpx;
+  box-shadow:0px 6px 10px 0px rgba(235,51,73,0.22);
+  border-radius:8rpx;
+  position: absolute;
+  top: 16rpx;
+  left: 394rpx;
+}
+.discount_shoppingBottom .discount_rushPurchase {
+  position: absolute;
+  top: -14rpx;
+  left: 484rpx;
+  font-size: 84rpx;
+}
+.discount_rushPurchase .discount_rushPurchaseTitle {
+  position: absolute;
+  left: 46rpx;
+  top: 22rpx;
+  font-family:PingFang SC;
+  font-weight:bold;
+  font-size: 32rpx;
+  width: 96rpx;
+  text-align: center;
+}
+.discount_profitPrice {
+  width:100rpx;
+  height:26rpx;
+  font-size:24rpx;
+  font-family:Adobe Heiti Std;
+  color:#fff;
+  line-height:26rpx;
+  text-align: center;
+  margin-top: 3rpx;
+}
+.discount_profitTitle {
+  width:100rpx;
+  height:28rpx;
+  font-size:24rpx;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:#fff;
+  line-height: 28rpx;
+  text-align: center;
+  margin-top: 3rpx;
+}
+.discount_tabFiexd {
+  position:fixed;
+  left:0;
+  top: 0;
+  z-index: 101;
+}

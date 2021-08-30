@@ -1,0 +1,119 @@
+.input-title{
+  font-size: 30rpx;
+  color: #fff;
+  padding: 16rpx 40rpx;
+}
+.input-wrap{
+  background: #fff;
+  
+}
+.input-box{
+  position: relative;
+  padding: 0rpx 40rpx;
+  height: 80rpx;
+  border-bottom: 1px solid #e4e4e4;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.input-box icon{
+  margin-top: -12rpx;
+
+}
+/* .input-box icon{
+  position: absolute;
+  top:6rpx;
+  right: 30rpx;
+} */
+.input-wrap input{
+  width: 85%;
+  font-size: 28rpx;
+}
+.tip-text{
+  padding: 12rpx 40rpx;
+  display: flex;
+}
+.tip-text icon{
+  display: block;
+  width: 40rpx;
+  margin-right: 10rpx;
+
+}
+.tip-text text{
+  flex: 1;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 40rpx;
+}
+.question-tip{
+  padding: 14rpx 40rpx;
+  font-size: 22rpx;
+  color: #999;
+  line-height: 36rpx;
+}
+.question-tip text{
+  display: block;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #666;
+  text-align: center;
+}
+.uploadImg-wrap{
+  padding: 20rpx 40rpx;
+  overflow: hidden;
+}
+.uploadImg-btn{
+  position: relative;
+  float: left;
+  width:300rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #666;
+  height: 200rpx;
+  border:6rpx dotted #ccc;
+  
+}
+.uploadImg-btn icon{
+  position: absolute;
+  right: -22rpx;
+  top: -36rpx;
+}
+.uploadImg-btn:nth-child(1){
+  margin-right: 47rpx;
+}
+.uploadImg-btn text{
+  display: block;
+  font-size: 120rpx;
+  text-align: center;
+  color: #ccc;
+}
+.explameImg-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 40rpx;
+}
+.explameImg-wrap view{
+  flex: 1;
+}
+.explameImg-wrap text{
+  display: block;
+  line-height: 50rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #ccc;
+}
+.explameImg-wrap image{
+  display: block;
+  margin: 0 auto;
+  width: 240rpx;
+  height: 160rpx;
+  background: #000;
+}
+.clickIcon{
+  width: 15%;
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

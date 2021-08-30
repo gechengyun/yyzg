@@ -1,0 +1,25 @@
+<!-- 商品 -->
+<template name="goods_component">
+  <import src="../public/goodsTempList.wxml" />
+  <!-- <import src="../public/businessList.wxml" /> -->
+  <view class="shopProduct editProduct {{content.content.product_list == '' ? 'hide' : '' }}" data-page="page.public.shopProduct" data-desc="商品普通列表" style="margin-top:20rpx;">
+    <!-- 新增商品滑动 -->
+    <view class='list-conent my-list'>
+      <!-- 
+            display_style的值
+            1=show_pic_big=>大图模块
+            2=show_slide_big=>滑动模式-大图
+            3=show_slide_small=>滑动模式-小图
+            4=show_line_2=>一行两个
+            5=show_line_3=>一行3个
+            6=show_detail=>详细信息
+            7=show_big_small=>一大俩下
+            -->
+      <view class="goods-list-box show-style-6 index-goods">
+      
+        <template is="goodsList" data="{{content:content.content,themeColor:themeColorValue,baseImgUrl:'https://s.404.cn/applet/',size:content.content.display_style,is_member,show_index_img,is_gift,storeData}}" />
+      </view>
+    </view>
+
+  </view>
+</template>

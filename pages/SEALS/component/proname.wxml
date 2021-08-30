@@ -1,0 +1,11 @@
+<template name="proname">
+  <view class="card-product card-list">
+      <view class="cp-name list-name">{{titleName.tname}}</view>
+      <view class="clearfix">
+        <view class="cp-list" wx:for="{{cardData.product}}" wx:key='{{index}}' bindtap="goDetailed" data-pid="{{item.product_id}}">
+          <image class="cp-img" mode="widthFix" src='{{item.image}}'></image>
+          <view class="cp-describe">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+</template>

@@ -1,0 +1,53 @@
+<!-- <view class="password-setting pinkDarkTheme">
+    <view class="password-box" bindtap="focusInput">
+        <view class="password-set-name">支付密码：</view>
+        <view class="password-item"
+              wx:for="{{[1,2,3,4,5,6]}}"
+              wx:key="index">
+            {{currentPw.length >= item ? (pwShow ? currentPw[index] : "●") : ""}}
+        </view>
+    </view>
+    <view class="password-box" bindtap="focusInputAgin">
+        <view class="password-set-name">确认密码：</view>
+        <view class="password-item"
+              wx:for="{{[1,2,3,4,5,6]}}"
+              wx:key="index">
+            {{currentPw.length >= item ? (pwShow ? currentPw[index] : "●") : ""}}
+        </view>
+    </view>
+    <view class="password-desc">
+        <text class="password-desc-left">为了您的资金安全，支付密码将仅用于支付</text>
+        <text class="password-desc-right" bindtap="toggleShowPassword">{{pwShowName}}</text>
+    </view>
+    <view class="password-save-btn" bindtap="savePassword">保存密码</view>
+    <input class="password-hidden"
+           type="number"
+           focus="{{focus}}"
+           bindinput="inputPassword"
+    />
+</view>
+<include src="/pages/public/page_footer.wxml"></include> -->
+
+<!-- 输入密码 -->
+<view class="page-pwd-content">
+    <view class="pwd-block">
+        <input class="txtInput" data-type="pwd" type="number" password="{{isTypePwd}}" placeholder="请输入6位数字密码" bindinput="pwdStatus" bindblur="inputPwd" maxlength="6"></input> 
+    </view>
+     <view class="pwd-block pwd1">
+        <input class="txtInput" data-type="pwd1" type="number" password="{{isTypePwd}}" placeholder="请再次输入密码" bindinput="pwdStatus" bindblur="inputPwd" maxlength="6"></input>
+    </view>
+
+    <view class="iconfont-block">
+        <text class="message" style="color:{{message=='校验通过' ? 'green' : 'red'}}">{{message}}</text>
+        <text class="iconfont {{isTypePwd ? 'icon-yanjing1' : 'icon-guanbi-yanjing'}}" bindtap="changePwdStatus"></text>
+    </view>
+    
+    
+    <view class="see-pwd">
+        <text class="iconfont"></text>
+    </view>
+
+    <button type="button" class="btn-keep-pwd" style="background-color:{{themeColorValue}}" catchtap="keppPwdFun" loading="{{isLoading}}">保存密码</button>
+    <view class="tips">(为了您的资金安全，支付密码仅用于支付)</view>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

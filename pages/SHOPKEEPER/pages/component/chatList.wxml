@@ -1,0 +1,30 @@
+<template name="chatList">
+  <!-- 聊天列表 -->
+  <view class="chat-list" wx:if="{{sayList.list && sayList.list.length>0}}">
+    <view class="chat-item" wx:for="{{sayList.list}}" wx:key="index">
+      <image class="chat-avatar-img" src="{{item.avatar}}" mode="widthFix"></image>
+      <view class="chat-content">
+        <view class="chat-item-t">
+          <view class="chat-item-name">{{item.nickname}}<text class="chat-item-tip" wx:if="{{item.isself*1 == 1}}">楼主</text></view>
+          <view class="chat-item-like {{item.ismylike*1==1?'chat-item-liked':''}}" data-likeid="{{item.id}}" data-idxs="{{index}}" bindtap="listHeart">
+            <text class="iconfont icon-xihuan"></text>
+            <text>{{item.likenumstr}}</text>
+          </view>
+        </view>
+        <view class="chat-item-m">{{item.content}}</view>
+        <view class="chat-item-b">{{item.addtime}}</view>
+      </view>
+    </view>
+    
+    <view class="end" style="margin:80rpx 0;" wx:if='{{sayList.list && sayList.list.length>0 && isOver}}'>
+      <text>THE  END</text>
+    </view>
+  </view>
+  <view class="main" wx:if="{{sayList.list && sayList.list.length == 0}}">
+    <view class="data_null_block comment-empy">
+      <image src="https://s.404.cn/applet/images/data_null.png" style="width:520rpx;" mode="widthFix"></image>
+      <text class="tips" style="font-weight:bold;color:#999;">暂无评论</text>
+      <text class="tips" style="margin-top:10rpx;">赶紧发表评论吧~</text>
+    </view>
+  </view>
+</template>

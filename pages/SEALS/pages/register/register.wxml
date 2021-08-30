@@ -1,0 +1,122 @@
+<!--pages/SEALS//pages/register/register.wxml-->
+<import src="../../../public/warning.wxml" />
+<import src="../../component/showVideo.wxml"></import>
+<view class="container {{pageTheme}}" wx:if="{{testCode==0}}">
+  <form bindsubmit="grouperSave" bindreset="formReset">
+    <view class="content">
+      <view class="title">
+        <view class="logo-pic" style="border-color:{{themeColorValue}};box-shadow: 0 0 16rpx 0 {{themeColorValue}};"></view>
+        <view>基本信息</view>
+      </view>
+      <view class="list list-head">
+        <view class="list-left">头像</view>
+        <button class="list-right" bindtap="getHeaderPhoto">
+          <image class="head-img" src='{{group_detail.avatarUrl}}' wx:if="{{group_detail.avatarUrl}}"></image>
+          <image class="head-img" src='https://s.404.cn/applet/images/wxcopy/head.png' wx:else></image>
+          <image src='https://s.404.cn/applet/images/wxcopy/right.png'></image>
+        </button>
+      </view>
+      <view class="list">
+        <view class="list-left">姓名</view>
+        <view class="list-right">
+          <input placeholder="必填" placeholder-style="color:#C0C4CC;" bindblur="bindName" value='{{group_detail.name}}'></input>
+          <image src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </view>
+      </view>
+      <view class="list">
+        <view class="list-left">职位</view>
+        <view class="list-right">
+          <input placeholder="必填" placeholder-style="color:#C0C4CC;" bindblur="bindWork" value='{{group_detail.work}}'></input>
+          <image src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </view>
+      </view>
+      <view class="list">
+        <view class="list-left">手机号</view>
+        <button class='list-right' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" disabled="{{phoneNumber}}">
+          <input placeholder="必填" bindinput="bindTel" placeholder-style="color:#C0C4CC;" value='{{phoneNumber || group_detail.tel}}'></input>
+          <image wx:if="{{!phoneNumber}}" src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </button>
+      </view>
+      <view class="list">
+        <view class="list-left">固定电话</view>
+        <view class="list-right">
+          <input placeholder="选填" placeholder-style="color:#C0C4CC;" bindblur="bindCall" value='{{group_detail.call}}'></input>
+          <image src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </view>
+      </view>
+      <view class="list">
+        <view class="list-left">微信</view>
+        <view class="list-right">
+          <input placeholder="选填" placeholder-style="color:#C0C4CC;" bindblur="bindChat" value='{{group_detail.chat}}'></input>
+          <image src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </view>
+      </view>
+      <view class="list">
+        <view class="list-left">邮箱</view>
+        <view class="list-right">
+          <input placeholder="选填" placeholder-style="color:#C0C4CC;" bindblur="bindEmail" value='{{group_detail.email}}'></input>
+          <image src='https://s.404.cn/applet/images/wxcopy/pen.png'></image>
+        </view>
+      </view>
+    </view>
+    <view class="content" wx:if="{{way}}">
+      <view class="title">
+        <view class="logo-pic" style="border-color:{{themeColorValue}};box-shadow: 0 0 16rpx 0 {{themeColorValue}};"></view>
+        <view>个人简介</view>
+      </view>
+      <view class="list my-list" bindtap="showTextarea">
+        <textarea placeholder='请简要概括您的个人信息' placeholder-style="color:#C0C4CC;" cursor-spacing='20' bindblur="hideTextarea" bindinput='bindApplynotes' auto-focus="true" maxlength='200' value='{{group_detail.introduce}}' wx:if="{{textareaShow}}"></textarea>
+        <rich-text nodes="{{group_detail.introduce}}" class="new-textarea" wx:if="{{!textareaShow}}"></rich-text>
+        <text class="list-num {{group_detail.introduce.length>170?'list-num-red':''}}">{{group_detail.introduce.length||0}}/200</text>
+      </view>      
+    </view>
+    <view class="content" wx:if="{{way}}">
+      <view class="title video-title">
+        <view class="logo-pic" style="border-color:{{themeColorValue}};box-shadow: 0 0 16rpx 0 {{themeColorValue}};"></view>
+        <view>我的视频<text>（视频大小25M/5分钟内）</text></view>
+      </view>
+      <view class="video-list" wx:if="{{videoSrc != ''}}">
+        <block wx:for="{{videoSrc}}">
+          <view class="videoed">
+            <video src="{{item.fileurl}}" id='video{{index}}' controls class='slide_video' poster="{{item.coverimg}}" data-index="{{index}}"></video>
+            <view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="video"></view>
+            <view wx:if="{{index != playIndex}}" bindtap="videoPlay" data-index="{{index}}" class="videoplay">
+              <!-- <text class="iconfont icon-play"></text> -->
+            </view>
+          </view>
+        </block>        
+      </view>
+      <view class="list video-list">
+        <view class="iconfont icon-jia" style="color:{{themeColorValue}}" bindtap="addVideo">添加视频</view>
+      </view>      
+    </view>
+    <view class="content content-pic" wx:if="{{way}}">
+      <view class="title img-title">
+        <view class="logo-pic" style="border-color:{{themeColorValue}};box-shadow: 0 0 16rpx 0 {{themeColorValue}};"></view>
+        <view>我的图集<text>（图片不超过9张）</text></view>
+      </view>
+      <view class="img-list" wx:if="{{imgSrc != ''}}">
+        <block wx:for="{{imgSrc}}">
+          <view class="imaged">
+            <image src="{{item}}" mode="widthFix" class="slide_img"></image>
+            <view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="image"></view>
+          </view>
+        </block>
+      </view>
+      <view class="list img-list" wx:if="{{imgSrc.length<9}}">
+        <view class="iconfont icon-jia" style="color:{{themeColorValue}}" bindtap="addImage">添加图集</view>
+      </view>      
+    </view>
+    <button size="default" class="sub-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover" form-type="submit" wx:if="{{!way}}">保存</button>
+    <button size="default" class="sub-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover" form-type="submit" wx:else>保存</button>
+  </form>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<view class="tips" wx:else>
+   <image class="tips-img" mode="widthFix" src='https://s.404.cn/applet/images/wxcopy/empty-tip.png'></image>
+   <view>二维码已过期</view>
+   <text>请联系后台管理员重新获得</text>
+</view>
+<!-- 底部Tab -->
+<view style="width:100%;height:100rpx;"></view>
+<include src="/pages/public/page_footer.wxml"></include>

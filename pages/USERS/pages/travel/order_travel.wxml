@@ -1,0 +1,105 @@
+<!--旅游下单页面-->
+<import src="../../../public/warning.wxml" />
+<scroll-view scroll-top="{{scrollTop}}" class="orderTravel container {{pageTheme}}" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="pages.travel.order_travel">
+
+    <!--日期选择-->
+    <view class="section dateSection">
+        <view class="sectionTitle">可选预定日期</view>
+        <view class="monthNav">
+            <view wx:for='{{detail.months}}' wx:key="index" class="monthItem {{item.checked?'active':''}}" data-month="{{item.value}}" data-index="{{index}}" data-year="{{item.year}}" bindtap="handleCalendar">
+                {{item.text}}
+                <i class="{{item.checked ? 'active' : ''}}"></i>
+            </view>
+        </view>
+        <view class="flex box box-tb box-align-center">
+            <view class="calendar pink-color box box-tb">
+                <view class="weeks box box-lr box-pack-center box-align-center">
+                    <view class="flex flex-center week fs28" wx:for="{{weeks_ch}}" wx:key="index" data-idx="{{index}}"> {{item}}</view>
+                </view>
+                <view class="days box box-lr box-wrap">
+                    <view wx:if="{{hasEmptyGrid}}" class="grid white-color box box-align-center box-pack-center" wx:for="{{empytGrids}}" wx:key="index" data-idx="{{index}}">
+                    </view>
+                    <view class="grid white-color box box-align-center box-pack-center {{ item.index == item.canChooseDay ? 'light-pink-bg' : '' }} {{index==chosenDay-1 ? 'border-radius pink-bg' : ''}}" wx:for="{{days}}" wx:key="index" data-idx="{{index}}" data-index="{{item.index}}" bindtap="chooseDate">
+                        <view class="day box  {{index==chosenDay-1 ? 'border-radius pink-bg' : ''}} box-align-center box-pack-center">{{item.index}}</view>
+                        <view class="price" wx:if="{{chosenMoney}}">￥{{chosenMoney}}</view>
+                    </view>
+                </view>
+            </view>
+        </view>
+
+    </view>
+
+    <!--出行人数-->
+    <view class="section peopleSection">
+        <view class="sectionTitle">
+            出行人数
+            <span wx:if='{{detail.product.people_quota_min}}'>
+                [最小预定人数{{detail.product.people_quota_min}}人]
+            </span>
+        </view>
+        <view class="peopleList">
+            <view class="adultItem peopleItem" wx:for='{{nowArray}}' wx:key="unique">
+                <view class="leftLabel">
+                    <text>{{item.value}}：</text>
+                    <text class="itemPrice">￥{{item.price}}</text>
+                </view>
+                <view class="rightBox">
+                    <text class="iconfont icon-jianhao" data-value='{{item.value}}' data-type="{{item.is_child}}" data-skuid="{{item.sku_id}}" bindtap="reducePerson"></text>
+                    <text class="itemNum">{{item.num}}</text>
+                    <text class="iconfont icon-jiahao" data-value='{{item.value}}' data-type="{{item.is_child}}" data-skuid="{{item.sku_id}}" bindtap="addPerson"></text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!--联系人信息-->
+    <view class="section contactSection" wx:if="{{contact != ''}}">
+        <view class="sectionTitle">联系人信息</view>
+        <view class="contactList">
+            <view class="listItem" wx:for="{{contact}}" wx:key='{{index}}' bindtap="">
+                <view class="leftLabel">{{item.field_name}}</view>
+                <view class="rightBox">
+                    <input type="{{item.type}}" bindinput="bindInfoInput" data-index='{{index}}' placeholder="{{item.placeholder}}" maxlength="{{item.maxlength}}" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;"
+                    />
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!--出行人信息-->
+    <view class="section travelerSection" wx:for="{{nowArray}}" wx:key="unique" wx:for-item="item" wx:if='{{item.value=="成人" &&item.num>0}}'>
+        <view class="sectionTitle">出行人信息</view>
+        <view class="travelerList">
+            <view class="listItem" wx:for="{{item.num}}" wx:for-item="info" wx:key="{{info.index}}" bindtap="">
+                <view class="leftLabel">{{'出行人'+(index+1)}}</view>
+                <view class="rightBox">
+                    <input type="idcard" placeholder="请输入身份证号" data-index="{{index}}" bindinput="idCardInput" maxlength="18" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <!--协议-->
+    <view class="section agreementSection" bindtap="goAgreement">
+        <view class="agreementBox {{agreement?'active':''}}">
+            <text class="iconfont icon-duihao1 {{agreement?'active':''}}"></text> 我已阅读并接受
+            <text class="agreement">旅游合同</text> 中的所有条款
+        </view>
+    </view>
+
+    <!--底部菜单-->
+    <view class="shoppingCatFooter">
+        <view class="clearfix  ulList" wx:if="{{productData.product.is_reservation*1!=1}}">
+            <view class="shoppingCatButton reserPrice" data-type="self_buy" bindtap="oppenShopping" data-product="{{productData.product.product_id}}">
+                <text>金额</text>
+                <text class="price">￥{{allMoney}}</text>
+            </view>
+            <view class="shoppingCatButton yuding {{agreement?'active':''}}" data-type="add_cart" bindtap="goPay" data-product="{{productData.product.product_id}}">
+                <text>去支付</text>
+            </view>
+        </view>
+    </view>
+
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</scroll-view>
+<include src="/templates/page_footer.wxml"></include>

@@ -1,0 +1,320 @@
+/* pages/user/membersDetails/membersDetails.wxss */
+.menber{
+  padding-bottom: 120rpx;
+}
+.menber .header {
+  width: 100%;
+  height: 290rpx;
+}
+
+.menber .header .user {
+  padding: 0 32rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  padding-top: 20rpx;
+}
+
+.user image {
+  width: 121rpx;
+  height: 121rpx;
+  border-radius: 550%;
+  border: 2px solid white;
+  background: gainsboro;
+  margin-right: 30rpx;
+}
+
+.user .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 121rpx;
+}
+
+.user .info .name {
+  font-size: 32rpx;
+  color: #fff;
+}
+
+.user .info .name {
+  display: flex;
+  align-items: center;
+}
+
+.user .info .name .txt {
+  width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user .info .type {
+  width: max-content;
+  height: 32rpx;
+  font-size: 20rpx;
+  color: white;
+  line-height: 32rpx;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16rpx;
+  position: relative;
+  padding: 5rpx 10rpx;
+}
+
+.my_project {
+  width: 702rpx;
+  height: 335rpx;
+  background-color: #fff;
+  box-shadow: 0rpx 4rpx 15rpx 0px rgba(0, 0, 0, 0.09);
+  border-radius: 12rpx;
+  margin: 0 auto;
+  margin-top: -100rpx;
+}
+
+.my_project .title {
+  width: 100%;
+  padding: 36rpx 26rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.my_project .title .txt {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.my_project .title .more {
+  font-size: 24rpx;
+  color: #c0c0c0;
+}
+
+.my_project .title .more image {
+  width: 18rpx;
+  height: 18rpx;
+}
+
+.my_project .num {
+  font-size: 24rpx;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.my_project .num text {
+  color: #eb3349;
+}
+
+progress {
+  width: 520rpx;
+  margin: 32rpx auto 0;
+}
+
+.my_project .conut {
+  width: 520rpx;
+  margin: 10rpx auto 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20rpx;
+  color: #c4c3c3;
+}
+
+.yao_btn {
+  width: 406rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: white;
+  font-size: 28rpx;
+  border-radius: 30rpx;
+  margin: 0 auto;
+}
+
+.qus_title {
+  width: max-content;
+  height: 54rpx;
+  margin: 0 auto;
+  margin-top: 78rpx;
+  color: white;
+  padding: 0 82rpx;
+  font-size: 30rpx;
+  line-height: 54rpx;
+  border-radius: 20rpx 0 20rpx 0;
+  box-shadow: 0px 5rpx 12rpx 0px rgba(0, 0, 0, 0.54);
+}
+
+.anser {
+  width: 635rpx;
+  padding: 28rpx 16rpx;
+  box-sizing: border-box;
+  border-radius: 20rpx;
+  margin: 44rpx auto 0;
+  box-shadow: 0px 5rpx 12rpx 0px rgba(0, 0, 0, 0.54);
+}
+
+.anser .content {
+  background: white;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  color: #333;
+  padding: 35rpx 18rpx;
+  box-sizing: border-box;
+}
+
+.anser .content text{
+  line-height: 45rpx;
+}
+
+ .anser .content1 {
+  padding: 0;
+}
+
+.anser .content1 .shopdetails {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 26rpx 35rpx;
+}
+.anser .content1 .shopdetails image {
+  width: 196rpx;
+  height: 219rpx;
+}
+
+.shopdetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.shopdetails .details{
+  height: 220rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.shopdetails .shoptitle {
+  width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.shopdetails .price{
+  margin-bottom:10rpx; 
+}
+.shopdetails .price1{
+ display: flex;
+ align-items: center;
+}
+
+.shopdetails .price .zhuan{
+  width: max-content;
+	height: 30rpx;
+  line-height: 30rpx;
+  color: white;
+  font-size: 18rpx;
+	background-color: #f62049;
+	border-radius: 0px 15px 15px 15px;
+  padding: 0 15rpx;
+}
+.shopdetails .price .num{
+  width: max-content;
+  color: #f62049;
+  font-size: 50rpx;
+}
+.shopdetails .price .num text{
+  font-size: 30rpx;
+}
+.old_price{
+  width: max-content;
+  color:#e1e1e1;
+  font-size: 24rpx;
+  position: relative;
+}
+.old_price .line{
+  width: 100%;
+  height: 1px;
+  background: #e1e1e1;
+  position: absolute;
+  top: 50%;
+}
+.h_line{
+  width: 534rpx;
+	height: 1rpx;
+	background-color: #f4f4f4;
+  margin: 0 auto;
+}
+.anser .item{
+  width: 100%;
+  padding: 30rpx 35rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.anser .item .title{
+  font-size: 30rpx;
+	color: #333333;
+  font-weight: 600;
+}
+.anser .item .notice{
+  font-size: 20rpx;
+  margin-top: 20rpx;
+}
+.anser .item image{
+  width: 150rpx;
+  height: 150rpx;
+}
+
+button::after{
+ border: none;
+}
+
+/**分享按钮**/
+.sharebutton{
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20rpx 0;
+}
+.sharebutton .item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: normal;
+  background: none;
+  font-size: 22rpx;
+}
+.sharebutton .item image{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: gainsboro;
+  margin-bottom: 10rpx;
+  display:block;
+  padding:28rpx;
+  box-sizing:border-box;
+}
+
+.haibaoimg{
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 11111;
+  transform: translate(-50%,-50%) scale(0.8);
+  width: 635rpx;
+  height: 1100rpx;
+}
+
+canvas{
+  position: fixed;
+  top:-500%;
+  left: 0;
+  z-index: -1;
+}

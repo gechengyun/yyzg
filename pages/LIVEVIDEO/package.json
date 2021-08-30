@@ -1,0 +1,17 @@
+{
+  "name": "livevideo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "cos-wx-sdk-v5": "^0.7.10",
+    "miniprogram-sm-crypto": "^0.1.0",
+    "tim-wx-sdk": "^2.7.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,35 @@
+<!--产品信息通用模板-->
+<template name="shoppingProduct">
+  <cover-view class="shoppingProduct clearfix" data-page="pages.LIVEVIDEO.pages.component.shoppingProduct" style="background:#fff">
+    <navigator class="liveshoppro" url="/pages/product/details?product_id={{product.product_id}}" hover-class="none" open-type="redirect">
+      <cover-view class="shoppingImg">
+        <cover-image src="{{product.image}}" mode="aspectFit"></cover-image>
+      </cover-view>
+      <cover-view class="shoppingInfo clearfix" >
+        <cover-view class="shoppingName textOmitted2">{{product.name}}
+          <cover-view class="shoppingNameTxt" wx:if="{{product.pro_num}}">×{{product.pro_num}}</cover-view>
+        </cover-view>
+        <cover-view class="left-content">
+          <cover-view class="price" wx:if="{{type != 'make' && product.price}}">¥{{product.price}}</cover-view>
+          <cover-view class="price" wx:if="{{type != 'make' && (product.from_point_shop==1)}}">+
+            <cover-view class="iconfont icon-jifen"></cover-view>{{product.point_exchange_num}}</cover-view>
+          <cover-view class="price" wx:if="{{type == 'make'}}">{{product.custom_reservation_name ? product.custom_reservation_name : '预约'}}定金：¥{{product.reservation_deposit}}</cover-view>
+          <cover-view class="price" wx:if="{{product.pro_price}}">¥{{product.pro_price}}
+            <block wx:if="{{product.is_present*1}}"> 赠送</block>
+            <block wx:if="{{(product.discount)&&(product.is_present=='0')&&(product.is_point_exchange!=1)}}}"> x{{product.discount}}折</block>
+          </cover-view>
+          <!-- 上门服务 -->
+          <cover-view wx:if='{{product.special_product_type==95}}' class='service_btn'>上门服务</cover-view>
+
+          <cover-view class="shoppingSole" wx:if="{{product.quantity}}">库存:{{product.quantity}}</cover-view>
+          <cover-view class="shoppingSole" wx:if="{{product.sku_data_arr}}">
+            <block wx:for="{{product.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+          </cover-view>
+          <cover-view class="shoppingSole" wx:if="{{product.sku_arr}}">
+            <block wx:for="{{product.sku_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </navigator>
+  </cover-view>
+</template>

@@ -1,0 +1,11 @@
+<view class="container {{pageTheme}}">
+    <view class="storeLogo">
+        <image src="{{shopHomeData.store.logo}}"></image>
+        <text>{{shopHomeData.store.name}}</text>
+    </view>
+    <!--     <view class="loginButton" bindtap="navigateTo">确定登录</view>
+     -->
+    <view class="loginTxt" bindtap="navigateTo">登陆跳转中...</view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,88 @@
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<template name="chatList">
+  <view class="live-chat-box" style="bottom:{{inputBottom ? (inputBottom+5+'px') : '120rpx'}}">
+    <!-- <cover-image class="live-chat-shadow" src="https://s.404.cn/applet/images/qudao/zhibo/livechatshadow.png"></cover-image> -->
+    <view class="live-chat" scroll-top="{{scrollTop}}">
+      <view class="chat-list">
+        <!-- 公告 -->
+        <view class="chat-live chat-content chat-notice" wx:if="{{liveVideoData.live_room_announcement != ''}}">公告：{{liveVideoData.live_room_announcement}}</view>
+        <block>
+          <!-- 大转盘中奖 -->
+          <view class="chat-live" wx:for="{{barrageArr}}" wx:key="index" wx:if="{{item.typeName === 'lucky' && item.content.length > 0}}">
+            <block >
+             <view class="chat-content">{{item.content}}</view>
+            </block>
+          </view>
+        </block>
+        <block wx:if="{{liveVideoData.live_reward.reward_open && liveVideoData.live_reward.group_open}}">
+          <!-- 开启了打赏与粉丝团 -->
+          <view class="chat-live" wx:for="{{barrageArr}}" wx:key="index" wx:if="{{item.typeName !== 'lucky' && item.content.length > 0}}">
+            <block wx:if="{{item.level && item.level>0}}">
+              <!-- 有等级的时候有等级图标 -->
+              <block wx:if="{{filter.getStrleng(item.name) <= 32}}">                
+                <view class="chat-name" style="color: {{nameColor[index%4]}}">
+                  <view class="chat-level">
+                    <image class="chat-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{item.level}}.png'></image>
+                    <view class="chat-level-name">{{item.level_name}}</view>
+                  </view>
+                  <view class="chat-content_text">{{item.name}}</view>
+                </view>
+                <view class="chat-content chat-content-first">
+                  <view class="chat-content_text after-box">{{filter.wrapChat(item.content,filter.ceilFun(filter.getStrleng(item.name)/2),16,16)}}</view>
+                </view>
+                <view class="chat-content" wx:if="{{filter.ceilFun(filter.getStrleng(item.name)/2) + item.content.length>16}}">{{filter.wrapChat(item.content,filter.ceilFun(filter.getStrleng(item.name)/2),filter.ceilFun(filter.getStrleng(item.name)/2)+item.content.length,16)}}</view>
+              </block>
+              <block wx:else>
+                <view class="chat-name" style="color: {{nameColor[index%4]}};float:unset;">
+                  <view class="chat-level">
+                    <image class="chat-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{item.level}}.png'></image>
+                    <view class="chat-level-name">{{item.level_name}}</view>
+                  </view>
+                  <view class="chat-content_text">{{item.name}}</view>
+                </view>
+                <view class="chat-content">{{item.content}}</view>
+              </block>
+            </block>
+            <block wx:else>
+              <!-- 没等级图标 -->
+              <block wx:if="{{filter.getStrleng(item.name) <= 40}}">                
+                <view class="chat-name" style="color: {{nameColor[index%4]}};padding: 10rpx 0 10rpx 12rpx;">
+                  <view class="chat-content_text">{{item.name}}</view>
+                </view>
+                <view class="chat-content chat-content-first">
+                </view>
+                <view class="chat-content" wx:if="{{filter.ceilFun(filter.getStrleng(item.name)/2) + item.content.length>20}}">{{filter.wrapChat(item.content,filter.ceilFun(filter.getStrleng(item.name)/2),filter.ceilFun(filter.getStrleng(item.name)/2)+item.content.length,20)}}</view>
+              </block>
+              <block wx:else>
+                <view class="chat-name" style="color: {{nameColor[index%4]}};float:unset;">
+                  <view class="chat-content_text">{{item.name}}</view>
+                </view>
+                <view class="chat-content">{{item.content}}</view>
+              </block>
+            </block>
+          </view>
+        </block>
+        <block wx:else>
+          <!-- 未开启打赏、粉丝团 -->
+          <view class="chat-live" wx:for="{{barrageArr}}" wx:key="index" wx:if="{{item.typeName !== 'lucky' && item.content.length > 0}}">
+            <block wx:if="{{filter.getStrleng(item.name) <= 40}}">                
+              <view class="chat-name" style="color: {{nameColor[index%4]}};padding: 10rpx 0 10rpx 12rpx;">
+                <view class="chat-content_text">{{item.name}}</view>
+              </view>
+              <view class="chat-content chat-content-first">
+                <view class="chat-content_text after-box">{{filter.wrapChat(item.content,filter.ceilFun(filter.getStrleng(item.name)/2),20,20)}}</view>
+              </view>
+              <view class="chat-content" wx:if="{{filter.ceilFun(filter.getStrleng(item.name)/2) + item.content.length>20}}">{{filter.wrapChat(item.content,filter.ceilFun(filter.getStrleng(item.name)/2),filter.ceilFun(filter.getStrleng(item.name)/2)+item.content.length,20)}}</view>
+            </block>
+            <block wx:else>
+              <view class="chat-name" style="color: {{nameColor[index%4]}};float:unset;">
+                <view class="chat-content_text">{{item.name}}</view>
+              </view>
+              <view class="chat-content">{{item.content}}</view>
+            </block>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+</template>

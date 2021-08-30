@@ -1,0 +1,115 @@
+<!--购物袋页面-->
+<import src="../public/warning.wxml" />
+<import src="./carListTemp.wxml" />
+<!-- 购物袋商品列表模板 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<view class="{{pageTheme}}" style='min-height:90vh;'>
+<import src="../public/shopProduct.wxml" />
+<import src="../public/shopProductPoint.wxml"></import>
+<import src="../public/confirmModal.wxml"></import>
+<!-- <import src="../public/shoppingCatRecomment.wxml"></import> -->
+<import src="../public/shoppingCat.wxml" />
+  <!-- 用户没登录 -->
+  <view class="unlogin-block" wx:if='{{_unlogin}}'>
+    <view class="content">
+      <image src="https://s.404.cn/applet/images/unlogin.png" mode="widthFix" class="pic-unlogin"></image>
+      <text class="tips">
+          由于您没有授权本页面无法展示
+        </text>
+      <text class="tips">
+          更多信息为了您更好的用户体验，请授权微信登录
+        </text>
+    </view>
+
+    <button type='primary' class='btn-l-logins' style="color:#fff;" bindtap="isLogin">登录
+    </button>
+  </view>
+
+  <view class="container editProduct" wx:else data-page="pages.shoppingCat.index">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="shoppingCatTitle newShopping" wx:if="{{shoppingCatData.cart_list != ''}}">
+      <!-- <view class='store-box'>
+        <text class="iconfont icon-gouwuche"></text>
+        <view class='store-name'>{{shoppingCatData.physical_info.name}}
+          <view wx:if='{{shoppingCatData.physical_info.show_delivery_amount==1&&shoppingCatData.physical_info.delivery_min_amount*1>0}}' style='font-size:24rpx;font-weight:normal;color:{{themeColorValue}}'>
+            ({{filter.parseDeliverRule(shoppingCatData.physical_info)}})
+          </view>
+        </view>
+
+        <view class='btn-change-store' style='background:{{themeColorValue}}' bindtap='changeStore' wx:if='{{(!shoppingCatData.physical_info.is_open_community)&&shoppingCatData.physical_info.physical_count&&shoppingCatData.physical_info.physical_count>1}}'>
+          <text class="iconfont icon-qiehuan" style='color:#fff;'></text>切换门店
+        </view>
+      </view> -->
+      <view bindtap="editCart" class='editCart'>
+        {{editCartText}}
+      </view>
+    </view>
+    <view class='shopTips' wx:if="{{shoppingCatData.cart_list != ''&&shoppingCatData.cart_notice}}">
+      <view id='txt1' class='txt' style='animation: roll linear {{duration}}s infinite;'>{{shoppingCatData.cart_notice}}</view>
+    </view>
+
+    <!-- 本门店购物袋商品 -->
+    <view class='forbid-buy other-store'>
+      <block wx:if='{{hascommon_product&&shoppingCatData.now_physical_product_list&&shoppingCatData.now_physical_product_list.length>0}}'>
+        <view class='title new-store'>
+          <text class="iconfont icon {{isActive1}}" bindtap="choiceShopping" data-check="check1" data-edit_check="edit_check1" data-foreignproducttype="{{foreignProductType}}" ></text>
+          <image class="icon-image"src="../../images/prodetail/store.png"role="img"></image>
+          <text class="storeName">{{shoppingCatData.physical_info.name}}</text> 
+        </view> 
+        <template is="carListTemp" data="{{shoppingCatData:shoppingCatData.now_physical_product_list,foreignProductType:true,isforeignProductType}}" />
+      </block>
+      <block wx:if='{{hasforeign_product&&shoppingCatData.now_physical_product_list&&shoppingCatData.now_physical_product_list.length>0}}'>
+        <!-- <view class='title new-store'>
+           <text class="iconfont icon {{isActive2}} {{isEditActive2}}" bindtap="choiceShopping" data-check="check2" data-edit_check="edit_check2" data-foreignproducttype="{{foreignProductType}}" ></text> <text>全选 </text> <text>跨境含税商品</text> 
+          </view>  -->
+        <template is="carListTemp" data="{{shoppingCatData:shoppingCatData.now_physical_product_list,foreignProductType:false,isforeignProductType}}"/>
+      </block>
+
+    </view>
+    <!-- 其他门店商品 -->
+    <view class='forbid-buy other-store' wx:if='{{shoppingCatData.other_physical_product_list&&shoppingCatData.other_physical_product_list.length>0}}'>
+      <view class='title'>其他门店商品</view>
+      <template is="carListTemp" data="{{shoppingCatData:shoppingCatData.other_physical_product_list,otherStore:true,editCartText,other:true}}" />
+    </view>
+    <!-- 以下商品无法购买 -->
+    <view class='forbid-buy forbid-list' wx:if='{{shoppingCatData.now_physical_unable_list&&shoppingCatData.now_physical_unable_list.length>0}}'>
+      <view class='title'>
+        <text class="sx-title">失效宝贝 {{shoppingCatData.now_physical_unable_list.length}} 件</text>
+        <text class="clear-title" bindtap="clearbind">清空失效商品</text>
+        <!-- <text class='iconfont icon-qest1' data-color='{{themeColorValue}}' style='color:{{themeColorValue}}' bindtap='showMsg'></text> -->
+      </view>
+      <template is="carListTemp" data="{{shoppingCatData:shoppingCatData.now_physical_unable_list,otherStore:true,editCartText,other:true}}" />
+    </view>
+    <view class="promptMsg" wx:if="{{shoppingCatData.now_physical_product_list == '' && shoppingCatData.now_physical_unable_list == ''}}">
+      <image mode="aspectFit" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/shoppingcat/catnull.png"></image>
+      <text id="nulltitle">购物袋是空的哦</text>
+      <navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">
+        <text class="backhomebtn">去逛逛</text>
+      </navigator>
+    </view>
+    <view class="shoppingCatFooter" wx:if="{{shoppingCatData.now_physical_product_list != '' || shoppingCatData.now_physical_unable_list != ''}}">
+      <view class="shoppingCatFooterCentent {{isIpx}}__footer__btn-group" style="bottom:{{store_nav_list_show?'96rpx':0}}">
+         <view class='shoppingChoice'>
+          <text class="iconfont icon {{isActive1}}" bindtap="choiceShopping" data-check="check1" data-edit_check="edit_check1" data-foreignproducttype="{{foreignProductType}}" ></text>全选
+        </view>
+        <!-- <view class="shoppingChoice">
+          <text class="iconfont {{isActive}} {{isEditActive}}" bindtap="choiceShopping" data-check="check" data-edit_check="edit_check"></text>全选
+        </view> -->
+        <view class="total" style='font-size:28rpx' wx:if="{{editCartText == '管理'}}">合计:<text style='font-size:36rpx;font-weight: 500;color:#EF422C;'><text style='font-size:24rpx;font-weight: 400;color:#EF422C;'>￥</text>{{shoppingCatMoney}}</text></view>
+        <form report-submit="true" bindsubmit="formSubmit">
+          <button form-type="submit" class="settlement" wx:if="{{editCartText == '管理'}}" bindtap="settlement">结算({{shoppingCatNum}})</button>
+        </form>
+        <view class="settlement" wx:if="{{editCartText == '完成'}}" bindtap="settlementDel">删除</view>
+      </view>
+    </view>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+  </view>
+  <!-- 确认框 -->
+  <block wx:if="{{confirmShow}}">
+    <template is="confirm" data="{{content:'删除宝贝就没有啦',cancelText: '再想想', confirmText: '确定', type:'delete'}}" />
+  </block>
+   <block wx:if="{{clearconfirmShow}}">
+    <template is="confirm" data="{{content:'确认清空失效宝贝',cancelText: '再想想', confirmText: '确定', type:'clear'}}" />
+  </block>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

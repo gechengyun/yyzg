@@ -1,0 +1,411 @@
+/* pages/LIVEVIDEO//pages/liveMoney/liveMoney.wxss */
+.mymoney {
+  font-size: 26rpx;
+}
+
+.mymoney .header {
+  width: 100%;
+  height: 110rpx;
+  border-top: 1rpx solid #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: #333;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.mymoney .header  .item {
+  font-size: 30rpx;
+  font-weight: 600;
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.line {
+  width: 80rpx;
+  height: 6rpx;
+  background-color: white;
+}
+
+.mymoney .header .active {
+  color: #ff5c1c;
+}
+
+.line_active {
+  background-color: transparent;
+}
+/* 账户明细 */
+.list .title {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  background-color: #f2f3f4;
+  color: #333;
+  font-weight: 500;
+}
+
+.list .date {
+  width: 100%;
+  height: 120rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list .date .month {
+  width: max-content;
+  padding: 5rpx 25rpx;
+  height: 50rpx;
+  background-color: #fff;
+  border-radius: 25rpx;
+  border: solid 1px #efefef;
+  font-size: 24rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.list .date .month image {
+  width: 14rpx;
+  height: 10rpx;
+  background-color: #bbb;
+  margin-left: 5rpx;
+}
+.total text{
+  color: #bbb;
+  font-size: 26rpx;
+}
+.date .icon-xia{
+  font-size: 14rpx;
+  margin-left: 10rpx;
+  color: #bbb;
+}
+/* 列表 */
+.list-item{
+  padding: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #fff;
+  border-bottom: 1px solid #f9f9f9;
+}
+.li-left{
+  display: flex;
+  flex-direction: column;
+  color: rgb(16, 16, 16);
+  font-size: 24rpx;
+}
+.li-name{
+  font-size: 28rpx;
+}
+.li-tip{
+  color: rgb(250, 0, 40);
+  background-color: rgba(250, 0, 40,.2);
+  padding: 2rpx 10rpx;
+  border-radius: 22rpx;
+  margin-left: 10rpx;
+  font-size: 24rpx;
+}
+.li-time{
+  margin: 6rpx 0;
+}
+.order-copy{
+  margin-left: 6rpx;
+  color: rgba(250, 0, 40, 1);
+  text-decoration: underline;
+}
+.li-right{
+  font-size: 32rpx;
+  font-weight: 600;
+  color: rgba(250, 0, 40, 1);
+}
+/***提现***/
+
+.cashmoney {
+  width: 100%;
+  padding-left: 40rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.cashmoney .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 75rpx;
+  line-height: 75rpx;
+  font-size: 26rpx;
+  color: #333;
+  border-bottom: 1rpx solid #eee;
+  box-sizing: border-box
+}
+.cashmoney .title text{
+  color: #fa0028;
+  margin-left: 24rpx;
+  font-size: 36rpx;
+}
+.ipt-tip{
+  padding: 20rpx 0;
+  font-size: 24rpx;
+  color: #999;
+}
+.cashmoney  .money {
+  width: 100%;
+  height: 140rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+
+.cashmoney  .money  .num {
+  font-size: 50rpx;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.cashmoney  .money  .num  input {
+  width: 500rpx;
+  font-size: 58rpx;
+  color: #333;
+  height: 70rpx;
+  font-weight: 500;
+}
+.cashmoney  .notice {
+  width: 100%;
+  height: 91rpx;
+  line-height: 91rpx;
+}
+.cashmoney  .money  .cashbtn {
+  font-size: 26rpx;
+  margin-right: 26rpx;
+}
+.cash-type{
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  background-color: #f9f9f9;
+  margin: 10rpx 0;
+}
+.icon-item{
+  margin-left: 20rpx;
+  padding: 10rpx 16rpx;
+  background-color: #e4e4e4;
+  border-radius: 12rpx;
+  display: flex;
+  align-items: center;
+  color: #666;
+}
+.icon-item.active{
+  background-color: #fa0028;
+  color: #fff;
+}
+.cash-type .iconfont{
+  margin-right: 8rpx;
+}
+/* 输入列表 */
+.applySection {padding:0 25rpx;margin-bottom:20rpx;}
+.applySection .sectionItem {display:flex;align-items:center;padding:25rpx 0;border-bottom:1px solid #e6e6e6;font-size:24rpx;color:#666;}
+.applySection .sectionItem:last-child {border-bottom:none;}
+.applySection .sectionItem .leftLabel {flex:1;}
+.applySection .sectionItem .rightBox {flex:3;color:#999;text-align:right;padding-right:50rpx;}
+.applySection .sectionItem .rightBox input {font-size:24rpx;color:#666;text-align:right;}
+/* 底部提现按钮 */
+.txbtn{
+  margin: 40rpx auto;
+  width: 80%;
+  height: 80rpx;
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 36rpx;
+  border-radius: 10rpx;
+}
+
+.message {
+  margin-top: 20rpx;
+  width: 100%;
+  font-size: 24rpx;
+  color: #9a9a9a;
+  background: white;
+  padding: 35rpx;
+  box-sizing: border-box;
+}
+
+.message  .title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 35rpx;
+}
+
+.message .info text {
+  display: block;
+  width: 100%;
+  line-height: 46rpx;
+}
+
+/**日期选择**/
+
+.chosedate {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 625rpx;
+  background: white;
+}
+
+.upDown{
+  animation: upDown 800ms ease;
+}
+
+@keyframes upDown{
+  0%{
+    bottom: -100%;
+  }
+  100%{
+    bottom:0%;
+  }
+}
+
+.chosedate .title {
+  height: 100rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  font-size: 26rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosedate .title .btntrue {
+  font-size: 26rpx;
+}
+
+.showdate {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #ccc;
+}
+
+.showdate .time {
+  display: block;
+  width: 278rpx;
+  text-align: center;
+  padding-bottom: 15rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.picker-view {
+  text-align: center;
+}
+
+.picker-view-column view {
+  text-align: center;
+}
+.isover{
+  color: #333333;
+  padding: 50rpx 0;
+}
+
+/* 2019-7-10-xq-新增 */
+.btn-selfwithdrawal{
+  margin:60rpx auto 0;
+  width:80%;
+  height:80rpx;
+  color:white;
+  line-height:80rpx;
+  text-align:center;
+  font-size:36rpx;
+  border-radius:10rpx;
+}
+/* // */
+.status{
+  margin-left: 20rpx;
+  color: #fff;
+  width: max-content;
+  padding: 5rpx 15rpx;
+  border-radius: 30rpx;
+}
+/* 提现明细 */
+.cash-title{
+  background-color: #fff;
+  padding: 30rpx 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 52rpx;
+  font-size: 30rpx;
+  font-weight: 600;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+/* 我的金币 */
+.cash-title-unnum{
+  color: rgb(153,153,153);
+  font-size: 24rpx;
+}
+.gold-title{
+  padding-right: 20rpx;
+}
+.give-money{
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 20rpx 20rpx 0;
+}
+.give-money input{
+  background-color: #f7f7f7;
+  flex: 1;
+  padding: 8rpx 20rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+.balance-tips{
+  font-size: 22rpx;
+  padding: 20rpx 0;
+  background-color: #fff;
+  display: flex;
+}
+.balance-tips text:first-child{
+  margin-right: 5rpx;
+  vertical-align: middle;
+}
+.cash-des{
+  background-color: #fff ;
+  margin-top: 20rpx;
+  padding: 24rpx;
+}
+.cash-des-content{
+  color: rgb(153,153,153);
+  font-size: 22rpx;
+  margin-bottom: 20rpx;
+}
+.cash-des-title{
+  color: rgb(51,51,51);
+  font-size: 26rpx;
+  line-height: 60rpx;
+}

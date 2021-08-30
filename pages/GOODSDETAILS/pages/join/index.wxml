@@ -1,0 +1,153 @@
+<!--参团页面-->
+<import src="../../../public/detailsTable.wxml" />
+<import src="../../../public/TshoppingCat.wxml" />
+<import src="../../../public/TshoppingProduct.wxml" />
+<import src="../../../public/warning.wxml" />
+<scroll-view class="container join {{pageTheme}}" style="height: {{scrollHeight}}px;" scroll-y="true" scroll-top="{{scrollTop.scroll_top}}" bindscroll="scrollTopFun" data="page.join.index">
+    <view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+        <official-account binderror="officialAccountError"></official-account>
+    </view>
+    <view class="aside" catchtap="goTopFun">
+        <view>
+            <text class="iconfont icon-dingbu"></text>
+            <text>顶部</text>
+        </view>
+        <view bindtap="goBack">
+            <text class="iconfont icon-shangyiye"></text>
+            <text>首页</text>
+        </view>
+        <view bindtap="mycollageGo" style="display:none">
+            <text class="iconfont icon-jingxuan"></text>
+            <text>拼团</text>
+        </view>
+    </view>
+    <view class="joinHeader">
+        <view class="itemName clearfix">
+            <text>{{joinData.tuan_team.type_txt}}</text>
+            <text>已参团{{joinData.tuan_team.order_number}}人</text>
+        </view>
+        <template is="TshoppingProduct" data="{{product:joinData.product}}" />
+    </view>
+    <view class="itemList clearfix">
+        <view scroll-x="true" class="itemImg" bindtap="oppenMemberShow" wx:if="{{joinData.tuan_team.status!=2}}">
+            <view class="itemImgList">
+                <view wx:for="{{joinData.buy_list}}" wx:if="{{index<7}}" wx:key='{{index}}'>
+                    <image src="{{item.avatar}}"></image>
+                </view>
+            </view>
+        </view>
+        <view class="itemState">
+            <view class="itemHave" wx:if="{{(joinData.tuan_team.status==0)&&(joinData.tuan_team.number-joinData.tuan_team.order_number!=0)}}">
+                <text class="iconfont icon-jinhangzhong"></text>
+                <text>拼团中，还差{{joinData.tuan_team.number-joinData.tuan_team.order_number}}人</text>
+            </view>
+            <view class="itemHave" wx:if="{{(joinData.tuan_team.status==0)&&(joinData.tuan_team.number-joinData.tuan_team.order_number==0)}}">
+                <text class="iconfont icon-jinhangzhong"></text>
+                <text>拼团中</text>
+            </view>
+            <view class="itemSc" wx:if="{{(joinData.tuan_team.status==1)&&(joinData.tuan_team.in_team!=1)}}">
+                <text class="iconfont icon-tishi"></text>
+                <text>团已满</text>
+            </view>
+            <view class="itemFull" wx:if="{{(joinData.tuan_team.status==1)&&(joinData.tuan_team.in_team==1)}}">
+                <text class="iconfont icon-dui"></text>
+                <text>拼团成功</text>
+            </view>
+            <view class="itemFull" wx:if="{{joinData.tuan_team.status==2}}">
+                <text class="iconfont icon-cuowu"></text>
+                <text>拼团失败</text>
+            </view>
+        </view>
+    </view>
+    <view>
+        <view class="joinButton two" wx:if="{{(!is_end)&&(joinData.tuan_team.status==0)&&(joinData.tuan_team.in_team!=1)}}">
+            <button bindtap="shareTap">立即拉人</button>
+            <button class="b2" bindtap="oppenShopping" data-item="{{joinData.tuan_team.item_id}}" data-team="{{joinData.tuan_team.team_id}}" data-tuan="{{joinData.tuan_team.tuan_id}}" data-type="{{joinData.tuan_team.type}}"> 立即参团</button>
+        </view>
+        <view class="joinButton" wx:if="{{(!is_end)&&(joinData.tuan_team.status==2)&&(joinData.tuan_team.in_team!=1)}}">
+            <button bindtap="goBack">重新开团</button>
+        </view>
+        <view class="joinButton" wx:if="{{(!is_end)&&(joinData.tuan_team.in_team==1)&&(joinData.tuan_team.status*1==0)}}">
+            <button bindtap="shareTap">立即拉人</button>
+        </view>
+        <view class="joinButton overdue" wx:if="{{(is_end)}}">
+            <button>团购已过期</button>
+        </view>
+    </view>
+    <view class="memberInfo clearfix" bindtap="oppenExplain">
+        <view>
+            <text class="iconfont icon-xuanze"></text>
+            <text>选择开团档</text>
+        </view>
+        <view>
+            <text class="iconfont icon-jiaren"></text>
+            <text>邀请好友参团</text>
+        </view>
+        <view>
+            <text class="iconfont icon-wancheng"></text>
+            <text>成团分别发货</text>
+        </view>
+        <view>
+            <text class="iconfont icon-tuikuan"></text>
+            <text>失败则退款</text>
+        </view>
+    </view>
+    <template is="detailsTable" data="{{currentTab:currentTab,productInfo:productInfo,description:description}}" />
+</scroll-view>
+<block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="TshoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning, pageTheme:pageTheme,store_nav_list_show,store_nav_list}}" />
+</block>
+<block wx:if="{{explainShow}}">
+    <view class="layer" bindtap="closeExplain"></view>
+    <view class="shoppingLayer joinExplain {{pageTheme}}">
+        <view class="shoppingTitle">拼团说明
+            <text class="iconfont icon-chacha" bindtap="closeExplain"></text>
+        </view>
+        <view class="shoppingTxt">
+            <text>1、首选必须选择一个类型团（不限/限定人次）</text>
+            <text>2、在活动有效期，邀请好友来参团</text>
+            <text>3、限制人次达标成团后分别发货给成团人员</text>
+            <text>4、无法满足成团人次，则退还拼团货款</text>
+            <text>5、不限人次的玩法：以最终拼团人次确定成团价</text>
+            <text>6、不限人次团长可随时结束拼团，并退回参团价和成团价差额</text>
+        </view>
+    </view>
+</block>
+<block wx:if="{{memberShow}}">
+    <view class="layer" bindtap="closeMemberShow"></view>
+    <view class="memberLayer {{pageTheme}}">
+        <text class="iconfont icon-chacha" bindtap="closeMemberShow"></text>
+        <view class="memberHead">
+            <view class="memberImg">
+                <image src="{{joinData.buy_list[0].avatar}}"></image>
+            </view>
+            <view class="memberTxt">{{joinData.buy_list[0].nickname}}</view>
+            <view class="memberTxt">
+                <text>{{joinData.tuan_team.dateline_txt}} 开团</text>
+            </view>
+        </view>
+        <view class="memberCentent">
+            <view class="memberList clearfix" wx:for="{{joinData.buy_list}}" wx:key='{{index}}'>
+                <view>
+                    <image src="{{item.avatar}}"></image>
+                </view>
+                <view class="textOmitted">{{item.nickname}}</view>
+                <view>{{item.add_time_txt}}参团</view>
+            </view>
+        </view>
+    </view>
+</block>
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<!--海报画布-->
+<canvas canvas-id='pullTuanPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+<!-- <shareModal id='shareModal' 
+            title='我是标题' 
+            content="content" 
+            cancelText='取消' 
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+</shareModal> -->
+
+<bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>    
+<include src="/pages/public/page_footer.wxml"></include>

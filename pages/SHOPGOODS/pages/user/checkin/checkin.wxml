@@ -1,0 +1,49 @@
+<!--pages/SHOPGOODS//pages/user/checkin/checkin.wxml-->
+<view class="container">
+  <view class="check-header">
+    <image src="{{pageData.banner_image}}" mode="widthFix"></image>
+    <view class="check-btn" bindtap="checkClick" wx:if="{{!pageData.is_sign}}">点我签到</view>
+  </view>
+  <view class="get-num" wx:if="{{showNum}}">+{{pageData.points}}</view>
+  <view class="check-content">
+    <view class="check-tip">
+      <view class="check-name">尊敬的会员"<text>{{pageData.user_name}}</text>"</view>
+      <view class="check-num">
+        <text>{{richbak}}</text>
+      </view>
+      <view class="check-tips" wx:if="{{!pageData.is_sign}}">您还未签到哦！！</view>
+      <view class="check-tips" wx:if="{{pageData.is_sign}}">您今天签到获得{{pageData.points}}积分</view>
+    </view>
+    <view class="check-task-cloth" wx:if="{{pageData.is_share*1 == 1}}">
+      <view class="check-task-title">
+        <image class="ct-title-bg" src="https://s.404.cn/applet/images/user/signtitle.png"></image>
+      任务区</view>
+      <view class="check-task">
+        <view class="ct-title">任务</view>
+        <view class="ct-des">分享给小伙伴，小伙伴点击就有可能给你带来积分收入哦</view>
+        <view class="ct-link-cloth">
+          <input class="ct-link" value="{{pageData.share_link}}" wx:if="{{0}}"></input>
+          <button class='ct-share-link' catchtap='shareTap'>分享</button>
+        </view>
+      </view>
+      <view class="check-task" wx:if="{{0}}">
+        <view class="ct-title">任务二</view>
+        <view class="ct-des">将下面二维码分享给小伙伴，小伙伴扫码就有可能给你带来积分收入哦</view>
+        <view class="ct-link-cloth2">
+          <view class="shop-name">欢迎收藏本店 <text>{{pageData.store_name}}</text></view>
+          <view class="ct-code">
+            <image class="ct-share-code" src="{{pageData.qrcode_image}}" mode="widthFix"></image>
+            <text>扫 左侧二维码 进入“{{pageData.store_name}}”</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 分享组件 -->
+  <bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+  <!--海报画布-->
+  <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+</view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

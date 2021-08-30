@@ -1,0 +1,10 @@
+<template name="video">
+  <view class="video-name" wx:if="{{videoData.title}}">{{videoData.title}}</view>
+  <view class="videoed" wx:for="{{videoData.list}}">
+    <video src="{{ item.url}}" controls class='slide_video' poster='{{ item.cover}}' id='video{{index}}' data-index="{{index}}"></video>
+    <view wx:if="{{index != playIndex}}" bindtap="videoPlay" data-index="{{index}}" class="videoplay">
+      <!-- <text class="iconfont icon-play"></text> -->
+    </view>
+    <view class="videoDes" wx:if="item.vname">{{item.vname}}</view>
+  </view>
+</template>

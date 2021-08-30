@@ -1,0 +1,83 @@
+<!--pages/user/myFans/myFans.wxml-->
+<view class='fans {{pageTheme}}'>
+  <view class='header'>
+    <view class='search'>
+      <view class='iconfont icon-chazhao' style='color:#999999'></view>
+      <input placeholder='输入查询用户昵称' placeholder-style='color:#999999' bindinput="changeTxt" value='{{searchTxt}}'></input>
+      <image src='/images/close.png' catchtap='clearTxt'></image>
+    </view>
+    <button class="{{searchTxt!=''?'theme-color':''}}" catchtap='searchBtn'>搜索</button>
+  </view>
+  <view class='paixu {{pageTheme}}'>
+    <view class='pop'>
+      <view class='changetype {{typeIndex==1?"active":""}}' catchtap='changeType' data-type="1" data-usertype='1' data-zstype='0'>{{fans_alias}}
+         <view class='line {{typeIndex==1?"theme-bg-color":""}}'></view>
+      </view>
+      <!-- 直推会员 -->
+      <view class='changetype {{typeIndex==2?"active":""}}'  catchtap='changeType' data-type="2" data-usertype='2' data-zstype='1'>{{fans_data.zt_member_alias}}
+        <view class='line {{typeIndex==2?"theme-bg-color":""}}'></view>
+      </view>
+      <!-- 团队会员 -->
+      <view class='changetype {{typeIndex==3?"active":""}}'  catchtap='changeType' data-type="3" data-usertype='2' data-zstype='2'>{{fans_data.td_member_alias}}
+        <view class='line {{typeIndex==3?"theme-bg-color":""}}'></view>
+      </view>
+    </view>
+    <view  class='type' wx:if="{{!applayType}}">
+      <view class='item {{paixuIndex==1?"theme-color":""}}' catchtap='paiXuList' data-type='1'>注册时间
+        <view class='iconfont icon-qiehuan'></view>
+      </view>
+      <view class='item {{paixuIndex==2?"theme-color":""}}' data-type='2' catchtap='paiXuList'>成长
+        <view class='iconfont icon-qiehuan'></view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{applayType}}" class='typelist'>
+    <view>
+      <text>{{today_num?today_num:0}}</text>
+      <text>今日新增{{typeIndex == 1?'粉丝':'会员'}}</text>
+    </view>
+    <view>
+      <text>{{month_num?month_num:0}}</text>
+      <text>本月新增{{typeIndex == 1?'粉丝':'会员'}}</text>
+    </view>
+    <view>
+      <text>{{count?count:0}}</text>
+      <text>累计{{typeIndex == 1?'粉丝':'会员'}}</text>
+    </view>
+  </view>
+
+  <!-- 会员等级 -->
+  <view class='level-box' wx:if='{{typeIndex!=1}}'>
+    <view class="{{checkedLeval==1 ? 'active':''}}" data-level='1' catchtap='changeLevelFun'>初级</view>
+    <view class="{{checkedLeval==2 ? 'active':''}}" data-level='2' catchtap='changeLevelFun'>中级</view>
+    <view class="{{checkedLeval==3 ? 'active':''}}" data-level='3' catchtap='changeLevelFun'>高级</view>
+  </view>
+
+  <view class='list' wx:if="{{listData&&listData.length!=0}}">
+    <block wx:for="{{listData}}" wx:key="{{index}}">
+      <view class='item'>
+        <view class='user'>
+          <view class='userimg'>
+            <image class='head' mode='aspectFill' src='{{item.avatar}}'></image>
+            <view class='ident active_bg'>{{item.user_type}}</view>
+          </view>
+          <view class='content'>
+            <view class='name'>
+              <view class='txt'> <text style="font-weight:bold;">{{item.nickname}}</text> <text style="font-size:24rpx;color:#666;" wx:if='{{userType==2}}'>{{item.apply_phone}}</text></view>
+              <button open-type='share' wx:if="{{item.member_type==0&&item.show_recall&&item.show_recall==1&&!applayType}}" class='btn theme-bg-color'>召回</button>
+            </view>
+            <view class='time'>{{item.add_time}}</view>
+            <progress percent="{{item.member_type==0?item.fans_num*100/need_num:100}}" active border-radius="5px" stroke-width="5px" activeColor='{{themeColorValue}}' wx:if="{{!applayType}}" />
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view wx:else class='pages_no_data'>   
+      <image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx' > </image>
+      <view style='color:{{themeColorValue}}'>暂无数据</view>
+    </view> 
+<!-- nextPage -->
+    <view class='no-data' wx:if='{{nextPage==false && listpage>1}}'>没有更多数据了</view>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

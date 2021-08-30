@@ -1,0 +1,88 @@
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="circle-buy-timeline">
+    <view class="circle-buy-order">
+        <view class="send-title clearfix">
+            <view class="send-name">
+                配送期
+            </view>
+            <view class="send-progress">
+                <text class="send-progress-delivered">{{deliver_data.push_num}}</text><text>/{{deliver_data.deliver_num}}</text>
+            </view>
+        </view>
+        <view class="send-list">
+            <view
+                    wx:for="{{deliver_data.deliver_list}}"
+                    wx:key="index"
+                    class="send-list-item {{filter.parseOrderPaidStatus(item.status,'statusClass')}}">
+                <view class="item-indicate">
+                    {{item.indexNum}}
+                </view>
+                <view class="item-desc">
+                    <view>{{filter.parseOrderPaidStatus(item.status,'statusName')}}{{filter.judgePreSend(item)}}</view>
+                    <view>{{filter.parseOrderPaidTime(item.paid_time)}}</view>
+                </view>
+                <view class="item-btn" wx:if="{{item.status != 1}}"
+                      bindtap="deliverDelay"
+                      data-id="{{item.id}}"
+                      data-delay_num="{{deliver_data.delay_num}}"
+                      data-prolong_num="{{deliver_data.prolong_num}}"
+                      data-status="{{item.status}}"
+                      data-order_no="{{item.order_no}}">
+                    {{['已延期','我要延期'][item.status*1 + 1]}}
+                </view>
+                <view class="send-time" wx:if="{{item.status == 1}}">
+                    <view>{{item.real_time}}</view>
+                    <view data-package_id="{{item.package_id}}"
+                          class="view-send-detail"
+                          bindtap="viewExpressDetail">查看配送详情></view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{deliver_data.express.layer_show}}">
+        <view class="layer" bindtap="viewExpressDetail"></view>
+        <view class="logisticsLayer">
+            <block wx:if="{{order.shipping_method=='local'}}">
+                <view class="logisticsLayerTitle">包裹状态</view>
+                <view class="logisticsList">
+                    <view>
+                        <text>订单提交成功 <text style="float: right;">{{deliver_data.express.list.nowOrder.add_time}}</text></text>
+                        <text>订单编号{{deliver_data.express.list.nowOrder.order_no_txt}}</text>
+                    </view>
+                    <view>
+                        <text>商家确认订单 <text style="float: right;">{{deliver_data.express.list.nowPackage.add_time}}</text></text>
+                        <text>门店【{{ deliver_data.express.list.nowPhysical.name }}】正在为您准备商品</text>
+                    </view>
+                    <block wx:if="{{deliver_data.express.list.nowPackage.status > 1}}">
+                        <view>
+                            <text>配送员已取货<text style="float: right;">{{deliver_data.express.list.nowPackage.send_time}}</text>
+                            </text>
+                            <text>配送员姓名：{{deliver_data.express.list.nowCourier.name}}</text>
+                            <text data-tel="{{deliver_data.express.list.nowCourier.tel}}" bindtap="makePhoneCall">电话：{{deliver_data.express.list.nowCourier.tel}}</text>
+                        </view>
+                        <view>
+                            <text>正在配送<text style="float: right;">{{deliver_data.express.list.nowPackage.send_time}}</text>
+                            </text>
+                            <text>请耐心等候</text>
+                        </view>
+                    </block>
+                    <block wx:if="{{deliver_data.express.list.nowPackage.status > 2}}">
+                        <view>
+                            <text>包裹送达<text style="float: right;">{{deliver_data.express.list.nowPackage.send_time}}</text></text>
+                            <text>欢迎您的任何意见和吐槽</text>
+                        </view>
+                    </block>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="logisticsLayerTitle">物流信息</view>
+                <view class="logisticsList">
+                    <view wx:for="{{deliver_data.express.list}}" wx:key="index">
+                        <text>{{item.context}}</text>
+                        <text>{{item.time}}</text>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </block>
+</template>

@@ -1,0 +1,43 @@
+<template name="reward">
+  <cover-view class="live-component-cloth" hidden="{{!showReward}}">
+		<cover-view class="layer recharge-layer" bindtap="rechargeClose" catchtouchmove="ture"></cover-view>
+		<cover-view class="shoppingLayer reward" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.reward">
+			<cover-view class="recharge-header reward-header">
+        <cover-view class="reward-gold">
+          <cover-view>{{giftData.coin_name}}：</cover-view>
+          <cover-view class="reward-gold-num after-box">{{giftData.user_coin}}</cover-view>
+        </cover-view>
+        <cover-view class="recharge-more" bindtap="rechargeList">去充值></cover-view>
+      </cover-view>
+      <cover-view class="reward-swiper">
+        <cover-view class="reward-list" bindtouchstart="touchStartR" catchtouchmove="touchMoveR" bindtouchend='touchEndR' animation="{{aniR}}" wx:for="{{giftData.gift_list.page_total}}" wx:for-index="swiperidx" wx:key="swiperidx">
+          <cover-view class="reward-item {{rewardIdx==index?'active':''}}" data-idx="{{index}}" data-giftid="{{item.id}}" data-giftnum="{{item.gold_coin}}" catchtap="rewardType" wx:for="{{giftData.gift_list.list}}" wx:key="index" wx:if="{{index<(swiperidx+1)*8 && index>=swiperidx*8}}">
+            <cover-image class="reward-img" src="{{item.image}}"></cover-image>
+            <cover-view>{{item.name}}</cover-view>
+            <cover-view class="reward-item-gold">{{item.gold_coin}}{{giftData.coin_name}}</cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="dot-list" wx:if="{{giftData.gift_list.page_total>1}}">
+        <cover-view class="dot-item {{index==(pager-1)?'active':''}}" style="width: {{120/giftData.gift_list.page_total}}rpx;" wx:for="{{giftData.gift_list.page_total}}" wx:key="key"></cover-view>
+      </cover-view>
+      <cover-view class="reward-send-num">
+        <cover-view class="send-list-title">数量</cover-view>
+        <cover-view class="send-num-list">
+          <cover-view class="send-num-item {{reNumIdx==0?'active':''}}" data-idx="{{0}}" data-num="{{1}}" bindtap="rewardNum">1</cover-view>
+          <cover-view class="send-num-item {{reNumIdx==1?'active':''}}" data-idx="{{1}}" data-num="{{50}}" bindtap="rewardNum">50</cover-view>
+          <cover-view class="send-num-item {{reNumIdx==2?'active':''}}" data-idx="{{2}}" data-num="{{666}}" bindtap="rewardNum">666</cover-view>
+          <!-- <cover-view class="send-num-item {{reNumIdx==3?'active':''}}" data-idx="{{3}}" bindtap="rewardNumIpt">{{rinputInfo?rinputInfo:'其他'}}</cover-view> -->
+        </cover-view>
+        <cover-view class="reward-send-btn" bindtap="sendReward">{{sendTxt}}</cover-view>
+      </cover-view>
+		</cover-view>
+	</cover-view>
+  <cover-view class="live-component-cloth" wx:if="{{rinputFocus}}">
+    <cover-view class="layer recharge-layer" bindtap="rechargeClose2" catchtouchmove="ture"></cover-view>
+    <cover-view class="cover-input new-input" style="bottom: {{rinputFocus?rinputBottom>0?rinputBottom:226:226}}px;">
+      <input type="number" class='cover-input-text cover-input-in' value="{{rinputInfo}}" focus='{{rinputFocus}}' bindfocus="rfocusInput" bindblur='rblurInput' bindinput='rinputChange' maxlength="-1" adjust-position="{{false}}" confirm-type="send" bindconfirm="rsendInput" placeholder="请输入" placeholder-style="color: #aaa;"></input>
+      <cover-view catchtap="sendReward" class="send-btn">发送</cover-view>
+    </cover-view>
+  </cover-view>
+</template>

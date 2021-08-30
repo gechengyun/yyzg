@@ -1,0 +1,43 @@
+<view>
+  <view class='apply-status-top'>
+    <image></image>
+    <text>{{applyResult.msg}}</text>
+    <text wx-if="{{applyResult.status == 2}}">{{applyResult.audit_description}}</text>
+  </view>
+  <view class='apply-detail-list'  wx-if="{{applyResult.status == 1}}">
+    <view class='apply-detail-item'>
+      <label>姓名</label>
+      <text>{{applyResult.user_name}}</text>
+    </view>
+    <view class='apply-detail-item'>
+      <label>联系电话</label>
+      <text>{{applyResult.phone}}</text>
+    </view>
+    <view class='apply-detail-item'>
+      <label>所在地区</label>
+      <text>{{applyResult.location}}</text>
+    </view>
+    <view class='apply-detail-item'>
+      <label>详细地址</label>
+      <text>{{applyResult.address}}</text>
+    </view>
+  </view>
+
+  <!-- <view class='now-apply-btn' wx:if='{{applyResult.status==1}}' bindtap='showBackApply'>撤回申请</view> -->
+  <view class='now-apply-btn' wx:if='{{applyResult.status==1}}' bindtap='showBackApply'>回到首页</view>
+  <button class='btn-resubmit' wx:if='{{applyResult.status!=1}}' bindtap="reSubmit">重新提交</button>
+
+  <view class='modal-black' wx-if="{{backApplyStatus}}">
+    <view class='windowmask windowmask-opacity' catchtouchmove='false' catchtap='closeApply'></view>
+    <view class='Withdrawal-apply-box'>
+      <image></image>
+      <text>撤回审核</text>
+      <text>您的申请正在审核中，是否撤回申请？</text>
+      <view class='Withdrawal-apply-button'>
+        <view class='cancel' bindtap='closeApply'>取消</view>
+        <view class='confirm' bindtap='confirmCloseApply'>确定</view>
+      </view>
+      <icon class='iconfont icon-cuowu_quan_001' bindtap='closeApply'></icon>
+    </view>
+  </view>
+</view>

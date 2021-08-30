@@ -1,0 +1,38 @@
+<!--pages/user/information/information.wxml-->
+<view class="info">
+  <form catchsubmit="formSubmit">
+    <view class="avatar">
+       <image class="ava-img" bindtap="addImg" wx:if="{{userData.avatar === undefined}}" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/defaultAva.png" />
+      <image class="ava-img" bindtap="addImg" wx:else src="{{imgList.length>0?imgList[0]:userData.avatar}}" />
+      <view class="ava-title" bindtap="addImg">点击修改头像</view>
+    </view>
+    <view class="content">
+      <view class="cont-item">
+        <view class="left">用户名：</view>
+        <view class="right"><input class="input" maxlength="7" placeholder="未填写" name="nickname" value="{{userData.nickname}}"/></view>
+      </view>
+      <view class="cont-item">
+        <view class="left">性别：</view>
+        <view class="right">
+          <radio-group name="sex">
+            <label class="man"><radio value="1" color="#DB1E29" checked="{{userData.sex === '1'}}" style="transform:scale(0.7)"/>男</label>
+            <label><radio value="2" color="#DB1E29" checked="{{userData.sex === '2'}}" style="transform:scale(0.7)"/>女</label>
+          </radio-group>
+        </view>
+      </view>
+      <view class="cont-item">
+        <view class="left">生日：</view>
+        <view class="right">
+          <picker mode="date" name="birthday" value="{{date}}" start="1960-09-01" end="2020-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              {{date}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <button class="btn" formType="submit">
+      保存
+    </button>
+  </form>  
+</view>

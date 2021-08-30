@@ -1,0 +1,19 @@
+<!-- 餐饮小食1 -->
+<template name="goods_group1">
+    <import src="../public/productListLeft.wxml" />
+    <view class="editProductGrouping  goodsGrouping {{content.goods_group_list == '' ? 'hide' : '' }}" data-page="page.public.editProductGrouping" data-desc="餐饮小食1">
+        <view class="productGrouping clearfix">
+            <view class="productNav">
+                <view class="{{currentTab==index ? 'active' : ''}}" wx:for="{{content.goods_group_list}}" data-current="{{index}}" wx:key="" bindtap="swichNav">{{item.title}}</view>
+            </view>
+            <view class="productGroupingList editProduct" style="height:{{scrollHeight}}px;">
+                <view class="shopProductTable {{currentTab==index ? 'active' : ''}} size_3 buy_btn_type_2" wx:for="{{content.goods_group_list}}" wx:for-item="list" wx:key="">
+                    <view class="editProductGroupingTitle">{{list.title}}</view>
+                    <template is="productListLeft" data="{{content:list,productTable:productTable,groupType:'left'}}" />
+
+                   
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

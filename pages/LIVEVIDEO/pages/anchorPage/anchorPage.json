@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "主播主页",
+  "usingComponents": {
+    "bottom-modal": "../../../../components/bottomModal/index",
+    "dialog-modal": "../../../../components/dialog/index"
+  },
+  "navigationStyle": "custom"
+}

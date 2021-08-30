@@ -1,0 +1,92 @@
+/* pages/SHOPGOODS//pages/user/balance/balance.wxss */
+page, .container{
+  padding-bottom: 0;
+}
+.container{
+  font-size: 30rpx;
+}
+.all-money{
+  text-align: center;
+  padding: 40rpx 0;
+}
+.all-money text{
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-left: 10rpx;
+}
+.icon-jindou{
+  color: #f7af00;
+}
+.balance-title{
+  padding: 20rpx 0;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+}
+.balance-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eaeaea;
+  padding: 24rpx 20rpx;
+}
+.list-l{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 70%;
+}
+.title-one{
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.title-one text{
+  font-size: 22rpx;
+  margin-left: 10rpx;
+}
+.balance-time{
+  font-size: 24rpx;
+  color: #999;
+}
+.list-r text{
+  margin-left: 10rpx;
+}
+/* 尾部提示信息 */
+.end {
+  color: #919398;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.end text {
+  margin: 0 10rpx;
+}
+
+.end::before, .end::after {
+  content: '';
+  display: inline-block;
+  width: 100rpx;
+  height: 1px;
+  background-color: #919398;
+  vertical-align: middle;
+}
+/* 空数据 */
+.data_null_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.data_null_block .tips {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: rgba(192, 196, 204, 1);
+  line-height: 42rpx;
+  margin-top: 40rpx;
+}

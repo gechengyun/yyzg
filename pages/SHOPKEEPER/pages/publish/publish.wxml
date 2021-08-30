@@ -1,0 +1,148 @@
+<!--pages/SHOPKEEPER//pages/publish/publish.wxml-->
+<import src="../../../public/warning.wxml" />
+<wxs module="indexModule">
+  module.exports.jsonStringify = function(name) {
+    return JSON.stringify(name);
+  }
+</wxs>
+<view class="container {{pageTheme}}">
+  <form bindsubmit="grouperSave" wx:if="{{!isTopic}}">
+    <view class="upSource">
+      <view class="title img-title">
+        <view>上传图片/视频</view>
+      </view>
+      <view class="img-list">
+        <block wx:for="{{imgSrc}}" wx:if="{{imgSrc.length>0}}" wx:key='index'>
+          <view class="imaged">
+            <image src="{{item}}" class="slide_img"></image>
+            <view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="image"></view>
+          </view>
+        </block>
+        <block wx:for="{{videoSrc}}" wx:if="{{videoSrc.length>0}}" wx:key='index'>
+          <view class="imaged">
+            <video src="{{item.furl}}" id='video{{index}}' controls class='slide_video' poster="{{item.vthumb}}" data-index="{{index}}"></video>
+            <view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="video"></view>
+          </view>
+          <block>
+            <view class="iconfont icon-jia1 imaged img-add" style="color:{{themeColorValue}}" bindtap="addVideoPic" wx:if="{{vthumb == ''}}">
+              <view class="add-video-pic">上传封面图</view>
+            </view>
+            <view class="imaged" wx:else>
+              <image src="{{vthumb}}" class="slide_img"></image>
+              <view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="vthumb"></view>
+            </view>
+          </block>
+        </block>
+        <view class="iconfont icon-jia1 imaged img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:if="{{imgSrc.length<9 && videoSrc.length<1}}"></view>
+      </view>
+      <!-- 上传类型选择 -->
+      <action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+        <block wx:for-items="{{actionSheetItems}}" wx:key='index'>
+          <action-sheet-item bindtap="{{item.bindtap}}">{{item.txt}}</action-sheet-item>
+        </block>
+        <action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+      </action-sheet>
+    </view>
+    <view class="shop-title">
+      <input placeholder="填写标题会有更多赞哦~" placeholder-style="color:#C0C4CC;" cursor-spacing='20' bindinput="bindTitle" bindblur="inputblur" value='{{group_detail.title}}'></input>
+    </view>
+    <view class="shop-content" bindtap="showTextarea">
+      <!-- <textarea placeholder='分享下你和宝贝的小故事吧~' placeholder-style="color:#C0C4CC;" bindinput='bindContent' value='{{group_detail.content}}' maxlength="-1"></textarea> -->
+      <textarea placeholder='分享下你和宝贝的小故事吧~' placeholder-style="color:#C0C4CC;" cursor-spacing='20' bindblur="hideTextarea" bindinput='bindContent' value='{{group_detail.content}}' maxlength="-1" wx:if="{{textareaShow}}" auto-focus="{{textareaShow}}"></textarea>
+      <rich-text nodes="{{group_detail.content?group_detail.content:'分享下你和宝贝的小故事吧~'}}" style="color:" class="new-textarea {{group_detail.content?'':'new-textarea-empy'}}" wx:if="{{!textareaShow}}"></rich-text>
+    </view>
+    <!-- 标签 -->
+    <view class="topic" data-topictype="tag" bindtap="showTopic" wx:if="{{tagData.list && tagData.list.length>0}}">
+      <view class="topic-go">
+        <view class="topic-list1">
+          <view class="topic-tip" wx:if="{{tagList.length==0}}">
+            <text class="iconfont icon-jingxuan-F topic-tag"></text>
+            <text>标签</text>
+          </view>
+          <view class="topic-item" wx:for="{{tagList}}" wx:key="index">
+            <text class="iconfont icon-jingxuan-F topic-tag" style="color:{{themeColorValue}}"></text>
+            <text style="color:{{themeColorValue}}">{{item.tagtitle}}</text>
+            <view class="iconfont icon-iconfonticonfontclose close topic-close" catchtap="delTopic" data-index="{{index}}" data-topictype="tag"></view>
+          </view>
+        </view>
+        <view class="iconfont icon-xiayibu"></view>
+      </view>
+    </view>
+    <!-- 参与话题 -->
+    <view class="topic" data-topictype="topic" bindtap="showTopic">
+      <view class="topic-go">
+        <view class="topic-list1">
+          <view class="topic-tip" wx:if="{{topicList.length==0}}">
+            <text class="topic-symbol">#</text>
+            <text>参与话题</text>
+          </view>
+          <view class="topic-item" wx:for="{{topicList}}" wx:key="index">
+            <text class="topic-symbol" style="background-color:{{themeColorValue}}">#</text>
+            <text style="color:{{themeColorValue}}">{{item.talkname}}</text>
+            <view class="iconfont icon-iconfonticonfontclose close topic-close" catchtap="delTopic" data-index="{{index}}" data-topictype="topic"></view>
+          </view>
+        </view>
+        <view class="iconfont icon-xiayibu"></view>
+      </view>
+    </view>
+    <view class="relat-goods">
+      <navigator class="go-goods" url="/pages/SHOPGOODS/pages/user/myCollection/index?ways=1" open-type="navigate">
+        <view>
+          <text class="iconfont icon-basket"></text>关联商品</view>
+        <view class="iconfont icon-xiayibu"></view>
+      </navigator>
+      <view class="show-goods">
+        <block wx:for="{{goodsData.plist}}" wx:key='index'>
+          <view class="goods-list">
+            <image src="{{item.image}}" mode="aspectFill"></image>
+            <view class="goods-title">{{item.name}}</view>
+            <view class="goods-price">
+              <text>￥</text>{{item.price}}
+              <text class="goods-price-line" wx:if="{{item.original_price > 0}}">{{item.original_price}}</text>
+            </view>
+            <view class="iconfont icon-iconfonticonfontclose close" bindtap="delGoods" data-index="{{index}}"></view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <button size="default" disabled="{{isSubmit}}" class="sub-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover" form-type="submit">确认发布</button>
+    <view class="add-pic-tip">温馨提示：为呈现最佳效果，选择发布种草短视频时，请上传一张背景图。</view>
+  </form>
+  <view class="topic-container" wx:if="{{isTopic}}">
+    <view class="topicSearch">
+      <view class="search-ipt">
+        <text class="iconfont icon-chazhao" style="color:#B7A392"></text>
+        <input bindconfirm="wxSearchFn" bindinput="wxSearchInput" placeholder="搜索更多{{jointype==1?'标签':'话题'}}" type="text" maxlength="8" value="{{topicVal}}"></input>
+      </view>
+      <view class="go-back" bindtap="cancleTopic">取消</view>
+    </view>
+    <scroll-view scroll-y="true" style="height:{{scrollHeight - 66}}px;" bindscrolltolower="bindDownLoad" bindscrolltoupper="bindUpLoad">
+      <view class="creat-topic" wx:if="{{topicData.list.length==0}}" bindtap="{{jointype==2?'creatTopic':''}}">
+        <view>{{jointype==1?'未发现此标签':'话题没有想参与的？'}}</view>
+        <view wx:if="jointype==1">创建新{{jointype==1?'标签':'话题'}}：{{keyword}}</view>
+      </view>
+      <view class="topic-box">
+        <block wx:if="{{jointype==1}}">
+          <view class="topic-list {{item.titleid==item.tagIsClock?'unClickTopic':''}}" wx:for="{{tagData.list}}" data-idx="{{index}}" data-tagitem="{{item}}" bindtap="{{item.titleid==item.tagIsClock?'unClickTopic':'tagItem'}}" wx:key="index">
+            <text class="iconfont icon-jingxuan-F topic-tag"></text>
+            <text>{{item.tagtitle}}</text>
+          </view>
+        </block>
+        <block wx:if="{{jointype==2}}">
+          <view class="topic-list {{item.tid==item.topicIsClock?'unClickTopic':''}}" wx:for="{{topicData.list}}" data-idx="{{index}}" data-topicitem="{{item}}" bindtap="{{item.tid==item.topicIsClock?'unClickTopic':'topicItem'}}" wx:key="index">
+            <text class="topic-symbol">#</text>
+            <text>{{item.talkname}}</text>
+          </view>
+        </block>
+      </view>
+      <view class="end" style="margin:80rpx 0;" wx:if='{{no_more}}'>
+        <text>THE  END</text>
+      </view>
+    </scroll-view>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt,warningColor:warning.warningColor}}" />
+</view>
+<view class="topic"></view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>
+

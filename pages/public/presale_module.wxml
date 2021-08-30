@@ -1,0 +1,5 @@
+<!-- 预售模块 -->
+<import src="./activities.wxml" />
+<template name="presale_module">
+    <template is="activities" data="{{content, t_index}}"></template>
+</template>

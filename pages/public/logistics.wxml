@@ -1,0 +1,22 @@
+<!-- 产品信息通用模板 -->
+<template name="logistics">
+		<view class="paymentInfo" data-page="page.public.logistics">
+			<view class="open logisticsTitle" data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}" bindtap="logistics">
+				<text class="iconfont icon-yifahuo"></text>
+				<text data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}">{{package_list.express_company}}</text>
+				<text data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}">{{package_list.express_no}}</text>
+			</view>
+		</view>
+		<block wx:if="{{logisticsShow}}">
+				<view class="layer" bindtap="logistics"></view>
+				<view class="logisticsLayer">
+						<view class="logisticsLayerTitle">物流信息</view>
+						<view class="logisticsList">
+								<view wx:for="{{logistics}}" wx:key="index">
+										<text>{{item.context}}</text>
+										<text>{{item.time}}</text>
+								</view>
+						</view>
+				</view>
+		</block>
+</template>

@@ -1,0 +1,23 @@
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="customNav">
+  <block>
+    <!-- 导航 -->
+    <view class="nav-block customNav" >
+      <view class="status-colum" style="height:{{status}}px"></view>
+      <view class="contents" style="height:{{navHeight}}px">
+        <view>
+          <!-- 返回 -->
+          <view class="_centet nav_back" wx:if='{{1==2}}'>
+            <text class="iconfont icon-shangyibu"></text>
+          </view>
+          <view class="logo">
+            <image class='logo-img' src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/logo.png" />
+          </view>
+        </view>
+        <!-- <view class="nav-title _centet" style="color:{{barType==1?'#000':'#fff'}};justify-content:{{is_gift==1?'start':''}}">{{is_gift==1?name:_barTitle}}</view> -->
+      </view>
+    </view>
+    <!-- 占位 -->
+    <view class='nav-position' style="background-color:'#fff'; height:{{status+navHeight}}px;">占位</view>
+  </block>
+</template>

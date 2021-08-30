@@ -1,0 +1,145 @@
+/* detail.wxss */
+.headerArticle {width:100%;height:130rpx;display:flex;align-items:center;}
+.headerArticle .headerNav {font-size:28rpx;display:flex;align-items:center;align-content:space-between;width:500rpx;margin:0 auto;}
+.headerArticle .headerNav .navItem {flex:1;text-align:center;height:58rpx;line-height:58rpx;background:#fff;color:#FE6B34;border:3rpx solid #FE6B34;}
+.headerArticle .headerNav .navItem:first-child {border-radius:10rpx 0 0 10rpx;}
+.headerArticle .headerNav .navItem:last-child {border-radius:0 10rpx 10rpx 0;}
+.headerArticle .headerNav .navItem:first-child.active {border-right:none;background:#FE6B34;color:#fff;}
+.headerArticle .headerNav .navItem:last-child.active {border-left:none;background:#FE6B34;color:#fff;}
+.sectionArticle .brokerage, .sectionArticle .record {display:none;}
+.sectionArticle .brokerage.active, .sectionArticle .record.active {display:block;}
+.sectionArticle .brokerageItem {display:flex;flex-direction:column;align-items:center;box-sizing:border-box;padding:0 25rpx;margin-bottom:10rpx;background:#fff;}
+.sectionArticle .brokerageItem .topPart{width:100%;display:flex;align-content:space-between;align-items:center;font-size:26rpx;color:#666;border-bottom:1px solid #E6E6E6;}
+.sectionArticle .brokerageItem .bottomPart{width:100%;display:flex;align-content:space-between;align-items:center;font-size:36rpx;color:#F6640C;}
+.sectionArticle .brokerageItem .topPart view, .sectionArticle .brokerageItem .bottomPart view {padding:25rpx 0;}
+.sectionArticle .brokerageItem .topPart view.order_no, .sectionArticle .brokerageItem .bottomPart view.money {flex:3;}
+.sectionArticle .brokerageItem .topPart view.order_date, .sectionArticle .brokerageItem .bottomPart view.status {flex:1.2;text-align:right;}
+.sectionArticle .brokerageItem .bottomPart view.status {font-size:28rpx;color:#FFAD4D;}
+.sectionArticle .record .headerInfo {padding:0;border-bottom:1px solid #e6e6e6;background:#fff;}
+.sectionArticle .record .headerInfo .infoBox{width:100%;display:flex;align-content:space-between;align-items:center;font-size:26rpx;color:#333;padding:0 25rpx;box-sizing:border-box;}
+.sectionArticle .record .headerInfo .infoBox view {padding:25rpx 0;}
+.sectionArticle .record .headerInfo .infoBox view.infoDate {width:40%;}
+.sectionArticle .record .headerInfo .infoBox view.infoMoney {width:40%;}
+.sectionArticle .record .headerInfo .infoBox view.infoStatus {width:20%;text-align:center;}
+.sectionArticle .record .recordItem {padding:0 25rpx;background:#fff;}
+.sectionArticle .record .recordItem .recordBox {width:100%;display:flex;align-content:space-between;align-items:center;font-size:26rpx;color:#666;padding:0;border-bottom:1px solid #e6e6e6;}
+.sectionArticle .record .recordItem .recordBox view {padding:35rpx 0;}
+.sectionArticle .record .recordItem .recordBox view.itemDate {width:40%;} 
+.sectionArticle .record .recordItem .recordBox view.itemMoney {width:40%;font-size:28rpx;color:#F6640C;} 
+.sectionArticle .record .recordItem .recordBox view.itemStatus {width:20%;color:#333;text-align:center;} 
+.emptyArticle {display:flex;align-items: center;justify-content:center;flex-direction:column;padding-top:100rpx;}
+.emptyArticle image {width:160rpx;height:160rpx;}
+.emptyArticle .artMsg {font-size:28rpx;color:#666;margin-top:20rpx;}
+
+
+/* 主题色 --- 黑色(000000/ (0,152,248)--- 浅色1(E5F5FF) --- 浅色2(67C4FF) */
+/*fe6b34*/
+.blackTheme .headerArticle .headerNav .navItem {color:#000000;border:3rpx solid #000000;}
+.blackTheme .headerArticle .headerNav .navItem:first-child.active {background:#000000;}
+.blackTheme .headerArticle .headerNav .navItem:last-child.active {background:#000000;}
+/* F6640C */
+.blackTheme .sectionArticle .brokerageItem .bottomPart{color:#000000;}
+.blackTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#000000;}
+/* FFAD4D */
+.blackTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#000000;}
+
+
+
+/* 主题色 --- 红色(FA0029/ (250,0,41)--- 浅色1(250,0,41, 1) --- 浅色2(250,0,41, 2) */
+/*fe6b34*/
+.redTheme .headerArticle .headerNav .navItem {color:#FA0029;border:3rpx solid #FA0029;}
+.redTheme .headerArticle .headerNav .navItem:first-child.active {background:#FA0029;}
+.redTheme .headerArticle .headerNav .navItem:last-child.active {background:#FA0029;}
+/* F6640C */
+.redTheme .sectionArticle .brokerageItem .bottomPart{color:#FA0029;}
+.redTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#FA0029;}
+/* FFAD4D */
+.redTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#FA0029;}
+
+
+
+/* 主题色 --- 橘色(FF5C1C/ (255,92,28)--- 浅色1(255,92,28, 1) --- 浅色2(255,92,28, 2) */
+/*fe6b34*/
+.orangeTheme .headerArticle .headerNav .navItem {color:#FF5C1C;border:3rpx solid #FF5C1C;}
+.orangeTheme .headerArticle .headerNav .navItem:first-child.active {background:#FF5C1C;}
+.orangeTheme .headerArticle .headerNav .navItem:last-child.active {background:#FF5C1C;}
+/* F6640C */
+.orangeTheme .sectionArticle .brokerageItem .bottomPart{color:#FF5C1C;}
+.orangeTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#FF5C1C;}
+/* FFAD4D */
+.orangeTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#FF5C1C;}
+
+
+
+/* 主题色 --- 蓝色(0098F8/ (0,152,248)--- 浅色1(E5F5FF) --- 浅色2(67C4FF) */
+/*fe6b34*/
+.blueTheme .headerArticle .headerNav .navItem {color:#0098F8;border:3rpx solid #0098F8;}
+.blueTheme .headerArticle .headerNav .navItem:first-child.active {background:#0098F8;}
+.blueTheme .headerArticle .headerNav .navItem:last-child.active {background:#0098F8;}
+/* F6640C */
+.blueTheme .sectionArticle .brokerageItem .bottomPart{color:#0098F8;}
+.blueTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#0098F8;}
+/* FFAD4D */
+.blueTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#0098F8;}
+
+
+
+/* 主题色 --- 桃紫色(FF007C/ (255,0,124)--- 浅色1(255,0,124,1) --- 浅色2(255,0,124, 2) */
+/*fe6b34*/
+.pinkDarkTheme .headerArticle .headerNav .navItem {color:#FF007C;border:3rpx solid #FF007C;}
+.pinkDarkTheme .headerArticle .headerNav .navItem:first-child.active {background:#FF007C;}
+.pinkDarkTheme .headerArticle .headerNav .navItem:last-child.active {background:#FF007C;}
+/* F6640C */
+.pinkDarkTheme .sectionArticle .brokerageItem .bottomPart{color:#FF007C;}
+.pinkDarkTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#FF007C;}
+/* FFAD4D */
+.pinkDarkTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#FF007C;}
+
+
+
+/* 主题色 --- 紫色(7948FD/ (121,72,253)--- 浅色1(121,72,253, 1) --- 浅色2(121,72,253, 2) */
+/*fe6b34*/
+.purpleTheme .headerArticle .headerNav .navItem {color:#7948FD;border:3rpx solid #7948FD;}
+.purpleTheme .headerArticle .headerNav .navItem:first-child.active {background:#7948FD;}
+.purpleTheme .headerArticle .headerNav .navItem:last-child.active {background:#7948FD;}
+/* F6640C */
+.purpleTheme .sectionArticle .brokerageItem .bottomPart{color:#7948FD;}
+.purpleTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#7948FD;}
+/* FFAD4D */
+.purpleTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#7948FD;}
+
+
+
+/* 主题色 --- 棕色(B7A392/ (183,163,146)--- 浅色1(183,163,146, 1) --- 浅色2(183,163,146, 2) */
+/*fe6b34*/
+.brownTheme .headerArticle .headerNav .navItem {color:#B7A392;border:3rpx solid #B7A392;}
+.brownTheme .headerArticle .headerNav .navItem:first-child.active {background:#B7A392;}
+.brownTheme .headerArticle .headerNav .navItem:last-child.active {background:#B7A392;}
+/* F6640C */
+.brownTheme .sectionArticle .brokerageItem .bottomPart{color:#B7A392;}
+.brownTheme .sectionArticle .record .recordItem .recordBox view.itemMoney {color:#B7A392;}
+/* FFAD4D */
+.brownTheme .sectionArticle .brokerageItem .bottomPart view.status {color:#B7A392;}
+
+
+
+.tab-box{
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  font-size: 28rpx;
+  padding: 0 30rpx;
+}
+.tab-box .tab-title-left{
+  margin-right: 40rpx;
+}
+
+.fans-name{
+  box-sizing: border-box;
+  padding-right: 30rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

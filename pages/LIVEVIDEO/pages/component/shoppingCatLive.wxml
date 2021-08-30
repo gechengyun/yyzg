@@ -1,0 +1,65 @@
+<!--添加购物袋页面-->
+<template name="shoppingCatLive">
+  <import src="../component/shoppingProduct.wxml" />
+  <cover-view class="live-component-cloth">
+    <cover-view class="layer" bindtap="closeShopping" catchtouchmove="ture"></cover-view>
+    <cover-view class="shoppingLayer {{isIpx}}__footer__btn-group" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.shoppingCat">
+      <cover-view class="shoppingTitle">
+        <cover-image src="https://s.404.cn/applet/images/qudao/close.png" class="close-img" bindtap="closeShopping"></cover-image>
+      </cover-view>
+
+      <template is="shoppingProduct" data="{{product:shoppingData.shoppingCatData.product, type: shoppingData.type}}" />
+      
+      <cover-view class="shoppingSpec">
+        <cover-view class="shoppingCentent" wx:for="{{shoppingData.shoppingCatData.property_list}}" wx:for-index="id" wx:for-item="property" wx:key="index">
+          <cover-view class="shoppingSpecName">{{property.name}}</cover-view>
+          <cover-view class="shoppingSpecList">
+            <block wx:for="{{property.values}}" wx:for-item="twodata" wx:key="index">
+            <cover-view
+              wx:if="{{twodata.allQuantity === 0}}"
+                class="ggbtn disabled-btn"
+                >{{twodata.value}}</cover-view>
+              <cover-view
+              wx:else
+                class="ggbtn {{(shoppingData.specList[id].vid==twodata.vid) || shoppingData.single_sku_single_value ? 'active' : ''}}"
+                bindtap="shoppingVid"
+                data-vid="{{twodata.vid}}"
+                data-id="{{id}}"
+                data-pid="{{property.pid}}"
+                data-image="{{twodata.image}}"
+                wx:for-item="twodata"
+                >{{twodata.value}}</cover-view>
+            </block>  
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="shoppingNum">
+        <cover-view class="shoppingNumL">
+        <cover-view class="shoppingNumTxt">
+        数量
+        </cover-view>
+        <cover-view wx:if="{{shoppingData.shoppingCatData.product.buyer_quota!=0}}"><cover-view>(限购</cover-view><cover-view class="red">{{shoppingData.shoppingCatData.product.buyer_quota}}</cover-view><cover-view>件)</cover-view></cover-view>
+        </cover-view>
+        <cover-view class="shoppingInput">
+          <cover-image class="addicon" src="../../../../images/prodetail/reduce.png" bindtap="reduce" data-special="1"></cover-image>
+          <!-- <cover-view class="reduce shoppingInputTxt" bindtap="reduce">-</cover-view> -->
+          <cover-view bindtap="shoppingFocus" class="shoppingFocus">
+            <cover-view class="shoppingInputNum">{{shoppingData.shoppingNum?shoppingData.shoppingNum:1}}</cover-view>
+            <input bindblur="shoppingBlur" disabled="{{true}}" bindfocus='shoppingFocus' bindinput='shoppingChange' focus="{{shoppingInputFocus}}" value="{{shoppingData.shoppingNum?shoppingData.shoppingNum:1}}"/>
+          </cover-view>
+          <cover-image class="addicon" src="../../../../images/prodetail/add.png" bindtap="plus" data-special="1"></cover-image>
+          <!-- <cover-view class="plus shoppingInputTxt" bindtap="plus">+</cover-view> -->
+        </cover-view>
+      </cover-view>
+      <cover-view class="shoppingButton shoppingButtonLive">
+        <!-- 有规格 -->
+        <block wx:if="{{liveStatus != 1}}">
+          <button bindtap="payment" class="add-cart" data-type="add_cart" wx:if="{{shoppingData.shoppingCatData.property_list}}">加入购物袋</button>
+          <!-- 无规格 -->
+          <button bindtap="addCartBtn" class="add-cart" data-type="add_cart" data-product="{{shoppingData.shoppingCatData.product.product_id}}" wx:else>加入购物袋</button>  
+        </block>    
+        <button bindtap="payment" id="self_buy" data-type="self_buy" style='background:"#000"'>立即购买</button>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</template>

@@ -1,0 +1,79 @@
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<template name="nowRank">
+  <!-- rankStatus: 1：打赏榜，2：主播榜，3：粉丝列表 -->
+  <cover-view class="live-component-cloth">
+		<cover-view class="layer" bindtap="nowRankClose" catchtouchmove="ture"></cover-view>
+		<cover-view class="shoppingLayer" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.nowRank">
+			<cover-view style="overflow-y: scroll;height: 860rpx;">
+        <cover-view class="nrank-title">
+          <cover-view class="go-fans" bindtap="goFans" wx:if="{{rankStatus == 3}}">
+            <cover-view class="go-fans-before"></cover-view>
+            <cover-view class="go-fans-after"></cover-view>
+          </cover-view>
+          <block wx:if="{{rankStatus == 1}}">本场榜</block>
+          <block wx:if="{{rankStatus == 2}}">主播榜</block>
+          <block wx:if="{{rankStatus == 3}}">{{liveVideoData.nickname}}粉丝团</block>
+          <cover-view class="nrank-avard" wx:if="{{rankStatus == 2 && 0}}">打赏排行榜</cover-view>
+        </cover-view>
+        <cover-view class="fans-mes" wx:if="{{rankStatus == 3 && rewardList.fans_list.length>0}}">
+          <cover-view class="fans-mes-item">
+            <cover-view class="fans-mes-item-num after-box">粉丝团成员  {{rewardList.fans_num}}人</cover-view>
+            <cover-view>亲密度</cover-view>
+          </cover-view>
+        </cover-view>
+        <block wx:if="{{rankStatus == 3}}">
+          <block wx:if="{{rewardList.fans_list.length>0}}">
+            <cover-view class="nrank-list" wx:for="{{rewardList.fans_list}}" wx:key="index">
+              <cover-view class="nrank-item">
+                <cover-view class="nrank-img">
+                  <cover-image class="nrank-avatar" src="{{item.avatar}}"></cover-image>
+                </cover-view>
+                <cover-view class="nrank-middle">
+                  <cover-view class="nrank-name">{{filter.wrapChat1(item.nickname,filter.ceilFun(filter.getStrleng(item.nickname)/2),5)}}<block wx:if="{{filter.getStrleng(item.nickname) > 10}}">...</block></cover-view>
+                </cover-view>
+                <cover-view class="nrank-tip" wx:if="{{item.level>0}}">
+                  <cover-image class="nrank-tip-bg" src="https://s.404.cn/applet/images/degreebg/degree_bg{{item.level}}.png"></cover-image>
+                  <cover-view class="nrank-tip-name">{{item.level_name?item.level_name:'等级名称'}}</cover-view>
+                </cover-view>
+                <cover-view class="nrank-money fans-num">{{item.intimacy}}</cover-view>
+              </cover-view>
+            </cover-view>
+          </block>
+          <block wx:else>
+            <!-- 粉丝团列表为空 -->
+            <cover-view class="fans-empty">
+              <cover-image class="fans-empty-img" src="https://s.404.cn/applet/images/qudao/zhibo/fans_img2.png"></cover-image>
+              <cover-view class="fans-empty-des">
+                <cover-view>快点加入成为首位粉丝吧</cover-view>
+                <cover-view>超多惊喜为你而来</cover-view>
+              </cover-view>
+              <cover-view class="fansing-bottom" bindtap="joinFans">{{rewardList.need_coin}}{{rewardList.coin_name}}金币加入粉丝团</cover-view>
+            </cover-view>
+          </block>
+        </block>
+        <block wx:else>
+          <cover-view class="nrank-list" wx:for="{{rewardList.list}}" wx:key="index">
+            <cover-view class="nrank-self" wx:if="{{item.is_self}}"></cover-view>
+            <cover-view class="nrank-item">          
+              <cover-view class="nrank-order">{{index + 1}}</cover-view>
+              <cover-view class="nrank-img" bindtap="{{rankStatus==2?'rankgoAnchor':''}}">
+                <cover-image class="nrank-avatar" src="{{item.avatar}}"></cover-image>
+                <cover-image class="nrank-living" src="https://s.404.cn/applet/images/qudao/zhibo/rliving.png" wx:if="{{rankStatus == 2}}"></cover-image>
+              </cover-view>
+              <cover-view class="nrank-middle">
+                <cover-view class="nrank-name">{{filter.wrapChat1(item.nickname,filter.ceilFun(filter.getStrleng(item.nickname)/2),5)}}<block wx:if="{{filter.getStrleng(item.nickname) > 10}}">...</block></cover-view>
+                <cover-view class="nrank-money nrank-moneying" wx:if="{{rankStatus == 2}}">{{item.coin}}</cover-view>
+              </cover-view>
+              <cover-view class="nrank-tip" wx:if="{{item.level>0}}">
+                <cover-image class="nrank-tip-bg" src="https://s.404.cn/applet/images/degreebg/degree_bg{{item.level}}.png"></cover-image>
+                <cover-view class="nrank-tip-name">{{item.level_name?item.level_name:'等级名称'}}</cover-view>
+              </cover-view>
+              <cover-view class="nrank-money" wx:if="{{rankStatus == 1}}">{{item.coin}}</cover-view>
+              <cover-view class="nrank-about-btn" wx:if="{{rankStatus == 2}}">关注</cover-view>
+            </cover-view>
+          </cover-view>
+        </block>
+      </cover-view>
+		</cover-view>
+	</cover-view>
+</template>

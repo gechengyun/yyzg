@@ -1,0 +1,19 @@
+<template name="chatWindow">
+  <wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+  <import src="../component/chatList.wxml" />
+  <!-- 聊天弹窗 -->
+  <view class="layer" bindtap="closeChat" catchtouchmove="ture"></view>
+  <view class="shoppingLayer1 chatLayer" style="z-index:99999;padding-bottom:{{videoData.iscomment == 1?'':'0'}};">
+    <view class="chat-list-header">
+      <text>{{curQueue[current].comment_total}}条评论</text>
+      <view class="iconfont icon-iconfonticonfontclose" bindtap="closeChat"></view>
+    </view>
+    <template is="chatList" data="{{sayList:sayList2,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+    <view class="go-chat-list" data-id="{{curQueue[current].id}}" bindtap="goChatList" wx:if="{{curQueue[current].comment_total>10}}">更多评论></view>
+    <view class="chat-inp" wx:if="{{videoData.iscomment == 1}}">
+      <image class="chat-avatar-img" src="{{videoData.userinfo.avatar}}" mode="widthFix"></image>
+      <input class="chat-input" bindconfirm="wxSearchFn" bindinput="wxSearchInput" placeholder="留下你的种草心得..." type="text" value="{{topicVal}}" confirm-type="send"  placeholder-style="color:#C0C0C0;" maxlength="200"></input>
+      <view class="chat-btn" bindtap="wxSearchFn">评论</view>
+    </view>
+  </view>
+</template>

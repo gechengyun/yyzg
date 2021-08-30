@@ -1,0 +1,54 @@
+<!-- 优惠券列表 -->
+<import src="../component/coupon.wxml" />
+<!-- 购物袋列表 -->
+<import src="../component/goodsList.wxml" />
+<!-- 加入购物袋 -->
+<import src="../component/shoppingCatLive.wxml" />
+<!-- 商品列表 -->
+<import src="../component/productList.wxml" />
+<!-- 提示弹窗 -->
+<import src="../../../public/warning.wxml" />
+  <video id="myvideo" show-fullscreen-btn="{{false}}"  show-mute-btn="{{false}}" autoplay="{{true}}"  src="{{filesrc}}" bindloadedmetadata="bindloadedmetadata" object-fit="contain">
+  </video>
+    <!-- 商品列表按钮 -->
+      <view class="goods-btn" wx:if="{{showStatus!=0}}"   catchtap="goodsListShow" data-goodslength="{{goodsData.list.length}}">
+        <image class="goods-img" wx:if="{{goodsData.totalcount>0}}" src="https://s.404.cn/applet/images/qudao/zhibo/goodsbtn1.png" mode="widthFix"></image>
+        <view class="goods-num" wx:if="{{goodsData.totalcount>0}}">{{goodsData.totalcount}}</view>
+      </view>
+      <view catchtap="goback" class="live-close" style="top:{{boundtop}}px;width:{{boundHeight}}px;height:{{boundHeight}}px;line-height:{{boundHeight}}px;">
+  <image class="close-live-img"src="https://s.404.cn/applet/images/qudao/left.png"></image>
+      </view>
+  <!-- 主播信息 -->
+      <view class="user-mes" style='top:{{boundtop}}px;height:{{boundHeight}}px;z-index:9;'>
+        <image class="user-avatar" src="{{liveVideoData.avatar}}"></image>
+        <view class="user-content">
+          <view>{{liveVideoData.nickname}}</view>
+        </view>
+        <view class="follow" bindtap="followClick" wx:if="{{liveVideoData.subscribe*1 == 0}}">
+          <image class="follow-img" src="https://s.404.cn/applet/images/qudao/zhibo/follow.png"></image>
+          <view class="follow-contnet">关注</view>  
+        </view>
+        <!-- <view class="follow followed" bindtap="followClick" wx:else>
+          <view class="follow-contnet">已关注</view>  
+        </view> -->
+        <button class="getPhoneNum" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:if="{{liveVideoData.is_exist_phone == 0}}"></button>
+      </view> 
+
+      <!-- 关闭回放 -->
+      <!-- <view class="iconfont icon-chacha closePlay"  catchtap="goback">   </view>      -->
+      <!-- 商品列表 -->
+      <block>
+        <template is="goodsList" data="{{goodsListShow:liveVideoData.goodsListShow, goodsData:goodsData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,themeColorValue,status:liveVideoData.status,allrecord:allrecord}}" />
+      </block>
+      <!-- 提示框 -->
+      <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+   <!-- 优惠券列表 -->
+      <block wx:if="{{liveVideoData.couponShow}}">
+        <template is="coupon" data="{{couponData:couponData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,themeColorValue}}" />
+      </block>
+      <!-- 加入购物袋选规格 -->
+      <block wx:if="{{liveVideoData.shoppingShow}}">
+        <template is="shoppingCatLive" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+      </block>
+      <!-- 底部Tab -->
+      <include src="/pages/public/page_footer.wxml"></include>

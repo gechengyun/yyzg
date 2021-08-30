@@ -1,0 +1,65 @@
+<import src="../public/businessList.wxml" />
+<view class='list-page {{pageTheme}}'>
+  <!-- header  -->
+  <!-- fixed-header固定到顶部废弃 -->
+  <view class='header'>
+    <view class='header-block'>
+      <view class='header-content'>
+        <image class='bus-photo' wx:if="{{productListData.wholesale_store.logo}}" src='{{productListData.wholesale_store.logo}}' mode="aspectFill"></image>
+        <view class='bus-name'>{{productListData.wholesale_store.name}}</view>
+      </view>
+      <view class='bus-desc'>
+        <view>客服电话：{{productListData.wholesale_store.tel}}</view>
+        <view>店铺简介：{{productListData.wholesale_store.intro}}</view>
+        <!-- <view>
+      店铺简介：这是一个很想红的店铺
+      </view> -->
+      </view>
+    </view>
+    <image src='{{BASE_IMG_URL}}images/bus_bg.png' class='head-bg'></image>
+
+  </view>
+  <!-- main -->
+  <view class='main'>
+    <!-- 标题 -->
+    <view class="productTitle clearfix bgF newAdd">
+      <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav" data-sort="">
+        <text class="{{currentTab==0 ? 'active' : ''}}" data-current="0" data-sort="time_desc">默认</text>
+      </view>
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav" data-sort="sales">
+        <text class="{{currentTab==1 ? 'active' : ''}}" data-current="1" data-sort="sales_desc">销量</text>
+      </view>
+      <view class="sort {{priceTab}} {{currentTab==2 ? 'active' : ''}}" data-current="2" date-type="price" bindtap="swichNav" data-sort="priceTab">
+        <view date-type="price" data-sort="priceTab">
+          <text class="price" data-sort="priceTab">价格</text>
+          <view data-sort="priceTab">
+            <text class="iconfont icon-shang Arrow" data-current="2" data-sort="sales_asc"></text>
+            <text class="iconfont icon-xia Arrow" data-current="3" data-sort="sales_desc"></text>
+          </view>
+        </view>
+      </view>
+      <view style='display:none;'>
+       占用样式
+      </view>
+    </view>
+
+
+
+
+    <view class='main-container'>
+
+
+      <scroll-view scroll-y style="height:100%;" bindscrolltolower="toScroll" lower-threshold="{{50}}" class='{{pageTheme}}'>
+        <view class='tab-main'>
+          <view class="editProduct Zy">
+            <view class="shopProductTable" style="display:block">
+              <template is="businesstList" data="{{content:productListData}}" />
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view wx:if='{{no_data&&no_data.length!=0}}' class='no-data'>{{no_data}}</view>
+  </view>
+</view>

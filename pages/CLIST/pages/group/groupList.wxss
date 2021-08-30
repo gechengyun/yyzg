@@ -1,0 +1,8 @@
+/* pages/CLIST//pages/group/groupList.wxss */
+.no-data {
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  padding-bottom:10rpx;
+  padding-top:10rpx;
+}

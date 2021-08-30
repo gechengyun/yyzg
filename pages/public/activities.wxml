@@ -1,0 +1,343 @@
+<!--秒杀砍价拼团预售模块的模板-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="activities">
+    <view class="clearfix al-container al-display-style-{{content.config.list_display_style}}" wx:if="{{content.activities.length > 0}}" style="margin-top:15rpx;">
+        <view class="al-title" wx:if='{{content.config.title}}'>
+            <text class="activity_newtitle0716">{{content.config.title}}</text>
+            <text class="al-indicate" wx:if="{{content.config.list_display_style == 3}}">
+                <text class="al-indicate-current">{{content.config.current_indicate_index * 1 + 1}}</text>
+                <text class="al-indicate-all">/{{content.activities.length}}</text>
+            </text>
+        </view>
+        <block wx:for="{{content.activities}}" wx:key="index" wx:if="{{content.config.list_display_style == 1}}">
+            <navigator class="al-item" url="{{filter.getPageUrl(item.type,item.pigcms_id)}}" hover-class="none" open-type="navigate">
+                <view class="al-main-img al-main-image-size-style-{{content.config.main_image_size_style}} al-main-image-fill-style-{{content.config.main_image_fill_style}}"
+                      style="background: url('{{item.image}}') center no-repeat;background-size:{{content.config.main_image_fill_style == 1 ? 'cover' : 'contain'}};"
+                ></view>
+                <view class="al-board {{item.statusClass || ''}}">
+                    <view class="al-type-name">
+                        <text>{{item.tips}}</text>
+                    </view>
+                    <block wx:if="{{content.field_type=='presale_module'}}">
+                        <view class="al-presale-tail" wx:if="{{item.privileged_cash * 1 > 0}}"><image src="https://s.404.cn/applet/images/wxcopy/qushixiadie.png"></image><text>尾款直降{{item.privileged_cash}}元</text></view>
+                        <view wx:if="{{content.config.presale_price_show=='true'}}" class="al-presale-price"><view>定金{{item.dingjin}}元</view></view>
+                        <view class="al-time-count hide">
+                            <time-count-down
+                                    activityId="{{item.pigcms_id}}"
+                                    customFieldIndex="{{t_index}}"
+                                    bind:_onActivityStatusChange="_onActivityStatusChange"
+                                    startTime="{{item.start_time}}"
+                                    endTime="{{item.end_time}}"
+                            ></time-count-down>
+                        </view>
+                    </block>
+                    <block wx:else>
+                        <view wx:if="{{content.config.remain_sku_show=='true'}}" class="al-remain-sku"><view>剩余{{filter.transBigNumber(item.quantity,1)}}件</view></view>
+                        <view class="al-time-count{{content.config.time_count_show=='true'?'':' hide'}}">
+                            <time-count-down
+                                    activityId="{{item.pigcms_id}}"
+                                    customFieldIndex="{{t_index}}"
+                                    bind:_onActivityStatusChange="_onActivityStatusChange"
+                                    startTime="{{item.start_time}}"
+                                    endTime="{{item.end_time}}"
+                            ></time-count-down>
+                        </view>
+                    </block>
+                </view>
+                <view wx:if="{{content.config.name_show=='true'}}" class="al-good-name textOmitted">
+                    <text>{{item.product_name}}</text>
+                </view>
+                <view class="al-action-list">
+                    <view class="al-price {{item.statusClass || ''}}">
+                        <text class="al-price-prefix">{{content.field_type=='tuan_module'?item.start_persons+'人团':content.config.price_name}}:￥</text>
+                        <block wx:if="{{item.type==1 && item.dingjin}}">
+                            <text class="al-current-price">{{filter.transBigNumber((item.price * 1000 - item.privileged_cash * 1000 ) / 1000)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==2 && item.start_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.start_price)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==4 && item.min_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.min_price)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.seckill_price)}}</text>
+                        </block>
+                        <text wx:if="{{content.config.original_price_show=='true'}}" class="al-original-price"> ￥{{filter.transBigNumber(item.price)}}</text>
+                    </view>
+                    <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}">{{content.config.buy_btn_name}}</view>
+                </view>
+            </navigator>
+        </block>
+        <scroll-view wx:if="{{content.config.list_display_style == 2}}" scroll-x="true">
+            <block wx:for="{{content.activities}}" wx:key="index">
+                <navigator class="al-item" url="{{filter.getPageUrl(item.type,item.pigcms_id)}}" hover-class="none" open-type="navigate">
+                    <view class="al-main-img al-main-image-size-style-{{content.config.main_image_size_style}} al-main-image-fill-style-{{content.config.main_image_fill_style}}"
+                          style="background: url('{{item.image}}') center no-repeat;background-size:{{content.config.main_image_fill_style == 1 ? 'cover' : 'contain'}};"
+                    ></view>
+                    <view class="al-board {{item.statusClass || ''}}">
+                        <view class="al-type-name">
+                            <text>{{item.tips}}</text>
+                        </view>
+                        <block wx:if="{{content.field_type=='presale_module'}}">
+                            <view class="al-time-count hide">
+                                <time-count-down
+                                        activityId="{{item.pigcms_id}}"
+                                        customFieldIndex="{{t_index}}"
+                                        bind:_onActivityStatusChange="_onActivityStatusChange"
+                                        startTime="{{item.start_time}}"
+                                        endTime="{{item.end_time}}"
+                                ></time-count-down>
+                            </view>
+                            <view class="al-presale-tail" wx:if="{{item.privileged_cash * 1 > 0}}"><image src="https://s.404.cn/applet/images/wxcopy/qushixiadie.png"></image><text>尾款直降{{item.privileged_cash}}元</text></view>
+                            <view wx:if="{{content.config.presale_price_show=='true'}}" class="al-presale-price"><view>定金{{item.dingjin}}元</view></view>
+                        </block>
+                        <block wx:else>
+                            <view wx:if="{{content.config.remain_sku_show=='true'}}" class="al-remain-sku"><view>剩余{{filter.transBigNumber(item.quantity,1)}}件</view></view>
+                            <view class="al-time-count{{content.config.time_count_show=='true'?'':' hide'}}">
+                                <time-count-down
+                                        activityId="{{item.pigcms_id}}"
+                                        customFieldIndex="{{t_index}}"
+                                        bind:_onActivityStatusChange="_onActivityStatusChange"
+                                        startTime="{{item.start_time}}"
+                                        endTime="{{item.end_time}}"
+                                ></time-count-down>
+                            </view>
+                        </block>
+                    </view>
+                    <view wx:if="{{content.config.name_show=='true'}}" class="al-good-name textOmitted">
+                        <text>{{item.product_name}}</text>
+                    </view>
+                    <view class="al-action-list">
+                        <view class="al-price {{item.statusClass || ''}}">
+                            <text class="al-price-prefix">{{content.field_type=='tuan_module'?item.start_persons+'人团':content.config.price_name}}:￥</text>
+                            <block wx:if="{{item.type==1 && item.dingjin}}">
+                                <text class="al-current-price">{{filter.transBigNumber((item.price * 1000 - item.privileged_cash * 1000 ) / 1000)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==2 && item.start_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.start_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==4 && item.min_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.min_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.seckill_price)}}</text>
+                            </block>
+                            <text wx:if="{{content.config.original_price_show=='true'}}" class="al-original-price"> ￥{{filter.transBigNumber(item.price)}}</text>
+                        </view>
+                        <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}">{{content.config.buy_btn_name}}
+                        </view>
+                    </view>
+                </navigator>
+            </block>
+        </scroll-view>
+        <swiper style="height: 600rpx;" wx:if="{{content.config.list_display_style == 3}}" autoplay="true"
+                interval="5000" circular="true" bindchange="onActivitySwiperChange" data-t_index="{{t_index}}">
+            <swiper-item wx:for-items="{{content.activities}}" wx:key="index">
+                <navigator class="al-item" url="{{filter.getPageUrl(item.type,item.pigcms_id)}}" hover-class="none" open-type="navigate">
+                    <view class="al-main-img al-main-image-size-style-{{content.config.main_image_size_style}} al-main-image-fill-style-{{content.config.main_image_fill_style}}"
+                          style="background: url('{{item.image}}') center no-repeat;background-size:{{content.config.main_image_fill_style == 1 ? 'cover' : 'contain'}};"
+                    ></view>
+                    <view class="al-board {{item.statusClass || ''}}">
+                        <view class="al-type-name">
+                            <text>{{item.tips}}</text>
+                        </view>
+                        <block wx:if="{{content.field_type=='presale_module'}}">
+                            <view class="al-time-count hide">
+                                <time-count-down
+                                        activityId="{{item.pigcms_id}}"
+                                        customFieldIndex="{{t_index}}"
+                                        bind:_onActivityStatusChange="_onActivityStatusChange"
+                                        startTime="{{item.start_time}}"
+                                        endTime="{{item.end_time}}"
+                                ></time-count-down>
+                            </view>
+                            <view class="al-presale-tail" wx:if="{{item.privileged_cash * 1 > 0}}"><image src="https://s.404.cn/applet/images/wxcopy/qushixiadie.png"></image><text>尾款直降{{item.privileged_cash}}元</text></view>
+                            <view wx:if="{{content.config.presale_price_show=='true'}}" class="al-presale-price"><view>定金{{item.dingjin}}元</view></view>
+                        </block>
+                        <block wx:else>
+                            <view wx:if="{{content.config.remain_sku_show=='true'}}" class="al-remain-sku"><view>剩余{{filter.transBigNumber(item.quantity,1)}}件</view></view>
+                            <view class="al-time-count{{content.config.time_count_show=='true'?'':' hide'}}">
+                                <time-count-down
+                                        activityId="{{item.pigcms_id}}"
+                                        customFieldIndex="{{t_index}}"
+                                        bind:_onActivityStatusChange="_onActivityStatusChange"
+                                        startTime="{{item.start_time}}"
+                                        endTime="{{item.end_time}}"
+                                ></time-count-down>
+                            </view>
+                        </block>
+                    </view>
+                    <view wx:if="{{content.config.name_show=='true'}}" class="al-good-name textOmitted">
+                        <text>{{item.product_name}}</text>
+                    </view>
+                    <view class="al-action-list">
+                        <view class="al-price {{item.statusClass || ''}}">
+                            <text class="al-price-prefix">{{content.field_type=='tuan_module'?item.start_persons+'人团':content.config.price_name}}:￥</text>
+                            <block wx:if="{{item.type==1 && item.dingjin}}">
+                                <text class="al-current-price">{{filter.transBigNumber((item.price * 1000 - item.privileged_cash * 1000 ) / 1000)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==2 && item.start_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.start_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==4 && item.min_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.min_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.seckill_price)}}</text>
+                            </block>
+                            <text wx:if="{{content.config.original_price_show=='true'}}" class="al-original-price"> ￥{{filter.transBigNumber(item.price)}}</text>
+                        </view>
+                        <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}">{{content.config.buy_btn_name}}
+                        </view>
+                    </view>
+                </navigator>
+            </swiper-item>
+        </swiper>
+
+        <block wx:for="{{content.activities}}" wx:key="index" wx:if="{{content.config.list_display_style == 4}}">
+            <navigator class="al-item clearfix" url="{{filter.getPageUrl(item.type,item.pigcms_id)}}" hover-class="none" open-type="navigate">
+                <view class="al-main-img al-main-image-size-style-{{content.config.main_image_size_style}} al-main-image-fill-style-{{content.config.main_image_fill_style}}"
+                      style="background: url('{{item.image}}') center no-repeat;background-size:{{content.config.main_image_fill_style == 1 ? 'cover' : 'contain'}};"
+                ></view>
+                <view class="al-board {{item.statusClass || ''}}">
+                    <view class="al-type-name">
+                        <text>{{item.tips}}</text>
+                    </view>
+                    <block wx:if="{{content.field_type=='presale_module'}}">
+                        <view class="al-time-count hide">
+                            <time-count-down
+                                    activityId="{{item.pigcms_id}}"
+                                    customFieldIndex="{{t_index}}"
+                                    bind:_onActivityStatusChange="_onActivityStatusChange"
+                                    startTime="{{item.start_time}}"
+                                    endTime="{{item.end_time}}"
+                            ></time-count-down>
+                        </view>
+                        <view wx:if="{{content.config.presale_price_show=='true'}}" class="al-presale-price"><view>定金{{item.dingjin}}元</view></view>
+                    </block>
+                    <block wx:else>
+                        <view class="al-time-count{{content.config.time_count_show=='true'?'':' hide'}}">
+                            <time-count-down
+                                    activityId="{{item.pigcms_id}}"
+                                    customFieldIndex="{{t_index}}"
+                                    bind:_onActivityStatusChange="_onActivityStatusChange"
+                                    startTime="{{item.start_time}}"
+                                    endTime="{{item.end_time}}"
+                            ></time-count-down>
+                        </view>
+                    </block>
+                </view>
+                <view wx:if="{{content.config.name_show=='true'}}" class="al-good-name">
+                    {{item.product_name}}
+                </view>
+                <view class="al-action-list">
+                    <view class="al-price {{item.statusClass || ''}}">
+                        <text class="al-price-prefix">{{content.field_type=='tuan_module'?item.start_persons+'人团':content.config.price_name}}:￥</text>
+                        <block wx:if="{{item.type==1 && item.dingjin}}">
+                            <text class="al-current-price">{{filter.transBigNumber((item.price * 1000 - item.privileged_cash * 1000 ) / 1000)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==2 && item.start_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.start_price)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==4 && item.min_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.min_price)}}</text>
+                        </block>
+                        <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                            <text class="al-current-price">{{filter.transBigNumber(item.seckill_price)}}</text>
+                        </block>
+                        <text wx:if="{{content.config.original_price_show=='true'}}" class="al-original-price"> ￥{{filter.transBigNumber(item.price)}}</text>
+                    </view>
+                    <view>
+                        <view wx:if="{{content.config.remain_sku_show=='true' && content.field_type != 'presale_module'}}" class="al-remain-sku"><view>剩余{{filter.transBigNumber(item.quantity,1)}}件</view></view>
+                        <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}{{(content.field_type=='presale_module' || content.config.remain_sku_show!='true') ?' al-btn-buy-md':''}}">{{content.config.buy_btn_name}}
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <block wx:for="{{content.activities}}" wx:key="index" wx:if="{{content.config.list_display_style == 5}}">
+            <navigator class="al-item clearfix" url="{{filter.getPageUrl(item.type,item.pigcms_id)}}" hover-class="none" open-type="navigate">
+                <view class="al-left">
+                    <view class="al-main-img al-main-image-size-style-{{content.config.main_image_size_style}} al-main-image-fill-style-{{content.config.main_image_fill_style}}"
+                          style="background: url('{{item.image}}') center no-repeat;background-size:{{content.config.main_image_fill_style == 1 ? 'cover' : 'contain'}};"
+                    ></view>
+                    <view class="al-board {{item.statusClass || ''}}">
+                        <block wx:if="{{content.field_type=='presale_module'}}">
+                            <view class="al-time-count hide">
+                                <time-count-down
+                                        activityId="{{item.pigcms_id}}"
+                                        customFieldIndex="{{t_index}}"
+                                        bind:_onActivityStatusChange="_onActivityStatusChange"
+                                        startTime="{{item.start_time}}"
+                                        endTime="{{item.end_time}}"
+                                ></time-count-down>
+                            </view>
+                            <view class="al-presale-tail" wx:if="{{item.privileged_cash * 1 > 0}}"><image src="https://s.404.cn/applet/images/wxcopy/qushixiadie.png"></image><text>尾款直降{{item.privileged_cash}}元</text></view>
+                        </block>
+                        <block wx:else>
+                            <view class="al-time-count{{content.config.time_count_show=='true'?'':' hide'}}">
+                                <view style="margin-top: 3rpx;">
+                                    <time-count-down
+                                            activityId="{{item.pigcms_id}}"
+                                            customFieldIndex="{{t_index}}"
+                                            bind:_onActivityStatusChange="_onActivityStatusChange"
+                                            startTime="{{item.start_time}}"
+                                            endTime="{{item.end_time}}"
+                                    ></time-count-down>
+                                </view>
+                            </view>
+                        </block>
+                    </view>
+                </view>
+                <view class="al-right">
+                    <view wx:if="{{content.config.name_show=='true'}}" class="al-good-name">
+                        {{item.product_name}}
+                    </view>
+                    <view class="al-action-list">
+                        <view class="al-price {{item.statusClass || ''}}">
+                            <text class="al-price-prefix">{{content.field_type=='tuan_module'?item.start_persons+'人团':content.config.price_name}}:￥</text>
+                            <block wx:if="{{item.type==1 && item.dingjin}}">
+                                <text class="al-current-price">{{filter.transBigNumber((item.price * 1000 - item.privileged_cash * 1000 ) / 1000)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==2 && item.start_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.start_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==4 && item.min_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.min_price)}}</text>
+                            </block>
+                            <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                                <text class="al-current-price">{{filter.transBigNumber(item.seckill_price)}}</text>
+                            </block>
+                            <text wx:if="{{content.config.original_price_show=='true'}}" class="al-original-price"> ￥{{filter.transBigNumber(item.price)}}</text>
+                        </view>
+                        <view>
+                            <block wx:if="{{content.field_type=='presale_module'}}">
+                                <view class="al-time-count hide">
+                                    <time-count-down
+                                            activityId="{{item.pigcms_id}}"
+                                            customFieldIndex="{{t_index}}"
+                                            bind:_onActivityStatusChange="_onActivityStatusChange"
+                                            startTime="{{item.start_time}}"
+                                            endTime="{{item.end_time}}"
+                                    ></time-count-down>
+                                </view>
+                                <view wx:if="{{content.config.presale_price_show=='true'}}" class="al-presale-price"><view>定金{{item.dingjin}}元</view></view>
+                                <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}{{content.config.presale_price_show=='true'?'':' al-btn-buy-lg'}}">
+                                    {{content.config.buy_btn_name}}
+                                </view>
+                            </block>
+                            <block wx:else>
+                                <view style="display: flex;justify-content: space-between;flex-direction: row;margin-top: 16rpx">
+                                <view wx:if="{{content.config.remain_sku_show=='true'}}" class="al-remain-sku" style="flex:0;margin-top: 25rpx;"><view>剩余{{filter.transBigNumber(item.quantity,1)}}件</view></view>
+                                <view class="{{item.statusClass || ''}} al-buy-btn al-buy-btn-style-{{content.config.buy_btn_style}}{{content.config.remain_sku_show=='true'?'':' al-btn-buy-lg'}}">
+                                    {{content.config.buy_btn_name}}
+                                </view>
+                            </view>
+                            </block>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+    </view>
+</template>

@@ -1,0 +1,33 @@
+<!--我的订单-订单评价页面-->
+<import src="../../public/warning.wxml" />
+<import src="../../public/showBigPic.wxml" />
+<view class="container {{pageTheme}}" data-page="page.order.publishedEvaluation">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="evaluationList" wx:for="{{evaluationData.order_product_list}}" wx:for-index="list_index" wx:key="">
+        <view class="orderShop">
+            <view class="clearfix">
+                <view class="productImg verticalCentering">
+                    <image src="{{item.image}}"></image>
+                </view>
+                <view class="productInfo ">
+                    <view class="h2"><text>已评价 {{item.comment.score}}星</text><text>{{item.comment.dateline}}</text></view>
+                    <view name=""   value="">{{item.comment.content}}</view>
+                </view>
+            </view>
+            <view class="evaluation">
+                <text   class="active" wx:for="{{item.comment.tag_list}}" wx:for-item="list" wx:key="">{{list}}</text>
+            </view>
+            <view class="clearfix dl" wx:if="{{item.comment.attachment_list}}">
+                <view wx:for="{{item.comment.attachment_list}}" wx:for-item="list" wx:key="index">
+                    <image src="{{list}}" data-index="{{index}}" bindtap="showBigPic"></image>
+                </view>
+             </view>
+        </view>
+     
+    </view>
+    <block wx:if="{{showBigPic}}">
+        <template is="showBigPic" data="{{content: imgList, index: common_list_index, showBigPic: showBigPic}}" />
+    </block>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<import src="../../public/editAddress.wxml" />
+
+<view class="{{pageTheme}}">
+    <template is="editAddress" data="{{user_address:user_address,province_index:province_index,province_name_arr:province_name_arr,city_index:city_index,city_name_arr:city_name_arr,country_index:country_index,country_name_arr:country_name_arr,country_index:country_index,warning:warning,change_color,BASE_IMG_URL,order_no,paymentPostage}}"
+    />
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

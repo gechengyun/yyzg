@@ -1,0 +1,40 @@
+/* pages/SEALS//pages/website/website.wxss */
+/* 轮播 */
+.bannerSwiper{
+  height: 422rpx;
+}
+/* 内容 */
+.content{
+  padding: 0 40rpx;
+  margin-top: 80rpx;
+}
+.title{
+  color:#08132D;
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.c-content{
+  color: #606165;
+  font-size: 28rpx;
+  line-height: 48rpx;
+   margin: 32rpx 0;
+}
+.culture image{
+  width: 100%;
+  border-radius: 8rpx;
+}
+.title{
+  margin-bottom: 32rpx;
+}
+.videoed .slide_video{
+  margin-bottom: 24rpx;
+}
+.video-title{
+  color: #313334;
+  font-size: 32rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}

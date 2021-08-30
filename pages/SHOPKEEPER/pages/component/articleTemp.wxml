@@ -1,0 +1,154 @@
+<template name="articleTemp">
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<!--富文本-->
+<import src="../../../../wxParse/wxParse.wxml" />
+  <view class="msg-list style{{show_type}}" wx:for='{{lists}}' wx:key='listidx' wx:for-index="listidx">
+    <!-- 图片 -->
+    <view wx:if='{{item.files && item.files.length>0}}' class="img-block pic-num-{{item.files.length}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}">
+      <block wx:if='{{show_type==1}}'>
+        <block wx:if="{{status_type=='details' || show_lay==0}}">
+        <block wx:if="{{show_lay==0}}" >
+          <image src="{{pic.thumb}}" mode="widthFix" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx' wx:if='{{item.files.length==1 && item.files[0].type==1}}' style="height:800rpx;border-radius: 8rpx"></image>
+        </block>
+        <block wx:if="{{status_type=='details'}}">
+            <image src="{{pic.thumb}}" mode="widthFix" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx' wx:if='{{item.files.length==1 && item.files[0].type==1}}' style="height:800rpx;width:112%;margin: -32rpx -40rpx;"></image>
+            <view wx:if='{{item.files.length==1 && item.files[0].type==1}}' style="height:30rpx"></view>
+        </block>
+          <block wx:if="{{status_type=='details'}}">
+            <!-- 轮播图start -->
+            <view style="height:{{nowImgH*2}}rpx;width:112%;margin: -32rpx -40rpx;" >
+              <swiper  bindchange="bindchange"   wx:if="{{item.files.length>1 && item.files[0].type==1}}"style="height:{{nowImgH*2}}rpx;"  autoplay="true" interval="5000" indicator-dots="{{false}}">
+                <swiper-item wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx'> 
+                  <image bindload="{{idx==0?'imgHeight':''}}" src="{{pic.thumb}}" mode="aspectFill" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" style="width:100%;height:{{nowImgH*2}}rpx;"></image>
+                </swiper-item>
+              </swiper>
+              <!-- style="top:{{nowImgH*2-67}}rpx" -->
+              <view  wx:if="{{item.files.length>1}}" class="dot-number-style" style="top:{{nowImgH*2-67}}rpx">{{tabIndex+1}}/{{item.files.length}}</view>
+            </view>
+          </block>
+          <block wx:elif="{{show_lay==0}}" >
+            <image src="{{pic.thumb}}" mode="aspectFill" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx' wx:if='{{item.files.length>1 && item.files[0].type==1}}' style="border-radius: 8rpx"></image>
+          </block>
+          <!-- 列表页 -->
+          <view class="vedio-block videoed" wx:if='{{status_type=="list" && item.files[0].type==2}}'>
+            <video class="video_label" poster='{{item.files[0].video_thumb}}' src="{{item.files[0].file_path}}" controls object-fit='cover' autoplay='{{false}}' loop='{{false}}'></video>
+            <view class="videoplay"></view>
+          </view>
+          <!-- 列表页end -->
+        </block>
+        <!-- 懒加载 -->
+        <block wx:else>
+          <image src="{{imgList[listidx]?pic.thumb:defaultImg}}" mode="widthFix" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx' wx:if='{{item.files.length==1}}'
+            lazy-load="true"></image>
+
+          <image src="{{imgList[listidx]?pic.thumb:defaultImg}}" mode="aspectFill" data-src='{{pic.thumb}}' data-urls='{{item.files}}' bindtap="previewPic" wx:for='{{item.files}}' wx:for-item='pic' wx:for-index="idx" wx:key='idx' wx:if='{{item.files.length>1}}'
+            lazy-load="true"></image>
+        </block>
+      </block>
+      <!-- 一屏两列 -->
+      <block wx:if='{{show_type==2}}'>
+        <block wx:if="{{status_type=='details'}}">
+          <image src="{{item.files[0].thumb}}" mode="widthFix" data-src='{{item.files[0].thumb}}' data-urls='{{item.files}}' bindtap="previewPic" bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight}}rpx;"></image>
+        </block>
+        <block wx:else>
+          <image src="{{item.files[0].thumb}}" mode="widthFix" data-src='{{item.files[0].thumb}}' data-urls='{{item.files}}' bindtap="previewPic" bindload="imageLoad" style="width:{{imgwidth}}rpx; height:{{imgheight}}rpx;"></image>
+        </block>
+      </block>
+
+    </view>
+    <!-- 详情页视频 -->
+    <view class="vedio-block" wx:if='{{item.files[0].type==2 && status_type=="details"}}'>
+      <video class="video_label" poster='{{item.files[0].video_thumb}}' src="{{item.files[0].file_path}}" controls autoplay='{{true}}' loop='{{true}}'></video>
+    </view>
+    <view class="list-contener">
+      <view class="userContent" wx:if='{{status_type=="details"}}'>
+        <view class="userInfo" data-isanchor="{{item.is_anchor}}" data-uid="{{item.uid}}" bindtap="goPage">
+          <image src="{{item.fbtximg}}" class="comment-avatar"></image>
+          <view class="userName">{{item.fbname}}</view>
+          <view class="read" wx:if="{{item.show_addtime*1}}">{{item.addtime}}</view>
+        </view>
+        <block wx:if="{{detailData.subscribe_btn*1}}">
+          <text class="switchConcern" style="background-color:{{detailData.is_subscribe?'':themeColorValue}};color:{{detailData.is_subscribe?'':'#fff'}}" data-ismutual="{{detailData.is_subscribe}}" bindtap="switchConcern">{{detailData.is_subscribe?'已关注':'关注'}}</text>
+        </block>
+      </view>
+      <!-- 用户信息 -->
+      <view class="soft-title" wx:if='{{status_type=="details"}}'>{{item.title}}</view>
+      <!-- 内容 -->
+      <block wx:if="{{status_type=='list'}}">
+      <rich-text nodes='{{filter.richText(richtex || item.content)}}' class="soft-content style{{show_type}} {{moreData==item.id?'':'hide-more'}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}" wx:if="{{show_type==1}}"></rich-text>
+      <view class="soft-content style{{show_type}} {{moreData==item.id?'':'hide-more'}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}" wx:else>{{item.title}}</view>
+      </block>
+      <!-- 底部交互 -->
+      <view class="oprate style{{show_type}}" wx:if='{{status_type=="list" || !status_type}}'>
+        <view class="left">
+          <view class="publisher" wx:if="{{show_set.show_fber*1}}">
+            <image src="{{item.fbtximg}}" mode="widthFix" data-src='{{item.fbtximg}}'></image>
+            <text>{{item.fbname}}</text>
+          </view>
+          <view class="read" style="margin-right:24rpx;" wx:if="{{show_set.show_addtime*1}}">{{item.addtime}}</view>
+          <view class="dot" wx:if="{{show_set.show_addtime*1 && show_set.show_view*1}}"></view>
+          <view class="read cricle" wx:if="{{show_set.show_view*1}}">{{item.view_num}}阅读</view>
+        </view>
+        <view class="like go-like" bindtap="clickHeart" data-id="{{item.id}}" data-idxs="{{listidx}}" style="color:{{item.liked?themeColorValue:'rgba(145,147,152,1)'}}" wx:if="{{show_set.show_like*1}}">
+          <text class="iconfont {{item.liked?'icon-xihuan':'icon-hert'}}"></text>
+          <text>{{item.like_num}}</text>
+        </view>
+        <view class="grass-btn-ico" data-id="{{item.id}}" data-idx="{{listidx}}" data-comment="{{1}}" data-type="{{item.files[0].type}}" catchtap="goDetail" style="color:rgba(145,147,152,1);" wx:if="{{show_set.show_comment*1}}">
+          <text class="iconfont icon-pinglun"></text>
+          <text>{{item.comment_total*1<1000?item.comment_total:'999+'}}</text>
+        </view>
+      </view>
+    <!-- 详情页的时间和阅读量 -->
+      <view class="oprate style{{show_type}}" wx:if='{{status_type=="details"}}'>
+        <view class="left">
+          
+          <!-- <view class="dot" wx:if="{{item.show_addtime*1 && item.show_view*1}}"></view> -->
+          <view class="cricle" style="font-size: 24rpx;color: #A8A8A8;font-family: PingFang SC;font-weight: 400;" wx:if="{{item.show_view*1}}">{{item.view_num}}阅读</view>
+        </view>      
+      </view>
+    <!-- 详情页的时间和阅读量end -->
+    <!--又是一个标题-->
+    <block wx:if="{{status_type=='details'}}">
+      <view class="soft-content style{{show_type}}" wx:if="{{show_type==1}}">
+        <template is="wxParse" data="{{wxParseData:item.content.nodes}}" />
+      </view>
+      <view class="soft-content style{{show_type}} {{moreData==item.id?'':'hide-more'}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" wx:else>{{item.title}}</view>
+    </block>
+    <!--又是一个标题 end-->
+      <!-- 展开收起 -->
+      <view class="slide-block" wx:if='{{show_type==1 && marginBM[listidx]>5 && marginBM[listidx]!=6 && status_type=="list"}}' style="color:{{themeColorValue}}" bindtap="showMore" data-idxs="{{item.id}}">
+        <text wx:if="{{moreData==item.id}}">收起</text>
+        <text wx:else>展开</text>
+      </view>
+    <!-- 标签 -->
+      <view class="topic" wx:if='{{status_type=="details" && item.talktag.length>0}}'>
+        <navigator class="topic-list" wx:for="{{item.talktag}}" wx:for-item="topicList" url="/pages/SHOPKEEPER/pages/publish/publishList?way=1&tid={{topicList.tid}}" wx:key='index'>
+          <text class="topic-symbol" style="background-color:{{themeColorValue}}">#</text>
+          <text style="color:{{themeColorValue}}">{{topicList.talkname}}</text>
+        </navigator>
+      </view>
+    <!-- 标签end -->
+      <view class="optionContainer" wx:if='{{status_type=="details"}}'>
+        <view class="downLoad" style="background:{{themeColorValue}}" bindtap="oneDownLoad" wx:if="{{item.files[0].type==1 && detailData.is_close_down == 0}}">
+          <view class="downloadSvg iconfont icon-xiazai"></view>素材一键下载
+        </view>
+        <view class="right">
+          <view class="like go-like" style="color:{{item.liked?themeColorValue:'rgba(145,147,152,1)'}}">
+
+            <view class="share" style="color:rgba(145,147,152,1);" bindtap="shareTap">
+              <text class="iconfont icon-share2" ></text>{{item.share_num}}
+              <!-- style="padding-right:4rpx;" -->
+            </view>
+            <view wx:if="{{item.show_like*1}}" bindtap="clickHeart" data-id="{{item.id}}" data-idxs="{{listidx}}" style="display: flex;align-items: center;margin-left:30rpx;">
+              <text class="iconfont {{item.liked?'icon-xihuan':'icon-hert'}}"></text>{{item.like_num}}
+            </view>
+
+          </view>
+          <!-- <view class="share" style="margin-left:50rpx;color:rgba(145,147,152,1);" bindtap="shareTap">
+            <text class="iconfont icon-iconzhengli_fenxiang" style="padding-right:4rpx;"></text>{{item.share_num}}
+          </view> -->
+        </view>  
+      </view>
+    </view>
+  </view>
+</template>

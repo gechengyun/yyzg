@@ -1,0 +1,40 @@
+<!--产品信息通用模板-->
+<template name="shoppingProduct">
+    <import src="../public/shoppingProduct.wxml" />
+    <view class="shoppingProduct clearfix" data-page="page.public.shoppingProduct" style="background:#fff">
+        <!-- <navigator url="/pages/product/details?product_id={{product.product_id}}" hover-class="none" open-type="navigate"> -->
+            <view class="shoppingImg">
+              <image src="{{product.image}}" mode="aspectFit"></image>
+            </view>
+            <view class="shoppingInfo clearfix">
+                <view class="shoppingName textOmitted2">{{product.name}}
+                    <text wx:if="{{product.pro_num}}">×{{product.pro_num}}</text>
+                </view>
+                <view class="">
+									<text class="price" wx:if="{{type != 'make' && product.price}}">¥{{product.price}}</text>
+									<text class="price" wx:if="{{type != 'make' && (product.from_point_shop==1)}}">+<text class="iconfont icon-jifen"></text>{{product.point_exchange_num}}</text>
+									<text class="price" wx:if="{{type == 'make'}}">{{product.custom_reservation_name ? product.custom_reservation_name : '预约'}}定金：¥{{product.reservation_deposit}}</text>
+									<text class="price" wx:if="{{product.pro_price}}">¥{{product.pro_price}}                    
+										<block wx:if="{{product.is_present*1}}"> 赠送</block>  
+										<block wx:if="{{(product.discount)&&(product.is_present=='0')&&(product.is_point_exchange!=1)}}}"> x{{product.discount}}折</block>
+									</text>
+									<!-- 上门服务 -->
+									<text wx:if='{{product.special_product_type==95}}' class='service_btn' >上门服务</text>
+									<text class="shoppingSole" wx:if="{{product.quantity}}">库存:{{product.quantity}}</text>
+									<text class="shoppingSole" wx:if="{{product.sku_data_arr}}">
+									<block wx:for="{{product.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+									</text>
+											<text class="shoppingSole" wx:if="{{product.sku_arr}}">
+											<block wx:for="{{product.sku_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+									</text>
+								</view>
+            </view>
+        <!-- </navigator> -->
+        <view class="orderButton" wx:if="{{(status*1!=0)&&(status*1!=1)&&(status*1!=3)&&(status*1!=4)&&status&&type*1!=10}}">
+            <view wx:if="{{product.is_return==true&&status*1!=5}}" bindtap="applyRefundGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">申请退货</view>
+            <view wx:if="{{product.has_return==true}}" bindtap="returnGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">查看退货</view>
+            <view wx:if="{{product.is_rights==true}}" bindtap="applyRightsGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">申请维权</view>
+            <view wx:if="{{product.has_rights==true}}" bindtap="rightsGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">查看维权</view>
+        </view>
+    </view>
+</template>

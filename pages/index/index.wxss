@@ -1,0 +1,1267 @@
+/* pages/index/index.wxss */
+@import "../../wxParse/wxParse.wxss";
+@import "../../wxss/new_activity_module.wxss";
+@import "../../wxss/activities.wxss";
+@import "../../wxss/public/store_map.wxss";
+@import "../../wxss/public/image_ad2.wxss";
+@import "/iconfont/iconfont.wxss";
+
+.productTitle {
+  height: auto;
+}
+
+.new_windows {
+  position: fixed;
+  bottom: 155rpx;
+  left: 0;
+  z-index: 901;
+  width: 710rpx;
+  /* height: 975rpx; */
+}
+
+.new_windows .message {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  margin-bottom: 35rpx;
+}
+
+.new_windows .message .headimg {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #ebebeb;
+}
+
+.new_windows .message .content {
+  margin-left: 20rpx;
+}
+
+.new_windows .message .content .name {
+  font-size: 30rpx;
+  color: #fff;
+}
+
+.new_windows .message .content .text {
+  max-width: 470rpx;
+  font-size: 24rpx;
+  color: #333;
+  padding: 15rpx 24rpx;
+  background: #fff;
+  border-radius: 0px 35rpx 35rpx 35rpx;
+  box-sizing: border-box;
+}
+
+.windows_info {
+  position: absolute;
+  top: 56%;
+  left: 53%;
+  transform: translate(-50%, -50%);
+  width: 662rpx;
+  height: 320rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.windows_info .title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 460rpx;
+}
+
+.windows_info .title .item .txt {
+  font-weight: 500;
+}
+
+.windows_info .title .item .num {
+  display: flex;
+  align-items: center;
+  font-size: 60rpx;
+  color: #333;
+}
+
+.windows_info .title .item .num .dec {
+  font-size: 20rpx;
+}
+
+.windows_info .pronum {
+  font-size: 24rpx;
+  color: #333;
+}
+
+.windows_info .pronum text {
+  color: #eb3349;
+}
+
+.windows_info progress {
+  width: 400rpx;
+}
+
+button {
+  margin: 0;
+  padding: 0;
+}
+
+button::after {
+  border: none;
+}
+
+.windows_info button {
+  width: 406rpx;
+  height: 60rpx;
+  border-radius: 30rpx;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  color: #ffffff;
+}
+
+.windows_info .shopcontent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+}
+
+.windows_info .shopcontent .content {
+  width: 380rpx;
+  height: 150rpx;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.windows_info .shopcontent .content .title {
+  width: 360rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+
+.windows_info .shopcontent .shopimg {
+  width: 168rpx;
+  height: 168rpx;
+  background: gainsboro;
+  margin-left: 20rpx;
+}
+
+
+.windows_info .shopcontent .content .price {
+  width: max-content;
+  font-size: 30rpx;
+  color: #f62049;
+  position: relative;
+}
+
+.windows_info .shopcontent .content .price .line {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 2px;
+  background: #f62049;
+}
+
+.windows_info .shopcontent .content .nowprice {
+  color: #f62049;
+  display: flex;
+  align-items: center;
+}
+
+.windows_info .shopcontent .content .nowprice .num {
+  font-size: 36rpx;
+}
+
+.windows_info .shopcontent .content .nowprice text {
+  font-size: 30rpx;
+}
+
+.windows_info .shopcontent .content .nowprice .you {
+  width: 120rpx;
+  height: 30rpx;
+  background-color: #f62049;
+  border-radius: 15rpx 15rpx 15rpx 0px;
+  font-size: 18rpx;
+  color: white;
+  line-height: 30rpx;
+  text-align: center;
+  margin-left: 10rpx;
+}
+
+.windowscontent {
+  width: 700rpx;
+  height: 650rpx;
+  position: relative;
+}
+
+.windowscontent .img-close {
+  position: absolute;
+  left: 50%;
+  bottom: 6rpx;
+  margin-left: -30rpx;
+  width: 60rpx;
+  height: 55rpx;
+  z-index: 20;
+}
+
+.windowscontent .gopeople {
+  width: 400rpx;
+  height: 100rpx;
+  background: transparent;
+  position: absolute;
+  top: 55rpx;
+  left: 150rpx;
+  z-index: 999;
+}
+
+.windowscontent .membertitle {
+  font-size: 30rpx;
+  color: #ffffff;
+  width: 100%;
+  text-align: center;
+  margin-top: 10rpx;
+}
+
+.windowscontent .win_bg {
+  width: 700rpx;
+  height: 645rpx;
+  position: absolute;
+  bottom: 0rpx;
+  left: 23rpx;
+}
+
+.windowscontent .win_bg1 {
+  width: 670rpx;
+  height: 496rpx;
+  overflow: hidden;
+  position: absolute;
+  top: 52rpx;
+  left: 37rpx;
+}
+
+.windowscontent .win_bg1 image {
+  height: 598rpx
+}
+
+.myicon {
+  display: block;
+  width: 74rpx;
+  height: 74rpx;
+  border-radius: 50%;
+  background: gainsboro;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.myicon1 {
+  position: absolute;
+  bottom: 18rpx;
+  left: 116rpx;
+  width: 75rpx;
+  height: 75rpx;
+  border-radius: 50%;
+  background: gainsboro;
+}
+
+.bg_window {
+  position: absolute;
+  bottom: 100rpx;
+  left: 25rpx;
+  width: 702rpx;
+  height: 451rpx;
+  border-radius: 15rpx 15rpx 10rpx 60rpx;
+}
+
+.windowscontent .bottom_win {
+  position: absolute;
+  bottom: 22rpx;
+  left: 114rpx;
+  width: 102rpx;
+  height: 102rpx;
+  border-radius: 50%;
+}
+
+/**分享按钮**/
+.sharebutton {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: white;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20rpx 0;
+}
+
+.sharebutton .item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: normal;
+  background: none;
+  font-size: 22rpx;
+}
+
+.sharebutton .item image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+  background: gainsboro;
+  margin-bottom: 10rpx;
+  display: block;
+  padding: 28rpx;
+  box-sizing: border-box;
+}
+
+.haibaoimg {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 11111;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 635rpx;
+  height: 1100rpx;
+}
+
+canvas {
+  position: fixed;
+  top: -500%;
+  left: 0;
+  z-index: -1;
+}
+
+.xuanfu {
+  width: 200rpx;
+  height: 150rpx;
+  position: fixed;
+  bottom: 250rpx;
+  right: 0rpx;
+  font-size: 100rpx;
+}
+
+.xuanfu text {
+  position: absolute;
+  top: 140rpx;
+  left: 20rpx;
+  z-index: 999;
+  width: 160rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+  text-align: center;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.5)
+}
+
+.shopCouponList-index {
+  display: flex;
+  margin-right: 18rpx;
+  min-height: 100rpx;
+}
+
+.shopCouponList-index .getquan {
+  font-size: 30rpx;
+  line-height: 100rpx;
+  color: #f00;
+}
+
+/* 社区团购 */
+.group-buying-frist {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+}
+
+.group-buying-frist>image:nth-of-type(1) {
+  display: block;
+  width: 474rpx;
+  height: 500rpx;
+}
+
+.group-buying-frist .group-buying-btn {
+  position: absolute;
+  left: 50%;
+  bottom: 40rpx;
+  transform: translate(-50%, 0%);
+  z-index: 1000;
+  display: block;
+  width: 314rpx;
+  height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.group-buying-frist .img-close {
+  position: absolute;
+  left: 50%;
+  bottom: -90rpx;
+  margin-left: -32rpx;
+  width: 60rpx;
+  height: 55rpx;
+  font-size: 55rpx;
+  color: #fff;
+}
+
+/* ----------------------------团长展示 */
+.commander-content-wrap {
+  padding: 0 30rpx;
+  /* margin-top: 20rpx; */
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.commander-card {
+  /* height: 250rpx; */
+  /* margin: 28rpx 0 40rpx; */
+  padding: 0 20rpx;
+  /* background-color: #ffffff;
+	box-shadow: 0px 0px 17px 1px 
+		rgba(216, 216, 216, 0.68);
+	border-radius: 20rpx; */
+  background-color: #ffffff;
+  box-shadow: 0rpx 0rpx 46rpx 0rpx rgba(0, 0, 0, 0.06);
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.commander-card-top {
+  margin: 30rpx 0 20rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center
+}
+
+.commander-card-top .commander-card-headImg {
+  /* max-width: 100%; */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  flex-wrap: wrap;
+  overflow: hidden;
+  padding: 0 16rpx;
+}
+
+.commander-card-top .commander-card-headImg .commander-tips {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 13rpx;
+}
+
+.commander-card-top .commander-card-headImg .commander-tips .siteTips {
+  width: 75rpx;
+  height: 26rpx;
+  background-color: #ffcebf;
+  border-radius: 13rpx;
+  font-family: PingFang-SC-Regular;
+  font-size: 20rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 26rpx;
+  text-align: center;
+  letter-spacing: 0rpx;
+  color: #fd5d2c;
+  margin-right: 5rpx;
+}
+
+.commander-card-top .commander-card-headImg .commander-tips .name {
+  font-family: PingFang-SC-Bold;
+  font-size: 36rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 44rpx;
+  letter-spacing: 0rpx;
+  color: #333333;
+}
+
+.commander-card-top .commander-card-headImg .commander-tips .selectName {
+  font-family: PingFang-SC-Bold;
+  font-size: 36rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 44rpx;
+  letter-spacing: 0rpx;
+  text-align: center;
+  color: #333333;
+}
+
+.commander-card-top .commander-card-headImg .commander-card-address {
+  width: 100%;
+  font-family: PingFang-SC-Medium;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 36rpx;
+  letter-spacing: 0rpx;
+  color: #c7c7c7;
+}
+
+/* .commander-card-top .commander-card-headImg .commander-card-icon{
+  width: 96rpx;
+	height: 96rpx;
+
+	background-color: #cce198;
+  border-radius: 50%;
+} */
+/* .commander-card-address{
+  float: left;
+  width: 340rpx;
+  margin-left: 22rpx;
+} */
+/* .commander-card-address text:first-child{
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: PingFang-SC-Bold;
+	font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+}
+.commander-card-address text:nth-child(2){
+	font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #c7c7c7;
+} */
+/* .commander-card-address text:nth-of-type(1){
+  margin-bottom: 22rpx;
+  font-size: 32rpx;
+	color: #202020;
+}
+.commander-card-address text:nth-of-type(2)
+{
+  font-size: 24rpx;
+	color: #999999;
+} */
+.commander-card-opeartion {
+  float: right;
+}
+
+.commander-card-item {
+  float: left;
+  width: 90rpx;
+  text-align: center;
+}
+
+.commander-card-item:nth-child(2) {
+  margin-left: 22rpx;
+}
+
+.commander-card-item image {
+  display: block;
+  width: 60rpx;
+  height: 60rpx;
+  /* background: #000; */
+  border-radius: 50%;
+  margin: 0 auto 12rpx;
+}
+
+.commander-card-item text {
+  display: block;
+  font-family: PingFang-SC-Medium;
+  font-size: 22rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 44rpx;
+  letter-spacing: 0rpx;
+  color: #333333;
+}
+
+.commander-card-right {
+  width: 540rpx;
+  font-family: PingFang-SC-Medium;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 60rpx;
+  letter-spacing: 0px;
+  color: #b6b6b6;
+
+}
+
+.commander-card-right text {
+  display: block;
+  width: 100%;
+  font-family: PingFang-SC-Medium;
+  font-size: 24rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 60rpx;
+  letter-spacing: 0rpx;
+  color: #b6b6b6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.commander-card-right .btn-logins {
+  margin-top: 10rpx;
+  float: right;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #666;
+}
+
+.buying-preson-wrap {
+  float: right;
+  margin-bottom: 40rpx;
+}
+
+.buying-preson-box {
+  float: left;
+  display: flex;
+  align-items: center;
+  margin-right: 10rpx;
+}
+
+.buying-preson-box image {
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 8rpx;
+  border-radius: 50%;
+  background-color: #cce198;
+}
+
+.buying-preson-box text {
+  width: 62rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 22rpx;
+  line-height: 34rpx;
+  color: #666666;
+}
+
+.lookmore {
+  float: right;
+  line-height: 34rpx;
+  font-size: 22rpx;
+  color: #666666;
+}
+
+.lookmore icon {
+  float: right;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 24rpx;
+  color: #999;
+  padding-bottom: 10rpx;
+  padding-top: 10rpx;
+}
+
+/* 2019-5-19-xq 新增 */
+.change-shop {
+  padding: 25rpx 15rpx !important;
+  color: #fff;
+  border: 1rpx solid #ececec !important;
+
+}
+
+.shopProduct.editProduct .shopProductList>wx-view .productInfo wx-text.appointment:nth-child(2) wx-text {
+  line-height: 27rpx;
+}
+
+/* 2019-7-20-xq-新增 */
+.commander-card-item .iconfont {
+  display: block;
+  width: 46rpx;
+  height: 46rpx;
+  border-radius: 50%;
+  margin: 0 auto 12rpx;
+  font-size: 40rpx;
+  color: #98d05b;
+}
+
+.commander-card-item text.btn-tuan-copy {
+  border: 1rpx solid #40c1ae;
+  color: #40c1ae;
+  padding: 5rpx 10rpx;
+  height: 32rpx;
+  width: 72rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 17rpx;
+  border-radius: 36rpx;
+}
+
+.default_user {
+  font-size: 100rpx;
+}
+
+/* 2020-6-30 */
+.right .income {
+  display: inline-block;
+  width: 200rpx;
+  height: 100%;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+
+/* 限时折扣 */
+.discount_allContainer .discount_topImageContainer {
+  width: 702rpx;
+  height: 150rpx;
+  margin: 0 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background: #fff; */
+}
+
+.topImage {
+  width: 50%;
+}
+
+.discount_allContainer .discount_scrollTab {
+  width: 100%;
+  height: 100rpx;
+  overflow: hidden;
+  /* position: relative; */
+  display: flex;
+  background: #fff;
+}
+
+.tab-fiexd {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 101;
+}
+
+.discount_allContainer .discount_timeContainer {
+  width: calc(100% - 175rpx);
+  padding: 12rpx 31rpx;
+  display: flex;
+  white-space: nowrap;
+  flex-direction: row;
+  display: inline-block;
+}
+
+.discount_timeContainer .discount_timeItem {
+  margin: 0 13rpx;
+  height: 90rpx;
+  display: inline-block;
+}
+
+.discount_time {
+  width: auto;
+  height: 26rpx;
+  font-family: STHeitiSC-Medium;
+  font-size: 28rpx;
+  font-weight: bold;
+  font-stretch: normal;
+  color: #333333;
+  margin-bottom: 18rpx;
+  text-align: center;
+}
+
+.discount_title {
+  width: auto;
+  height: 24rpx;
+  font-family: PingFang-SC-Medium;
+  font-size: 22rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  color: #333333;
+  text-align: center;
+}
+
+.discount_timeContainer .discount_timeItem:first-child {
+  margin-left: 0;
+}
+
+.discount_timeContainer .discount_timeItem:last-child {
+  margin-right: 0;
+}
+
+.discount_scrollTab .discount_header {
+  width: 64rpx;
+  height: 70rpx;
+  font-family: AdobeHeitiStd-Regular;
+  font-size: 72rpx;
+  font-stretch: normal;
+  line-height: 39prx;
+  display: inline-block;
+  margin-right: 12rpx;
+  margin-left: 24rpx;
+  margin-top: 14rpx;
+}
+
+.discount_active {
+  color: #fff;
+  height: 38rpx;
+  line-height: 38rpx;
+  border-radius: 20rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+}
+
+.discount_contentContainer {
+  margin-top: 31rpx;
+}
+
+.discount_contentContainer .discount_contentItem {
+  width: 702rpx;
+  height: auto;
+  background-color: #fff;
+  display: block;
+  margin-left: 24rpx;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+}
+
+.discount_contentItem .discount_imgContainer {
+  width: 702rpx;
+  height: 292rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.discount_imgContainer .discount_img {
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 15rpx;
+  border-top-right-radius: 15rpx;
+  position: relative;
+}
+
+.discount_label {
+  width: 18%;
+  height: 20%;
+  position: absolute;
+  top: 0rpx;
+  left: 42rpx;
+}
+
+.discount_label .discount_labelImg {
+  width: 82%;
+  height: 43%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.discount_imgContainer .discount_img_style_1 {
+  width: 60%;
+  height: 100%;
+}
+
+.discount_shoppingContainer {
+  width: 702rpx;
+  height: auto;
+}
+
+.discount_shoppingTop {
+  width: 702rpx;
+  height: 81rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.discount_shoppingTimeContainer {
+  width: 572rpx;
+  height: 50rpx;
+  display: flex;
+  align-items: center;
+  margin-left: 28rpx;
+  /* justify-content: space-between; */
+}
+
+.discount_shoppingTimeContainer .discount_shoppingTitle {
+  color: white;
+  font-size: 24rpx;
+  font-weight: normal;
+  width: 72rpx;
+  height: 30rpx;
+  margin-right: 18rpx;
+  margin-top: -8rpx;
+  white-space: nowrap;
+}
+
+.discount_shoppingTime {
+  width: auto;
+  height: 46rpx;
+  white-space: nowrap;
+}
+
+.discount_shoppingTime_item {
+  width: 38rpx;
+  height: 38rpx;
+  text-align: center;
+  line-height: 38rpx;
+  display: inline-block;
+  background: #fff;
+  font-size: 24rpx;
+  font-family: PingFang-SC-Bold;
+  font-weight: bold;
+  font-stretch: normal;
+  letter-spacing: 0rpx;
+  border-radius: 6rpx;
+}
+
+.discount_shoppingTime em {
+  color: #fff;
+  font-size: 22rpx;
+  margin: 0 10rpx;
+}
+
+.discount_progressBarContainer {
+  width: 180rpx;
+  height: 38rpx;
+  margin-left: 80rpx;
+  margin-top: 5rpx;
+  border-radius: 16px;
+  position: relative;
+}
+
+.discount_progressBar {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  /* opacity: 0.6; */
+  border-radius: 16px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.discount_progressBarContainer .discount_progressBarPercent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: #fff;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 19rpx;
+  font-family: PingFang SC;
+  line-height: 38rpx;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.discount_progressBarOver {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border-radius: 16px;
+  text-align: center;
+  font-size: 19rpx;
+  font-family: PingFang SC;
+  line-height: 38rpx;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.discount_shoppingTop .discount_shoppingShare {
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 36rpx;
+  margin-top: 5rpx;
+  padding: 5rpx;
+  border-radius: 50%;
+}
+
+.discount_shoppingBottom {
+  width: 702rpx;
+  height: auto;
+  border-bottom-left-radius: 15rpx;
+  border-bottom-right-radius: 15rpx;
+  position: relative;
+  padding-bottom: 10rpx;
+}
+
+.discount_shoppingBottomTitle {
+  width: 624rpx;
+  height: auto;
+  font-family: PingFang-SC-Bold;
+  font-size: 30rpx;
+  font-weight: 600;
+  line-height: 36rpx;
+  color: #060606;
+  margin-left: 30rpx;
+  overflow: hidden;
+  margin-top: 16rpx;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.discount_bottomTopicContainer {
+  width: auto;
+  /* height: 36rpx; */
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  line-height: 36rpx;
+  margin-top: 20rpx;
+  margin-left: 32rpx;
+}
+
+.discount_bottomTopic {
+  height: 34rpx;
+  position: relative;
+  margin-right: 20rpx;
+}
+
+.discount_bottomTopicBg {
+  width: 100%;
+  height: 100%;
+  border-radius: 17rpx;
+  opacity: 0.2;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.discount_bottomTopicTitle {
+  text-align: center;
+  line-height: 34rpx;
+  padding: 0 20rpx;
+}
+
+.discount_shoppingBottomPrice {
+  width: auto;
+  height: 80rpx;
+  margin-left: 29rpx;
+  margin-top: 18rpx;
+  position: relative;
+}
+
+.discount_discountPrice {
+  height: 34rpx;
+  font-size: 40rpx;
+  font-family: STHeitiSC;
+  font-weight: bold;
+  line-height: 48rpx;
+  display: inline-block;
+  margin-top: 26rpx;
+}
+
+.discount_originalPrice {
+  height: 20rpx;
+  font-size: 24rpx;
+  font-family: STHeitiSC;
+  font-weight: bold;
+  text-decoration: line-through;
+  color: rgba(153, 153, 153, 1);
+  line-height: 48px;
+  margin-left: 15rpx;
+  position: relative;
+}
+
+.discount_shoppingBottomPrice em {
+  font-size: 26rpx;
+  font-family: STHeitiSC;
+  font-weight: bold;
+  margin-right: 4rpx;
+}
+
+.discount_shoppingBottom .discount_profit {
+  width: 146rpx;
+  height: 60rpx;
+  box-shadow: 0px 6px 10px 0px rgba(235, 51, 73, 0.22);
+  border-radius: 8rpx;
+  position: absolute;
+  top: 16rpx;
+  left: 394rpx;
+}
+
+.discount_shoppingBottom .discount_rushPurchase {
+  position: absolute;
+  top: -14rpx;
+  left: 484rpx;
+  font-size: 84rpx;
+}
+
+.discount_rushPurchase .discount_rushPurchaseTitle {
+  position: absolute;
+  left: 46rpx;
+  top: 22rpx;
+  font-family: PingFang SC;
+  font-weight: bold;
+  font-size: 32rpx;
+  width: 96rpx;
+  text-align: center;
+}
+
+.discount_profitPrice {
+  width: 100rpx;
+  height: 26rpx;
+  font-size: 24rpx;
+  font-family: Adobe Heiti Std;
+  color: #fff;
+  line-height: 26rpx;
+  text-align: center;
+  margin-top: 3rpx;
+}
+
+.discount_profitTitle {
+  width: 100rpx;
+  height: 28rpx;
+  font-size: 24rpx;
+  font-family: PingFang SC;
+  font-weight: 500;
+  color: #fff;
+  line-height: 28rpx;
+  text-align: center;
+  margin-top: 3rpx;
+}
+
+.discount_tabFiexd {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 101;
+}
+
+.discount_onLoad {
+  color: white;
+  font-size: 24rpx;
+  font-weight: normal;
+  width: 72rpx;
+  height: 30rpx;
+  white-space: nowrap;
+  margin-top: 6rpx;
+}
+/* 首页直播列表 */
+.live_list{
+  margin-top:20rpx;
+  height: 184rpx;
+  background: #F5F6F7;
+  border: 1px solid red;
+}
+.live-cotent {
+  width:702rpx;
+  height:220rpx;
+  background:url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/zbbg.png")no-repeat center;
+  background-size: cover;
+  margin: 20rpx auto;
+}
+.live-more {
+  font-size: 24rpx;
+  font-weight: 500;
+  color: #E1251B;
+  text-align: right;
+  padding: 10rpx 24rpx;
+}
+.moreicon {
+  width: 11rpx;
+  height: 18rpx;
+  padding-left: 10rpx;
+}
+.live-ul {
+  height: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-left: 40rpx;
+  /* margin-right: 40rpx; */
+}
+.live-li {
+  position: relative;
+  margin-right:52rpx;
+}
+.live-img {
+  position: relative;  
+  width:116rpx;
+  height:116rpx;
+  border-radius: 50%;
+  text-align: center;          
+  line-height: 116rpx;   
+  margin: 0 auto;
+  background: url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/zbb.png")no-repeat center;
+  background-size: cover;
+}
+
+.live-img image {
+  width:100rpx;
+  height:100rpx;
+  border-radius: 50%;
+  margin:8rpx;
+}
+.live-tips {
+  width:68rpx;
+  height:28rpx;
+  background:url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/tips.png")no-repeat center;
+  background-size: cover;
+  font-size:18rpx;
+  font-weight:400;
+  color:#fff;
+  line-height:28rpx;
+  text-align: center;
+  position:absolute;
+  top:0rpx;
+  left:62rpx;
+}
+.live-untips {
+  width:68rpx;
+  height:28rpx;
+  background:url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/untips.png")no-repeat center;
+  background-size: cover;
+  font-size:18rpx;
+  font-weight:400;
+  color:#fff;
+  line-height:28rpx;
+  text-align: center;
+  position:absolute;
+  top:0rpx;
+  left:62rpx;
+}
+.live-name {
+  width:114rpx;
+  font-size:20rpx;
+  font-weight:400;
+  color:#333;
+  text-align: center;
+  margin-top:3rpx;
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}

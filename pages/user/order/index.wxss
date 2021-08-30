@@ -1,0 +1,212 @@
+/* pages/user/order/index.wxss */
+@import "../../../wxss/circle_buy_timeline.wxss";
+.logistics-box{
+  border: none!important;
+  padding-top:0!important;
+}
+.logistics-box>text{
+  border-bottom: 1rpx solid #f4f4f4;
+  padding:20rpx 0;
+}
+/* 订单状态 */
+.order-status{
+  width: 100%;
+  padding: 20rpx;
+  margin-top: 20rpx;
+  background: #fff;
+}
+.order-status .title{
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #353535;
+  margin-bottom: 6rpx;
+}
+.order-status .desc{
+  font-size: 28rpx;
+  color: #999;
+  margin-bottom: 6rpx;
+}
+.logisticsLayer .logisticsList .delivery-view{
+  display:flex;
+  justify-content: space-between;
+  border: none;
+  padding-bottom: 5rpx;
+}
+
+.logisticsLayer .logisticsList .delivery-view+text{
+  padding-left: 20rpx;
+}
+
+.list-slide-down{
+  text-align:center;
+  font-size:28rpx;
+  padding-bottom:20rpx;
+  color: #999;
+}
+.list-slide-down .iconfont {
+  font-size:24rpx;
+}
+/* 金豆 */
+.gold-refund{
+  color: #999!important;
+  border-color: #999!important;
+}
+.isChannel{
+  font-size: 20rpx;
+  border: 1px solid;
+  border-radius: 10rpx;
+  padding: 0 10rpx;
+  margin-left: 8rpx;
+}
+
+
+
+.community_store{
+  width: 100%;
+	min-height: 166rpx;
+	background-color: #ffffff;
+	box-shadow: 0rpx 0rpx 46rpx 0rpx 
+		rgba(0, 0, 0, 0.06);
+	/* border-radius: 10rpx; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  /* margin-bottom: 10rpx; */
+}
+.community_store .head{
+  width: 160rpx;
+  height: 100%;
+  display: flex;
+  /* align-items: center; */
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.community_store .head .head_img{
+  width: 86rpx;
+	height: 86rpx;
+  border-radius: 50%
+}
+.community_store .head .head_img image{
+  width: 86rpx;
+	height: 86rpx;
+  border-radius: 50%;
+
+}
+.community_store .head  .head_name{
+  font-family: PingFang-SC-Bold;
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+  width: 100%;
+  height: 44rpx;
+  text-align: center;
+}
+.community_store .address_store .address_name{
+	font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #c7c7c7;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center
+}
+.community_store .address_store .address_name text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 75rpx;
+	height: 26rpx;
+	background-color: #ffcebf;
+	border-radius: 13rpx;
+	font-family: PingFang-SC-Regular;
+	font-size: 20rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #fd5d2c;
+  margin-right: 10rpx;
+}
+.community_store .address_store .store_name{
+  	font-family: PingFang-SC-Bold;
+	font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+}
+.community_store .address_store  .store_time{
+  font-family: PingFang-SC-Regular;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #444444;
+}
+.community_store .address_store  .store_time text{
+	font-size: 24rpx;
+}
+/* 核销码卡号卡密 */
+.write-code{
+  border-top: 1px solid #ddd;
+  margin-top: 16rpx;
+  padding-top: 16rpx;
+}
+.write-code .write-code-title{
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.write-code .write-code-title view{
+  font-size: 36rpx;
+}
+.write-code .write-code-title .show-more{
+  font-size: 30rpx;
+}
+.write-code-list{
+  background-color: #f2f2f2;
+  padding: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10rpx;
+}
+.write-code-r{
+  border: 1px solid #aaa;
+  border-radius: 10rpx;
+  background-color: #fff;
+  padding: 4rpx 20rpx;
+}
+.write-code .icon-yihexiao{
+  font-size: 70rpx;
+  margin-top: 20rpx;
+}
+.card-copy{
+  text-decoration: underline;
+  margin-left: 10rpx;
+}
+.shoppingProduct .orderButton {
+  width: 180rpx!important;
+  height: 150rpx;
+}
+/* .shoppingProduct .shoppingInfo {
+  float: left!important;
+  width: 574rpx!important;
+  margin-top: 5rpx!important;
+  font-size: 26rpx!important;
+  line-height: 30rpx!important;
+  margin-left: 16rpx!important;
+  border: 1px solid red;
+} */
+
+

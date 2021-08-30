@@ -1,0 +1,13 @@
+<template name="vidname">
+  <view class="card-video card-list" wx:if="{{cardData.myvideos}}">
+    <view class="cv-name list-name">{{titleName.tname}}</view>
+    <block>
+      <view class="videoed" wx:for="{{videoData}}" wx:key='{{index}}'>
+        <video src="{{ item.fileurl}}" controls class='slide_video' poster='{{ item.coverimg}}' id='video{{index}}' data-index="{{index}}"></video>
+        <view wx:if="{{index != playIndex}}" bindtap="videoPlay" data-index="{{index}}" class="videoplay">
+          <!-- <text class="iconfont icon-play"></text> -->
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

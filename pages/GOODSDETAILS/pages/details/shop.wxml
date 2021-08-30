@@ -1,0 +1,14 @@
+<!--搜索广告页面-->
+<import src="../../../public/search.wxml" />
+<import src="../../../public/TproductList.wxml" />
+<view class="container {{pageTheme}}" data-page="page.search.index">
+    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" class="shopHome">
+        <template is="TproductList" data="{{productList:storeData.tuan_list}}" />
+        <view class="productdDefault" wx:if="{{storeData.tuan_list==''}}">
+            <image src="https://s.404.cn/applet/images/wxcopy/que_03.png"> </image>
+            <text>该店铺还没有团购活动哦!</text>
+        </view>
+    </scroll-view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

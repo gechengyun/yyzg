@@ -1,0 +1,316 @@
+/* pages/LIVEVIDEO//pages/myTeam/myTeam.wxss */
+page, .container{
+  padding-bottom: 0;
+}
+.team-header{
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  color: #333333;
+  font-size: 30rpx;
+  background-color: #fff;
+}
+.back-box{
+  position: absolute;
+  width: calc(100% - 64rpx);
+  left: 32rpx;
+  top: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.back-box .icon-shangyibu{
+  margin-top: 6rpx;
+  width: 70rpx;
+}
+.team-title{
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 70rpx;
+}
+.title-item{
+  padding: 0 35rpx;
+}
+.back-box .active{
+  font-size: 34rpx;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 12rpx;
+}
+.back-box .active::after{
+  content: '';
+  width: 60%;
+  height: 8rpx;
+  display: block;
+  margin-top: 6rpx;
+  background: linear-gradient(to right, rgb(247, 131, 136), rgb(225,80,87));
+  border-radius: 4rpx;
+}
+.fixed-content{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background-color: #f9f9f9;
+}
+.team-tip{
+  background-color: rgba(216, 58, 43,.15);
+  color: #E15057;
+  font-size: 24rpx;
+  padding: 0 25rpx;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+.team-tip .icon-dengpaobeifen{
+  margin-right: 12rpx;
+}
+.search-ipt{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 30rpx;
+  height: 40px;
+  background-color: #eaeaea;
+  border-radius: 40rpx;
+  padding: 0 30rpx 0 40rpx;
+  margin-top: 13px;
+  width: calc(100% - 118rpx);
+  margin-left: 24rpx;
+}
+.search-ipt input{
+  flex: 1;
+}
+.icon-chazhao{
+  font-size: 56rpx;
+  color: #999
+}
+.team-list-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 24rpx;
+  color: #333;
+  padding: 0 24rpx;
+  height: 47px;
+}
+.team-choose{
+  font-size: 26rpx;
+  padding: 14rpx 0;
+}
+.team-choose .icon-shaixuan{
+  margin-right: 12rpx;
+}
+.team-choose .icon-paixu{
+  margin-right: 12rpx;
+  font-size: 40rpx;
+  vertical-align: sub;
+}
+/* 团队列表 */
+.team-list{
+  padding: 10rpx 24rpx 24rpx 24rpx;
+}
+.my-team{
+  margin: 12px;
+}
+.team-item{
+  padding: 15px;
+  margin-bottom: 12px;
+  border-radius: 10rpx;
+  background-color: #fff;
+  box-shadow: 0 0 5px 1px rgba(54, 49, 61, .1);
+}
+.team-item:last-child{
+  margin-bottom: 0;
+}
+.team-mes{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #333;
+}
+.team-mes-l{
+  display: flex;
+  align-items: center;
+}
+.team-avatar{
+  width: 41px;
+  height: 41px;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.team-n-p{
+  height: 41px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.team-name{
+  display: flex;
+  align-items: center;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.team-step{
+  color: #F1A260;
+  font-size: 20rpx;
+  background-color: #FADB95;
+  border-radius: 20rpx;
+  margin-left: 10rpx;
+  padding-right: 16rpx;
+  display: flex;
+  align-items: center;
+}
+.team-step .icon-zhubo{
+  color: #fff;
+  font-size: 20rpx;
+  background: linear-gradient(to right, #F7D398,#EE9962);
+  border-radius: 20rpx;
+  padding: 8rpx;
+  margin-right: 12rpx;
+  display: inline-block;
+}
+.team-phone{
+  font-size: 24rpx;
+}
+.team-mes-r{
+  font-size: 22rpx;
+  background-color: #EEEEEE;
+  width: 106rpx;
+  height: 42rpx;
+  line-height: 42rpx;
+  text-align: center;
+  border-radius: 22rpx;
+}
+.team-income{
+  background-color: #EBEBEB;
+  border-radius: 10rpx;
+  display: flex;
+  padding: 20px 15px;
+  margin: 20px 0 0;
+}
+.team-mun-list{
+  flex: 1;
+  text-align: center;
+  font-size: 22rpx;
+  font-weight: 600;
+  color: #999999;
+}
+.team-mun{
+  color: #333;
+  font-size: 24rpx;
+  margin-top: 10rpx;
+}
+.team-val{
+  font-size: 32rpx;
+  font-weight: 400;
+}
+.team-time{
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  color: #9C9E9D;
+  padding: 0 24rpx;
+}
+.team-please{
+  width: 100%;
+  height: 100rpx;
+  color: #FEFEFE;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  background-color: #D83A2B;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+}
+.team-please-name{
+  font-size: 30rpx;
+}
+/* 点击详情弹窗 */
+.detail-cloth{
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+}
+.detail-position{
+  width: 568rpx;
+  /* height: 612rpx; */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  z-index: 16;
+  border-top: 8rpx solid #F45C43;
+  border-radius: 5rpx;
+  padding: 0 34rpx 30rpx;
+}
+.detail-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  font-size: 26rpx;
+  padding: 30rpx 0;
+}
+.detail-title-name{
+  font-size: 36rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+.detail-copy{
+  font-size: 24rpx;
+  color: #E15057;
+  margin-left: 8rpx;
+  vertical-align: top;
+}
+.detail-income{
+  background-color: #EBEBEB;
+  padding: 35rpx 30rpx;
+  border-radius: 10rpx;
+  display: flex;
+  margin: 40rpx 0 20rpx;
+}
+.detail-item{
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx;
+  font-size: 26rpx;
+  color: #333333;
+}
+.detail-item-num{
+  color: #C0C0C0;
+}
+.detail-position .icon-cuowu_quan_001{
+  position: absolute;
+  bottom: -110rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 56rpx;
+  color: #fff;
+}
+/* 空列表 */
+.team-empy{
+  text-align: center;
+  color: #ccc;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.team-empy .icon-wode{
+  font-size: 150rpx;
+  font-weight: 300;
+  margin-top: 120rpx;
+}

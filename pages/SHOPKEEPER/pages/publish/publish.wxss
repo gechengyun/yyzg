@@ -1,0 +1,306 @@
+/* pages/SHOPKEEPER//pages/publish/publish.wxss */
+.container{
+  padding: 30rpx 30rpx 0;
+  background-color: #fff;
+}
+.title{
+  color: #08132D;
+  font-size: 40rpx;
+  font-weight: 600;
+  padding: 40rpx 0;
+  display: none;
+}
+.img-list{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.imaged{
+  position: relative;
+  width: calc(100%/3 - 45rpx/3);
+  height: 212rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  /* box-shadow: 0 0 13rpx rgba(0,0,0,0.13); */
+}
+.imaged:nth-child(3n){
+  margin-right: 0;
+}
+.imaged image{
+  width: 100%;
+  height: 100%;
+}
+.slide_video{
+  width: 100%;
+  height: 100%;
+}
+.close{
+  position: absolute;
+  font-size: 24rpx;
+  color: #fff;
+  background-color: rgba(0, 0, 0, .3);
+  width: 32rpx;
+  height: 32rpx;
+  text-align: center;
+  line-height: 32rpx;
+  border-radius: 50%;
+  right: 12rpx;
+  top: 12rpx;
+  z-index: 15;
+}
+.img-add{
+  font-size: 100rpx;
+  height: 208rpx;
+  line-height: 208rpx;
+  text-align: center;
+  margin-right: 0;
+  margin-bottom: 20rpx;
+  border: 1px dashed #E1E2E6;  
+}
+.add-video-pic{
+  font-size: 28rpx;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -60rpx;
+  width: 100%;
+}
+.shop-title{
+  border-bottom: 1px solid rgb(239,239,239);
+  padding: 35rpx 0;
+  margin-bottom: 30rpx;
+}
+.shop-title input{
+  font-size: 32rpx;
+  line-height: 60rpx;
+}
+.shop-content{
+  min-height: 80rpx;
+  font-size: 30rpx;
+}
+.shop-content textarea,.new-textarea{
+  width: 100%;
+  height: 310rpx;
+  overflow-y: auto;
+  display: block;
+}
+.new-textarea-empy{
+  color: #C0C4CC;
+}
+.go-goods{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgb(132,132,132);
+  font-size: 30rpx;
+  border-top: 1px solid rgb(239,239,239);
+  border-bottom: 1px solid rgb(239,239,239);
+  padding: 35rpx 0;
+  margin-bottom: 28rpx;
+}
+.go-goods text{
+  margin-right: 20rpx;
+  color: rgb(205,205,205);
+}
+.show-goods{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.goods-list{
+  position: relative;
+  width: calc(100%/3 - 40rpx/3);
+  height: 320rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  overflow: hidden;
+  box-shadow: 0 0 13rpx rgba(0,0,0,0.13);
+}
+.goods-list:nth-child(3n){
+  margin-right: 0;
+}
+.goods-list image{
+  width: 100%;
+  height: 212rpx;
+}
+.goods-title{
+  font-size: 20rpx;
+  color: rgb(51,51,51);
+  height: 60rpx;
+  line-height: 30rpx;
+  padding: 0 8rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  white-space:initial;
+}
+.goods-price{
+  font-size: 21rpx;
+  color: rgb(212,42,51);
+  padding: 0 8rpx;
+}
+.goods-price text{
+  font-size: 16rpx;
+}
+.goods-price-line{
+  text-decoration: line-through;
+  color: rgb(153,153,153);
+  font-size: 14rpx;
+}
+.sub-btn{
+  border-radius: 60rpx;
+  width: 90%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  margin: 50rpx auto;
+}
+.sub-btn-hover::after{  
+  border: none;
+  background-color: rgb(0, 0, 0,.2);
+  border-radius: 0;
+}
+/* 参与话题 */
+.topic-go{
+  font-size: 32rpx;
+  padding: 35rpx 0 15rpx;
+  border-top: 1px solid rgb(239,239,239);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topic-list1{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+.topic-tip{
+  margin-bottom: 20rpx;
+}
+.topic-item{
+  padding: 10rpx 20rpx;
+  font-size: 22rpx;
+  border-radius: 25rpx;
+  margin-right: 20rpx;
+  margin-bottom: 20rpx;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.topic-symbol{
+  background-color: #000;
+  color: #fff;
+  border-radius: 50%;
+  display: inline-block;
+  width: 32rpx;
+  height: 32rpx;
+  line-height: 32rpx;
+  text-align: center;
+  font-size: 24rpx;
+  margin-right: 12rpx;
+}
+.topic-tag{
+  font-size: 30rpx;
+  margin-right: 12rpx;
+}
+.topic-item-symbol{
+  margin-right: 4rpx;
+  font-size: 26rpx;
+}
+.topic-close{
+  right: -10rpx;
+  top: -10rpx;
+  font-size: 18rpx;
+  width: 28rpx;
+  height: 28rpx;
+  line-height: 28rpx;
+}
+.icon-xiayibu{
+  color: rgb(132,132,132);
+}
+/* pages/SHOPKEEPER//pages/topic/topicChoose.wxss */
+.topicSearch{
+  padding-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  border-bottom: 1px solid #f7f7f7;
+}
+.search-ipt{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid #f7f7f7;
+  background-color: #f7f7f7;
+  border-radius: 30rpx;
+  overflow: hidden;
+  width: calc(100% - 108rpx);
+  padding: 2px 14rpx;
+}
+.search-ipt input{
+  width: calc(100% - 50rpx);
+  margin-left: 10rpx;
+}
+.go-back{
+  width: 70rpx;
+  text-align: right;
+}
+/* 创建话题 */
+.creat-topic{
+  padding: 30rpx 20rpx;
+  font-size: 30rpx;
+  color: #aaa;
+  border-bottom:  1px solid #f7f7f7;
+}
+/* 话题列表 */
+.topic-list{
+  font-size: 30rpx;
+  padding: 30rpx 0;
+  border-bottom:  1px solid #f7f7f7;
+}
+.topic-symbol{
+  margin-right: 12rpx;
+}
+/* 尾部提示信息 */
+.end {
+  color: #919398;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: center;
+}
+
+.end text {
+  margin: 0 10rpx;
+}
+
+.end::before, .end::after {
+  content: '';
+  display: inline-block;
+  width: 100rpx;
+  height: 1px;
+  background-color: #919398;
+  vertical-align: middle;
+}
+.unClickTopic{
+  color: red;
+}
+.unClickTopic .topic-symbol{
+  background-color: red;
+}
+
+/* 上传视频封面提示 */
+.add-pic-tip{
+  color: #999;
+  font-size: 24rpx;
+  padding: 24rpx;
+  line-height: 40rpx;
+  background-color: #f9f9f9;
+}

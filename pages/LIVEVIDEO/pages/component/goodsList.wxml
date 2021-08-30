@@ -1,0 +1,63 @@
+<!--商品列表页面-->
+<template name="goodsList">
+
+	<cover-view class="live-component-cloth" hidden="{{!goodsListShow}}">
+		<cover-view class="layer" bindtap="goodsListClose" catchtouchmove="ture"></cover-view>
+		<cover-view class="shoppingLayer" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.goodsList">
+			<cover-view class="goods-title-num">
+				<cover-view style="font-size: 24rpx;color: #343434;">全部商品（{{goodsData.totalcount}}）</cover-view>
+				<!-- <cover-view class="goods-title-close" bindtap="goodsListClose">
+					<cover-image src="https://s.404.cn/applet/images/qudao/prize/prize_close.png"></cover-image>
+				</cover-view> -->
+			</cover-view>
+			<cover-view style="height: 80rpx;"></cover-view>
+			<cover-view class="goods-all">
+				<!--  -->
+				<cover-view class="goods-list" wx:for="{{goodsData.list}}" wx:key="index" data-index="{{index}}" wx:if="{{item.is_show}}" bindtap="openShop" data-product="{{item.product_id}}" data-skstatus="{{item.seckill_status}}" data-type="self_buy" data-baby="baby">
+			<!--商品上start-->
+					<cover-view style="display:flex">
+					<cover-view class="goods-l">
+						<cover-image class="goods-img" mode="scaleToFill" src="{{item.image}}"></cover-image>
+						<cover-view class="goods-sort-top" wx:if="{{item.is_top == 1}}" style="background-color:{{themeColorValue}}">热</cover-view>
+						<cover-view class="goods-sort" wx:else>{{item.sort}}</cover-view>
+					</cover-view>
+					<cover-view class="goods-middle">
+						<cover-view class="goods-name">{{item.name}}</cover-view>
+						<cover-view class="goods-tag" wx:if="{{status == 1}}">
+							<cover-view class="tag-item" wx:if="{{item.is_top == 1}}">置顶中</cover-view>
+							<!-- <cover-view class="tag-item" wx:if="{{item.teach_status != 0}}">{{item.teach_status==1?'讲解中':'已结束'}}</cover-view> -->
+							<cover-view class="tag-item" wx:if="{{item.teach_status != 0&&item.teach_status==1}}">讲解中</cover-view>
+							<cover-view class="tag-item" wx:if="{{item.seckill_status == 1}}">秒杀中</cover-view>
+						</cover-view>
+						<cover-view class="goods-price">
+							<cover-view class="goods-now-price">
+								<cover-view>￥</cover-view>
+								<cover-view class="goods-pricing">{{item.price}}</cover-view>
+							</cover-view>
+							<!-- <cover-view class="line-price" wx:if="{{item.original_price > 0}}">￥{{item.original_price}}
+								<cover-view class="line-through"></cover-view>
+							</cover-view> -->
+						</cover-view>
+					</cover-view>
+					<cover-image class="icon-right {{item.live_product_qty && item.live_product_qty*1 == 0?'right-rob-over':''}}" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/liveDetail/gwdicon.png"></cover-image>
+				</cover-view>
+			<!--商品上end-->
+					<!-- 回放视频 -->
+					<cover-view>
+						<!-- <cover-image class="goplayback" wx:if="{{item.recordvideo.length>0&&status!=1}}" style="background-color:{{themeColorValue}}" data-product="{{item.product_id}}" data-filesrc="{{item.recordvideo[0].filesrc}}" catchtap="goRecordvideo" src="../image/hf.png">
+						</cover-image> -->
+						<cover-view class="goplayback1" wx:if="{{item.recordvideo.length>0&&status!=1&&allrecord!=1}}" data-product="{{item.product_id}}" data-filesrc="{{item.recordvideo[0].filesrc}}" catchtap="goRecordvideo"><cover-image class="replay_button_style" src="https://s.404.cn/applet/images/qudao/prize/replay_button.png"></cover-image><cover-view style="height: 55rpx;line-break: 55rpx;text-align: center;margin-top: 10rpx;margin-left: 36rpx;font-size: 25rpx;color: #7F7F7F"> 看讲解</cover-view></cover-view>
+						<!-- <cover-view class="right-rob {{item.live_product_qty && item.live_product_qty*1 == 0?'right-rob-over':''}}">
+							马上抢
+						</cover-view> -->
+					
+					</cover-view>
+          <!-- <cover-image class="goods-cart" src="https://s.404.cn/applet/images/qudao/cartGray.png" data-product="{{item.product_id}}" wx:if="{{item.live_product_qty && item.live_product_qty*1 == 0}}"></cover-image>
+					<cover-image class="goods-cart" src="https://s.404.cn/applet/images/qudao/cart.png" data-product="{{item.product_id}}" wx:else></cover-image> -->
+				</cover-view>
+				
+				<!--  -->
+			</cover-view>
+		</cover-view>
+	</cover-view>
+</template>

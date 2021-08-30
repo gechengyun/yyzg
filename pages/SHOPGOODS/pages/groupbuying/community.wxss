@@ -1,0 +1,444 @@
+.groupbuying-position {
+  display: flex;
+  align-items: center;
+  height: 120rpx;
+  background: #fff;
+  font-size: 28rpx;
+}
+
+.groupbuying-position icon {
+  width: 38rpx;
+  height: 38px;
+  font-size: 38rpx;
+  margin-right: 12rpx;
+}
+
+.content-padding {
+  padding: 0 30rpx;
+}
+
+.groupbuying-position text {
+  flex: 1;
+}
+
+.edit-address {
+  width: 90rpx;
+  color: #999;
+}
+
+.edit-address text {
+  margin-right: 10rpx;
+}
+
+.groupbuying-person-content {
+  background: #fff;
+  margin-top: 20rpx;
+  padding-bottom: 24rpx;
+  overflow: hidden;
+}
+
+.groupbuying-person-part {
+  height: 176rpx;
+  margin-top: 24rpx;
+  background-color: #fff;
+  box-shadow: 0px 0px 17px 1px rgba(216, 216, 216, 0.68);
+  border-radius: 20px;
+  padding: 0 20rpx;
+  overflow: hidden;
+}
+
+.groupbuying-person-part .iconwarp {
+  position: relative;
+  float: left;
+  height: 100%;
+  margin-right: 24rpx;
+}
+
+.groupbuying-person-part .iconwarp image {
+  width: 96rpx;
+  height: 96rpx;
+  margin: 40rpx 0 0;
+  border-radius: 50%;
+  background-color: #cce198;
+}
+
+.groupbuying-person-part .iconwarp text {
+  position: absolute;
+  right: 0;
+  bottom: 40rpx;
+  text-align: center;
+  width: 62rpx;
+  height: 25rpx;
+  background-color: #ff6030;
+  border-radius: 0px 12rpx 0px 12rpx;
+  font-size: 18rpx;
+  line-height: 25rpx;
+  color: #fff;
+}
+
+.groupbuying-person-part .position-distance {
+  margin-bottom: 22rpx;
+  height: 26rpx;
+  line-height: 26rpx;
+  margin-top: 50rpx;
+  font-size: 32rpx;
+  font-weight: normal;
+  color: #202020;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.groupbuying-person-part .position-distance view{
+   display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.groupbuying-person-part .position-distance text.right {
+  float: right;
+  font-size: 22rpx;
+  color: #ff6030;
+}
+
+.groupbuying-person-part .address-name {
+  font-size: 24rpx;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.groupbuying-person-part .address-name view{
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: center; */
+  width: 80%;
+  line-height: 24rpx;
+}
+.groupbuying-person-part .address-name view icon{
+   /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.groupbuying-person-part .address-name .xuanTa {
+  display: inline-block;
+  width: 90rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #ff6030;
+  border-radius: 22rpx;
+}
+
+.current-person {
+  position: relative;
+  overflow: hidden;
+  margin-top: 24rpx;
+  background-color: #fff;
+  padding-bottom: 32rpx;
+  box-shadow: 0px 0px 17rpx 1rpx rgba(216, 216, 216, 0.68);
+  border-radius: 20px;
+}
+
+.current-person-namefans, .current-person-detail {
+  padding: 0 34rpx;
+}
+
+.current-person-namefans {
+  color: #202020;
+}
+
+.current-person-namefans text {
+  line-height: 34rpx;
+  font-size: 36rpx;
+}
+
+.current-person-namefans .fans-num {
+  font-size: 22rpx;
+  line-height: 26rpx;
+  margin-top: 20rpx;
+}
+
+.current-person-namefans .fans-num label {
+  font-size: 26rpx;
+  color: #666;
+  margin-right: 12rpx;
+}
+
+.current-person-title {
+  width: 140rpx;
+  height: 46rpx;
+  margin: 20rpx 0 24rpx;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 46rpx;
+  color: #fff;
+  background-image: linear-gradient(90deg, #feb40d 0%, #ff6030 100%),
+                      linear-gradient(#cce198, #cce198);
+  background-blend-mode: normal, normal;
+  box-shadow: 0px 0px 8rpx 1rpx rgba(248, 88, 40, 0.35);
+  border-radius: 0px 23rpx 23rpx 0px;
+}
+
+.current-person-detail {
+  font-size: 24rpx;
+  margin-top: 52rpx;
+  color: #333;
+}
+
+.current-person-detail view {
+  margin-bottom: 16rpx;
+}
+
+.current-person-detail view:last-child {
+  margin: 0;
+}
+
+.current-person-detail label {
+  float: left;
+  color: #666;
+  margin-right: 40rpx;
+  width: 100rpx;
+  display: flex;
+  text-justify: inter-cluster;
+}
+
+.current-person .icon-wrap {
+  position: absolute;
+  top: 46rpx;
+  right: 36rpx;
+}
+
+.current-person .icon-wrap image {
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 46rpx;
+  background-color: #cce198;
+  box-shadow: 0px 0px 17rpx 1rpx rgba(216, 216, 216, 0.68);
+  border: solid 8rpx #fff;
+  border-radius: 50%;
+}
+
+.current-person .icon-wrap text {
+  display: block;
+  margin-bottom: 44rpx;
+  width: 151rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #ff6030;
+  border-radius: 22rpx;
+}
+
+.current-person-position {
+  margin: 40rpx 0 10rpx;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.current-person-position icon {
+  margin-right: 10rpx;
+  color: #ff6030;
+}
+
+.none-grouper {
+  text-align: center;
+}
+
+.none-grouper image {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 100rpx auto 20rpx;
+}
+
+.none-grouper .tip {
+  margin-bottom: 20rpx;
+  color: #666;
+}
+
+.none-grouper text {
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  text-align: center;
+  display: block;
+  color: #ff6030;
+}
+
+/* tc 新增 1224 */
+
+.groupbuying-now {
+  height: 236rpx;
+  margin-top: 24rpx;
+  background-color: #fff;
+  box-shadow: 0px 0px 17px 1px rgba(216, 216, 216, 0.68);
+  border-radius: 20px;
+  padding: 0 20rpx;
+  overflow: hidden;
+}
+
+.groupbuying-now .top {
+  width: 100%;
+  height: 176rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.groupbuying-now .top .now-head {
+  width: 150rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+  padding-top: 40rpx;
+}
+
+.groupbuying-now .top .now-head image {
+  width: 86rpx;
+  height: 86rpx;
+  border-radius: 50%;
+  margin-bottom: 14rpx;
+}
+
+.groupbuying-now .top .now-head .now-name {
+  width: 100%;
+  font-family: PingFang-SC-Bold;
+  font-size: 28rpx;
+  text-align: center;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 34rpx;
+  letter-spacing: 0rpx;
+  color: #333;
+}
+
+.groupbuying-now .top .now-distance {
+  flex: 1;
+  height: 100%;
+  padding-top: 40rpx;
+  font-size: 32rpx;
+  font-weight: normal;
+  box-sizing: border-box;
+  color: #202020;
+  padding-right: 10rpx;
+}
+
+.groupbuying-now .top .now-distance  .nickname {
+  line-height: 40rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.groupbuying-now .top .now-distance .address-name text {
+  font-size: 24rpx;
+  color: #666;
+  line-height: 30rpx;
+}
+
+.groupbuying-now .top .now-but text {
+  display: block;
+  margin-bottom: 44rpx;
+  width: 151rpx;
+  height: 44rpx;
+  line-height: 44rpx;
+  font-size: 24rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #ff6030;
+  border-radius: 22rpx;
+}
+
+.groupbuying-now  .bottom {
+  width: 100%;
+}
+
+.groupbuying-now  .bottom navigator {
+  width: 100%;
+}
+
+.groupbuying-now  .bottom navigator .buying-preson-wrap {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height: 60rpx;
+  box-sizing: border-box;
+}
+
+.groupbuying-now  .bottom .buying-preson-box {
+  margin-right: 10rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.groupbuying-now  .bottom .buying-preson-box image {
+  width: 34rpx;
+  height: 34rpx;
+  margin-right: 8rpx;
+  border-radius: 50%;
+  background-color: #cce198;
+}
+
+.groupbuying-now  .bottom .buying-preson-box text {
+  width: 62rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 22rpx;
+  line-height: 34rpx;
+  color: #666;
+}
+
+.groupbuying-now  .bottom .lookmore {
+  font-size: 22rpx;
+  color: #666;
+}
+
+.groupbuying-now  .bottom.lookmore icon {
+  float: right;
+}
+
+.groupbuying-now {
+  position: relative;
+}
+
+.groupbuying-now .current-title {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 140rpx;
+  height: 40rpx;
+  font-size: 22rpx;
+  text-align: center;
+  line-height: 40rpx;
+  color: #fff;
+  background-image: linear-gradient(90deg, #feb40d 0%, #ff6030 100%),
+                      linear-gradient(#cce198, #cce198);
+  background-blend-mode: normal, normal;
+  box-shadow: 0px 0px 8rpx 1rpx rgba(248, 88, 40, 0.35);
+  border-radius: 0px 23rpx 23rpx 0px;
+}
+
+.siteTips {
+  display: inline-block;
+  width: 75rpx;
+  height: 26rpx;
+  /* margin-bottom: 10rpx; */
+  background-color: #ffcebf;
+  border-radius: 13rpx;
+  font-family: PingFang-SC-Regular;
+  font-size: 20rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 26rpx;
+  text-align: center;
+  letter-spacing: 0rpx;
+  color: #fd5d2c;
+  margin-right: 5rpx;
+}

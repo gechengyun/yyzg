@@ -1,0 +1,157 @@
+<!-- 直播列表 -->
+<template name="liveList">
+	<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+	<!-- <view class="live-shade" wx:if="{{isShade}}"></view> -->
+	<view class="live-wrap" wx:if="{{videoListData.list.length > 0 }}">
+		<!-- 左边 -->
+		<view class="live-video">
+			<view class="video-list video-list-left" wx:if="{{index%2==0}}" wx:for="{{videoListData.list}}" wx:key="index" bindtap="goLiveDetail" data-liveid="{{item.id}}" data-imgsrc="{{item.cover_img}}" data-status="{{item.status}}" data-liveindex="{{index}}">
+				<view class="video-top">
+					<view wx:if="{{item.status==0}}" class="video-status">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>预告</view>
+					<view wx:if="{{item.status==1&&(tabIndex != 2)}}" class="video-status my-playing">
+						<view class="videobg"><image class="videoing" mode="widthFix" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/living1.gif"></image></view>
+						<text>{{filter.transBigNumber2(item.view_num,1)}}</text>
+						<text>观看</text>
+					</view>
+					<view wx:if="{{item.status==1&&tabIndex==2 && !onlyAppletLive.unable_applet_live}}" class="video-status playing">
+						<text ></text>直播中</view>
+					<view wx:if="{{item.status==2&&item.record_replay.length==0}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>已结束</view>
+						<view wx:if="{{item.status==2&&item.record_replay.length>0}}" class="video-status record" style="background-color:#E1251B">
+							<text wx:if="{{tabIndex==0 && !onlyAppletLive.unable_applet_live}}"></text>可回放</view>
+					<view wx:if="{{item.status==3}}" >
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>禁播</view>
+					<view wx:if="{{item.status==4}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>暂停中</view>
+					<view wx:if="{{item.status==5}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>异常</view>
+					<image class="video_label" mode="aspectFill" src="{{item.cover_img}}"></image>
+					<view class="video-mes">
+						<view class="user-mes">
+							<image src="{{item.avatar?item.avatar:'https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/personal/avatar.png'}}"></image>
+							<text>{{item.nickname}}</text>
+						</view>
+						<view class="user-like" wx:if="{{tabIndex != 2}}">
+							<image wx:if="{{item.is_subscribe ==0 }}" class="select-icon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/selected.png"></image>
+							<image wx:else class="select-icon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/select.png"></image>
+							<text class="select-text">{{filter.transBigNumber2(item.like_num,1)}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="video-title">{{(tabIndex==2 && !onlyAppletLive.unable_applet_live)?item.live_name:item.title}}</view>
+				<view class="about" wx:if="{{item.record_replay.length>0}}">
+					<view class="about-num"><text>{{filter.transBigNumber2(item.record_replay_num,1)}}</text>次播放</view>
+					<block wx:if="{{item.status == 2}}">
+						<view class="about-btn-record" data-livestatus="{{item.status}}" catchtap="goRecordvideo"  data-product="{{item.live_product[0].product_id}}" data-filesrc="{{item.record_replay[0].filesrc}}"  data-allrecord="{{1}}" data-show_status="{{item.record_replay[0].is_record_show_product}}"   data-lived="{{item.id}}">回看</view>
+					</block>
+				</view>
+				<view class="goods-list-box" wx:if="{{item.live_product && item.live_product.length>0}}">
+					<view class="goods-scroll">
+						<view class="base-block goods-left">
+							<text class="txt">{{item.show_products_count}}件</text>
+							<text class="txt">直播购</text>
+						</view>
+						<view class="base-block goods-item" wx:if="{{item.live_product && item.live_product.length>0}}" wx:for="{{item.live_product}}" wx:for-item="child_item" wx:for-index="child_index" wx:key="child_index">
+							<image class="goods-pic" lazy-load="{{true}}" src="{{child_item.image}}" mode="aspectFill"></image>
+						</view>
+					</view>
+				</view>
+				<view class="about" wx:if="{{videoListData.subscribe_template_id && videoListData.subscribe_template_id.length>0 && item.record_replay.length==0}}">
+					<view class="about-num"><text>{{filter.transBigNumber2(item.advance_total,1)}}</text>人已预约</view>
+					<block wx:if="{{item.status == 1 || item.status == 2}}">
+						<view class="about-btn" data-livestatus="{{item.status}}" catchtap="appointed" wx:if="{{item.is_advance == 0}}">预约</view>
+						<view class="about-btn" data-livestatus="{{item.status}}" catchtap="appointed" wx:else>已预约</view>
+					</block>
+					<block wx:else>
+						<view class="about-btn" catchtap="appointClick" wx:if="{{item.is_advance == 0}}" style="background-color: {{themeColorValue}};" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" data-liveid="{{item.id}}" data-advancetotal="{{item.advance_total}}">预约</view>
+						<view class="about-btn" catchtap="appointClick" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" wx:else>已预约</view>
+					</block>
+				</view>
+			</view>
+		</view>
+		<!-- 右边 -->
+		<view class="live-video video-list-right">
+			<view class="video-list" wx:if="{{index%2==1}}" wx:for="{{videoListData.list}}" wx:key="index" bindtap="goLiveDetail" data-liveid="{{item.id}}" data-imgsrc="{{item.cover_img}}" data-status="{{item.status}}" data-liveindex="{{index}}">
+				<view class="video-top">
+					<view wx:if="{{item.status==0}}" class="video-status">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>预告</view>
+					<view wx:if="{{item.status==1&&(tabIndex != 2)}}" class="video-status my-playing">
+						<image class="videoing" mode="widthFix" src="https://s.404.cn/applet/images/qudao/zhibo/living.gif"></image>
+						<text>{{filter.transBigNumber2(item.view_num,1)}}</text>
+						<text>观看</text>
+					</view>
+					<view wx:if="{{item.status==1&&tabIndex==2 && !onlyAppletLive.unable_applet_live}}" class="video-status playing">
+						<text ></text>直播中</view>
+					<view wx:if="{{item.status==2&&item.record_replay.length==0}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>已结束</view>
+						<view wx:if="{{item.status==2&&item.record_replay.length>0}}" class="video-status record" style="background-color:{{item.is_advance == 0 ? themeColorValue:'rgba(112, 182, 3, 1)'}}">
+							<text wx:if="{{tabIndex==0 && !onlyAppletLive.unable_applet_live}}"></text>可回放</view>
+					<view wx:if="{{item.status==3}}" >
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>禁播</view>
+					<view wx:if="{{item.status==4}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>暂停中</view>
+					<view wx:if="{{item.status==5}}" class="video-status played">
+						<text  wx:if="{{tabIndex==2 && !onlyAppletLive.unable_applet_live}}"></text>异常</view>
+					<image class="video_label" mode="aspectFill" src="{{item.cover_img}}"></image>
+					<view class="video-mes">
+						<view class="user-mes">
+							<image src="{{item.avatar?item.avatar:'https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/personal/avatar.png'}}"></image>
+							<text>{{item.nickname}}</text>
+						</view>
+						<view class="user-like" wx:if="{{tabIndex != 2}}">
+							<image wx:if="{{item.is_subscribe ==0 }}" class="select-icon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/selected.png"></image>
+							<image wx:else class="select-icon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/select.png"></image>
+							<text class="select-text">{{filter.transBigNumber2(item.like_num,1)}}</text>
+						</view>
+					</view>
+				</view>
+				<view class="video-title">{{(tabIndex==2 && !onlyAppletLive.unable_applet_live)?item.live_name:item.title}}</view>
+				<view class="about" wx:if="{{item.record_replay.length>0}}">
+					<view class="about-num"><text>{{filter.transBigNumber2(item.record_replay_num,1)}}</text>次播放</view>
+					<block wx:if="{{item.status == 2}}">
+						<view class="about-btn-record" data-livestatus="{{item.status}}" catchtap="goRecordvideo"  data-product="{{item.live_product[0].product_id}}" data-filesrc="{{item.record_replay[0].filesrc}}"  data-allrecord="{{1}}" data-show_status="{{item.record_replay[0].is_record_show_product}}"   data-lived="{{item.id}}">回看</view>
+					</block>
+				</view>
+				<view class="goods-list-box" wx:if="{{item.live_product && item.live_product.length>0}}">
+					<view class="goods-scroll">
+						<view class="base-block goods-left">
+							<text class="txt">{{item.show_products_count}}件</text>
+							<text class="txt">直播购</text>
+						</view>
+						<view class="base-block goods-item" wx:if="{{item.live_product && item.live_product.length>0}}" wx:for="{{item.live_product}}" wx:for-item="child_item" wx:for-index="child_index" wx:key="child_index">
+							<image class="goods-pic" lazy-load="{{true}}" src="{{child_item.image}}" mode="aspectFill"></image>
+						</view>
+					</view>
+				</view>
+				<view class="about" wx:if="{{videoListData.subscribe_template_id && videoListData.subscribe_template_id.length>0 && item.record_replay.length==0}}">
+					<view class="about-num"><text>{{filter.transBigNumber2(item.advance_total,1)}}</text>人已预约</view>
+					<block wx:if="{{item.status == 1 || item.status == 2}}">
+						<view class="about-btn" data-livestatus="{{item.status}}" catchtap="appointed" wx:if="{{item.is_advance == 0}}">预约</view>
+						<view class="about-btn" data-livestatus="{{item.status}}" catchtap="appointed" wx:else>已预约</view>
+					</block>
+					<block wx:else>
+						<view class="about-btn" catchtap="appointClick" wx:if="{{item.is_advance == 0}}" style="background-color: {{themeColorValue}};" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" data-liveid="{{item.id}}" data-advancetotal="{{item.advance_total}}">预约</view>
+						<view class="about-btn" catchtap="appointClick" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" wx:else>已预约</view>
+					</block>
+				</view>
+
+			</view>
+		</view>
+	</view>
+	<!-- 页面内容为空 -->
+	<!-- 关注页面内容为空 -->
+	<view wx:if='{{(videoListFail != 0 || videoListData.list.length == 0) && tabIndex == 0}}'>
+		<view class="data_null_block">
+			<image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/null_data.png" style="width:300rpx;" mode="widthFix"></image>
+			<text class="tips">暂无数据～</text>
+		</view>
+	</view>
+	<!-- 非关注页面内容为空 -->
+	<view wx:if='{{(videoListFail != 0 || videoListData.list.length == 0) && tabIndex!=0}}'>
+		<view class="data_null_block">
+			<image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/null_data.png" style="width:300rpx;" mode="widthFix"></image>
+			<text class="tips">暂无数据～</text>
+		</view>
+	</view>
+</template>

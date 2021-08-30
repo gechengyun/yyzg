@@ -1,0 +1,47 @@
+<!--pages/USERS/pages/opinion/opinion.wxml-->
+<view class="opinion">
+  <form catchsubmit="formSubmit">
+    <view class="section title">
+      <text class="text">问题类型</text>
+    </view>
+    <view class="section">
+      <radio-group name="questionType">
+        <view class="single-item" wx:for="{{opinionList}}" wx:key="index">
+          <text class="name">{{item.title}}</text>
+          <label class="right" for="question1">
+            <text class="desc">{{item.content}}</text>
+            <radio class="radio" id="question1" value="{{item.id}}" color="#DB1E29" />
+          </label>
+        </view>
+      </radio-group>
+    </view>
+    <view class="section title">
+      <text class="text">详情描述</text>
+    </view>
+    <view class="section content">
+      <textarea name="content" class="textarea" maxlength="200" placeholder-class="placeholder" placeholder="如果您对我们有什么建议、想法和期望，请告诉我们"></textarea>
+    </view>
+    <view class="section upload">
+       <view class="addImgList">
+          <view wx:for="{{imgList}}" class="addImgItem" wx:key="index">
+            <image src="../../../../images/close.png" class="deletImg" data-index='{{index}}' bindtap="deleteImg"></image>
+            <image src="{{item}}"></image>
+          </view>
+          <!-- <view class="addImg" bindtap="addImg">+</view> -->
+          <view class="upload-btn" bindtap="addImg"></view>
+        </view>
+      <!-- <view class="upload-btn"></view> -->
+    </view>
+    <view class="section phone">
+      <text class="text">手机号</text>
+      <view class="seperator"></view>
+      <input class="tel" name="phone" type="number" maxlength="11" placeholder="方便我们更快向你反馈哦" placeholder-class="placeholder" />
+    </view>
+    <view class="bottom">
+      <button class="btn" formType="submit">
+        提交
+      </button>
+    </view>
+  </form>  
+</view>
+

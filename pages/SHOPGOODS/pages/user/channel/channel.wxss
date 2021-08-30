@@ -1,0 +1,114 @@
+/* pages/SHOPGOODS//pages/user/channel/channel.wxss */
+page{  
+  padding-bottom: 0;
+}
+.container{
+  background-color: #d53632;
+  padding-bottom: 0;
+}
+.channel-top{
+  padding: 245rpx 70rpx 0;
+  background-color: rgb(233,79,67);
+  position: relative;
+}
+.channel-detail{
+  position: relative;
+  width: calc(100% - 64rpx);
+  background-color: #fff;
+  padding: 97rpx 32rpx 150rpx;
+}
+.shop-logo{
+  width: 162rpx;
+  height: 162rpx;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  margin-left: -81rpx;
+  margin-top: -81rpx;
+}
+.channel-title{
+  font-size: 36rpx;
+  color: #000;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 60rpx;
+}
+.channel-list{
+  padding: 10rpx 15rpx;
+  background-color: rgb(250,250,250);
+  border: 1px solid rgb(238,238,238);
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.channel-list image{
+  width: 135rpx;
+  height: 135rpx;
+  margin-right: 25rpx;
+  background-color: #fff;
+}
+.list-right{
+  width: calc(100% - 160rpx);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 32rpx;
+  color: #000;
+}
+.title-two{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 34rpx;
+}
+.channel-bg{
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.gain{
+  font-size: 32rpx;
+}
+.inp-pas{  
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 10rpx;
+  width: 78%;
+  height: 100rpx;
+  line-height: 100rpx;
+  margin: 60rpx auto;
+}
+.sub-btn{
+  font-size: 32rpx;
+  border-radius: 10rpx;
+  width: 78%;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #fff;
+  margin: 60rpx auto;
+  background: linear-gradient(to bottom,#ffb75e,#ed8f03);
+}
+.sub-btn-hover::after{  
+  border: none;
+  background-color: rgb(0, 0, 0,.2);
+  border-radius: 0;
+}
+/* 空数据 */
+.data_null_block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+}
+
+.data_null_block .tips {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: rgba(192, 196, 204, 1);
+  line-height: 42rpx;
+  margin-top: 40rpx;
+}

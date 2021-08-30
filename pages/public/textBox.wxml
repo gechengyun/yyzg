@@ -1,0 +1,10 @@
+<!--文本弹窗-->
+<template name="textBox">
+    <view class="richTextWrap" data-page="page.public.textBox">
+    <view class="richTextBox" decode="{{true}}">
+        <view class="boxTitle">{{content.title}}</view>
+        <view class="boxContent">{{content.content}}</view>
+        <view class="boxFooter" bindtap='hideTexBox'>{{content.footer}}</view>
+    </view>
+</view>
+</template>

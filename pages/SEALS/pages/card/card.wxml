@@ -1,0 +1,135 @@
+<!--pages/SEALS//pages/card/card.wxml-->
+<!-- 联系客服 -->
+<import src="../../../public/contact.wxml"></import>
+<!-- 图片广告 -->
+<import src="../../component/banner.wxml"></import>
+<!-- 主推商品 -->
+<import src="../../component/proname.wxml"></import>
+<!-- 个人简历 -->
+<import src="../../component/intrname.wxml"></import>
+<!-- 视频 -->
+<import src="../../component/showVideo.wxml"></import>
+<!-- 我的图集 -->
+<import src="../../component/picname.wxml"></import>
+<view style="width:100%;height:100%;position:absolute;z-index:2;background-color:#fff;" wx:if="{{cardShow}}"></view>
+<view class="container {{pageTheme}}" wx:if="{{cardData.ishavedata==1}}">
+  <view class="card-top" style="background-color: {{themeColorValue}};">
+    <!-- <image class="bg-img" src='../../../../images/lafenbg.png'></image> -->
+    <view class="card-header">
+      <view class="ch-left">
+        <view class="avatar">
+          <image mode="widthFix" src='{{cardData.avatarurl}}'></image>
+        </view>
+        <view>
+          <view class="card-name">{{cardData.xmname}}</view>
+          <text>{{cardData.positioner}}</text>
+        </view>
+      </view>
+      <view wx:if="{{cardData.iscanedit==1}}" class="card-edit" bindtap="cardEdit">编辑</view>
+      <view wx:if="{{cardData.iscanedit==0&&cardData.myuserid!=0}}" class="card-edit" bindtap="cardChange">切换到我的名片</view>
+    </view>
+    <view class="company-message">
+      <view class="cm-top">
+        <view class="company-name" wx:if="{{cardData.company.name}}">{{cardData.company.name}}</view>
+        <view class="company-email" wx:if="{{cardData.email}}">
+          <view class="iconfont icon-youxiang">
+            <view>{{cardData.email}}</view>
+          </view>
+        </view>
+        <view class="company-email" wx:else>
+          <view class="iconfont icon-telephone">
+            <view>{{cardData.cellphone}}</view>
+          </view>
+        </view>
+        <view class="company-address" wx:if="{{cardData.company.province}}">
+          <view class="iconfont icon-dizhi">
+            <view>{{cardData.company.province}}{{cardData.company.city}}{{cardData.company.area}}{{cardData.company.address}}</view>
+          </view>
+        </view>
+      </view>
+      <view class="save-mes">
+        <view bindtap="addPhone">
+          <view hover-class="save-message">存入通讯录</view>
+        </view>
+        <view bindtap="shareTap" wx:if="{{_unlogin == false}}">
+          <view hover-class="save-message">分享名片</view>
+        </view>
+        <view wx:else>
+          <button class='card-btn-login' hover-class="save-message" open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">分享名片</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='user-number'>
+    <scroll-view scroll-x class="scroll-header">
+      <view class='um-list' data-idx="{{0}}" data-mobile="{{cardData.cellphone}}" wx:if="{{cardData.cellphone}}" bindtap="useNumber">
+        <view class="iconfont {{iconClass[0]}}">
+          <text>{{userMessage[0]}}</text>
+        </view>
+        <text>{{cardData.cellphone}}</text>
+      </view>
+      <view class='um-list' data-idx="{{1}}" data-mobile="{{cardData.telephone}}" wx:if="{{cardData.telephone}}" bindtap="useNumber">
+        <view class="iconfont {{iconClass[1]}}">
+          <text>{{userMessage[1]}}</text>
+        </view>
+        <text>{{cardData.telephone}}</text>
+      </view>
+      <view class='um-list' data-idx="{{2}}" data-text="{{cardData.wxaccount}}" wx:if="{{cardData.wxaccount}}" bindtap="useNumber">
+        <view class="iconfont {{iconClass[2]}}">
+          <text>{{userMessage[2]}}</text>
+        </view>
+        <text>{{cardData.wxaccount}}</text>
+      </view>
+      <view class='um-list' data-idx="{{3}}" data-text="{{cardData.email}}" wx:if="{{cardData.email}}" bindtap="useNumber">
+        <view class="iconfont {{iconClass[3]}}">
+          <text>{{userMessage[3]}}</text>
+        </view>
+        <text>{{cardData.email}}</text>
+      </view>
+      <view class='um-list' data-idx="{{4}}" wx:if="{{cardData.company.address}}" bindtap="useNumber">
+        <view class="iconfont {{iconClass[4]}}">
+          <text>{{userMessage[4]}}</text>
+        </view>
+        <text>{{cardData.company.province}}{{cardData.company.city}}{{cardData.company.area}}{{cardData.company.address}}</text>
+      </view>
+    </scroll-view>
+  </view>  
+  <!-- 后台配置组件 -->
+  <view class="card-bottom">
+     <template wx:for="{{cardData.titlename}}" wx:key="index" wx:if="{{item.itemname}}" is="{{item.itemname}}" data="{{cardData,titleName:item,videoData:cardData.myvideos,playIndex}}" wx:key='{{index}}'/>
+  </view>
+  
+  <!-- The End -->
+  <view class="end">
+    <text>THE  END</text>
+  </view>
+  <!-- 分享组件 -->
+  <bottom-modal id='shareModaled' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+  <template is="contact" />
+  <!--海报画布-->
+  <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+</view>
+<!-- 登录后未设置名片信息 -->
+<view class="tips" wx:else>
+  <image class="tips-img" mode="widthFix" src='.https://s.404.cn/applet/images/wxcopy/empty-tip.png'></image>
+  <text>该页面暂未默认名片信息</text>
+</view>
+<!-- 海报预览 -->
+<view wx:if="{{butshow}}" class="draw-canvas">
+  <text class="iconfont icon-iconfonticonfontclose dc-delete" bindtap="closeCanvas"></text>
+  <image src="{{myimgsrc}}" class="dc-img"></image>
+  <button type='primary' wx:if="{{saveImgBtnHidden}}" style="background-color:{{themeColorValue}}" class="dc-btn" bindtap="saveCanvas">保存相册并分享好友</button>
+  <button type='primary' wx:else open-type="openSetting" bindopensetting='handleSetting' style="background-color:{{themeColorValue}}" class="dc-btn">保存相册并分享好友</button>
+</view>
+<!-- 保存海报图弹窗成功 -->
+<view class="gray" bindtap="closeModaled" wx:if='{{closeModal}}'>
+  <view class="modal-main">
+    <image class="img-top" src="https://s.404.cn/applet/images/save_complate.png" mode="aspectFill"></image>
+    <view class="modal-title">保存海报成功</view>
+    <view class="modal-text">名片海报已保存到手机相册，你可以分享了</view>
+    <button class="btn-close" bindtap="closeModaled" style="background-color:{{themeColorValue}}">我知道了</button>
+  </view>
+</view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

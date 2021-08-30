@@ -1,0 +1,18 @@
+<view hidden='{{dialogHidden}}'>
+    <view class='drawer_screen' bindtap='cancleBtn'/>
+    <view class='drawer_box'>
+        <view class="drawer_title">提示</view>
+        <view class='drawer_content'>
+            <text class='titleMsg'>{{titleMsg}}</text>
+        </view>
+        <view class='sureQuery'>
+            <button bindtap='cancleBtn' class='btn' hidden='{{cancleBtn}}'>取消</button>
+            <block wx:if="{{authBtn}}">
+            <button bindtap='determineBtn' open-type="{{openType}}" class='btn btnSure'>{{determineBtnTxt}}</button>
+            </block>
+            <block wx:else>
+                <view bindtap='determineBtn' class='btn btnSure'>{{determineBtnTxt}}</view>
+            </block>
+        </view>
+    </view>
+</view>

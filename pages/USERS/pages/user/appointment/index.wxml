@@ -1,0 +1,36 @@
+<!-- 我的预约 -->
+<import src="../../../../public/appointment.wxml" />
+<wxs src="../../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="{{pageTheme}}">
+    <view class="setTitleList clearfix" data-page="page.user.appointment">
+        <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">未核销</view>
+        <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">已核销</view>
+    </view>
+    <view class="appointment setTable">
+        <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+        <view class="selectProduct clearfix li" wx:for="{{orderlistData.orders}}" wx:key='{{index}}'>
+            <view class="productImg verticalCentering">
+                <image src="{{item.image}}" alt=""></image>
+            </view>
+            <view class="productInfo">
+                <view>订单号:{{item.order_no}}</view>
+                <text class="">{{item.name}}</text>
+            </view>
+            <view class="productButton">
+                <view class="button {{item.reservation==1?'':'active'}}" bindtap="appointment" data-appoin="{{item.verify_image_code}}" data-btn="{{item.verify_btn_value}}">{{item.verify_btn_value}}</view>
+                <view class="button" bindtap="appoCencel" wx:if="{{item.reservation==1}}" data-orderid="{{item.order_id}}" data-index="{{index}}">{{item.cancel_btn_value}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="promptMsg" wx:if="{{orderlistData.orders==''}}">
+        <navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">
+            <text class="iconfont icon-zanwuneirong"></text>
+            <text>暂无该商品</text>
+            <text>去逛逛</text>
+        </navigator>
+    </view>
+    <block>
+        <template is="appointment" wx:if="{{appointment}}" data="{{verify_image_code:verify_image_code}}" />
+    </block>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

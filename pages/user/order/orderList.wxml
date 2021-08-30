@@ -1,0 +1,132 @@
+<wxs src="../../../utils/filter.wxs" module="filter"></wxs>
+<import src="../../public/selffetch.wxml" />
+<!--我的订单列表页面-->
+<view class="container {{pageTheme}}">
+  <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+  <scroll-view class="orderState" scroll-top="" scroll-y="{{orderlistData.order_list!=''}}" style="height:calc(100vh - 45rpx);" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="page.order.index">
+    <view class="clearfix orderStateHeader {{orderlisttapShow != 1?'orderStateHeader-min':''}}">
+      <!-- <view class="fixedHeader" style="height:80rpx;display: flex;" wx:if="{{orderlisttapShow == 1}}">
+        <view class="shopHeadButtonWrap">
+          <view bindtap="swichNavShop" class="shopHeadButton {{currentTabShop == '0' ? 'active' : ''}}" data-current_shop="0">本店订单</view>
+          <view bindtap="swichNavShop" class="shopHeadButton {{currentTabShop == '1' ? 'active' : ''}}" data-current_shop="1">全部订单</view>
+        </view>
+      </view> -->
+
+      <view class="fixedHeaderSecond">
+        <view class="item {{currentTab=='all' ? 'active' : ''}}" bindtap="swichNav" data-current="all">
+          <text data-current="all">全部</text>
+        </view>
+        <view class="item {{currentTab=='unpay' ? 'active' : ''}}" bindtap="swichNav" data-current="unpay">
+          <text data-current="unpay">待付款</text>
+        </view>
+        <view class="item {{currentTab=='unsend' ? 'active' : ''}}" bindtap="swichNav" data-current="unsend">
+          <text data-current="unsend">待发货</text>
+        </view>
+        <view class="item {{currentTab=='send' ? 'active' : ''}}" bindtap="swichNav" data-current="send">
+          <text data-current="send">待收货</text>
+        </view>
+        <view class="item {{currentTab=='complete' ? 'active' : ''}}" bindtap="swichNav" data-current="complete">
+          <text data-current="complete">已完成</text>
+        </view>
+      </view>
+    </view>
+    <view class="orderStateList">
+      <view class="orderList" wx:for="{{orderlistData.order_list}}" wx:for-item="order" wx:if="{{order}}" wx:key="index">
+        <view class="orderTitle">
+          <view class="">
+            <text class="iconfont icon-store "></text>
+            <block wx:if="{{order.leader.community_name}}">
+            {{order.leader.community_name}} 
+            </block>
+            <block wx:else>
+            {{order.store}}
+            </block>
+          </view>
+          <view class="orderTag">
+            <button form-type="submit" class="btnText orderDie" wx:if="{{order.community_status==2}}">已到货</button>
+            <button form-type="submit" class="btnText orderDie" wx:if="{{order.community_status==3}}">已自提</button>
+            <block wx:if="{{order.is_point_exchange==1}}">
+            积分换购
+            </block>
+            <block wx:else>
+            {{order.typeTxt}} 
+            </block>
+            </view>
+        </view>
+        <view class="orderContent">
+          <view class="orderContentList" wx:for="{{order.order_product_list}}" wx:key="index">           
+            <navigator url="{{filter.toTruePage(item.special_product_type,order,item.product_id,order.data_id,order.activity_id)}}"
+              hover-class="none" open-type="navigate">
+              <view class="productImg">
+                <image src="{{item.image}}"></image>
+              </view>
+              <view class="productInfo">
+                <view class="productName">{{item.name}}</view>
+                <view class="productPrice">¥{{item.pro_price}}
+                  <block wx:if="{{item.is_present*1}}">赠品</block>
+                  <text>x{{item.pro_num}}</text>
+                </view>
+                <view class="shopTag" wx:if="{{order.is_live_order && order.is_live_order == 1}}" style="color: {{themeColorValue}};">直播间</view>
+                <view class="orderInfo">
+                  <block wx:for="{{item.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="index">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                </view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+        <form report-submit="true" bindsubmit="formSubmit">
+          <view class="orderFooter clearfix">
+            <view class="orderTotal">
+              <block wx:if="{{order.type!='10'}}">
+                <text>合计: </text>
+                <text>¥{{order.total}}</text>
+              </block>
+              <block wx:if="{{order.type=='10'}}">
+                <text>{{order.custom_reservation_name ? order.custom_reservation_name : '预约'}}定金: </text>
+                <text>¥{{order.reservation_deposit}}</text>
+              </block>
+            </view>
+            <view class="orderButton">
+            <button form-type="submit" class="btnText orderGo"  wx:if="{{(order.verify_image_code)}}" data-verify="{{order.verify_image_code}}" data-text="{{order.order_no}}" data-type="{{order.verify_image_code_type}}" bindtap="selffetch" >
+            查看核销码
+            </button>
+              <button style="width: 160rpx;" data-tuan_id="{{order.data_id}}" data-item_id="{{order.data_tuan_item_id}}" data-team_id="{{order.data_item_id}}" data-image="{{order.order_product_list[0].image}}" data-name="{{order.order_product_list[0].name}}" data-order_id="{{order.order_id}}"
+                data-order_status="{{order.status}}" wx:if="{{order.type=='6'&&order.status==2}}" class="btn_invite btnText" catchtap='shareTap'>邀小伙伴凑单</button>
+              <button form-type="submit" class="btnText cancelOrder" wx:if="{{((order.status==1)||(order.status==0)) && order.type != 7}}" bindtap="cancelOrder" data-order="{{order.order_no_txt}}" data-index="{{index}}">取消
+              </button>
+              <button form-type="submit" class="btnText paymentGo" wx:if="{{(order.status==1)||(order.status==0)}}" bindtap="paymentGo" data-order="{{order.order_no_txt}}">去支付
+              </button>
+              <button form-type="submit" class="btnText completeReceipt" wx:if="{{order.status==3}}" bindtap="completeReceipt" data-order="{{order.order_no_txt}}" data-index="{{index}}">确认收货
+              </button>
+              <navigator url="/pages/user/order/{{order.comment_btn=='评价'?'publishedEvaluation':'evaluation'}}?order_id={{order.order_id}}" wx:if="{{order.is_comment && order.virtual_goods_order*1 != 1}}" hover-class="none" open-type="navigate">
+                <text class="btnText completeReceipt">{{order.comment_btn}}</text>
+              </navigator>
+              <button form-type="submit" class="btnText completeOrder" wx:if="{{(order.status*1==7)&&(!item.has_return) && order.virtual_goods_order*1 != 1}}" bindtap="completeOrder" data-order="{{order.order_no_txt}}" data-index="{{index}}"> 交易完成
+              </button>
+              <button form-type="submit" class="btnText orderGo" bindtap="orderGo" data-order="{{order.order_no_txt}}">查看订单
+              </button>
+              <button form-type="submit" class="btnText orderDie" wx:if="{{order.status*1==5}}" data-index="{{index}}" data-order="{{order.order_no_txt}}">已取消
+              </button>
+              <button form-type="submit" class="btnText orderGo" wx:if="{{(order.show_pay_button==1 || order.show_pay_button==2) && order.status*1 != 0 && order.status*1 != 1 && order.status*1 != 5}}" bindtap="finalPayment" data-index="{{index}}" data-bindtap="finalPayment"
+                data-order="{{order.order_no_txt}}">支付尾款
+              </button>
+            </view>
+          </view>
+        </form>
+      </view>
+      <view class="productdDefault" wx:if="{{orderlistData.order_list==''}}">
+        <image src="https://s.404.cn/applet/images/shop_03.png"> </image>
+        <text>列表为空!</text>
+      </view>
+    </view>
+    <view class="bottom-line" wx:if="{{orderlistData.order_list.length > 0&& orderlistData.next_page=== false}}">
+      <image class="bottom-line-image" src="../../../images/line.png"/> 
+    </view>
+  </scroll-view>
+</view>
+<view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+  <block>
+    <template is="selffetch" wx:if="{{selffetch}}" data="{{selffetch_img_url:verify,themeColorValue,selffetch_text:text,selffetch_type:flag}}" />
+  </block>
+<include src="/pages/public/page_footer.wxml"></include>
+<bottom-modal id='shareModal' showFriendCircle="0" cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>

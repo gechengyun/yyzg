@@ -1,0 +1,6 @@
+<!--弹出成功警告框提示模板-->
+<template name="success">
+  <cover-view class="success" data-page="page.public.success">
+    {{successgTxt}}
+  </cover-view>
+</template>

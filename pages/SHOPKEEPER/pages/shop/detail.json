@@ -1,0 +1,10 @@
+{
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "usingComponents": {
+    "bottom-modal": "../../../../components/bottomModal/index",
+    "dialog-modal": "../../../../components/dialog/index"
+  },
+  "navigationBarTitleText": "内容详情",
+  "navigationStyle": "custom"
+}

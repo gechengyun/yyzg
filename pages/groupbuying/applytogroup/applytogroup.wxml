@@ -1,0 +1,6 @@
+<navigator url='/pages/groupbuying/applyform/applyform' hover-class='none' open-type='navigate' class='apply-wrap'>
+  <image class='apply-bj' style='background:transparent;' src='{{apply_background_img}}' mode="aspectFill"></image>
+  <!-- <navigator url='/pages/groupbuying/applyform/applyform' hover-class='none' open-type='navigate'>
+    <image class='apply-button' src='{{apply_button_img}}'></image>
+  </navigator> -->
+</navigator>

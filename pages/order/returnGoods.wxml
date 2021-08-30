@@ -1,0 +1,61 @@
+<!--我的订单-退货申请页面-->
+<import src="../public/payment.wxml" />
+<import src="../public/warning.wxml" />
+<view class="container payment" data-page="page.order.returnGoods showMessage">
+    <template is="payment" data="{{paymentData:returnData, postage:postage, showMessage: showMessage,store_nav_list}}" />
+    <view class="paymentTitle">填写订单信息</view>
+    <view class="returnList">
+        <view class="returnArticle">
+            <view>退货数量</view>
+            <view wx:if="{{numList==''}}">
+                1
+            </view>
+            <view class="open"  wx:if="{{numList!=''}}">
+                <picker bindchange="bindPickerNum" value="{{numIndex}}" range="{{numList}}" mode="selector">
+                    <view class="picker">
+                        {{numList[numIndex]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>退货原因</view>
+            <view class="open">
+                <picker bindchange="bindPickerReason" value="{{index}}" range="{{type_arr}}" mode="selector">
+                    <view class="picker">
+                        {{type_arr[index]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>手机号码</view>
+            <view>
+                <input type="text" bindblur="phoneNumber" placeholder="输入手机号码" />
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>退货说明</view>
+            <view>
+                <input type="text" placeholder="输入退货说明" bindblur="returnExplain" />
+            </view>
+        </view>
+        <view class="returnArticle addImgCentent">
+            <view>图片举证
+                <text>（最多5张）</text>
+            </view>
+            <view class="addImgList">
+                <view wx:for="{{imgList}}" wx:key="">
+                    <image src="{{item}}"></image>
+                </view>
+                <view class="addImg" bindtap="addImg">+</view>
+            </view>
+        </view>
+    </view>
+    <view class="paymentButton">
+        <view bindtap="applyRefund">提交申请</view>
+    </view>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,38 @@
+<!-- 店铺动态 -->
+<template name="article">
+    <view class="shopIndex" data-page="page.public.shopIndex">
+        <view class="title  ">
+            <view class="shopName">{{content.content.name}}</view>
+        </view>
+        <view class="shopIndexSwiper">
+            <swiper class="ulList" autoplay="true" interval="5000" indicator-dots="true" data-page="pages.public.swiper">
+                <swiper-item wx:for="{{content.content.activity_arr}}" wx:key="">
+                    <view class="shopInfo clearfix">
+                        <navigator url="/pages/product/details?product_id={{item.product_id}}" class="navigator" hover-class="none" open-type="navigate">
+                            <view class="shopImg verticalCentering">
+                                <image src="{{item.product_image}}"></image>
+                            </view>
+                            <view class="shopTxt">
+                                <view>{{item.product_name}}</view>
+                                <text>{{item.time}}</text>
+                            </view>
+                        </navigator>
+                        <view class="button {{item.mycollected==1?'active':''}}" bindtap="collect" data-dataid="{{item.pigcms_id}}" data-index="{{index}}" data-type="1">
+                            <text class="iconfont icon-like" data-dataid="{{item.pigcms_id}}" data-index="{{index}}" data-type="1"></text>{{item.collect}}</view>
+                    </view>
+                    <view class="shopList">
+                        <navigator url="/pages/product/details?product_id={{item.product_id}}" class="navigator" hover-class="none" open-type="navigate">
+                            <view class="shopListLi">
+                                <view class="clearfix imgList " >
+                                    <view wx:for="{{item.picture_list}}" wx:for-item="list" wx:key="">
+                                        <image src="{{list}}" mode="widthFix"></image>
+                                    </view>
+                                </view>
+                            </view>
+                        </navigator>
+                    </view>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+</template>

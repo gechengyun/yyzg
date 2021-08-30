@@ -1,0 +1,766 @@
+/* index.wxss */
+.container {background:#f6f6f6;}
+.swiper-container{ position: relative; } 
+.swiper-container .swiper { height: 600rpx; } 
+.swiper-container .swiper .img{ width: 100%; height: 100%; } 
+.swiper-container .dots{ position: absolute; right: 40rpx; bottom: 20rpx; display: flex; justify-content: center; } 
+.swiper-container .dots .dot{ margin: 0 10rpx; width: 28rpx; height: 28rpx; background: #fff; border-radius: 50%; transition: all .6s;font: 300 18rpx/28rpx "microsoft yahei"; text-align: center;} 
+.swiper-container .dots .dot.active{ background: #f80; color:#fff; }
+.swiper-container .bannerPage{position:absolute;right:40rpx;bottom:20rpx;width:100rpx;height:100rpx;border-radius: 50%;background: rgba(0,0,0,.7); color:#fff; }
+.swiper-container .bannerPage text{font-size:35rpx; position:absolute;}
+.swiper-container .bannerPage text.first{top:14rpx;left:28rpx;}
+.swiper-container .bannerPage text.last{bottom:14rpx;right:28rpx;}
+.swiper-container .bannerPage text.line{top:26rpx;left:50rpx;border-left:3rpx solid #fff;transform:rotate(45deg);height:50rpx;}
+
+.section {margin-top:0;margin-bottom:24rpx;padding:20rpx;border:none;}
+.section .infoTitle {font-size:26rpx;color:#363636;padding-bottom:20rpx;font-weight:bold;border-bottom:1px solid #F1F1F1;}
+.section .infoSection {padding:26rpx 0 8rpx 0;display: block;}
+.detailsCentent .productName wx-view.productH2 {font-weight:bold;}
+.detailsCentent .productInfo {border-bottom:1px solid #f1f1f1;}
+.detailsCentent .productInfo .productPrice>view {float:left;width:100%;font-size:36rpx;color:#F6640C;}
+.detailsCentent .productInfo .productPrice > wx-view:last-child {margin-left:0rpx;}
+.detailsCentent .productInfo .productPrice>view text.originalPrice{margin-left:10rpx;font-size:28rpx;color:#999;text-decoration:line-through;}
+.detailsCentent .productInfo .productFX {float:right;font-size:28rpx;}
+.detailsCentent .productInfo .productFX navigator{display: block;width:100%;height:100%;}
+.detailsCentent .productInfo .productFX view{color:#F6640C;border:1px solid #F6640C;border-radius:4rpx;width:120rpx;height:50rpx;box-sizing:border-box;text-align:center;line-height:46rpx;box-shadow:0px 0px 1px #F6640C;}
+.detailsCentent .productLimit {font-size:24rpx;color:#757575;padding-top:24rpx;padding-bottom:10rpx;}
+.detailsCentent .productLimit view {display:inline-block;margin-right:20rpx;width:80rpx;height:36rpx;border-radius:4rpx;color:#fff;background:#FDA814;text-align: center;line-height: 36rpx;}
+.detailsCentent .productLimit text.detail{float:right;font-size:26rpx;}
+.discountInfo .infoSection .discountItem {padding:5rpx 0;font-size:24rpx;}
+.discountInfo .infoSection .discountItem .itemName {display:inline-block;width:125rpx;height:40rpx;box-sizing:border-box;border:2rpx solid #FDA814;color:#FDA814;font-size:24rpx;line-height:36rpx;text-align: center;border-radius:5rpx;margin-right:20rpx;}
+.activityInfo .infoSection .activityItem {padding:5rpx 0;font-size:24rpx;}
+.activityInfo .infoSection .activityItem navigator {display:block;}
+.activityInfo .infoSection .activityItem .itemName {display:inline-block;width:80rpx;height:36rpx;box-sizing:border-box;background:#FDA814;color:#fff;font-size:24rpx;line-height:36rpx;text-align: center;border-radius:5rpx;margin-right:20rpx;}
+.activityInfo .infoSection .activityItem:nth-child(even) .itemName {background:#FF6868;}
+.activityInfo .infoSection .activityItem text.arrow {font-size:26rpx;float:right;color:#999;}
+.section.leaveInfo {padding-bottom:10rpx;}
+.leaveInfo .infoSection .leaveList {display:flex;flex-wrap: wrap;} 
+.leaveInfo .infoSection .leaveItem {width:160rpx;height:90rpx;padding:6rpx;display:flex;flex-direction:column;box-sizing:border-box;border:2rpx solid #E2E2E2;color:#666;font-size:28rpx;line-height:88rpx;text-align: center;border-radius:15rpx;margin-right:16rpx;margin-bottom:16rpx;}
+.leaveInfo .infoSection .leaveItem navigator {width:100%;height:100%;display:flex;flex-direction:column;}
+.leaveInfo .infoSection .leaveItem:nth-child(4n+4) {margin-right:0;}
+.leaveInfo .infoSection .leaveItem text {width:100%;height:50%;line-height:45rpx;}
+.leaveInfo .infoSection .leaveItem text.leavePrice {font-size:28rpx;color:#F66712;}
+.routeInfo .routeDetail {float:right;font-size:24rpx;color:#999;font-weight:normal;}
+.routeInfo .routeDetail navigator {display: block;width: 100%;height:100%;}
+.routeInfo .routeDetail text {margin-left:10rpx;font-size:26rpx;}
+.routeInfo .routeList .routeItem {padding:10rpx 0;font-size:26rpx;color:#666;}
+.routeInfo .routeList .routeItem .itemTime{display:inline-block;margin-right:25rpx;background:#FDA814;border-radius:50%;height:64rpx;width:64rpx;line-height:62rpx;text-align:center;font-size:28rpx;color:#fff;font-weight:bold;}
+/* 分类说明展示（用户评价） */
+.productInfoList {background:#fff;padding:0;border-top:1px solid #e6e6e6;}
+.productInfoList .ulList .navItem {flex:1;font-size:26rpx;color:#666;text-align:center;padding:26rpx 0;border-right:1px solid #e6e6e6;}
+.productInfoList .ulList .navItem.active {color: #fff;background: #ff6634;}
+.productInfoList .productInfo {padding:0 25rpx;}
+.productInfoList .productInfo .artSection {display:none;}
+.productInfoList .productInfo .artSection.active {display:block;}
+.productInfoList .productInfo .artSection .infoSection {padding:26rpx 0;display: block;}
+.productInfoList .productInfo .featureSection .featureItem,
+.productInfoList .productInfo .noticeSection .noticeItem {padding:5rpx 0;line-height:40rpx;font-size:24rpx;color:#999;}
+.productInfoList .productInfo .featureItem .itemName,
+.productInfoList .productInfo .noticeSection .noticeItem .itemName {width:125rpx;height:40rpx;box-sizing:border-box;border:2rpx solid #FDA814;color:#FDA814;font-size:24rpx;line-height:36rpx;text-align: center;border-radius:5rpx;margin-right:20rpx;padding:0 10rpx;}
+.productInfoList .productInfo .productEvaluate {background:#fff;}
+.productInfoList .productInfo .productEvaluate .title {padding:0 20rpx;font-size:24rpx;color:#333;line-height:60rpx;border-bottom:1rpx solid #e6e6e6;}
+.productInfoList .productInfo .productEvaluate .title .span {width:350rpx;height:60rpx;display:inline-block;vertical-align:top;}
+.productInfoList .productInfo .productEvaluate .title .span text {color:#ff6634;}
+.productInfoList .productInfo .productEvaluate .title .span:nth-child(2) {text-align:right;}
+.productInfoList .productInfo .productEvaluate .evaluateTitle {padding:20rpx 10rpx;background:#f9f9f9;}
+.productInfoList .productInfo .productEvaluate .evaluateTitle view {float:left;width:150rpx;margin:0 10rpx;font-size:24rpx;color:#666;line-height:48rpx;text-align:center;border:1rpx solid #e6e6e6;border-radius:10rpx;box-sizing:border-box;}
+.productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#ff6634;border:1rpx solid #ff6634;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList {border-top:1rpx solid #e6e6e6;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view {padding:20rpx;border-bottom:1rpx solid #e6e6e6;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view:last-child {border:0;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p {line-height:60rpx;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p view {width:350rpx;display:inline-block;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p view image {width:60rpx;height:60rpx;margin-right:20rpx;display:inline-block;vertical-align:top;overflow:hidden;border:1rpx solid #e6e6e6;border-radius:50%;box-sizing:border-box;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(2) {max-width:250rpx;font-size:28rpx;color:#333;text-overflow:ellipsis;white-space:nowrap;display:inline-block;vertical-align:top;overflow:hidden;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {width:60rpx;margin-top:18rpx;font-size:22rpx;font-weight:normal;color:#ff6634;line-height:24rpx;text-align:center;display:inline-block;vertical-align:top;border:1rpx solid #ff6634;border-radius:1rpx;margin-left:6rpx;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p view:nth-child(2) {float:right;width:240rpx;font-size:22rpx;color:#999;text-align:right;display:inline-block;vertical-align:top;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p:nth-child(2) {padding:12rpx 0;font-size:24rpx;color:#333;line-height:36rpx;}
+.productInfoList .productInfo .productEvaluate .evaluateTitleList  .evaluateImg view {float:left;width:119rpx;height:120rpx;margin:10rpx;overflow:hidden;border:1rpx solid #e6e6e6;}
+/* 底部按钮 */
+.travelLayer {display:none;position:fixed;top:0;left:0;right:0;bottom:0;z-index:10;background:rgba(0,0,0,.7);}
+.shoppingCatFooter .ulList .shoppingCatButton {font-size:26rpx;color:#fff;text-align:center;background:#ff9e40;border-right:1rpx solid #ee8016;flex:1;height:90rpx;line-height:90rpx;}
+.shoppingCatFooter .ulList .shoppingCatButton.add_cart {width:200rpx;background:#ff5c5c;border:0;} 
+.shoppingCatFooter .ulList {z-index:5;}
+.shoppingCatFooter .ulList .shoppingCatButton {font-size:32rpx;}
+.shoppingCatFooter .ulList .shoppingCatButton.zixun {background:#fff;color:#333;}
+.shoppingCatFooter .ulList .shoppingCatButton.zixun text.iconfont {font-size:20px;vertical-align:middle;}
+.shoppingCatFooter .ulList .shoppingCatButton.soldout {background:#c3c3c3;}
+/* 悬浮按钮 */
+.travelDetail .homeButton {display:block;position:fixed;z-index:5;width:90rpx;height:90rpx;border-radius:50%;background:#fff;right:30rpx;bottom:175rpx;line-height:90rpx;
+text-align:center;box-shadow:0 0 20rpx #aaaaaa;}
+.travelDetail .homeButton navigator {display:block;width:100%;height:100%;}
+.travelDetail .homeButton text {font-size:60rpx;color:#F6640C;}
+/* 咨询弹窗 */
+.consultPop {display:none;position:fixed;z-index:15;bottom:90rpx;left:0;right:0;background:#fff;}
+.consultPop .popHeader {padding:30rpx;font-size:24rpx;color:#999;border-bottom:2rpx solid #EAEAEA;}
+.consultPop .popHeader .leftLabel text{color:#F77122;font-size:32rpx;margin-right:20rpx;}
+.consultPop .popHeader .rightBox{float:right;color:#333;}
+.consultPop .popContent {padding:0 30rpx 15rpx 30rpx;border-bottom:2rpx solid #EAEAEA;}
+.consultPop .popContent .contentTitle{padding:30rpx 0 15rpx 0;font-size:24rpx;color:#999;}
+.consultPop .popContent .contentTitle .leftLabel text{color:#F77122;font-size:32rpx;margin-right:20rpx;vertical-align:middle}
+.consultPop .kefuItem {padding:15rpx 0;font-size:24rpx;color:#333;display:flex;justify-content:space-between;line-height:72rpx;}
+.consultPop .kefuItem .item {display:flex;}
+.consultPop .kefuItem .itemAvatar {width:72rpx;height:72rpx;display:inline-flex;background:#f00;margin-right:16rpx;}
+.consultPop .kefuItem .itemName {font-weight:bold;}
+.consultPop .kefuItem .toConsult {color:#999;}
+.consultPop .kefuItem .toConsult text {font-size:24rpx;color:#999;margin-left:20rpx;} 
+
+/*order_travel*/
+/* 旅游下单页面 */
+.container {background:#f6f6f6;}
+.section {margin-top:0;margin-bottom:24rpx;box-sizing: border-box;width:100%;border:none;}
+.orderTravel .section {padding: 0;}
+.section .sectionTitle{border-bottom:1px solid #E7E7E7;font-size:26rpx;font-weight:bold;padding:30rpx;text-align:left;color:#333;}
+.dateSection .monthNav {display:flex;flex-wrap:wrap;background:#fafafa;width:100%;font-size:26rpx;padding:10rpx 0;color:#666;}
+.dateSection .monthItem {width:14%;float:left;text-align: center;padding: 20rpx 0;}
+.dateSection .monthItem.active{color: #FF6633;}
+.dateSection .monthItem i{display: block;opacity: 0; width: 40rpx;height: 6rpx;background-color: #FF6633;margin: 0 auto;position: relative;top:10rpx;transition: all .3s;}
+.dateSection .monthItem i.active {opacity: 1;}
+.dateSection .weekNav {display:flex;background:#fff;width:690rpx;font-size:26rpx;font-weight:bold;padding:30rpx 0;margin:0 auto;color:#000;box-sizing: border-box;border-bottom:1px solid #e6e6e6;}
+.dateSection .weekItem {width:14%;float:left;text-align: center;}
+.dateSection .dateList {display:flex;flex-wrap:wrap;padding-left:25rpx;}
+.dateSection .dateList .dateItem {width:100rpx;height:100rpx;color:#666;border-radius:6rpx;font-size:26rpx;display:flex;flex-direction:column;text-align:center;box-sizing:border-box;padding:20rpx 0;}
+.dateSection .dateList .dateItem .manPrice {font-size:22rpx;display:none;}
+.dateSection .dateList .dateItem {background:#FDA814;color:#fff;}
+.dateSection .dateList .dateItem.active .manPrice {display:block;}
+.dateSection .dateList .dateItem.active {background:#F8823F;color:#fff;}
+.dateSection .dateList .dateItem.active .manPrice {display:block;}
+.peopleSection .peopleList {padding:20rpx 30rpx;}
+.peopleSection .peopleList .peopleItem {padding:6rpx 0;display:flex;flex-wrap: nowrap;align-content:space-between;}
+.peopleSection .peopleList .peopleItem .leftLabel {flex:1;font-size:26rpx;color:#666;line-height: 50rpx;}
+.peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#F8823F;}
+.peopleSection .peopleList .peopleItem .rightBox {flex:1;font-size:26rpx;text-align: right;}
+.peopleSection .peopleList .peopleItem .rightBox text.iconfont {font-size:38rpx;color:#fda815;}
+.peopleSection .peopleList .peopleItem .rightBox text.icon-jianhao {font-size:44rpx;}
+.peopleSection .peopleList .peopleItem .rightBox text.itemNum {margin: 0 15rpx;position: relative;top:-4rpx;}
+.contactSection .contactList, .travelerSection .travelerList {padding:0 30rpx;}
+.contactSection .contactList .listItem, .travelerSection .travelerList .listItem {display:flex;flex-wrap: nowrap;font-size:26rpx;line-height:48rpx;color:#666;padding:36rpx 0;border-bottom: 1px solid #e6e6e6;}
+.contactSection .contactList .listItem:last-child, .travelerSection .travelerList .listItem:last-child {border-bottom:none;}
+.contactSection .contactList .listItem .leftLabel, .travelerSection .travelerList .listItem .leftLabel {flex:1;}
+.contactSection .contactList .listItem .rightBox, .travelerSection .travelerList .listItem .rightBox {flex:3;}
+.agreementSection {margin-bottom:40rpx;background:transparent;}
+.agreementSection .agreementBox {padding:10rpx 30rpx;font-size:26rpx;color:#999;}
+.agreementSection .agreementBox.active{color:#333;}
+.agreementSection .agreementBox .icon-duihao1{position: relative;}
+.agreementSection .agreementBox .icon-duihao1.active{color: #fda815;}
+.agreementSection .agreementBox text.iconfont{font-size:26rpx;margin-right:10rpx;}
+.agreementSection .agreementBox text.agreement{color:#FDA814;}
+.shoppingCatFooter .ulList .shoppingCatButton {font-size:26rpx;color:#fff;text-align:center;background:#ff9e40;border-right:1rpx solid #ee8016;flex:1;height:90rpx;line-height:90rpx;}
+.shoppingCatFooter .ulList {z-index:5;}
+.shoppingCatFooter .ulList .shoppingCatButton{font-size:32rpx;border-right:none;}
+.shoppingCatFooter .ulList .shoppingCatButton.active{background: #ff9e40;}
+.shoppingCatFooter .ulList .shoppingCatButton.reserPrice{background:#fff;color:#333;}
+.shoppingCatFooter .ulList .shoppingCatButton.reserPrice .price {color:#F6640C;}
+
+/* 日历组件样式 */
+.box {
+    display: flex;
+}
+
+.box-lr {
+    flex-direction: row;
+}
+
+.box-rl {
+    flex-direction: row-reverse;
+}
+
+.box-tb {
+    flex-direction: column;
+}
+
+.box-bt {
+    flex-direction: column-reverse;
+}
+
+.box-pack-center {
+    justify-content: center;
+}
+
+.box-pack-start {
+    justify-content: flex-start;
+}
+
+.box-pack-end {
+    justify-content: flex-end;
+}
+
+.box-pack-between {
+    justify-content: space-between;
+}
+
+.box-pack-around {
+    justify-content: space-around;
+}
+
+.box-align-center {
+    align-items: center;
+}
+
+.box-align-start {
+    align-items: flex-start;
+}
+
+.box-align-end {
+    align-items: flex-end;
+}
+
+.self-align-center {
+    align-self: center;
+    margin: 0 auto;
+}
+
+.self-align-start {
+    align-self: flex-start;
+}
+
+.self-align-end {
+    align-self: flex-end;
+}
+
+.self-align-stretch {
+    align-self: stretch;
+}
+
+.box-wrap {
+    flex-wrap: wrap;
+}
+
+.box-nowrap {
+    flex-wrap: nowrap;
+}
+
+.flex {
+    flex-grow: 1;
+}
+
+.flex-center {
+    justify-content:center;
+}
+
+.shrink {
+    flex-shrink: 1;
+}
+.bg {
+  background-image: linear-gradient(to bottom, #faefe7, #ffcbd7);
+  overflow: hidden;
+}
+.brown-color {
+  color: #784344;
+}
+.pink-color {
+  color: #09162c;
+}
+.white-color {
+  color: #fff;
+}
+.fs24 {
+  font-size: 24rpx;
+}
+.fs28 {
+  font-size: 28rpx;
+}
+.fs32 {
+  font-size: 32rpx;
+}
+.fs36 {
+  font-size: 36rpx;
+}
+.top-handle {
+    height: 80rpx;
+}
+.prev {
+    text-align: right;
+    height: 80rpx;
+}
+.next {
+    height: 80rpx;
+}
+.prev-handle {
+    width: 80rpx;
+    height: 100%;
+}
+.next-handle {
+    width: 80rpx;
+    height: 100%;
+}
+.date-area {
+    width: 50%;
+    height: 80rpx;
+    text-align: center;
+}
+.weeks {
+    height: 50rpx;
+    line-height: 50rpx;
+    opacity: 0.5
+}
+.week {
+    text-align: center;
+}
+.days {
+    height: 500rpx;
+}
+.grid {
+    width: 14.2%;
+    position: relative;
+}
+.day {
+    width: 60rpx;
+    height: 60rpx;
+    color: #666666;
+    font-size: 26rpx;
+    font-weight: 200;
+}
+.border-radius {
+    border-radius: 5%;
+    position: relative;
+    left: 0;
+    top: 0;
+    color: #fff;
+}
+
+.light-pink-bg {
+    background-color: #FFF5CB;
+}
+.pink-bg {
+    background-color: #fda815;
+}
+
+.right-triangle::after {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 15rpx solid transparent;
+    border-left-color: #ff629a;
+    position: absolute;
+    right: -22rpx;
+    top: 18rpx;
+}
+.left-triangle::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 15rpx solid transparent;
+    border-right-color: #ff629a;
+    position: absolute;
+    left: -22rpx;
+    top: 18rpx;
+}
+.tips {
+    text-align: center;
+    margin-top: 20rpx;
+    margin-bottom: 20rpx;
+}
+.types {
+    background-color: #ffedf4;
+    height: 50rpx;
+}
+.type-dot {
+    width: 25rpx;
+    height: 25rpx;
+    border-radius: 50%;
+    margin-right: 10rpx;
+}
+.type-dot-ymq {
+    color:rgb(255, 124, 160);
+    background-color: rgb(255, 124, 160);
+}
+.type-dot-ycq {
+    color: rgb(255, 200, 202);
+    background-color: rgb(255, 200, 202);
+}
+.type-dot-aqq {
+    color: rgb(118, 191, 92);
+    background-color: rgb(118, 191, 92);
+}
+.type-dot-yyq {
+    color: rgb(255, 182, 236);
+    background-color: rgb(255, 182, 236);
+}
+.type-dot-plr {
+    color: rgb(211, 189, 215);
+    background-color: rgb(211, 189, 215);
+}
+.types-desc {
+    padding: 0 20rpx;
+}
+.type-name {
+    margin-top: 50rpx;
+    margin-bottom: 30rpx;
+}
+.type-desc {
+    padding: 0 35rpx;
+    line-height: 38rpx;
+}
+.explain {
+    border-top: 1px solid #eee;
+    width: 90%;
+    margin: 20rpx 5% 20rpx 5%;
+    padding: 20rpx 0;
+}
+.explain-title {
+    font-weight: bold;
+    margin-bottom: 15rpx;
+}
+.explain-item {
+    padding: 8rpx 20rpx;
+    color: #fff;
+}
+.left-border-radius {
+    border-top-left-radius: 20rpx;
+    border-bottom-left-radius: 20rpx;
+}
+.right-border-radius {
+    border-top-right-radius: 20rpx;
+    border-bottom-right-radius: 20rpx;
+}
+.grid .price{
+	display: block;
+	width: 100%;
+	text-align: center;
+	font-size: 26rpx;
+	position: absolute;
+	bottom: 0;
+	left:0;
+}
+
+/* distribution.wxss */
+.section {border:none;margin-top:0;margin-bottom:24rpx;}
+.headerSection {display:flex;flex-wrap:nowrap;align-content:space-between;padding:24rpx 35rpx;font-size:26rpx;color:#666;}
+.headerSection .leftText {width:50%;}
+.headerSection .leftText text {color:#333;}
+.headerSection .rightText {width:50%;color:#999;text-align: right;}
+.infoSection {padding:35rpx;display: flex;flex-wrap: nowrap;}
+.infoSection navigator {width:100%;display: flex;flex-wrap: nowrap;}
+.infoSection navigator image {flex:1;}
+.infoSection .infoBox {flex:4;display:flex;flex-direction:column;max-width:100%;padding-left:20rpx;font-size:28rpx;color:#999;}
+.infoSection .infoBox .infoName {font-size:32rpx;color:#333;flex:1;}
+.infoSection .infoBox .infoPrice text {font-size:36rpx;color:#F6640C;flex:1;}
+/* .shareSection {position:relative;padding-bottom:24rpx;}  */
+.shareSection .title {font-size:26rpx;color:#333;padding:24rpx 35rpx;border-bottom:1px solid #EAEAEA;}
+.shareSection .button {float:right;width:200rpx;height:70rpx;color:#fff;font-size:28rpx;text-align:center;line-height:70rpx;background:#FDA814;border-radius:6rpx;margin-top:35rpx;}
+.shareSection .sectionSection {padding:35rpx;}
+.share1Section .shareDesc {border-bottom:1px solid #EAEAEA;padding-bottom:60rpx;}
+.share1Section .shareDesc textarea {font-size:26rpx;color:#333;}
+.share2Section .postList {border-bottom:1px solid #EAEAEA;padding-bottom:35rpx;}
+.share2Section .postList .listItem {position:relative; display:inline-block; border-radius:6rpx; width: 200rpx; height: 358rpx; margin:10rpx 18rpx;}
+.share2Section .postList .listItem:nth-child(3n+1) {margin-left:5rpx;}
+.share2Section .postList .listItem:nth-child(3n+3) {margin-right:5rpx;}
+.share2Section .postList .listItem image {border-radius:6rpx;}
+.share2Section .postList .listItem .itemLayer {display:none; border-radius:6rpx; background:rgba(0,0,0,.3);position:absolute;z-index:2;top:0;left:0;right:0;bottom:0;}
+.share2Section .postList .listItem .itemLayer image {width:38rpx;height:38rpx;position:absolute;bottom:20rpx;right:20rpx;}
+
+
+
+
+
+
+/* 主题色 --- 黑色(000000/ (0,0,0)--- 浅色1(0,0,0,.1) --- 浅色2(0,0,0,.2) */
+/*浅色1*/
+.blackTheme .light-pink-bg {background-color: rgba(0,0,0,.1);}
+/*fda815*/
+.blackTheme .pink-bg {background-color: #000000;}
+.blackTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#000000;}
+.blackTheme .agreementSection .agreementBox .icon-duihao1.active{color: #000000;}
+/*F6640C*/
+.blackTheme .detailsCentent .productInfo .productPrice>view {color:#000000;}
+.blackTheme .detailsCentent .productInfo .productFX view{color:#000000;border:1px solid #000000;box-shadow:0px 0px 1px #000000;}
+.blackTheme.travelDetail .homeButton text {color:#000000;}
+.blackTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#000000;}
+.blackTheme .infoSection .infoBox .infoPrice text {color:#000000;}
+/*FDA814*/
+.blackTheme .detailsCentent .productLimit view {background:#000000;}
+.blackTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #000000;color:#000000;}
+.blackTheme .activityInfo .infoSection .activityItem .itemName {background:#000000;}
+.blackTheme .routeInfo .routeList .routeItem .itemTime{background:#000000;}
+.blackTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #000000;color:#000000;}
+.blackTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #000000;color:#000000;}
+.blackTheme .productInfoList .productInfo .featureItem .itemName,
+.blackTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #000000;color:#000000;}
+.blackTheme .dateSection .dateList .dateItem {background:#000000;}
+.blackTheme .agreementSection .agreementBox text.agreement{color:#000000;}
+.blackTheme .shareSection .button {background:#000000;}
+/*ff6634*/
+.blackTheme .productInfoList .ulList .navItem.active {background: #000000;}
+.blackTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#000000;}
+.blackTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#000000;border:1rpx solid #000000;}
+.blackTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#000000;border:1rpx solid #000000;}
+/*ff9e40*/
+.blackTheme .shoppingCatFooter .ulList>view.yuding {background:#000000;}
+/*F66712*/
+.blackTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#000000;}
+/*FF6633*/
+.blackTheme .dateSection .monthItem.active{color: #000000;}
+.blackTheme .dateSection .monthItem i{background-color: #000000;}
+/*F8823F*/
+.blackTheme .dateSection .dateList .dateItem.active {background:#000000;}
+.blackTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#000000;}
+
+
+
+
+/* 主题色 --- 红色(FA0029/ (250,0,41)--- 浅色1(250,0,41, 1) --- 浅色2(250,0,41, 2) */
+/*浅色1*/
+.redTheme .light-pink-bg {background-color: rgba((250,0,41, .1));}
+/*fda815*/
+.redTheme .pink-bg {background-color: #FA0029;}
+.redTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#FA0029;}
+.redTheme .agreementSection .agreementBox .icon-duihao1.active{color: #FA0029;}
+/*F6640C*/
+.redTheme .detailsCentent .productInfo .productPrice>view {color:#FA0029;}
+.redTheme .detailsCentent .productInfo .productFX view{color:#FA0029;border:1px solid #FA0029;box-shadow:0px 0px 1px #FA0029;}
+.redTheme.travelDetail .homeButton text {color:#FA0029;}
+.redTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#FA0029;}
+.redTheme .infoSection .infoBox .infoPrice text {color:#FA0029;}
+/*FDA814*/
+.redTheme .detailsCentent .productLimit view {background:#FA0029;}
+.redTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FA0029;color:#FA0029;}
+.redTheme .activityInfo .infoSection .activityItem .itemName {background:#FA0029;}
+.redTheme .routeInfo .routeList .routeItem .itemTime{background:#FA0029;}
+.redTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FA0029;color:#FA0029;}
+.redTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #FA0029;color:#FA0029;}
+.redTheme .productInfoList .productInfo .featureItem .itemName,
+.redTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FA0029;color:#FA0029;}
+.redTheme .dateSection .dateList .dateItem {background:#FA0029;}
+.redTheme .agreementSection .agreementBox text.agreement{color:#FA0029;}
+.redTheme .shareSection .button {background:#FA0029;}
+/*ff6634*/
+.redTheme .productInfoList .ulList .navItem.active {background: #FA0029;}
+.redTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#FA0029;}
+.redTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#FA0029;border:1rpx solid #FA0029;}
+.redTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#FA0029;border:1rpx solid #FA0029;}
+/*ff9e40*/
+.redTheme .shoppingCatFooter .ulList>view.yuding {background:#FA0029;}
+/*F66712*/
+.redTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#FA0029;}
+/*FF6633*/
+.redTheme .dateSection .monthItem.active{color: #FA0029;}
+.redTheme .dateSection .monthItem i{background-color: #FA0029;}
+/*F8823F*/
+.redTheme .dateSection .dateList .dateItem.active {background:#FA0029;}
+.redTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#FA0029;}
+
+
+
+/* 主题色 --- 橘色(FF5C1C/ (255,92,28)--- 浅色1(255,92,28, 1) --- 浅色2(255,92,28, 2) */
+/*浅色1*/
+.orangeTheme .light-pink-bg {background-color: rgba((255,92,28, .1));}
+/*fda815*/
+.orangeTheme .pink-bg {background-color: #FF5C1C;}
+.orangeTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#FF5C1C;}
+.orangeTheme .agreementSection .agreementBox .icon-duihao1.active{color: #FF5C1C;}
+/*F6640C*/
+.orangeTheme .detailsCentent .productInfo .productPrice>view {color:#FF5C1C;}
+.orangeTheme .detailsCentent .productInfo .productFX view{color:#FF5C1C;border:1px solid #FF5C1C;box-shadow:0px 0px 1px #FF5C1C;}
+.orangeTheme.travelDetail .homeButton text {color:#FF5C1C;}
+.orangeTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#FF5C1C;}
+.orangeTheme .infoSection .infoBox .infoPrice text {color:#FF5C1C;}
+/*FDA814*/
+.orangeTheme .detailsCentent .productLimit view {background:#FF5C1C;}
+.orangeTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF5C1C;color:#FF5C1C;}
+.orangeTheme .activityInfo .infoSection .activityItem .itemName {background:#FF5C1C;}
+.orangeTheme .routeInfo .routeList .routeItem .itemTime{background:#FF5C1C;}
+.orangeTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF5C1C;color:#FF5C1C;}
+.orangeTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #FF5C1C;color:#FF5C1C;}
+.orangeTheme .productInfoList .productInfo .featureItem .itemName,
+.orangeTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF5C1C;color:#FF5C1C;}
+.orangeTheme .dateSection .dateList .dateItem {background:#FF5C1C;}
+.orangeTheme .agreementSection .agreementBox text.agreement{color:#FF5C1C;}
+.orangeTheme .shareSection .button {background:#FF5C1C;}
+/*ff6634*/
+.orangeTheme .productInfoList .ulList .navItem.active {background: #FF5C1C;}
+.orangeTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#FF5C1C;}
+.orangeTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#FF5C1C;border:1rpx solid #FF5C1C;}
+.orangeTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#FF5C1C;border:1rpx solid #FF5C1C;}
+/*ff9e40*/
+.orangeTheme .shoppingCatFooter .ulList>view.yuding {background:#FF5C1C;}
+/*F66712*/
+.orangeTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#FF5C1C;}
+/*FF6633*/
+.orangeTheme .dateSection .monthItem.active{color: #FF5C1C;}
+.orangeTheme .dateSection .monthItem i{background-color: #FF5C1C;}
+/*F8823F*/
+.orangeTheme .dateSection .dateList .dateItem.active {background:#FF5C1C;}
+.orangeTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#FF5C1C;}
+
+
+
+
+
+
+
+/* 主题色 --- 蓝色(0098F8/ (0,152,248)--- 浅色1(E5F5FF) --- 浅色2(67C4FF) */
+/*浅色1*/
+.blueTheme .light-pink-bg {background-color: rgba(0,152,248,.1);}
+/*fda815*/
+.blueTheme .pink-bg {background-color: #0098F8;}
+.blueTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#0098F8;}
+.blueTheme .agreementSection .agreementBox .icon-duihao1.active{color: #0098F8;}
+/*F6640C*/
+.blueTheme .detailsCentent .productInfo .productPrice>view {color:#0098F8;}
+.blueTheme .detailsCentent .productInfo .productFX view{color:#0098F8;border:1px solid #0098F8;box-shadow:0px 0px 1px #0098F8;}
+.blueTheme.travelDetail .homeButton text {color:#0098F8;}
+.blueTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#0098F8;}
+.blueTheme .infoSection .infoBox .infoPrice text {color:#0098F8;}
+/*FDA814*/
+.blueTheme .detailsCentent .productLimit view {background:#0098F8;}
+.blueTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #0098F8;color:#0098F8;}
+.blueTheme .activityInfo .infoSection .activityItem .itemName {background:#0098F8;}
+.blueTheme .routeInfo .routeList .routeItem .itemTime{background:#0098F8;}
+.blueTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #0098F8;color:#0098F8;}
+.blueTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #0098F8;color:#0098F8;}
+.blueTheme .productInfoList .productInfo .featureItem .itemName,
+.blueTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #0098F8;color:#0098F8;}
+.blueTheme .dateSection .dateList .dateItem {background:#0098F8;}
+.blueTheme .agreementSection .agreementBox text.agreement{color:#0098F8;}
+.blueTheme .shareSection .button {background:#0098F8;}
+/*ff6634*/
+.blueTheme .productInfoList .ulList .navItem.active {background: #0098F8;}
+.blueTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#0098F8;}
+.blueTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#0098F8;border:1rpx solid #0098F8;}
+.blueTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#0098F8;border:1rpx solid #0098F8;}
+/*ff9e40*/
+.blueTheme .shoppingCatFooter .ulList>view.yuding {background:#0098F8;}
+/*F66712*/
+.blueTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#0098F8;}
+/*FF6633*/
+.blueTheme .dateSection .monthItem.active{color: #0098F8;}
+.blueTheme .dateSection .monthItem i{background-color: #0098F8;}
+/*F8823F*/
+.blueTheme .dateSection .dateList .dateItem.active {background:#0098F8;}
+.blueTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#0098F8;}
+
+
+
+/* 主题色 --- 桃紫色(FF007C/ (255,0,124)--- 浅色1(255,0,124,1) --- 浅色2(255,0,124, 2) */
+/*浅色1*/
+.pinkDarkTheme .light-pink-bg {background-color: rgba(255,0,124, .1);}
+/*fda815*/
+.pinkDarkTheme .pink-bg {background-color: #FF007C;}
+.pinkDarkTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#FF007C;}
+.pinkDarkTheme .agreementSection .agreementBox .icon-duihao1.active{color: #FF007C;}
+/*F6640C*/
+.pinkDarkTheme .detailsCentent .productInfo .productPrice>view {color:#FF007C;}
+.pinkDarkTheme .detailsCentent .productInfo .productFX view{color:#FF007C;border:1px solid #FF007C;box-shadow:0px 0px 1px #FF007C;}
+.pinkDarkTheme.travelDetail .homeButton text {color:#FF007C;}
+.pinkDarkTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#FF007C;}
+.pinkDarkTheme .infoSection .infoBox .infoPrice text {color:#FF007C;}
+/*FDA814*/
+.pinkDarkTheme .detailsCentent .productLimit view {background:#FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF007C;color:#FF007C;}
+.pinkDarkTheme .activityInfo .infoSection .activityItem .itemName {background:#FF007C;}
+.pinkDarkTheme .routeInfo .routeList .routeItem .itemTime{background:#FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF007C;color:#FF007C;}
+.pinkDarkTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #FF007C;color:#FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .featureItem .itemName,
+.pinkDarkTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #FF007C;color:#FF007C;}
+.pinkDarkTheme .dateSection .dateList .dateItem {background:#FF007C;}
+.pinkDarkTheme .agreementSection .agreementBox text.agreement{color:#FF007C;}
+.pinkDarkTheme .shareSection .button {background:#FF007C;}
+/*ff6634*/
+.pinkDarkTheme .productInfoList .ulList .navItem.active {background: #FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#FF007C;border:1rpx solid #FF007C;}
+.pinkDarkTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#FF007C;border:1rpx solid #FF007C;}
+/*ff9e40*/
+.pinkDarkTheme .shoppingCatFooter .ulList>view.yuding {background:#FF007C;}
+/*F66712*/
+.pinkDarkTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#FF007C;}
+/*FF6633*/
+.pinkDarkTheme .dateSection .monthItem.active{color: #FF007C;}
+.pinkDarkTheme .dateSection .monthItem i{background-color: #FF007C;}
+/*F8823F*/
+.pinkDarkTheme .dateSection .dateList .dateItem.active {background:#FF007C;}
+.pinkDarkTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#FF007C;}
+
+
+
+
+/* 主题色 --- 紫色(7948FD/ (121,72,253)--- 浅色1(121,72,253, 1) --- 浅色2(121,72,253, 2) */
+/*浅色1*/
+.purpleTheme .light-pink-bg {background-color: rgba(121,72,253, .1);}
+/*fda815*/
+.purpleTheme .pink-bg {background-color: #7948FD;}
+.purpleTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#7948FD;}
+.purpleTheme .agreementSection .agreementBox .icon-duihao1.active{color: #7948FD;}
+/*F6640C*/
+.purpleTheme .detailsCentent .productInfo .productPrice>view {color:#7948FD;}
+.purpleTheme .detailsCentent .productInfo .productFX view{color:#7948FD;border:1px solid #7948FD;box-shadow:0px 0px 1px #7948FD;}
+.purpleTheme.travelDetail .homeButton text {color:#7948FD;}
+.purpleTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#7948FD;}
+.purpleTheme .infoSection .infoBox .infoPrice text {color:#7948FD;}
+/*FDA814*/
+.purpleTheme .detailsCentent .productLimit view {background:#7948FD;}
+.purpleTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #7948FD;color:#7948FD;}
+.purpleTheme .activityInfo .infoSection .activityItem .itemName {background:#7948FD;}
+.purpleTheme .routeInfo .routeList .routeItem .itemTime{background:#7948FD;}
+.purpleTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #7948FD;color:#7948FD;}
+.purpleTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #7948FD;color:#7948FD;}
+.purpleTheme .productInfoList .productInfo .featureItem .itemName,
+.purpleTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #7948FD;color:#7948FD;}
+.purpleTheme .dateSection .dateList .dateItem {background:#7948FD;}
+.purpleTheme .agreementSection .agreementBox text.agreement{color:#7948FD;}
+.purpleTheme .shareSection .button {background:#7948FD;}
+/*ff6634*/
+.purpleTheme .productInfoList .ulList .navItem.active {background: #7948FD;}
+.purpleTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#7948FD;}
+.purpleTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#7948FD;border:1rpx solid #7948FD;}
+.purpleTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#7948FD;border:1rpx solid #7948FD;}
+/*ff9e40*/
+.purpleTheme .shoppingCatFooter .ulList>view.yuding {background:#7948FD;}
+/*F66712*/
+.purpleTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#7948FD;}
+/*FF6633*/
+.purpleTheme .dateSection .monthItem.active{color: #7948FD;}
+.purpleTheme .dateSection .monthItem i{background-color: #7948FD;}
+/*F8823F*/
+.purpleTheme .dateSection .dateList .dateItem.active {background:#7948FD;}
+.purpleTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#7948FD;}
+
+
+
+
+/* 主题色 --- 棕色(B7A392/ (183,163,146)--- 浅色1(183,163,146, 1) --- 浅色2(183,163,146, 2) */
+/*浅色1*/
+.brownTheme .light-pink-bg {background-color: rgba(183,163,146, .1);}
+/*fda815*/
+.brownTheme .pink-bg {background-color: #B7A392;}
+.brownTheme .peopleSection .peopleList .peopleItem .rightBox text.iconfont {color:#B7A392;}
+.brownTheme .agreementSection .agreementBox .icon-duihao1.active{color: #B7A392;}
+/*F6640C*/
+.brownTheme .detailsCentent .productInfo .productPrice>view {color:#B7A392;}
+.brownTheme .detailsCentent .productInfo .productFX view{color:#B7A392;border:1px solid #B7A392;box-shadow:0px 0px 1px #B7A392;}
+.brownTheme.travelDetail .homeButton text {color:#B7A392;}
+.brownTheme .shoppingCatFooter .ulList view.reserPrice .price {color:#B7A392;}
+.brownTheme .infoSection .infoBox .infoPrice text {color:#B7A392;}
+/*FDA814*/
+.brownTheme .detailsCentent .productLimit view {background:#B7A392;}
+.brownTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #B7A392;color:#B7A392;}
+.brownTheme .activityInfo .infoSection .activityItem .itemName {background:#B7A392;}
+.brownTheme .routeInfo .routeList .routeItem .itemTime{background:#B7A392;}
+.brownTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #B7A392;color:#B7A392;}
+.brownTheme .discountInfo .infoSection .discountItem .itemName {border:2rpx solid #B7A392;color:#B7A392;}
+.brownTheme .productInfoList .productInfo .featureItem .itemName,
+.brownTheme .productInfoList .productInfo .noticeSection .noticeItem .itemName {border:2rpx solid #B7A392;color:#B7A392;}
+.brownTheme .dateSection .dateList .dateItem {background:#B7A392;}
+.brownTheme .agreementSection .agreementBox text.agreement{color:#B7A392;}
+.brownTheme .shareSection .button {background:#B7A392;}
+/*ff6634*/
+.brownTheme .productInfoList .ulList .navItem.active {background: #B7A392;}
+.brownTheme .productInfoList .productInfo .productEvaluate .title .span text {color:#B7A392;}
+.brownTheme .productInfoList .productInfo .productEvaluate .evaluateTitle view.active {color:#B7A392;border:1rpx solid #B7A392;}
+.brownTheme .productInfoList .productInfo .productEvaluate .evaluateTitleList>view .p text:nth-child(3) {color:#B7A392;border:1rpx solid #B7A392;}
+/*ff9e40*/
+.brownTheme .shoppingCatFooter .ulList>view.yuding {background:#B7A392;}
+/*F66712*/
+.brownTheme .leaveInfo .infoSection .leaveItem text.leavePrice {color:#B7A392;}
+/*FF6633*/
+.brownTheme .dateSection .monthItem.active{color: #B7A392;}
+.brownTheme .dateSection .monthItem i{background-color: #B7A392;}
+/*F8823F*/
+.brownTheme .dateSection .dateList .dateItem.active {background:#B7A392;}
+.brownTheme .peopleSection .peopleList .peopleItem .leftLabel .itemPrice {color:#B7A392;}
+
+

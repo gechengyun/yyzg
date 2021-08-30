@@ -1,0 +1,184 @@
+/* pages/index/shopHomeList.wxss */
+/* .shopDetailsInfo .li {display: flex;align-items: center;}
+.shopHomeList .li.open:before {content: '';display:none;}
+.shopDetailsInfo .li>view:first-child {width:80%;}
+.shopDetailsInfo .li .span {margin:0;width:20%;text-align:right;}
+.shopDetailsInfo .li .span .shop_sign {height:30rpx;line-height:30rpx;padding:0 15rpx;font-size:24rpx;border:1px solid #F6A414;color:#F6A414;border-radius:20rpx;display:inline-flex;}
+.shopDetailsInfo .li .span .shop_sign.shop_sign_close {border-color:#999;color:#999;} */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: #efeff6;
+}
+
+.top {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 80rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 28rpx;
+    color: #000;
+    border-top: 1rpx solid #c8c8c8;
+    background: #fff;
+    /*border-bottom: 1rpx solid #c8c8c8;*/
+}
+
+.top .map, .top .site {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50rpx;
+    border-right: 1rpx solid #c8c8c8;
+}
+
+.top .map image, .top .site image {
+    width: 32rpx;
+    height: 32rpx;
+}
+
+.top .map {
+    border: 0;
+}
+
+.shopListItem {
+    background: #fff;
+
+    width: 100%;
+    height: auto;
+    border-bottom: 1rpx solid #c8c8c8;
+}
+
+.shopListItem .shopInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25rpx 20rpx;
+}
+
+.shopListItem .shopInfo .shopimg {
+    width: 180rpx;
+    height: 180rpx;
+    margin-right: 20rpx;
+}
+
+.shopListItem .shopInfo .shopText {
+    width: 500rpx;
+    min-height: 180rpx;
+
+}
+
+.shopListItem .shopInfo .shopText .shopName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.shopListItem .shopInfo .shopText .shopName view {
+    line-height: 50rpx;
+    font-size: 28rpx;
+    font-weight: 400;
+
+}
+
+.shopListItem .shopInfo .shopText .shopName .name {
+    width: 320rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shopListItem .shopInfo .shopText .shopName .kilom {
+    line-height: 50rpx;
+    font-weight: 400;
+    font-size: 24rpx;
+    color: #467cd4;
+}
+
+.shopTime, .shopSite {
+    font-size: 24rpx;
+    color: #c8c8c8;
+    line-height: 40rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shopSite {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.shopSite .site {
+    width: 370rpx;
+    font-size: 24rpx;
+    color: #c8c8c8;
+    line-height: 40rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.shopSite .goShopList {
+    width: 120rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: right;
+    color: #91adda;
+    font-size: 26rpx;
+    border-radius: 5rpx;
+    font-weight: 400
+}
+
+.tips {
+    width: 100%;
+    height: auto;
+    padding: 0 20rpx;
+    padding-bottom: 30rpx;
+    box-sizing: border-box;
+    display: flex;
+    /*justify-content: space-between;*/
+    flex-wrap: wrap;
+    align-content: flex-start
+}
+
+.tips .item {
+    margin: 0 8rpx;
+    margin-bottom: 20rpx;
+    width: 100rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    text-align: center;
+    border: 1rpx solid #91adda;
+    color: #91adda;
+    font-size: 20rpx;
+    border-radius: 5rpx;
+}
+
+.shopList, .provinceList, .cityList {
+    width: 100%;
+    height: auto;
+    background: #fff;
+    margin-top: 100rpx;
+}
+
+.provinceList .item, .cityList .item {
+    width: 100%;
+    height: 80rpx;
+   font-size: 28rpx;
+    padding: 0 20rpx 0 30rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1rpx solid #c8c8c8;
+    box-sizing: border-box;
+}
+
+
+

@@ -1,0 +1,115 @@
+<!--添加购物袋页面-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="shoppingCat">
+    <import src="../public/shoppingProduct.wxml" />
+    <view class="layer" bindtap="closeShopping" catchtouchmove="ture"></view>
+    <view catchtouchmove="ture" class="shoppingLayer {{isIpx}}__footer__btn-group" style="bottom:0;z-index:99999;" animation="{{animation}}" data-page="page.public.shoppingCat">
+        <view class="shoppingTitle">
+					<!-- {{shoppingData.shoppingCatData.store.name}} -->
+          <text class="iconfont icon-chacha" bindtap="closeShopping"></text>
+        </view>
+        <template is="shoppingProduct" data="{{product:shoppingData.shoppingCatData.product, type: shoppingData.type}}" />
+        <view class="circle-buy-send-count" wx:if="{{shoppingData.shoppingCatData.product.special_product_type == 98}}">
+          <text>配送期数：{{shoppingData.shoppingCatData.product.deliver_phase}}期，预计最早配送时间：{{filter.parseEarliestDeliverDate(shoppingData.shoppingCatData.product,shoppingData.shoppingCatData.product.deliver_date[shoppingData.deliver_date_index])}}</text>
+        </view>
+        <view class="shoppingSpec">
+            <view class="shoppingCentent" wx:for="{{shoppingData.shoppingCatData.property_list}}" wx:for-index="id" wx:for-item="property" wx:key="index">
+                <view class="shoppingSpecName">{{property.name}}</view>
+                <view class="shoppingSpecList">
+									<block wx:for="{{property.values}}" wx:for-item="twodata" wx:key="index">
+										<text
+										wx:if="{{twodata.allQuantity === 0}}"
+											class="disabled-btn"
+											>{{twodata.value}}</text>
+										<text
+										wx:else
+											class="{{(shoppingData.specList[id].vid==twodata.vid) || shoppingData.single_sku_single_value ? 'active' : ''}}"
+											bindtap="shoppingVid"
+											data-vid="{{twodata.vid}}"
+											data-id="{{id}}"
+											data-pid="{{property.pid}}"
+											data-image="{{twodata.image}}"
+											>{{twodata.value}}</text>
+									</block>				   
+                </view>
+            </view>
+            <view class="shoppingCentent" wx:if="{{shoppingData.shoppingCatData.product.special_product_type == 98}}">
+                <view class="shoppingSpecName">配送日<text class="circle-buy-send-count">（{{filter.parseFrequency(shoppingData.shoppingCatData.product.deliver_frequency)}}配送）</text></view>
+                <view class="shoppingSpecList">
+                    <text wx:for="{{shoppingData.shoppingCatData.product.deliver_date}}"
+                          wx:key="index"
+                          bindtap="selectDeliverDate"
+                          data-index="{{index}}"
+                          class="{{shoppingData.deliver_date_index == index ? 'active' : ''}}"
+                    >{{filter.parseDeliverDate(item, shoppingData.shoppingCatData.product.deliver_frequency)}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="shoppingNum">
+            <text class="shoppingNumTxt">数量<text wx:if="{{shoppingData.shoppingCatData.product.buyer_quota!=0}}">(限购{{shoppingData.shoppingCatData.product.buyer_quota}}件)</text>
+						</text>
+            <view class="shoppingInput">
+								<!-- bindblur="shoppingBlur" -->
+							<image class="addicon" src="../../images/prodetail/reduce.png" bindtap="reduce" data-special="1"/>
+							<input type="number" placeholder="1" bindtap="shoppingInput" disabled="{{true}}" bindblur="shoppingBlur" value="{{shoppingData.shoppingNum}}"/>
+							<image class="addicon" src="../../images/prodetail/add.png" bindtap="plus" data-special="1"/>
+            </view>
+        </view>
+        <!-- 上门服务 -->
+        <!-- <view class='visit_service'>
+          <view class='visit_title'>服务类型</view>
+          <text class='{{serviceval==1?"serviceAct":""}}'  catchtap='visit_sel' data-index='{{serviceval}}'>上门服务</text>
+        </view> -->
+
+        <view class="messageUlList" wx:if="{{shoppingData.shoppingCatData.custom_field_list.length > 0}}">
+            <view wx:for="{{shoppingData.shoppingCatData.custom_field_list}}" wx:key="index">
+                <block wx:if="{{item.field_type!='image'}}">
+                    <text class="textOmitted">{{item.field_name}}</text>
+                    <input type="text" wx:if="{{item.field_type=='text'}}" data-required="{{item.required}}" placeholder="{{item.field_name}}" data-index="{{index}}" bindblur="messageInput" value="{{item.value}}"></input>
+                    <input type="number" wx:if="{{item.field_type=='number'}}" data-required="{{item.required}}" placeholder="{{item.field_name}}" data-index="{{index}}" bindblur="messageInput" value="{{item.value}}"></input>
+                    <input type="text" wx:if="{{item.field_type=='email'}}" data-required="{{item.required}}" placeholder="{{item.field_name}}" data-index="{{index}}" bindblur="messageInput" value="{{item.value}}"></input>
+                    <input type="idcard" wx:if="{{item.field_type=='id_no'}}" data-required="{{item.required}}" placeholder="{{item.field_name}}" data-index="{{index}}" bindblur="messageInput" value="{{item.value}}"></input>
+                    <view class="picker" wx:if="{{item.field_type=='date'}}">
+                        <picker mode="date" start="{{item.dateDay}}" end="2127-09-01" bindchange="bindDateChange" data-index="{{index}}">
+                            <view>
+                                {{item.date}}
+                            </view>
+                        </picker>
+                        <picker mode="time" start="00:00" end="23:59" bindchange="bindTimeChange" data-index="{{index}}">
+                            <view>
+                                {{item.time}}
+                            </view>
+                        </picker>
+                    </view>
+                    <view class="picker" wx:if="{{item.field_type=='time'}}">
+                        <picker mode="date" start="{{item.dateDay}}" end="2127-09-01" bindchange="bindDateChange" data-index="{{index}}">
+                            <view>
+                                {{item.date}}
+                            </view>
+                        </picker>
+                    </view>
+                </block>
+                <block wx:if="{{item.field_type=='image'}}">
+                    <view class="returnArticle addImgCentent" style="padding:0;border-bottom:0;">
+                        <view>{{item.field_name}}
+                            <text>（最多5张）</text>
+                        </view>
+                        <view class="addImgList">
+                            <view wx:for="{{item.imgList}}" wx:for-item="list" wx:key="index">
+                                <image src="{{list}}"></image>
+                            </view>
+                            <view class="addImg" bindtap="addImg" data-index="{{index}}">+</view>
+                        </view>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <view class="shoppingButton">
+            <form bindsubmit="formSubmit">
+              <button form-type="submit"
+                bindtap="payment"
+                data-type="{{shoppingData.type}}" data-reserva="{{shoppingData.shoppingCatData.product.is_reservation}}" data-special="1">{{shoppingData.buttonTxt}}</button>
+            </form>
+        </view>
+    </view>
+</template>

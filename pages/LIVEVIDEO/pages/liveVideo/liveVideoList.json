@@ -1,0 +1,7 @@
+{
+  "enablePullDownRefresh": false,
+  "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "直播列表",
+  "usingComponents": {},
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,39 @@
+<!--推荐页面-->
+<import src="../public/productList.wxml" />
+<import src="../public/shoppingCat.wxml" />
+<import src="../public/textBox.wxml" />
+
+<import src="../public/warning.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<view class="{{pageTheme}}">
+    <view class="shopTop open clearfix bgF" wx:if="{{!shopTitle}}" style="position: fixed;top: 0;left: 0;z-index: 10;width: 100%;">
+        <navigator url="/pages/product/productList" class="navigator" hover-class="none" open-type="{{filter.getOpenType('/pages/product/productList',store_nav_list)}}">
+            <view>店家推荐</view>
+            <text>MORE</text>
+        </navigator>
+    </view>
+    <view  class="editProduct container"   data-page="pages.product.recommend">
+        <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+        <view  class="container" data-page="pages.product.recommend">
+            <view class="asideDetails productListPage">
+                <navigator url="/pages/shoppingCat/index" hover-class="none" open-type="{{filter.getOpenType('/pages/shoppingCat/index',store_nav_list)}}">
+                    <text class="iconfont icon-gouwuche1 shoppingCatIcon" wx:if="{{shoppingCatNum}}"></text>
+                </navigator>
+                <text class="goTop iconfont icon-dingbu" bindtap="goTopFun"
+                      style="display:{{scrollTop.goTopShow ? 'block' : 'none'}};"></text>
+            </view>
+            <view class="editProduct">
+                <view class="shopProductTable {{productTable}} Zy" style="display:block;margin-top: 90rpx;">
+                    <template is="productList" data="{{content:productListData}}" />
+                </view>
+            </view>
+        </view>
+        <block wx:if="{{shoppingData.shoppingShow}}">
+            <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+        </block>
+        <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+    </view>
+    <template is="textBox" wx:if="{{textBoxShow}}" data="{{content:textBoxData}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

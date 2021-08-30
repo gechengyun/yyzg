@@ -1,0 +1,7 @@
+<!--会员卡页面-->
+<import src="../public/membership.wxml" />
+<view class="container {{pageTheme}}" data-page="pages.coupons.membership">
+    <template is="membership" data="{{membership:true,user:coupontsData.user}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

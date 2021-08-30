@@ -1,0 +1,104 @@
+<!--2018/07/18 created by ccy -->
+<!--pages/goods_category/index.wxml-->
+<!--商品列表页面-->
+<import src="../public/productListSort.wxml" />
+<import src="../public/groupProductList.wxml" />
+<import src="../public/editProductSearch.wxml" />
+<import src="../public/shoppingCat.wxml" />
+<!-- 购物袋 -->
+<import src="../public/warning.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<!--警告提示-->
+<view class="all_container">
+  <view class="search_area {{pageTheme}}">
+    <view class="input-icon" bindtap="bindSearchGoods">
+      <image class="searchicon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/goodscategory/searchicon.png" />
+      <!-- <text class="iconfont icon-chazhao"></text> -->
+    </view>
+    <input type="text" placeholder="请输入商品名称" placeholder-style="color:#CCCCCC" confirm-type="search" bindinput="inputKeyWord" bindconfirm="bindSearchGoods" style="width: 644rpx;"/>
+  </view>
+  <view class="goods_category {{pageTheme}}">
+    <scroll-view class="left_container" scroll-y>
+      <view class="category_first{{index===activeIndex?' active':''}}" wx:for="{{topCates}}" wx:key="{{item.cat_id}}" bindtap="switchTopCate" data-tabindex="{{index}}">
+        <view class="active_bg"></view>
+        <text class="textOmitted">{{item.cat_name}}</text>
+      </view>
+    </scroll-view>
+    <view class="right_container">
+
+      <view wx:if="{{!tipsShow}}" class="bg">
+      </view>
+      <scroll-view class="category_second" scroll-y bindscrolltolower="bindscrolltolower"  scroll-top="{{scrollTop.scroll_top}}" scroll-with-animation="true" >
+        <block wx:if="{{modelContent.category_style==2}}">
+          <view bindtap="clickCate1" class="category_title textOmitted" data-id="{{currentSubCats.cat_id}}">全部{{currentSubCats.cat_name}}
+          </view>
+          <view class="category_second_item" wx:for="{{currentSubCats.cat_list}}" wx:for-item="cat_item" wx:key="cat_item.cat_id" bindtap="clickCate1" data-id="{{cat_item.cat_id}}">
+            <image src="{{cat_item.cat_pic}}"></image>
+            <view class="category_modal"></view>
+            <text class="second_category_name textOmitted2">{{cat_item.cat_name}}</text>
+          </view>
+        </block>
+        <block wx:if="{{modelContent.category_style==1}}">
+          <view class="t_container">
+
+            <view class="right_banner" wx:if="{{imgSrc}}">
+              <image src="{{imgSrc}}"></image>
+            </view>
+
+            <block wx:if="{{tipsShow}}">
+              <view class="right_c">
+                <scroll-view class="right_tips" scroll-x>
+                  <block wx:for="{{currentSubCats.cat_list}}" wx:for-item="cat_item" wx:key="cat_item.cat_id">
+                    <view class="item" style="border:1rpx solid {{index===activeIndexTips?themeColor:'#f2f2f2'}}" data-activeindextips="{{index}}" bindtap="clickCate" data-id="{{cat_item.cat_id}}">
+                      {{cat_item.cat_name}}
+                    </view>
+                  </block>
+                </scroll-view>
+                <view class="tips_zk" bindtap="tipsOpen" data-show="{{tipsShow}}">
+                  <text class="iconfont icon-dingbu-copy"></text>
+                </view>
+              </view>
+            </block>
+            <view class="right_com">
+              <view class="editProduct">
+                <view class="shopProductTable {{productTable}}" style="display:block">
+                  <block wx:if="{{productListData.product_list.length}}">
+                    <template is="productListSort" data="{{ content:productListData,modelContent:modelContent,themeColor:themeColor }}" />
+                  </block>
+                  <block wx:else>
+                    <view class="zwsp">
+                      当前分类下暂无商品
+                    </view>
+                  </block>
+                  <view style="height:80rpx;width:100%;line-height:80rpx;text-align:center;color: #fff;font-size: 26rpx;color:#000" wx:if="{{no_more_data}}">
+                    {{no_more_data}}</view>
+                </view>
+              </view>
+            
+            </view>
+          </view>
+        </block>
+      </scroll-view>
+      <view wx:if="{{!tipsShow}}" class="bg" bindtap="closeBg">
+              <view class="right_tips_show">
+                <view class="tit">
+                  <view class="tit_left">全部分类</view>
+                  <view class="tit_rig" bindtap="tipsOpen" data-show="{{tipsShow}}">
+                    <text class="iconfont icon-dingbu1"></text>
+                  </view>
+                </view>
+                <block wx:for="{{currentSubCats.cat_list}}" wx:for-item="cat_item" wx:key="cat_item.cat_id">
+                  <view class="item" bindtap="clickCate" data-id="{{cat_item.cat_id}}" style="border:1rpx solid {{index===activeIndexTips?themeColor:'#f2f2f2'}}" data-activeindextips="{{index}}" bindtap="clickCate" data-id="{{cat_item.cat_id}}">
+                    {{cat_item.cat_name}}
+                  </view>
+                </block>
+              </view>
+            </view>
+    </view>
+  </view>
+</view>
+  <block wx:if="{{shoppingData.shoppingShow}}">
+                <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+              </block>
+              <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<include src="/pages/public/page_footer.wxml"></include>

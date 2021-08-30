@@ -1,0 +1,32 @@
+<!--components/groupList/index.wxml-->
+<!-- <text>components/groupList/index.wxml</text> -->
+<view class="groupSearch">
+  <view class="groupSearchPa">
+    <view class="groupSearchSearch">
+      <input bindconfirm="wxSearchFn" bindinput="searchInput" placeholder="请搜索社区" type="text">
+      </input>
+      <text bindtap="wxSearchFn" class="iconfont icon-chazhao" style="color:#FF5C1C">
+      </text>
+    </view>
+  </view>
+</view>
+
+<view class="groupList" wx:if="{{community_name_arr.length>0}}">
+  <block wx:for="{{community_name_arr}}" wx:key="">
+    <view class="item" bindtap="goBack" data-physicalname="{{item.name}}" data-physicalid="{{item.pigcms_id}}">
+      <text class="red"></text><text>{{item.name}}</text>
+    </view>
+  </block>
+</view>
+<view class="groupList" wx:if="{{community_name_arr.length==0&&(!searchTrue)}}">
+  <view class="item2">
+    <view class="tips"><text class="red"></text><text>没有社区</text></view>
+    <view class="com">可以试试搜索创建社区</view>
+  </view>
+</view>
+<view class="groupList" wx:if="{{community_name_arr.length==0&&searchTrue}}">
+  <view class="item2" bindtap="goBack" data-physicalname="{{physical_name}}">
+    <view class="tips"><text class="red"></text><text>没有该社区</text></view>
+    <view class="com">可以试试创建：{{physical_name}}社区</view>
+  </view>
+</view>

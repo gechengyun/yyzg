@@ -1,0 +1,5 @@
+<!-- 砍价模块 -->
+<import src="./activities.wxml" />
+<template name="bargain_module">
+    <template is="activities" data="{{content, t_index}}"></template>
+</template>

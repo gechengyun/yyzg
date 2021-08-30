@@ -1,0 +1,225 @@
+@import "/iconfont/iconfont.wxss";
+/* 订单头部搜索tap切换 */
+page{
+  overflow-y: hidden;
+}
+.order-searchtap-wrap{
+  height: 188rpx;
+  margin-bottom: 24rpx;
+  background: #fff;
+}
+.order-search-box{
+  padding: 15rpx 24rpx;
+  display: flex;
+  align-items: center;
+}
+.order-search-btn{
+  width: 84rpx;
+	height: 66rpx;
+  margin-left: 18rpx;
+  text-align: center;
+  line-height: 66rpx;
+	background-color: #ff6030;
+	border-radius: 4rpx;
+  font-size: 26rpx;
+	color: #ffffff;
+}
+.order-search-content{
+  flex: 1;
+  padding: 0 19rpx 0 15rpx;
+	height: 66rpx;
+  display: flex;
+  align-items: center;
+	background-color: #f2f2f2;
+	border-radius: 4rpx;
+}
+.order-search-content input{
+  flex: 1;
+  margin: 0 10rpx;
+  font-size: 26rpx;
+	color: #333;
+}
+.order-search-content input::placeholder{
+  color: #bababa;
+}
+.order-search-content icon{
+  width: 28rpx;
+  line-height: 64rpx;
+  font-size: 28rpx;
+}
+.order-tap-box{
+  display: flex;
+  padding: 22rpx 40rpx 22rpx 40rpx;
+}
+.order-tap-box text{
+  flex: 1;
+  margin-right: 66rpx;
+  text-align: center;
+  padding-bottom: 18rpx;
+  font-size: 28rpx;
+	color: #333333;
+}
+.order-tap-box text:last-child{
+  margin: 0;
+}
+.order-tap-box text.active{
+  position: relative;
+  font-weight: bold;
+  font-size: 32rpx;
+}
+.order-tap-box text.active::after{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  margin-left: -15rpx;
+  content: '';
+  width: 30rpx;
+	height: 6rpx;
+	background-color: #ff6030;
+	border-radius: 3rpx;
+}
+/* 订单列表 */
+.order-list{
+  overflow: hidden;
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+}
+.order-list-title{
+  display: flex;
+  padding: 30rpx 24rpx 28rpx;
+}
+.order-list-title image{
+  display: block;
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+}
+.list-title-content{
+  flex: 1;
+}
+.list-title-name{
+  color: #666666;
+  line-height: 26rpx;
+}
+.list-title-name text:nth-of-type(1){
+  font-size: 30rpx;
+}
+.list-title-name text:nth-of-type(2){
+  font-size: 26rpx;
+  float: right;
+}
+.list-title-name text.colorgreen{
+  color: #2ecc71;
+}
+.list-title-time{
+  margin-top: 16rpx;
+  font-size: 24rpx;
+	color: #999999;
+}
+.list-title-time text:nth-of-type(2){
+  float: right;
+}
+
+.order-list-content{
+  padding: 20rpx 24rpx;
+  display: flex;
+  background-color: #f4f4f4;
+}
+.order-list-content image{
+  width: 124rpx;
+	height: 124rpx;
+	background-color: #06c1ae;
+	border-radius: 4rpx;
+	border: solid 1rpx #edebeb;
+}
+.list-content-detail{
+  flex: 1;
+  margin: 0 34rpx 0 24rpx;
+}
+.list-content-detail text,
+.list-content-style text{
+  display: block;
+}
+.list-content-detail text:nth-child(1){
+  font-size: 26rpx;
+	line-height: 41rpx;
+	color: #333333;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.list-content-detail text:nth-child(2){
+  margin-top: 20rpx;
+  font-size: 22rpx;
+	color: #999999;
+}
+.list-content-detail .rule{
+  font-size: 22rpx;
+	color: #999999;
+  display: inline-block;
+  margin-right: 10rpx;
+}
+.list-content-style{
+  width: 134rpx;
+  text-align: right;
+  color: #999999; 
+}
+.list-content-style text:nth-child(1){
+  font-size: 26rpx;
+}
+.list-content-style text:nth-child(2){
+  font-size: 22rpx;
+  margin: 20rpx 0;
+}
+.order-list-money{
+  padding: 38rpx 24rpx 34rpx;
+  font-size: 24rpx;
+  color: #333;
+  border-bottom:1rpx solid #f4f4f4;
+}
+.postage{
+  color: #999;
+}
+.profit{
+  float: right;
+	color: #ff6030;
+}
+.order-list-operation{
+  display: flex;
+  height: 96rpx;
+  font-size: 28rpx;
+	color: #999999;
+}
+.order-list-operation view{
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-list-operation view image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+  background: #000;
+}
+/* 没有订单展示 */
+.order-list-none image{
+  margin: 172rpx auto 22rpx;
+}
+.order-list-none view{
+  font-size: 26rpx;
+	line-height: 52rpx;
+  text-align: center;
+	color: #ff6030;
+}
+/* 自提状态 */
+.draw{
+  padding: 15rpx;
+  text-align: right;
+}
+.draw button{
+  background-color: #d8d8d8;
+}

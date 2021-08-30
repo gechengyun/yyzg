@@ -1,0 +1,55 @@
+<!--pages/SHOPGOODS//pages/user/recharge/recharge.wxml-->
+<!-- 提示弹窗 -->
+<import src="../../../../public/warning.wxml" />
+<view class='recharge {{pageTheme}}'>
+  <view class="balance-title">
+    <text>我的{{cashConfig.coin_name}}</text>
+    <view class="balance-num">{{cashConfig.user_coin?cashConfig.user_coin:'0.00'}}</view>
+  </view>
+  <view class="balance-tip">请选择充值数量</view>
+  <view class="balance-mode" wx:if="{{cashConfig.recharge_list.length>0}}">
+    <view class="balance-mode-item" data-idx="{{index}}" bindtap="balanceMode" style="border-color:{{modeIdx == index?themeColorValue:''}}" wx:for="{{cashConfig.recharge_list}}" wx:key="index">
+      <view>{{item.get_coin_num}}{{cashConfig.coin_name}}</view>
+      <view class="recharge-item-send-num">赠{{item.recharge_coin}}{{cashConfig.coin_name}}</view>
+      <text class="balance-mode-item-b">￥{{item.recharge_money}}</text>
+    </view>
+  </view>
+  <view class="balance-ipt" wx:if="{{cashConfig.open_custom_amount}}">
+    <input placeholder="点击输入其他金额" bindinput="changeMoneyNum" type='number' value="{{amount}}"></input>
+  </view>
+  <view class="balance-tips" style="color: {{themeColorValue}}" wx:if="{{0}}">注意：赠送仅限以上选择。其他额度不参与活动</view>
+  <view class="balance-type">
+    <view class="balance-type-title">支付方式</view>
+    <view class="balance-type-list">
+      <view class="balance-type-item" data-idx="{{0}}" bindtap="balanceTypes" wx:if="{{cashConfig.isalipay}}">
+        <view class="balance-type-left">
+          <text class="iconfont icon-umidd17"></text>
+          <text>支付宝支付</text>
+        </view>
+        <view class="balance-type-right">
+          <text class="iconfont {{balanceIdx == 0?'icon-xuanzhong':'icon-unselected'}}" style="color: {{balanceIdx == 0?themeColorValue:''}};"></text>
+        </view>
+      </view>
+      <view class="balance-type-item" data-idx="{{1}}" bindtap="balanceTypes" wx:if="{{1}}">
+        <view class="balance-type-left">
+          <text class="iconfont icon-weixin"></text>
+          <text>微信支付</text>
+        </view>
+        <view class="balance-type-right">
+          <text class="iconfont {{balanceIdx == 1?'icon-xuanzhong':'icon-unselected'}}" style="color: {{balanceIdx == 1?themeColorValue:''}};"></text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="submit-btn">
+    <view class='txbtn theme-bg-color' style="background:{{amount!=0 || modeIdx != -1?'':'#e1e1e1'}}" catchtap='{{amount!=0 || modeIdx != -1?"getMycash":""}}'>确认支付<text wx:if="{{amount!=0 || modeIdx != -1}}">￥{{amount || modeAmount}}</text></view>
+  </view>
+  <view class="register-rule" wx:if="{{0}}">
+    <text class="iconfont icon-xuanzhong1" bindtap="chooseRule" style="color:{{isRule?'':'#999'}};"></text>
+    <view class="register-rule-content">
+      <text>已阅读并同意</text>
+      <navigator url="/pages/LIVEVIDEO/pages/userLive/ruleSystem?ruleContent={{132}}&ruleName=充值协议" open-type="navigate">《用户充值协议》</navigator>
+    </view>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

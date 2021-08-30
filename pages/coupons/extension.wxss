@@ -1,0 +1,61 @@
+/* pages/coupons/extension.wxss */
+
+.canvas-container {
+    margin: 50rpx 70rpx;
+    position: relative;
+    width: 610rpx;
+    height: 830rpx;
+    box-shadow: 0 6rpx 16rpx #e4e1e1;
+    border-radius: 20rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+}
+
+.canvas-container .canvas-container-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.canvas-wrap {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    position: relative;
+    width: 610rpx;
+    height: 830rpx;
+    text-align: center;
+    /* box-shadow: 0 6rpx 16rpx #e4e1e1; */
+    border-radius: 20rpx;
+    box-sizing: border-box;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.canvas-wrap-header {
+    margin: 60rpx 0 54rpx;
+    height: 106rpx;
+    width: 106rpx;
+    border-radius: 50%;
+}
+
+.canvas-wrap-p {
+    font-size: 12px;
+    line-height: 44rpx;
+    color: #030000;
+}
+
+.canvas-wrap-title {
+    margin: 60rpx 0 60rpx;
+    font-size: 14px;
+    line-height: 44rpx;
+}
+
+.canvas-wrap-qrode {
+    margin-bottom: 45rpx;
+    height: 217rpx;
+    width: 217rpx;
+}

@@ -1,0 +1,169 @@
+<!--pages/LIVEVIDEO//pages/userLive/register.wxml-->
+<!-- 提示弹窗 -->
+<import src="../../../../public/warning.wxml" />
+<wxs src="../../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="container {{pageTheme}}">
+	<view class="register-header">
+		<image src="{{pageData.page_image}}" mode="scaleToFill"></image>
+		<view class='back-box' style='top:{{boundtop?boundtop:26}}px;height:{{boundHeight?boundHeight:32}}px;'>
+			<view class='iconfont icon-shangyibu' style='height:100%;line-height:{{boundHeight?boundHeight:32}}px' bindtap='goback'></view>
+			<!-- <text style='color:#fff;font-size:32rpx;box-size:border-box;padding-right:60rpx;' class='title'>直播团队</text> -->
+		</view>
+	</view>
+	<form bindsubmit="grouperSave" bindreset="formReset" wx:if="{{apply_info.status<0}}">
+		<view class="register-content">
+			<view class="register-title">
+				<text class="register-title-r" style="background-color:{{themeColorValue}}"></text>
+				<text>{{pageData.page_title}}</text>
+			</view>
+			<view class="register-step">
+				<view class="step-item {{stepidx==0?'step-active':''}}" style="background-color:{{stepidx==0?themeColorValue:''}}" data-stepidx="{{0}}" bindtap="nextStep">手机号绑定
+					<view class="step-right" style="border-color: {{stepidx==0?'rgb(238,238,238)':themeColorValue}};border-left-color:{{stepidx==0?themeColorValue:'rgb(238,238,238)'}}"></view>
+				</view>
+				<view class="step-item {{stepidx==1?'step-active':''}}" style="background-color:{{stepidx==1?themeColorValue:''}}" data-stepidx="{{1}}" bindtap="nextStep">填写信息</view>
+			</view>
+			<view class="register-list">
+				<block wx:if="{{stepidx==0&&pageData.require_field.show_phone==1}}">
+					<view class="register-item">
+						<text class="register-star">*</text>
+						<text class="register-mes">手机号</text>
+						<input placeholder="请输入手机号" placeholder-style="color:#C0C0C0;" bindblur="bindTel" value='{{group_detail.tel?group_detail.tel:apply_info.apply_phone}}' disabled="{{canSubmit}}"></input>
+					</view>
+					<view class="register-item" wx:if="{{stepidx==0 && !canSubmit}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">验证码</text>
+						<input placeholder="请输入验证码" placeholder-style="color:#C0C0C0;" bindinput="bindCode" value='{{group_detail.code}}'></input>
+						<button class='gecode' bindtap='getTelcode'>{{sendcodeStatus?(codenum+'秒'):'获取验证码'}}</button>
+					</view>
+				</block>
+				<block wx:if="{{stepidx==1}}">
+					<view class="register-item">
+						<text class="register-star">*</text>
+						<text class="register-mes" style="width:102rpx" wx:if="{{pageData.member_roles.length>0}}">代理类型</text>
+						<picker bindchange="bindPickerChange" range="{{pageData.member_roles}}" range-key="value" style="margin-left:150rpx" value="{{pick_index}}">
+							<view class="picker">
+								{{pageData.member_roles[pick_index].value}}
+							</view>
+						</picker>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_user_name==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">姓名</text>
+						<input placeholder="请输入姓名" placeholder-style="color:#C0C0C0;" bindblur="bindName" value='{{group_detail.name?group_detail.name:apply_info.apply_name}}'></input>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_address==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">省市区</text>
+						<view class="regionSelection">
+							<picker name="province" bindchange="pickerProvince" value="{{province_index}}" range="{{province_name_arr}}">
+								<view class="picker">
+									{{province_name_arr[province_index]}}
+								</view>
+							</picker>
+							<picker name="city" bindchange="pickerCity" value="{{city_index}}" range="{{city_name_arr}}">
+								<view class="picker">
+									{{city_name_arr[city_index]}}
+								</view>
+							</picker>
+							<picker name="area" bindchange="pickerCountry" value="{{country_index}}" range="{{country_name_arr}}">
+								<view class="picker">
+									{{country_name_arr[country_index]}}
+								</view>
+							</picker>
+						</view>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_address==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">地址</text>
+						<input placeholder="请输入详细地址" placeholder-style="color:#C0C0C0;" bindblur="bindAdress" value='{{group_detail.adress?group_detail.adress:apply_info.address}}'></input>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_bank_card==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">银行卡</text>
+						<input placeholder="请输入银行卡号" placeholder-style="color:#C0C0C0;" bindblur="bindBanknum" value='{{group_detail.banknum?group_detail.banknum:apply_info.bank_card}}'></input>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_bank_card==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">开户行</text>
+						<input placeholder="请输入开户行" placeholder-style="color:#C0C0C0;" bindblur="bindOpenBank" value='{{group_detail.openBank?group_detail.openBank:apply_info.bank_name}}'></input>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_bank_card==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">开户人</text>
+						<input placeholder="请输入开户人姓名" placeholder-style="color:#C0C0C0;" bindblur="bindOpenBankName" value='{{group_detail.openBankName?group_detail.openBankName:apply_info.bank_open_name}}'></input>
+					</view>
+					<view class="register-item" wx:if="{{pageData.require_field.show_id_card==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes">身份证</text>
+						<input placeholder="请输入身份证号" placeholder-style="color:#C0C0C0;" bindblur="bindIdnum" value='{{group_detail.idnum?group_detail.idnum:apply_info.id_card}}'></input>
+					</view>
+					<view class="register-item register-add" wx:if="{{pageData.require_field.show_id_card_pic==1}}">
+						<text class="register-star">*</text>
+						<text class="register-mes register-mes-id">身份证图片</text>
+						<view class="register-img">
+							<view class="imaged" bindtap="upImg" data-imgtype='upImgSrc1'>
+								<view class="register-img-add" wx:if="{{upImgSrc1}}">
+									<image src="{{upImgSrc1}}" class="slide_img" mode="aspectFit"></image>
+								</view>
+								<view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+								<view>身份证正面</view>
+							</view>
+							<view class="imaged" bindtap="upImg" data-imgtype='upImgSrc2'>
+								<view class="register-img-add" wx:if="{{upImgSrc2}}">
+									<image src="{{upImgSrc2}}" class="slide_img" mode="aspectFit"></image>
+								</view>
+								<view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+								<view>身份证反面</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+		<view class="register-bottom">
+			<block wx:if="{{stepidx==0 && !canSubmit}}">
+				<button class="now-apply-btn" style="background-color:{{themeColorValue}};margin-top: 60rpx;" data-stepidxs="{{1}}" bindtap="nextStep">下一步</button>
+			</block>
+			<block wx:if="{{stepidx==1}}">
+				<view class="register-rule" wx:if="{{ruleData && ruleData.length>0}}">
+					<text class="iconfont icon-xuanzhong1" bindtap="chooseRule" style="color:{{isRule?'':'#999'}};"></text>
+					<view class="register-rule-content">
+						<text>提交视为同意</text>
+						<view wx:for="{{ruleData}}" wx:key="goindex" wx:for-index="goindex">
+							<navigator url="/pages/LIVEVIDEO/pages/userLive/ruleSystem?protocol_id={{item.id}}" open-type="navigate">《{{item.name}}》</navigator>
+							<text wx:if="{{goindex < ruleData.length - 1}}">和</text>
+						</view>
+					</view>
+				</view>
+				<view class="choose-step" wx:if="{{!isTeam && gradeData.length > 0}}">
+					<view class="register-title">
+						<text class="register-title-r" style="background-color:{{themeColorValue}}"></text>
+						<text>选择礼包</text>
+					</view>
+					<view class="grade">
+						<view class="grade-item" wx:for="{{gradeData}}" wx:key="index" data-productid="{{item.product_id}}" bindtap="goDetail">
+							<image src="{{item.image}}" mode="widthFix"></image>
+							<view>{{item.name}}</view>
+							<view wx:if="{{0}}">￥{{item.price}}/年</view>
+							<text class="iconfont icon-xuanzhong2" style="color:{{isGrade==index?'#D83A2B':''}};" data-grade="{{index}}" catchtap="chooseGrade"></text>
+						</view>
+					</view>
+				</view>
+				<button class="now-apply-btn" formType="{{canSubmit?'submit':''}}" style="background-color:{{canSubmit?themeColorValue:'rgb(204,204,204)'}}" wx:if="{{isTeam}}">提交申请</button>
+				<block wx:else>
+					<!-- <button class="now-apply-btn" style="background-color:{{themeColorValue}}" bindtap="orderFun" wx:if="{{pageData.open_pay*1}}">付费开通</button> -->
+					<button class="now-apply-btn" formType="{{canSubmit?'submit':''}}" style="background-color:{{canSubmit?themeColorValue:'rgb(204,204,204)'}}">立即注册</button>
+				</block>
+			</block>
+		</view>
+	</form>
+	<view class="step-tip" wx:if="{{stepidx==0 && canSubmit}}">温馨提示：手机号已绑定，请前往填写信息完成注册</view>
+
+	<view class="examing" wx:if="{{apply_info.status==0 || apply_info.status==1}}">
+		<view class="iconfont {{apply_info.status==0?'icon-shenhezhong':'icon-yitongguo'}}"></view>
+		<text style="text-align: center;max-width: 75%;">{{apply_info.status==0?'审核中':'已通过'}}</text>
+	</view>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

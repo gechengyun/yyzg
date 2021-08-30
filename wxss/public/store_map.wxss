@@ -1,0 +1,33 @@
+.contact_store {
+    display: block;
+    padding: 20rpx;
+    position: relative;
+    background: #fff;
+    color: #999;
+    width: 90%;
+    margin: 20rpx auto 0 auto;
+    box-sizing: border-box;
+    border-radius: 8rpx;
+}
+
+.contact_store .storeName {
+    font-size: 32rpx;
+    color: #333;
+    font-weight: bold;
+}
+
+.contact_store .adress_title {
+    font-size: 26rpx;
+    color: #999;
+}
+
+.contact_icon {
+    position: absolute;
+    right: 20rpx;
+    top: 15rpx;
+}
+
+.contact_icon .icon_contact {
+    padding-left: 20rpx;
+    display: inline-block
+}

@@ -1,0 +1,60 @@
+<!--pages/SHOPGOODS/pages/evaluate/evaluate.wxml-->
+<import src="../../../public/showBigPic.wxml" />
+<view class="evaluate-page">
+  <scroll-view scroll-y="true" style="height: 100vh;"  bindscrolltolower="lower">
+    <view class="evaluateTitle">
+      <view class="evaluateTitle-item {{tab=='' ? 'active' : ''}}" data-productList="0" data-tab="" bindtap="productListSwichNav">全部
+         <text data-productList="0" data-tab="">·{{comment_data.total}}</text>
+      </view>
+      <view class="evaluateTitle-item {{tab=='HAO' ? 'active' : ''}}" data-productList="1" data-tab="HAO" bindtap="productListSwichNav">好评
+        <text data-productList="1" data-tab="HAO">·{{comment_data.t1}}</text>
+      </view>
+      <view class="evaluateTitle-item {{tab=='ZHONG' ? 'active' : ''}}" data-productList="2" data-tab="ZHONG" bindtap="productListSwichNav">中评
+        <text data-productList="2" data-tab="ZHONG">·{{comment_data.t2}}</text>
+      </view>
+      <view class="evaluateTitle-item {{tab=='CHA' ? 'active' : ''}}" data-productList="3" data-tab="CHA" bindtap="productListSwichNav">差评
+        <text data-productList="3" data-tab="CHA">·{{comment_data.t3}}</text>
+      </view>
+      <view class="evaluateTitle-item {{tab=='IMAGE' ? 'active' : ''}}" data-productList="4" data-tab="IMAGE" bindtap="productListSwichNav">有图
+        <text data-productList="4" data-tab="IMAGE">·{{comment_data.t4}}</text>
+      </view>
+    </view>
+    <view class="commentList">
+       <view class="default" wx:if="{{flag && comment_list.length === 0}}">
+          <image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/default.png"></image>
+          <view class="showTxt-default">空空如也～</view>
+        </view>
+      <view class="evaluateTitleList">
+        <view class="evaluateItem" wx:for="{{comment_list}}" wx:for-item="list" wx:for-index="list_index" wx:key="index">
+          <view class="eva-img">
+            <view class="eva-avatar"><image src="{{list.avatar}}"></image></view> 
+            <view class="eva-desc">
+              <view class="nickname">{{list.nickname}}</view>
+              <view>
+                <image wx:for="{{list.score*1}}" wx:key="index" class="aixin" src="../../../../images/aixin.png"/> 
+              </view>
+            </view>  
+          </view>
+          <view class="eva-time">
+            <text class="eva-date">{{list.date}} </text>  
+            <text class="time-gg">尺码:S 颜色:粉色</text>
+          </view>
+          <view class="eva-content">{{list.content}}</view>
+          <view class="evaluateImg clearfix">
+            <view wx:for="{{list.attachment_list}}" wx:for-index="img_index" wx:key="">
+              <image src="{{item.file}}" bindtap="showBigPic" data-src="{{item.file}}" data-index="{{img_index}}" data-pindex="{{list_index}}"></image>
+            </view>
+          </view>
+        </view>
+        <view class="bottom-line" wx:if="{{(comment_list!='')&&(!next_page)}}">
+          <image class="bottom-line-image" src="../../../../images/line.png"/>
+        </view>
+      </view>
+
+    </view>
+  </scroll-view>
+  <!--查看大图弹窗-->
+  <block wx:if="{{showBigPic}}">
+    <template is="showBigPic" data="{{content: comment_list[pindex].attachment_list, index: common_list_index, showBigPic: showBigPic}}" />
+  </block>
+</view>

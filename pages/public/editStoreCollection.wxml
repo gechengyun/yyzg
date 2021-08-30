@@ -1,0 +1,15 @@
+<!-- 店铺收藏 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="attention_collect">
+    <view class="editStoreCollection" data-page="page.public.editStoreCollection">
+        <view class="ulList">
+            <view bindtap="collectShop" >
+                收藏店铺(<text>{{content.collect}}</text>)
+            </view>
+            <view>
+                <navigator url="/pages/index/index" class="navigator" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">浏览店铺</navigator>
+            </view>
+        </view>
+        <view class="createShop"></view>
+    </view>
+</template>

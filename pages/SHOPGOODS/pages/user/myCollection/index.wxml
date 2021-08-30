@@ -1,0 +1,75 @@
+<!--我的收藏列表-->
+<view class="container {{pageTheme}}">
+  <scroll-view scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="page.myCollection.index">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="orderState">
+      <view class="orderStateList myCollection">
+        <view class="orderList" wx:if="{{showList}}">
+          <view class="orderContent" wx:for="{{orderlistData.product_list}}" wx:for-item="order" wx:key='index'>
+            <navigator url="{{order.from_point_shop*1 == 1?'/pages/POINT/pages/product/details':'/pages/product/details'}}?product_id={{order.product_id}}" hover-class="none" open-type="navigate">
+              <view class="orderContentList">
+                <view class="productImg">
+                  <image src="{{order.image}}"></image>
+                </view>
+                <view class="productInfo">
+                  <view class="productName serverName">
+                    <text class="t1 textOmitted">{{order.name}}</text>
+                  </view>
+                  <view class="productPrice">
+                    <block wx:if="{{order.point_exchange_num*1 != 0 && order.from_point_shop*1 == 1}}">
+                      <text class="price">  <text class="iconfont icon-jifen"></text>{{order.point_exchange_num}}</text>
+                      <text>+</text>
+                    </block>
+                    <text>¥{{order.price}}</text>
+                    <text>{{order.status_txt}}</text>
+                  </view>
+                </view>
+              </view>
+            </navigator>
+          </view>
+        </view>
+        <view class="orderList orderList2" wx:else>
+          <view class="orderContent orderContent2" wx:for="{{orderlistData.product_list}}" wx:for-item="order" wx:key='index'>
+            <navigator url="{{ways==1?'':order.from_point_shop*1 == 1?'/pages/POINT/pages/product/details?product_id='+order.product_id:'/pages/product/details?product_id='+order.product_id}}" hover-class="none" open-type="navigate">
+              <view class="orderContentList">
+                <view class="productImg">
+                  <image src="{{order.image}}"></image>
+                </view>
+                <view class="productInfo">
+                  <view class="productName serverName">
+                    <text class="t1 textOmitted">{{order.name}}</text>
+                  </view>
+                  <view class="productPrice">
+                    <block wx:if="{{order.point_exchange_num*1 != 0 && order.from_point_shop*1 == 1}}">
+                      <text class="price">  <text class="iconfont icon-jifen"></text>{{order.point_exchange_num}}</text>
+                      <text>+</text>
+                    </block>
+                    <text>¥{{order.price}}</text>
+                    <text>{{order.status_txt}}</text>
+                  </view>
+                </view>
+              </view>
+              <view wx:if="{{ways}}">
+                  <text class="iconfont icon-correct choose-goods" wx:if="{{order.isSelect}}" data-idx="{{index}}" bindtap="selectList"></text>
+                  <text class="iconfont icon-correct" wx:else data-idx="{{index}}" bindtap="selectList"></text>
+              </view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+    <!-- 页面内容为空 -->
+    <view wx:if='{{orderlistData.product_list.length==0}}'>
+      <view class="data_null_block">
+        <image src="https://s.404.cn/applet/images/wxcopy/empty-tip.png" style="width:520rpx;" mode="widthFix"></image>
+        <text class="tips">暂无宝贝，赶紧去收藏吧～</text>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="open-submit" wx:if="{{ways}}">
+    <view class="choose-num">已选择<text>{{order_total_num}}</text>个宝贝</view>
+    <button size="default" class="sub-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover" bindtap="goBack">添加</button>
+  </view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

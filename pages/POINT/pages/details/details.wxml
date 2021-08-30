@@ -1,0 +1,33 @@
+<!--pages/POINT/pages/details.wxml-->
+<!-- <text>pages/POINT/pages/details.wxml</text> -->
+<view class="con">
+  <view class="desc" style="color:{{navigateBarBgColor}}">剩余积分</view>
+  <view class="num" style="color:{{navigateBarBgColor}}">{{user_point}}
+  </view>
+</view>
+<view class="tabel">
+  <view class="tr th" style="background:{{navigateBarBgColor}}">
+    <view class="td1">
+      内容
+    </view>
+    <view class="td2">
+      积分
+    </view>
+    <view class="td3">
+      时间
+    </view>
+  </view>
+  <block wx:for="{{user_points_list}}" wx:key="">
+    <view class="tr ">
+      <view class="td1">
+        {{item.type_txt}}
+      </view>
+      <view class="td2">
+        {{item.points}}
+      </view>
+      <view class="td3">
+        {{item.data}}
+      </view>
+    </view>
+  </block>
+</view>

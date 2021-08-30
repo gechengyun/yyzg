@@ -1,0 +1,48 @@
+<!-- 餐饮小食2 -->
+<template name="goods_group4_tpl">
+  <import src="./groupProductListTpl.wxml" />
+  <import src="../../../public/editProductSearch.wxml" /><!--商品搜索 -->
+
+  <view data-page="page.public.editProductList" id='product' class="{{content.goods_group_list == '' ? 'hide' : '' }}" data-desc="餐饮小食2">
+    <view class='group-title-block'>
+      <!--商品搜索 -->
+      <template is="search" data="{{themeColorValue,BASE_IMG_URL,showSearch,fiexdTop:true}}" />
+      <!-- 新增导航分组 -->
+      <view class='group-bar fiex-top-my make_fiex' style='top:110rpx;'>
+        <swiper class='swiper-group' display-multiple-items='{{content.goods_group_list.length<=4?content.goods_group_list.length:4}}'>
+          <block wx:for="{{content.goods_group_list}}" wx:key="index">
+            <swiper-item>
+              <view class='nav-box'>
+                <view class="navtxt nav{{content.title_style?content.title_style:1}} {{cur_index==index ? 'active' : ''}}"  data-groupid="{{item.group_id}}" data-curindex="{{index}}" data-productlist="{{index}}" bindtap="groupListSwichNav"
+                  style='border-color:{{cur_index==index?((content.title_style==1||!content.title_style)?themeColorValue:"transparent"):"transparent"}};background:{{cur_index==index?((content.title_style==2||content.title_style==3)?themeColorValue:"transparent"):"transparent"}}'>
+                  {{item.title}}
+                </view>
+                <text wx:if="{{content.title_style==3&&cur_index==index}}" style='color:{{themeColorValue}}' class='iconfont icon-xia icon-checked-nav'></text>
+              </view>
+
+            </swiper-item>
+          </block>
+        </swiper>
+
+        <!-- 向右的箭头 -->
+        <view class="bar-to-right" wx:if='{{content.goods_group_list && content.goods_group_list.length>4}}'>
+          <text class="iconfont icon-xiayibu"></text>
+        </view>
+
+      </view>
+      <view class='exitbar' style='height:220rpx;'>占位bar</view>
+    </view>
+    <!-- 商品分组信息 -->
+    <view class="editProductListCentent editProduct {{field_type=='goods_group4'?'goods_group4':''}}" style='box-size:border-box;padding:0 {{content.page_distance?content.page_distance:20}}rpx;'>
+      <view class="shopProductTable {{cur_index==index ? 'active' : ''}} size_{{content.size}} size_type_{{content.size_type}} buy_btn_type_{{content.buy_btn_type}} buy_btn_{{content.buy_btn}}  show_title_{{content.show_title}} price_{{content.price}}  {{productTable}}"
+        wx:for="{{content.goods_group_list}}" wx:for-item="list" wx:key="index">
+        <template is="groupProductListTpl" data="{{content:list,show_title:content.show_title,BASE_IMG_URL,data:content,themeColorValue,size_type:content.size_type}}" />
+      </view>
+    </view>
+
+
+    <!-- 数据加载状态 -->
+    <view class='no-data'>{{load_txt}}</view>
+
+  </view>
+</template>

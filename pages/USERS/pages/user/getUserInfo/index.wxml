@@ -1,0 +1,32 @@
+<import src="../../../../public/warning.wxml" />
+<wxs src="../../../../../utils/filter.wxs" module="filter" />
+<view>
+  <form bindsubmit="inputSubmit" bindreset="formReset">
+		<view class="addressEdit" style="padding:0 30rpx;position:relative">
+			<view class="addressEditList inputList" style="border-bottom: 0rpx solid #eee;">
+				<view class="addressEditCentent">
+					<text>店铺名称</text>
+					<input type="text" name="name" placeholder="请输入店铺名称" value="{{resetValue}}"/>
+				</view>
+        <view class="addressEditCentent">
+					<text style="width:85%">店铺logo</text>
+					<!-- 图片 -->
+					<view class="upSource" style="margin-top:20rpx" name="store_logo">
+						<view class="img-list">
+								<view class="imaged" wx:if="{{imgSrc.length==1}}">
+									<image src="{{imgSrc}}" class="slide_img"></image>
+									<view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="image"></view>
+								</view>
+							<view class="iconfont icon-jia1 imaged img-add" style="color:{{themeColorValue}}" bindtap="addImage" wx:if="{{imgSrc.length==0}}"></view>
+						</view>
+					</view>
+				</view>
+			</view>
+			<view class="submitContainer">
+				<button class="submit inputSubmit" formType="submit" style="height: 80rpx;line-height: 80rpx;margin-top: 100rpx;padding: 0;border-radius:14rpx">提交</button>
+			</view>
+			<view style="position:absolute;top:0rpx;left:0rpx;width:100%;height:100%;z-index:999" wx:if="{{_unlogin}}" catchtap="goDetail"></view>
+		</view>
+	</form>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

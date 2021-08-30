@@ -1,0 +1,35 @@
+<!--优惠券页面-->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<template name="coupon">
+  <cover-view class="live-component-cloth">
+    <cover-view class="layer" bindtap="closeCoupon" catchtouchmove="ture"></cover-view>
+    <cover-view class="shoppingLayer" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.coupon">
+      <cover-view class="coupon-list">
+        <cover-view class="item-list" wx:for="{{couponData.list}}" bindtap="receiveCoupons" wx:key="index" style="background-color:{{themeColorValue}}" data-index="{{index}}">
+          <cover-view class="cricle top"></cover-view>
+          <cover-view class="cricle bottom"></cover-view>
+          <cover-view class="item-content">
+            <cover-view class="content-l">
+              <cover-view class="content-l-t">
+                <cover-view>￥</cover-view>
+                <cover-view class="content-value">{{filter.clearDot(item.face_money)}}</cover-view>
+                <cover-view>{{item.name}}</cover-view>
+              </cover-view>
+              <cover-view class="content-l-m" wx:if="{{item.limit_money>0}}">满{{item.limit_money}}元可以使用</cover-view>
+              <cover-view class="content-l-m" wx:if="{{item.limit_money==0}}">不限金额使用</cover-view>
+              <cover-view wx:if="{{item.value_type == 1}}">有效期 {{item.start_time}} 至 {{item.end_time}}</cover-view>
+              <cover-view wx:if="{{item.value_type == 0}}">领取后{{item.late_begin==0?'当':item.late_begin}}天生效，有效期{{item.late_value}}天</cover-view>
+            </cover-view>
+            <cover-view class="content-m"></cover-view>
+            <cover-view class="content-r">
+              <cover-view>领取</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="shoppingButton couponBtn">
+        <button form-type="submit" bindtap="closeCoupon">关闭</button>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</template>

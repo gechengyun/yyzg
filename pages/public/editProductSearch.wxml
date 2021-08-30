@@ -1,0 +1,16 @@
+<!-- 商品搜索 -->
+<template name="search">
+	<!-- 外部后台开以配置 -->
+	<view class="editProductSearchPa" style='position:{{flag==1?"static":"fixed"}}'>
+		<view class="editProductSearchCa" data-page="page.public.editProductSearch" style="{{flag!=1?'':'background:#fff'}}">
+			<view class="localname" wx:if="{{flag!=1}}">{{localName}}</view>
+			<view class="editProductSearch" style="{{flag!=1?'':'margin-left:48rpx;width:664rpx;background:#F5F7FA'}}">
+				<text class="iconfont icon-chazhao" bindtap="wxSearchFn"></text>
+				<input type="text" placeholder="请输入关键字" placeholder-style="color:#ccc" bindinput="wxSearchInput" value="{{keyword}}" confirm-type="search" bindconfirm="wxSearchFn"></input>
+			</view>
+			<view class="classify" bindtap="navigateToClass" wx:if="{{flag!=1}}">
+				<image class="classify_img" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/fl-icon.png" />
+			</view>
+		</view>
+	</view>
+</template>

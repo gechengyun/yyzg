@@ -1,0 +1,60 @@
+<!--我的订单-订单评价页面-->
+<import src="../../public/warning.wxml" />
+<view class="container {{pageTheme}}" data-page="page.order.publishedEvaluation">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="evaluationList" wx:for="{{evaluationData.order_product_list}}" wx:for-index="indexItem" wx:key="indexItem">
+			<view class="orderShop">
+				<view class="clearfix">
+					<view class="productImg verticalCentering">
+						<image src="{{item.image}}"></image>
+					</view>
+					<view class="productInfo ">
+						<textarea name="" placeholder="输入评论内容" bindinput="textarea" data-index="{{indexItem}}" value="{{item.content}}"></textarea>
+					</view>
+				</view>
+				<view class="evaluation">
+					<text bindtap="label" class="{{list.label?'active':''}}" data-label="{{label}}" data-index="{{indexItem}}" wx:for="{{item.tag_list}}" wx:for-index="label" wx:for-item="list" wx:key="index">{{list.value}}</text>
+				</view>
+				<view class="clearfix dl">
+					<view wx:for="{{item.imgList}}" wx:for-item="list" wx:key="index">
+						<image src="{{list}}"></image>
+						<view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-indexitem="{{indexItem}}" data-index="{{index}}"></view>
+					</view>
+					<view class="iconfont icon-iconfont7" bindtap="addImg" data-index="{{indexItem}}"></view>
+				</view>
+			</view>
+			<view class="evaluationInfo">
+				<view class=" title">满意度</view>
+				<view class=" descriptionFraction">
+					<text class="iconfont icon-xihuan {{list?'active':''}}" bindtap="satisfied" wx:for="{{item.satisfied}}" wx:for-item="list" data-label="{{label}}" wx:for-index="label" data-index="{{indexItem}}" wx:key="index"></text>
+				</view>
+			</view>
+	</view>
+	<view class="evaluationInfo">
+			<view class=" h3">店铺评分</view>
+			<view class="bgfff">
+					<view class="title">描述相符</view>
+					<view class="descriptionFraction ">
+							<text class="iconfont icon-wujiaoxing {{item?'active':''}}" bindtap="describe" data-type="describe" wx:for="{{evaluationData.describe}}" wx:key="index" data-index="{{index}}"></text>
+					</view>
+			</view>
+			<view class="bgfff">
+					<view class="title">物流服务</view>
+					<view class="descriptionFraction ">
+							<text class="iconfont icon-wujiaoxing {{item?'active':''}}" bindtap="describe" wx:for="{{evaluationData.logistics}}" data-type="logistics" wx:key="index" data-index="{{index}}"></text>
+					</view>
+			</view>
+			<view class="bgfff">
+					<view class="title">服务态度</view>
+					<view class="descriptionFraction ">
+							<text class="iconfont icon-wujiaoxing {{item?'active':''}}" bindtap="describe" data-type="service" wx:for="{{evaluationData.service}}" wx:key="index" data-index="{{index}}"></text>
+					</view>
+			</view>
+	</view>
+	<view class="confirmButton">
+		<text class="button" bindtap="published">发表评论</text>
+	</view>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

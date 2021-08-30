@@ -1,0 +1,779 @@
+function parseFrequency(frequency) {
+  switch (parseInt(frequency)) {
+      case 1:
+          return "每天"
+      case 2:
+          return "每周"
+      case 3:
+          return "每月"
+  }
+}
+
+function parseDeliverDate(index, frequency) {
+  switch (parseInt(frequency)) {
+      case 1:
+          return "每天"
+      case 2:
+          var seconds = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+          return seconds[parseInt(index) - 1]
+      case 3:
+          return index + "号"
+  }
+}
+
+function parseProLong(num) {
+  switch (parseInt(num)) {
+      case -1:
+          return "不限制次数"
+      case 0:
+          return "不允许顺延"
+      default:
+          return "最多顺延" + num + "次"
+  }
+}
+
+//获取周期购时间线中的日期
+function parseOrderPaidTime(str) {
+  var time = getDate('20' + str.replace('/','-'))
+  var day = time.getDay()
+  if(day ===0)day = 7;
+  var weekDay = parseDeliverDate(day, 2)
+  return str + ' ' + weekDay
+}
+
+//获取周期购的状态
+
+function parseOrderPaidStatus(str, filed) {
+  filed = filed || 'statusClass'
+  var statusData = {};
+  switch (parseInt(str)) {
+      case -1:
+          statusData =  {
+              statusName: "已延期",
+              statusClass: "delay"
+          }
+          break;
+      case 0:
+          statusData =  {
+              statusName: "待配送",
+              statusClass: "unsended"
+          }
+          break;
+      case 1:
+          statusData = {
+              statusName: '已配送',
+              statusClass: 'sended'
+          }
+          break;
+  }
+  return statusData[filed]
+}
+//周期购中判断是否提前配送
+
+function judgePreSend(item) {
+  if(item.status != 1){
+      return ""
+  }
+  var paid_time = getDate('20' + item.paid_time);
+  var send_time = getDate(item.real_time);
+  return paid_time > send_time ? "（提前配送）" : ""
+}
+
+function parseDeliverOrderInfo(item){
+  var frequency = parseFrequency(item.type)
+  switch (parseInt(item.type)) {
+      case 1:
+          return frequency;
+      case 2:
+          var time = getDate('20' + item.paid_time.replace('/','-'))
+          var day = time.getDay()
+          if(day ===0)day = 7;
+          var weekDay = parseDeliverDate(day, 2)
+          return frequency + weekDay
+      case 3:
+          var monthDay = item.paid_time.split('/')[2]
+          return frequency + monthDay + "号";
+  }
+}
+
+function chunk(array, size) {
+  size = Math.max(size, 0)
+  var length = array == null ? 0 : array.length
+  if (!length || size < 1) {
+      return []
+  }
+  var index = 0
+  var resIndex = 0
+  var result = []
+
+  while (index < length) {
+      result[resIndex++] = array.slice(index, (index += size))
+  }
+  return result
+}
+
+
+var getPageUrl = function (pageType, pigcms_id) {
+  var pageTypes = {
+      '1': '/pages/GOODSDETAILS/pages/presale/index?id=',
+      '2': '/pages/GOODSDETAILS/pages/details/index?tuan_id=',
+      '4': '/pages/GOODSDETAILS/pages/bargain/details?id=',
+      '5': '/pages/GOODSDETAILS/pages/seckill/index?id='
+  }
+  return pageTypes[('' + pageType)] + ('' + pigcms_id);
+};
+
+var getFixedPrice = function (price) {
+  if (typeof price == 'number') {
+      return price.toFixed(2)
+  } else if (typeof price == 'string') {
+      return parseFloat(price, 2)
+  }
+}
+//转换较大的单位为w
+var transBigNumber = function(number,nodecimal){
+  number = parseFloat(number)
+  if(number > 10000){
+      if(nodecimal == 1 || number % 10000 === 0){
+          var num = parseFloat(number / 10000).toString()
+          if(num.indexOf('.') > 0){
+              var splitNum = num.split('.')
+              num = splitNum[0]+'.'+(splitNum[1] + '00').slice(0,2)
+          }
+          return num + "万"
+      }
+      return Math.floor(parseFloat(number / 10000)).toFixed(2) + "万"
+  }
+  return number
+}
+var transBigNumber2 = function (number, nodecimal) {
+if ( number == null) {
+  number=0
+  return number;
+}
+number = parseFloat(number)
+if (number > 10000) {
+  if (nodecimal == 1 || number % 10000 === 0) {
+    var num = parseFloat(number / 10000).toString()
+    if (num.indexOf('.') > 0) {
+      var splitNum = num.split('.')
+      num = splitNum[0] + '.' + (splitNum[1] + '00').slice(0, 1)
+    }
+    return num + "W+"
+  }
+  return Math.floor(parseFloat(number / 10000)).toFixed(1) + "W+"
+}
+return number
+}
+var transBigNumber3 = function (number, nodecimal,numlen,unit) {//1数字，2是否保留小数，3保留位数，4单位
+if (number == null) {
+  number = 0
+  return number;
+}
+oldNum = number
+number = parseFloat(number)
+if(number<=100){//小于100，保留两位小数
+  if(oldNum.toString().indexOf('.') > 0){//有小数的，保留设置位数      
+    var splitNum1 = oldNum.split('.')
+    return num = splitNum1[0] + '.' + (splitNum1[1] + '00').slice(0, numlen + 1)
+  }else{//没小数的，直接输出
+    return parseFloat(number)
+  }
+}else if(number > 100 && number <= 10000){//大于100，小于10000，不留小数
+  return Math.floor(parseFloat(number))
+}else if (number > 10000) {//大于10000，保留位数与单位自传
+  if (nodecimal == 1 || number % 10000 === 0) {
+    var num = parseFloat(number / 10000).toString()
+    if (num.indexOf('.') > 0) {
+      var splitNum = num.split('.')
+      num = splitNum[0] + '.' + (splitNum[1] + '00').slice(0, numlen)
+    }
+    return num + unit
+  }
+  return Math.floor(parseFloat(number / 10000)).toFixed(numlen) + unit
+}
+return number
+}
+function formatNumber(n) {
+  n = n.toString()
+  return n[1] ? n : '0' + n
+}
+
+function formatTime(date,num) {
+  var year = date.getFullYear()
+  var month = date.getMonth() + 1
+  var day = date.getDate()
+  var arr = []
+  switch(num){
+      case 1:
+          arr = [year]
+          break;
+      case 2:
+          arr = [year, month]
+          break;
+      case 3:
+          arr = [year, month, day]
+          break;
+  }
+  return arr.map(formatNumber).join('-')
+}
+function parseEarliestDeliverDate(product,deliver_date){
+  var deliver_config = product.deliver_config
+  var earlyDay = (deliver_date || product.deliver_date[0]) * 1
+  var deliver_frequency = product.deliver_frequency * 1
+  var prevDaysNum = deliver_config[0]*1
+  var prevHour = deliver_config[1]*1
+  var nowTime = getDate();
+  var nowTimestamp = nowTime.getTime();
+  var nowHour = nowTime.getHours();
+  var perDayMs = 24 * 60 * 60 * 1000
+  var deliverTimestamp = nowTimestamp
+  var expectDeliverDatetime = getDate(nowTimestamp + prevDaysNum * perDayMs)
+  if(nowHour >= prevHour){
+      expectDeliverDatetime = getDate(expectDeliverDatetime.getTime() + perDayMs)
+  }
+  switch (deliver_frequency) {
+      case 1:
+          if(nowHour < prevHour){
+              deliverTimestamp = nowTimestamp + prevDaysNum * perDayMs
+          }else{
+              deliverTimestamp = nowTimestamp + (prevDaysNum + 1) * perDayMs
+          }
+          break;
+      case 2://每周配送
+          var expectWeekDay = expectDeliverDatetime.getDay()
+          if(expectWeekDay==0)expectWeekDay = 7;
+          if(earlyDay < expectWeekDay){
+              deliverTimestamp = getDate(expectDeliverDatetime.getTime() + (earlyDay + 7 - expectWeekDay) * perDayMs).getTime()
+          } else {
+              deliverTimestamp = getDate(expectDeliverDatetime.getTime() + (earlyDay - expectWeekDay) * perDayMs).getTime()
+          }
+          break;
+      case 3://test 每月20日配送，需要提前50天，10点之前预定，今天是15号，今天9点预定，最早几号送货
+          if(expectDeliverDatetime.getDate() > earlyDay){
+              var formatedTime = formatTime(getDate(expectDeliverDatetime.getTime() + 30 * perDayMs), 2).split('-')
+              deliverTimestamp = getDate(formatedTime[0],formatedTime[1]-1, earlyDay).getTime()
+              // return formatedTime[0] + '-' + formatedTime[1]
+          }else{
+              var formatedTime2 = formatTime(expectDeliverDatetime, 2).split('-')
+              deliverTimestamp = getDate(formatedTime2[0], formatedTime2[1]-1,earlyDay).getTime()
+          }
+          break;
+  }
+  return formatTime(getDate(deliverTimestamp),3)
+}
+
+function parseProductCouponTypeTitle(coupon) {
+  var type = parseInt(coupon.type)
+  // 1优惠券2团购券3折扣券4'礼品券,5代金券,6特殊券,7景点票,
+  switch (type) {
+      case 1:
+          return {
+              title: "优惠详情",
+              content: coupon.default_detail
+          }
+      case 2:
+          return {
+              title: "团购详情",
+              content: coupon.deal_detail
+          };
+      case 3:
+          return {
+              title: "折扣券",
+              content: coupon.discount + "折"
+          };
+      case 4:
+          return {
+              title: "兑换内容",
+              content: coupon.gift
+          };
+      case 5:
+          return {
+              title: "减免金额",
+              content: coupon.face_money
+          };
+      case 6:
+          return {
+              title: "特殊券",
+              content: "特殊券"
+          }
+      case 7:
+          return {
+              title: "票类型",
+              content: coupon.type_text
+          };
+  }
+}
+
+var getName = function (name, len) {
+  len = len || 10;
+  if (name&&len){
+    if (name.length > len) {
+      return name.slice(0, len) + "...";
+    }
+  }else{
+    name='';
+  }
+
+  return name;
+}
+function changeNum(num) {
+return num.split(".")[0];
+}
+function parseCouponDescription(text){
+  if(text.indexOf('\r\n')>-1){
+      return text.split('\r\n')
+  }
+  if(text.indexOf('\n')>-1){
+      return text.split('\n')
+  }
+  if(text.indexOf('\r')>-1){
+      return text.split('\r')
+  }
+  return [text]
+}
+
+function getOpenType(url, nav_list){
+  var openType = "navigate";
+  if (nav_list){
+    for (var i = 0; i < nav_list.length; i++) {
+      var navListElement = nav_list[i];
+      if (navListElement.pagePath.indexOf(url) > -1 && navListElement.status == 1) {
+        openType = "reLaunch"
+      }
+    }
+  }
+  return openType;
+}
+
+// 判断是否含有某个字符串
+var isExit = function (data, world) {
+if (data){
+  if (data.indexOf(world)>=0) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+return 0;
+}
+
+//超出部分显示省略
+var overflowNum = function(msg,num){
+if(msg){
+  if(!num)num=8;
+  if (msg.length > num) {
+    msg = msg.slice(0, num)
+    msg+='...'
+  }
+}
+return msg?(msg):'';
+}
+//订单状态
+function orderStatus(status) {
+if (status) {
+  var obj = {}
+  if (status <= 1) {
+    obj.title = '未支付'
+    obj.desc = '请尽快完成支付,超时自动取消'
+  } else if (status == 2) {
+    obj.title = '未发货'
+    obj.desc = '物流信息:等待发货'
+  } else if (status == 3) {
+    obj.title = '已发货'
+    obj.desc = '物流信息:商品已发货'
+  } else if (status == 4) {
+    obj.title = '交易完成'
+    // obj.desc = '物流信息:快递已被服务站代签收'
+    obj.desc = ''
+  } else if (status == 5) {
+    obj.title = '已取消'
+    obj.desc = '物流信息:交易取消'
+  } else if (status == 6) {
+    obj.title = '退款中'
+    obj.desc = '物流信息:退款中'
+  } else if (status == 7) {
+    obj.title = '确认收货'
+    obj.desc = '物流信息:确认收货'
+  }
+  return obj;
+}
+
+}
+function parseDeliverRule(shop) {
+if (shop.local_type * 1 == 1) {//限定配送距离
+  var text = '消费'
+  if (shop.amount_type === 'order_money') {
+    text = "订单"
+  }
+  if (shop.amount_type === 'pay_amount') {
+    text = "实付金额"
+  }
+  return text + "满" + shop.delivery_min_amount + "元起送"
+} else {//不限配送距离
+  return "0元起送"
+}
+}
+//保留两位小数
+function saveDouble(num) {
+if (num) {
+  var f = parseFloat(num);
+  if (isNaN(f)) {
+    return;
+  }
+  f = Math.round(num * 100) / 100;
+  return f;
+} else {
+  return 0;
+}
+}
+
+//订单页单击跳转对应商品详情
+function toTruePage(special_product_type, order, product_id, data_id, activity_id) {
+//  * order 表 type 字段
+//  * 订单类型 0 => '普通', 1 => '代付', 2 => '送礼', 3 => 分销, 4 => '活动',
+//  * 5 => '批发', 6 => '拼团', 7 => '预售', 10 => '预约', 11 => '选购',
+//  * 50 => '砍价', 51 => '人气夺宝', 53 => '秒杀', 55 => '降价拍', 56 => '抽奖',
+//  * 57 => '摇一摇', 58 => '微聚力', 59 => '拆礼盒', 61 => '集字游戏',
+//  * 62 => '摇钱树游戏', 63 => '竞价', 64 => '扫码', 65=> 限时折扣
+type = order.type;
+var _url='';
+if (special_product_type==99){
+  _url = '/pages/USERS/pages/travel/index?product_id=' + product_id;
+}else{
+  if (type == 6) {//拼团
+    _url = '/pages/GOODSDETAILS/pages/details/index?tuan_id=' + data_id;
+
+  } else if (type == 7) {//预售
+    _url = '/pages/GOODSDETAILS/pages/presale/index?id=' + data_id;
+
+  } else if (type == 50) {//砍价
+    _url = '/pages/GOODSDETAILS/pages/bargain/details?id=' + activity_id;
+  } else if (type == 53) {//秒杀
+    _url = '/pages/GOODSDETAILS/pages/seckill/index?id=' + activity_id;
+  } else {//普通
+    if (order.is_point_exchange != 1) {
+      _url = '/pages/product/details?product_id=' + product_id;
+    } else {
+      _url = '/pages/POINT/pages/product/details?product_id=' + product_id;
+    }
+  }
+}
+return _url;
+
+
+}
+
+// 弹幕最多显示8条
+function liveChat(Arr, len, limitLen){
+if (len > limitLen) {
+  return Arr.slice(len - limitLen, len);
+}
+return Arr;
+}
+// 弹幕内容显示换行
+function wrapChat(content,namelen,contetnlen, cutlen){
+if (content && contetnlen) {
+  if (contetnlen > cutlen) {
+    return content.slice(cutlen - namelen, contetnlen - namelen);
+  }else{
+    return content.slice(0, contetnlen - namelen);
+  }
+} else {
+  content = '';
+}
+return content;
+}
+
+function wrapChat1(content,contetnlen,cutlen){
+  if (content && cutlen) {
+    if(contetnlen>cutlen){
+      return content.slice(0, cutlen - contetnlen);
+    }else{
+      return content
+    }
+  } else {
+    content = '';
+  }
+  return content;
+}
+
+//获取字符串长度，中文是两个字符串
+function getStrleng(str) {
+var myLen = 0;
+for (var i = 0; i < str.length; i++) {
+  if (str.charCodeAt(i) > 0 && str.charCodeAt(i) < 128){//字符编码，128以内的是数字，英文字符，已经英文的符号等
+    myLen++;
+  }else{
+    myLen += 2;
+  }
+}
+return myLen;
+}
+// 去除小数点(5.123-->5/5.86-->5)
+function clearDot(num){
+if (num>0){
+  return parseInt(num);
+}else{
+  return num;
+}
+}
+// 向上取整(5.123-->6)
+function ceilFun(data) {
+if (data>0){
+  return Math.ceil(data)
+}else{
+  return data
+}
+}
+// 向下取整(5.68-->5)
+function floorFun(data){
+if (data > 0) {
+  return Math.floor(data)
+} else {
+  return data
+}
+}
+// 四舍五入(5.12-->5/5.68-->6)
+function roundFun(data){
+if (data > 0) {
+  return Math.round(data)
+} else {
+  return data
+}
+}
+
+//转直播url
+function urlTransform(url) {
+if (url.indexOf('c=tencent_live&a=live_room') > 0) {
+  var start = url.indexOf("live_id=");
+  var live_id = url.substring(start, url.length);
+  url = '/pages/LIVEVIDEO/pages/liveVideo/liveVideoDetail?isShare=1&' + live_id;
+  return url;
+} else {
+  return url;
+}
+}
+
+function richText(str){
+return str.replace('&nbsp;', '<p style="display:inline-block;width:10px;"></p>');
+}
+
+/**
+* 直播组件标题计算选中显示项
+*/
+function channelType(data){
+var showTyle='auto';
+if(data){
+  var _count = 0;
+  for(var i=0;i<data.length;i++){
+    if (data[i].is_checked == 1) {
+      _count++;
+    }
+  }
+  if(_count>4){
+    showTyle='flex';
+    return showTyle;
+  }else{
+    showTyle = _count;
+  }
+}
+return showTyle;
+}
+/**
+* 获取组播组件swiper高度
+*/
+function swiperHeight(list_len,rowType,showGoods,showYuyue){
+var _h=660;
+var h_yuyue =(showYuyue && showYuyue.length>0) ? 70:0; //预约版块高度
+var h_goods = showGoods=='true' ? 83 : 0;//商品版块高度
+var base_item_h = 500+h_yuyue+h_goods;
+
+if (rowType==1){//一行两个模式
+  list_len = Math.ceil(list_len/2);
+}
+
+if (list_len && list_len>0){
+  // 两行模式
+  if (rowType == 1) {
+    _h = list_len * base_item_h ;
+  } else if (rowType == 2) {
+    //列表模式
+    _h = list_len * 350;
+  }
+}
+
+return _h+50;
+}
+// 截取字符串
+function sliceLen(data, starlen, endlen){//1:数据，2开始的位置，3结束的位置
+return data.slice(starlen, endlen);
+}
+
+/* 通过文字二进制得到文字字节数 */
+function getByteByBinary(){
+  var byteLengthDatas = [0, 1, 2, 3, 4];
+  var len = byteLengthDatas[Math.ceil(binaryCode.length / 8)];
+  return len;
+}
+/* 通过文字十六进制得到文字字节数 */
+function getByteByHex(hexCode) {
+  return getByteByBinary(parseInt(hexCode, 16).toString(2));
+}
+//支持中英文数字Emoji混合截取
+function subStrByByte(str, maxLength=28) {
+  var result = "";
+  var flag = false;
+  var len = 0;
+  var length = 0;
+  var length2 = 0;
+  for (var i = 0; i < str.length; i++) {
+    var code = str.codePointAt(i).toString(16);
+    if (code.length > 4) {
+      i++;
+      if ((i + 1) < str.length) {
+        flag = str.codePointAt(i + 1).toString(16) == "200d";
+      }
+    }
+    if (flag) {
+      len += getByteByHex(code);
+      if (i == str.length - 1) {
+        length += len;
+        if (length <= maxLength) {
+          result += str.substr(length2, i - length2 + 1);
+        } else {
+          break
+        }
+      }
+    } else {
+      if (len != 0) {
+        length += len;
+        length += getByteByHex(code);
+        if (length <= maxLength) {
+          result += str.substr(length2, i - length2 + 1);
+          length2 = i + 1;
+        } else {
+          break
+        }
+        len = 0;
+        continue;
+      }
+      length += getByteByHex(code);
+      if (length <= maxLength) {
+        if (code.length <= 4) {
+          result += str[i]
+        } else {
+          result += str[i - 1] + str[i]
+        }
+        length2 = i + 1;
+      } else {
+        break
+      }
+    }
+  }
+  return result;
+}
+
+// 下拉列表
+function radioArr(dataArr,arr){
+   var arrValue = arr[0];
+   for(var i=0;i<dataArr.length;i++) {
+     if(dataArr[i].name==arrValue){
+       return dataArr[i].value
+     }
+   }
+}
+
+// 获取地区和图片的name
+function getNameData(arr,str){
+  for(var j=0;j<arr.length;j++){
+    if(arr[j].type==str){
+      return arr[j].name
+    }
+  }
+}
+// 获取购物券盒子的高度
+function getRechargeCoupon(num){
+  if(num==1) {
+    return 306
+  }
+  if(num==2) {
+    return 550
+  }
+  if(num>=3) {
+    return 784
+  }
+}
+// 获取成功后购物券盒子的高度
+function getRechargeCouponSuccess(num){
+  if(num==1) {
+    return 130
+  }
+  if(num==2) {
+    return 280
+  }
+  if(num>=3) {
+    return 432
+  }
+}
+// 获取成功后弹窗盒子的高度
+function getSuccessContainer(num){
+  if(num==1) {
+    return 508
+  }
+  if(num==2) {
+    return 658
+  }
+  if(num>=3) {
+    return 810
+  }
+}
+module.exports = {
+parseFrequency: parseFrequency,
+parseDeliverDate: parseDeliverDate,
+parseProLong: parseProLong,
+chunk: chunk,
+getPageUrl: getPageUrl,
+getFixedPrice: getFixedPrice,
+parseOrderPaidTime: parseOrderPaidTime,
+parseOrderPaidStatus:parseOrderPaidStatus,
+judgePreSend:judgePreSend,
+parseProductCouponTypeTitle: parseProductCouponTypeTitle,
+JSON:JSON,
+parseCouponDescription: parseCouponDescription,
+getOpenType: getOpenType,
+parseDeliverOrderInfo:parseDeliverOrderInfo,
+parseInt: parseInt,
+parseFloat: parseFloat,
+transBigNumber:transBigNumber,
+transBigNumber2: transBigNumber2,
+transBigNumber3: transBigNumber3,
+parseEarliestDeliverDate: parseEarliestDeliverDate,
+getName: getName,
+changeNum: changeNum,
+isExit: isExit,
+overflowNum:overflowNum,
+orderStatus: orderStatus,
+parseDeliverRule: parseDeliverRule,
+saveDouble: saveDouble,
+toTruePage: toTruePage,
+liveChat: liveChat,
+wrapChat1: wrapChat1,
+wrapChat: wrapChat,
+getStrleng:getStrleng,
+clearDot: clearDot,
+urlTransform: urlTransform,
+ceilFun: ceilFun,
+floorFun: floorFun,
+roundFun: roundFun,
+richText: richText,
+channelType: channelType,
+swiperHeight: swiperHeight,
+sliceLen:sliceLen,
+subStrByByte:subStrByByte,
+radioArr:radioArr,
+getNameData:getNameData,
+getRechargeCoupon:getRechargeCoupon,
+getRechargeCouponSuccess:getRechargeCouponSuccess,
+getSuccessContainer:getSuccessContainer
+}

@@ -1,0 +1,15 @@
+<!-- 店铺公告 -->
+<template name="notice">
+    <view class="shopNotice bgF mB16 clearfix" style="background:{{content.bgcolor}}" data-page="page.public.shopNotice">
+        <view class="notice_img">
+          <image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/notice.png" />
+        </view>
+        <view class="example">
+            <view class="marquee_box">
+                <view class="marquee_text" style="left:{{content.marqueeDistance}}px;">
+                  {{content.content}}
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

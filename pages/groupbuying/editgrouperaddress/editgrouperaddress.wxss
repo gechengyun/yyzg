@@ -1,0 +1,17 @@
+@import '/iconfont/iconfont.wxss';
+.apply-form-input icon{
+  float: right;
+  font-size: 30rpx;
+  color: #ccc;
+}
+.apply-form-input text.addressshow{
+  flex: 1;
+  overflow: hidden;
+  font-size: 30rpx;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.addressEditCentent input {width:70%;padding:0 10rpx;font-size:26rpx;color:#666;line-height:40rpx;display:inline-block;vertical-align:top;border:0;}
+ .addressEditCentent .regionSelection {width:70%;height:40rpx;padding:0 10rpx;font-size:0;color:#666;line-height:40rpx;display:inline-block;vertical-align:top;overflow:hidden;border:0;}
+.addressEditCentent picker {width:33%;height:40rpx;padding:0 10rpx;font-size:26rpx;color:#666;line-height:40rpx;text-align:center;display:inline-block;vertical-align:top;overflow:hidden;border:0;box-sizing:border-box;}
+.addressEditCentent:last-child {border-bottom:0;}

@@ -1,0 +1,457 @@
+/* pages/user/myMoney/myMoney.wxss */
+
+page{
+  padding-bottom: 150rpx;
+}
+.mymoney {
+  font-size: 26rpx;
+}
+
+.mymoney .header {
+  width: 100%;
+  height: 110rpx;
+  border-top: 1rpx solid #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: #333;
+}
+
+.mymoney .header  .item {
+  font-size: 30rpx;
+  font-weight: 600;
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.line {
+  width: 80rpx;
+  height: 6rpx;
+  background-color: white;
+}
+
+.mymoney .header .active {
+  color: #ff5c1c;
+}
+
+.line_active {
+  background-color: transparent;
+}
+
+.list .title {
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  background-color: #f2f3f4;
+  color: #333;
+  font-weight: 500;
+}
+
+.list .date {
+  width: 100%;
+  height: 120rpx;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list .date .month {
+  width: max-content;
+  padding: 5rpx 25rpx;
+  height: 50rpx;
+  background-color: #fff;
+  border-radius: 25rpx;
+  border: solid 1px #efefef;
+  font-size: 24rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.list .date .month image {
+  width: 14rpx;
+  height: 10rpx;
+  background-color: #bbb;
+  margin-left: 5rpx;
+}
+.list .date .num{
+  display: flex;
+  align-items: center;
+}
+.list .date .num .pay {
+  font-size: 24rpx;
+  color: #999;
+  margin: 10rpx;
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+}
+.list .date .num .pay view{
+  width: max-content;
+  padding: 5rpx 10rpx;
+  border-radius: 5rpx;
+  /* margin-bottom: 10rpx; */
+}
+.list .date .num .pay .active{
+  background: white
+}
+.list .item {
+  width: 100%;
+  height: 144rpx;
+  display: flex;
+  align-items: center;
+  padding-left: 35rpx;
+  box-sizing: border-box;
+}
+
+.list .item .headimg {
+  width: 76rpx;
+  height: 76rpx;
+  background: gainsboro;
+  border-radius: 50%;
+}
+
+.list .item  .content {
+  height: 144rpx;
+  display: flex;
+  margin-left: 24rpx;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+.list .item  .content .order_no{
+  font-size: 24rpx;
+  color: #adadad;
+}
+.list .item:last-child .content {
+  border-bottom: 1rpx solid transparent;
+}
+
+.list .item  .content .name {
+  width: 580rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list .item  .content .name .ncicon {
+  width: 70rpx;
+  height: 25rpx;
+  border-radius: 13rpx;
+  font-size: 18rpx;
+  line-height: 25rpx;
+  text-align: center;
+  color: white;
+}
+
+.list .item  .content .name .details {
+  display: flex;
+  align-items: center;
+}
+
+.list .item  .content .name .text {
+  width: 350rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.list .item  .content .itemdate {
+  font-size: 24rpx;
+  color: #adadad;
+}
+
+.list .item  .content .name .money {
+  font-size: 32rpx;
+  color: #31be00;
+}
+
+/***提现***/
+
+.cashmoney {
+  width: 100%;
+  height: 346rpx;
+  padding-left: 40rpx;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.cashmoney .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 75rpx;
+  line-height: 75rpx;
+  font-size: 26rpx;
+  color: #333;
+  border-bottom: 1rpx solid #eee;
+  padding-left: 20rpx;
+  box-sizing: border-box
+}
+
+.cashmoney  .money {
+  width: 100%;
+  height: 178rpx;
+  padding-top: 100rpx;
+  padding-bottom: 40rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+
+.cashmoney  .money  .num {
+  font-size: 50rpx;
+  display: flex;
+  height: 70rpx;
+  align-items: center;
+}
+
+.cashmoney  .money  .num  input {
+  width: 500rpx;
+  font-size: 58rpx;
+  color: #333;
+  height: 70rpx;
+  font-weight: 500;
+}
+
+.cashmoney  .notice {
+  width: 100%;
+  height: 91rpx;
+  line-height: 91rpx;
+}
+
+.cashmoney  .money  .cashbtn {
+  font-size: 26rpx;
+  margin-right: 26rpx;
+}
+
+.txbtn{
+  margin: 40rpx auto;
+  width: 80%;
+  height: 80rpx;
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 36rpx;
+  border-radius: 10rpx;
+}
+
+.message {
+  margin-top: 20rpx;
+  width: 100%;
+  font-size: 24rpx;
+  color: #9a9a9a;
+  background: white;
+  padding: 35rpx;
+  box-sizing: border-box;
+}
+
+.message  .title {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 35rpx;
+}
+
+.message .info text {
+  display: block;
+  width: 100%;
+  line-height: 46rpx;
+}
+
+/**待入账**/
+
+.nocash .nocashmoney {
+  margin: 25rpx auto 38rpx;
+  width: 702rpx;
+  height: 140rpx;
+  padding: 30rpx 38rpx;
+  box-sizing: border-box;
+  border-radius: 10rpx;
+}
+
+.nocash .nocashmoney  .title, .nocash .nocashmoney  .num {
+  font-size: 24rpx;
+  color: #f9f9f9;
+}
+
+.nocash .nocashmoney  .num {
+  font-size: 48rpx;
+}
+
+/**日期选择**/
+
+.chosedate {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 625rpx;
+  background: white;
+}
+
+.upDown{
+  animation: upDown 800ms ease;
+}
+
+@keyframes upDown{
+  0%{
+    bottom: -100%;
+  }
+  100%{
+    bottom:0%;
+  }
+}
+
+.chosedate .title {
+  height: 100rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  background-color: #f2f2f2;
+  font-size: 26rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chosedate .title .btntrue {
+  font-size: 26rpx;
+}
+
+.showdate {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  color: #ccc;
+}
+
+.showdate .time {
+  display: block;
+  width: 278rpx;
+  text-align: center;
+  padding-bottom: 15rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.picker-view {
+  text-align: center;
+}
+
+.picker-view-column view {
+  text-align: center;
+}
+.isover{
+  color: #333333;
+  padding: 50rpx 0;
+}
+/* 账户概览 */
+.account-today-wrap{
+  position: relative;
+  padding: 40rpx 30rpx;
+  color: #fff;
+}
+.showmoney-detail{
+  position: absolute;
+  right: 0;
+  top: 40rpx;
+  width: 135rpx;
+  text-align: center;
+  line-height: 40rpx;
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 20rpx 0 0 20rpx;
+  color: #ccc;
+}
+.today-money-num{
+  padding:0 100rpx;
+  line-height: 80rpx;
+  font-size: 36rpx;
+}
+.today-money-num text{
+  font-size: 46rpx;
+}
+.today-money-list{
+  margin-top: 20rpx;
+}
+.today-money-list,.gift-money-list{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.today-money-list view,.gift-money-list view{
+  flex: 1;
+  text-align: center;
+}
+.today-money-list text,.gift-money-list view text{
+  display: block;
+  font-size: 24rpx;
+}
+.today-money-list text:nth-of-type(1){
+  color: #efefef;
+  margin-bottom: 10rpx;
+}
+.gift-money-list{
+  padding: 40rpx 0;
+  border-bottom: 1rpx solid #ccc;
+}
+.gift-account-wrap button{
+  margin: 60rpx auto 0;
+  width: 660rpx;
+	height: 88rpx;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  color: #fff;
+	border-radius: 20rpx;
+}
+.gift-money-list view text{
+  font-size: 26rpx;
+}
+.gift-money-list view text:nth-of-type(1){
+  margin-bottom: 20rpx;
+  color: #999;
+  font-size: 30rpx;
+}
+.gift-money-list view text:nth-of-type(2){
+  font-size: 28rpx;
+}
+button::after{
+  border: none;
+}
+
+/* 2019-7-10-xq-新增 */
+.btn-selfwithdrawal{
+  margin:60rpx auto 0;
+  width:80%;
+  height:80rpx;
+  color:white;
+  line-height:80rpx;
+  text-align:center;
+  font-size:36rpx;
+  border-radius:10rpx;
+}
+/* // */
+.status{
+  margin-left: 20rpx;
+ color: #fff;
+  width: max-content;
+  padding: 5rpx 15rpx;
+  border-radius: 30rpx;
+}

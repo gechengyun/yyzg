@@ -1,0 +1,63 @@
+<!--推广二维码-->
+<import src="../public/shear.wxml" />
+<view class="container {{pageTheme}}" data-page="pages.coupons.extenison">
+    <!-- <view class=" membership bgF">
+         <view class="membershipHeard">
+            <image src="{{coupontsData.logo}}"></image>
+        </view>
+        <view>{{coupontsData.store_name}}
+        </view>
+        <view>
+            <text>{{coupontsData.store_intro}}</text>
+        </view>
+         <view class="membershipCar">
+            <image src="{{ewm}}"  mode="widthFix"></image>
+        </view>
+         <view>
+            <text>扫一扫上面的二维码，直接访问本店</text>
+        </view>
+    </view>
+    <canvas canvas-id='shopPost' style="width: {{canvasData.canvasWidth}}px; height: {{canvasData.canvasHeight}}px;letter-spacing: 10rpx;position:absolute;left: -1000px;"></canvas>
+    <shareModal id='shareModal'
+            title='我是标题'
+            content="content"
+            cancelText='取消'
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+    </shareModal> -->
+
+    <view class='canvas-container'>
+        <view class='canvas-wrap'>
+            <image src='{{coupontsData.logo}}' class='canvas-wrap-header'></image>
+            <view class='canvas-wrap-p'>
+                推荐一家我超喜欢的店铺给你
+            </view>
+            <view class='canvas-wrap-p'>
+                快来一起欢乐剁手啊~
+            </view>
+            <view class='canvas-wrap-title'>
+                {{coupontsData.store_name?coupontsData.store_name:"我的店铺"}}
+            </view>
+            <image src='{{qrcodePath}}' class='canvas-wrap-qrode'></image>
+            <view class='canvas-wrap-p'>
+                长按识别小程序码 即可买买买~
+            </view>
+        </view>
+    </view>
+
+    <canvas canvas-id='shopPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position: absolute;left: -2000rpx;"></canvas>
+
+    <button class="submit" bindtap="_shareFriendsCircle">保存海报图</button>
+    <block>
+        <template is="shear" wx:if="{{shear}}" />
+    </block>
+    <dialog
+        dialogHidden="{{dialog.dialogHidden}}"
+        titleMsg="{{dialog.titleMsg}}"
+        auth-btn="{{true}}"
+        determineBtnTxt="{{dialog.determineBtnTxt}}"
+    ></dialog>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

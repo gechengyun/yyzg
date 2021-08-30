@@ -1,0 +1,251 @@
+<!--pages/LIVEVIDEO//pages/anchorPage/anchorPage.wxml-->
+<import src="../../../public/warning.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="container {{pageTheme}}">
+  <view class='back-box' style='height:{{status + navHeight}}px;background-color:{{themeColorValue}};opacity: {{opacityNav}};'>
+    <view style="color:{{barType==1?'#000':'#fff'}};font-size:32rpx;margin-top:{{status}}px;line-height:{{navHeight}}px;" class='title'>主播主页</view>
+  </view>
+  <view class='iconfont icon-shangyibu' style='top:{{status}}px;line-height:{{navHeight}}px' bindtap='goback'></view>
+  <view class="register-header">
+    <image class="anchor-bg" src="{{anchorData.cover_img?anchorData.cover_img:'https://s.404.cn/applet/images/qudao/zhibo/bgbuy.png'}}" mode="aspectFill"></image>
+    <view class="anchor-hearder">
+      <image class="anchor-avatar" src="{{anchorData.avatar}}"></image>
+      <view class="anchor-name">{{anchorData.nickname}}</view>
+      <view class="anchor-fans">{{anchorData.anchor_idprefix?anchorData.anchor_idprefix:'主播ID'}}：<text>{{anchorData.idcode}}</text></view>
+      <view class="user-data" bindtap="{{isSelf?'goNumList':''}}">
+        <view class="user-data-url" data-listtype="about">
+          <view class="user-data-num">{{anchorData.subscribecount}}</view>关注
+        </view>
+        <view class="user-data-url" data-listtype="fans">
+          <view class="user-data-num">{{anchorData.fanscount}}</view>粉丝
+        </view>
+        <view class="user-data-url">
+          <view class="user-data-num">{{anchorData.getlike_num}}</view>获赞
+        </view>
+        <view class="user-data-url" data-listtype="like">
+          <view class="user-data-num">{{anchorData.outlike_num}}</view>喜欢
+        </view>
+      </view>
+      <button size="default" class="anchor-about" bindtap="followClick" style="background-color:{{anchorData.subscribe==1?'#999':themeColorValue}}" wx:if="{{!isSelf}}">{{anchorData.subscribe==1?'已关注':'关注'}}</button>
+    </view>
+    <view class="anchor-mask"></view>
+  </view>
+  <view class="anchor-live" wx:if="{{anchorData.live && anchorData.live.length>0 && anchorData.live[0].status != 2}}">
+    <view class="live-list" wx:for="{{anchorData.live}}" wx:for-item="livegoods" wx:key="goodsindex" wx:for-index="goodsindex">
+      <block wx:if="{{livegoods.status == 1}}">
+        <view class="live-top">
+          <view class="live-l">
+            <view class="live-tip" style="background-color:{{themeColorValue}}">
+              <image class="videoing" mode="widthFix" src="https://s.404.cn/applet/images/qudao/zhibo/living.gif"></image>
+              <text>直播中</text>
+            </view>
+            <view class="live-num">
+              <view>
+                <view class="live-name">{{livegoods.title}}</view>
+                <view class="live-look">观看人数：{{livegoods.view_num}}</view>
+              </view>
+            </view>
+          </view>
+          <view class="go-live" style="background-color:{{themeColorValue}}" data-liveid="{{livegoods.id}}" data-imgsrc="{{anchorData.cover_img}}" data-status="{{livegoods.status}}" bindtap="goLiveDetail">进入直播间</view>
+        </view>
+        <view class="live-goods" data-liveid="{{livegoods.id}}" data-imgsrc="{{anchorData.cover_img}}" data-status="{{livegoods.status}}" bindtap="goLiveDetail">
+          <scroll-view scroll-x class="scroll-header" wx:if="{{livegoods.products && livegoods.products.length>0}}">
+            <view class="goods-list" wx:for="{{filter.sliceLen(livegoods.products,0,20)}}" wx:key="index">
+              <image class="goods-img" src="{{item.image}}"></image>
+              <view>￥<text>{{item.price}}</text></view>
+            </view>
+          </scroll-view>
+          <view class="no-goods" wx:else>暂无展示商品~</view>
+        </view>
+      </block>
+      <block wx:if="{{livegoods.status == 0}}">
+        <view class="lived">
+          <view class="lived-l">
+            <view class="live-name">{{livegoods.title}}</view>
+            <view class="live-time">
+              <text class="lived-tip" style="background-color:{{themeColorValue}}">预告</text>
+              <text>{{livegoods.startTime}}</text>
+            </view>
+          </view>
+          <view class="go-live" style="background-color:{{themeColorValue}}" data-liveid="{{livegoods.id}}" data-liveindex="{{goodsindex}}" bindtap="appointClick" wx:if="{{anchorData.subscribe_template_id.length>0 && livegoods.is_preparetips == 0}}">开播提醒</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="anchor-content" style="margin-top:{{anchorData.live && anchorData.live.length>0 && anchorData.live[0].status != 2?'-16rpx':''}}">
+    <view class="anchor-title {{fixedNav?'fixed-nav':''}}" style="top:{{status + navHeight}}px">
+      <view class='title-item {{btn_index==index? "active": ""}}' data-index='{{index}}' catchtap='switchTab' wx:for="{{tabText}}" wx:key="index">
+        {{item}}
+        <view class='line {{btn_index==index?"theme-bg-color":""}}'></view>
+      </view>
+    </view>
+    <view class="anchor-title" wx:if="{{fixedNav}}"></view>
+    <block wx:if="{{btn_index == 0}}">
+      <view class="anchor-list">
+        <block wx:if="{{playBackData.record_list && playBackData.record_list.length>0}}">
+          <view class="anchor-item" wx:for="{{playBackData.record_list}}" wx:for-item="playBackitem" wx:key="playBackindex" wx:for-index="playBackindex">
+            <view class="add-time">
+              <block wx:if="{{playBackitem.datetime.istoday == 1}}">今天</block>
+              <block wx:else>
+                {{playBackitem.datetime.day}}<text class="add-time-mouth">{{playBackitem.datetime.month}}月</text>
+              </block>
+            </view>
+ <!-- 回放列表 整场回放allrecord1  产品回放allreocrd2 -->
+            <view class="list-l">
+              <block wx:if="{{playBackitem.record_replay.length>0}}">
+                <view class="anchor-item-header">
+                  <view class="item-header-l">
+                    <view class="live-name">{{playBackitem.title}}</view>
+                    <view class="live-time" style="margin-top:20rpx">
+                      <text class="playback-tip" style="background-color: rgb(241,67,86)">整场回放</text>
+                      <text>{{playBackitem.record_replay_num}}人气 | {{playBackitem.record_replay[0].vatime_str}}</text>
+                    </view>
+                  </view>
+                  <view class="item-header-r" wx:if="{{0}}">{{playBackitem.real_start_time}}</view>
+                </view>
+                <view class="anchor-item-video">
+                  <scroll-view scroll-x class="scroll-header" wx:if="{{playBackitem.record_replay && playBackitem.record_replay.length>0}}">
+                    <view class="goods-list"  data-product="{{playBackitem.recordvideo[0].product_id}}" data-filesrc="{{playBackitem.record_replay[0].filesrc}}" catchtap="goRecordvideo"  data-lived="{{playBackitem.id}}" data-allrecord="{{1}}" data-show_status="{{playBackitem.record_replay[0].is_record_show_product}}">
+                      <image class="playback-img" style="width:200rpx;height:227rpx;border-radius:12rpx;" src="{{playBackitem.cover_img}}"></image>
+                    </view>
+                  </scroll-view>
+                </view>
+              </block>
+              <block wx:if="{{playBackitem.recordvideo.length>0}}" >
+                <view class="anchor-item-header">
+                  <view class="item-header-l">
+                    <view class="live-name" wx:if="{{playBackitem.record_replay.length==0}}">{{playBackitem.title}}</view>
+                    <view class="live-time"style="margin-top:20rpx" >
+                      <text class="playback-tip">产品回放</text>
+                      <text>{{playBackitem.recordvideo_count}}宝贝</text>
+                      <!-- {{playBackitem.view_num}}观看 |  -->
+                    </view>
+
+                  </view>
+                  <view class="item-header-r" wx:if="{{0}}">{{playBackitem.real_start_time}}</view>
+                </view>
+                <view class="anchor-item-video">
+                  <scroll-view scroll-x class="scroll-header" wx:if="{{playBackitem.recordvideo && playBackitem.recordvideo.length>0}}">
+                    <view class="goods-list" wx:for="{{playBackitem.recordvideo}}" wx:key="index" data-product="{{playBackitem.recordvideo[0].product_id}}" data-filesrc="{{item.filesrc}}"  data-lived="{{playBackitem.id}}" catchtap="goRecordvideo" data-allrecord="{{2}}"> 
+                      <image class="playback-img"  style="width:192rpx;height:192rpx;border-radius:12rpx;" src="{{item.image}}"></image>
+                      <view class="playback-goods-name">{{item.name}}</view>
+                    </view>
+                  </scroll-view>
+                </view>
+              </block>
+              
+            </view>
+<!-- -->
+            <!-- <view class="list-l" wx:if="{{playBackitem.recordvideo.length>0}}">
+              
+            </view> -->
+<!-- 回放列表 -->            
+          </view>
+          <view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+            <text>THE  END</text>
+          </view>
+        </block>
+        <view class="anchor-list-empy" wx:else>
+          <image src="https://s.404.cn/applet/images/qudao/liveteam/playBack.png" mode="widthFix"></image>
+          <view>主播还没有上传回放视频哦~</view>
+        </view>
+      </view>
+    </block>
+    <block wx:if="{{btn_index == 1}}">
+      <view class="anchor-list">
+        <block wx:if="{{grassData.list && grassData.list.length > 0}}">
+          <view class="anchor-item" wx:for="{{grassData.list}}" wx:for-item="grassItem" wx:key="grassindex" wx:for-index="grassindex">
+            <view class="add-time">
+              <block wx:if="{{grassItem.datetime.istoday == 1}}">今天</block>
+              <block wx:else>
+                {{grassItem.datetime.day}}<text class="add-time-mouth">{{grassItem.datetime.month}}月</text>
+              </block>
+            </view>
+            <view class="list-l">
+              <view class="anchor-item-header" data-id="{{grassItem.id}}" data-type="{{grassItem.filetype}}" bindtap="goDetail">
+                <view class="item-header-l">
+                  <view class="live-name">{{grassItem.title}}</view>
+                  <view class="live-time" wx:if="{{0}}">{{grassItem.addtimeStr}}</view>
+                </view>
+                <view class="item-header-r" data-listindex="{{grassindex}}" catchtap="moreFun" wx:if="{{isSelf}}">···</view>
+                <view class="menu-list" data-id="{{grassItem.id}}" data-listindex="{{grassindex}}" catchtap="menuClick" wx:if="{{menuIndex == grassindex}}">
+                  <view class="menu-item" data-menutype="topping" data-toptime="{{grassItem.user_toptime}}">
+                    <text class="iconfont icon-zhiding"></text>{{grassItem.user_toptime*1>0?'置顶中':'置顶'}}
+                  </view>
+                  <view class="menu-item" data-menutype="downshelf">
+                    <text class="iconfont icon-xiajia"></text>下架
+                  </view>
+                  <view class="menu-item" data-menutype="delitem">
+                    <text class="iconfont icon-shanchu"></text>删除
+                  </view>
+                </view>
+              </view>
+              <view class="item-content-box" data-id="{{grassItem.id}}" data-type="{{grassItem.filetype}}" bindtap="goDetail">
+                <view class="item-content-cloth {{moreData == grassindex?'isshowmore':''}}">
+                  <rich-text nodes='{{grassItem.content}}' class="item-content"></rich-text>
+                  <view class="item-content-dot" wx:if="{{marginBM[grassindex]>2 && moreData != grassindex}}">...</view>
+                </view>
+                <view class="up-down" data-idx="{{grassindex}}" catchtap="showMore" wx:if="{{marginBM[grassindex]>2}}">
+                  <text wx:if="{{moreData == grassindex}}">收起</text>
+                  <text wx:else>展开</text>
+                </view>
+              </view>
+              <view class="grass-img" data-id="{{grassItem.id}}" data-type="{{grassItem.filetype}}" bindtap="goDetail">
+                <block wx:for='{{grassItem.files}}' wx:key='index'>
+                  <block wx:if="{{item.type*1 == 1}}">
+                    <image src="{{item.thumb}}" mode="aspectFill" data-src='{{item.thumb}}' data-urls='{{grassItem.files}}' style="{{index%3==2?'margin-right:0;':''}}" catchtap="previewPic"></image>
+                  </block>
+                  <view class="video_label" wx:else catchtap="videoScreen" data-index="{{grassindex}}">
+                    <video poster='{{item.video_thumb}}' src="{{item.file_path}}" controls object-fit='cover' autoplay='{{false}}' loop='{{true}}' id='video{{grassindex}}'></video>
+                  </view>
+                </block>
+              </view>
+              <view class="grass-bottom" wx:if="{{1}}">
+                <view class="topping" wx:if="{{grassItem.user_toptime*1>0}}" style="color:{{themeColorValue}}">置顶中</view>
+                <view class="grass-btn-ico" data-idxs="{{grassindex}}" catchtap="shareTap">
+                  <text class="iconfont icon-iconzhengli_fenxiang"></text>{{filter.transBigNumber3(grassItem.share_num,1,1,'W')}}
+                </view>
+                <view class="grass-btn-ico" data-id="{{grassItem.id}}" data-type="{{grassItem.filetype}}" data-comment="{{1}}" catchtap="goDetail">
+                  <text class="iconfont icon-pinglun"></text>
+                  <text>{{grassItem.comment_total*1<1000?grassItem.comment_total:'999+'}}</text>
+                </view>
+                <view class="grass-btn-ico" style="color:{{grassItem.liked?themeColorValue:'rgba(145,147,152,1)'}}" data-id="{{grassItem.id}}" data-idxs="{{grassindex}}" catchtap="clickHeart">
+                  <text class="iconfont {{grassItem.liked?'icon-xihuan':'icon-hert'}}"></text>{{filter.transBigNumber3(grassItem.like_num,1,1,'W')}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+            <text>THE  END</text>
+          </view>
+        </block>
+        <view wx:else class="anchor-list-empy">
+          <image src="https://s.404.cn/applet/images/qudao/liveteam/grass_bg.png" mode="widthFix"></image>
+          <view>主播还没有发布种草信息哦~</view>
+        </view>
+      </view>      
+    </block>
+  </view>
+  <!-- 分享组件 -->
+  <bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+  <!--海报画布-->
+  <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+  <!-- 海报预览 -->
+  <view wx:if="{{butshow}}" class="draw-canvas">
+    <text class="iconfont icon-iconfonticonfontclose dc-delete" bindtap="closeCanvas"></text>
+    <image src="{{myimgsrc}}" class="dc-img"></image>
+    <button type='primary' wx:if="{{saveImgBtnHidden}}" style="background-color:{{themeColorValue}}" class="dc-btn" bindtap="saveCanvas">保存到相册</button>
+    <button type='primary' wx:else open-type="openSetting" bindopensetting='handleSetting' style="background-color:{{themeColorValue}}" class="dc-btn">保存到相册</button>
+  </view>
+  <!-- 保存海报图弹窗成功 -->
+  <view class="gray" bindtap="closeModaled" wx:if='{{closeModal}}'>
+    <view class="modal-main">
+      <image class="img-top" src="https://s.404.cn/applet/images/save_complate.png" mode="aspectFill"></image>
+      <view class="modal-title">保存海报成功</view>
+      <view class="modal-text">名片海报已保存到手机相册，你可以分享了</view>
+      <button class="btn-close" bindtap="closeModaled" style="background-color:{{themeColorValue}}">我知道了</button>
+    </view>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

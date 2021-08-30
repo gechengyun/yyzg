@@ -1,0 +1,159 @@
+<!--pages/LIVEVIDEO//pages/registerShop/registerShop.wxml-->
+<!-- 提示弹窗 -->
+<import src="../../../public/warning.wxml" />
+<view class="container {{pageTheme}}">
+  <view class="register-header" style="height: {{nowImgH}}rpx">
+    <image src="{{pageData.image}}" mode="widthFix" bindload="imgHeight"></image>
+    <view class='back-box' style='top:{{boundtop?boundtop:26}}px;height:{{boundHeight?boundHeight:32}}px;'>
+      <view class='iconfont icon-shangyibu' style='height:100%;line-height:{{boundHeight?boundHeight:32}}px' bindtap='goback'></view>
+      <!-- <text style='color:#fff;font-size:32rpx;box-size:border-box;padding-right:60rpx;' class='title'>直播团队</text> -->
+    </view>
+  </view>
+  <view class="team-tip" wx:if="{{pageData.apply_status == 3}}">
+    <text class="iconfont icon-dengpaobeifen"></text>
+    <view>{{pageData.apply_info.bak}}</view>      
+  </view>
+  <form bindsubmit="grouperSave" bindreset="formReset" wx:if="{{pageData.apply_status == 0 || pageData.apply_status == 3}}">
+    <view class="register-content">
+      <view class="register-title">
+        <text class="register-title-r" style="background-color:{{themeColorValue}}"></text>
+        <text>填写信息</text>
+      </view>
+      <view class="register-list">
+        <view class="register-item" wx:if="{{pageData.required_field.show_store_name*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">店铺名称</text>
+          <input placeholder="请输入店铺名称" placeholder-style="color:#C0C0C0;" bindinput="bindShopName" value='{{pageData.apply_info.store_name}}'></input>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_store_location*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">省市区</text>
+          <view class="regionSelection">
+            <picker name="province" bindchange="pickerProvince" value="{{province_index}}" range="{{province_name_arr}}">
+              <view class="picker">
+                {{province_name_arr[province_index]}}
+              </view>
+            </picker>
+            <picker name="city" bindchange="pickerCity" value="{{city_index}}" range="{{city_name_arr}}">
+              <view class="picker">
+                {{city_name_arr[city_index]}}
+              </view>
+            </picker>
+            <picker name="area" bindchange="pickerCountry" value="{{country_index}}" range="{{country_name_arr}}">
+              <view class="picker">
+                {{country_name_arr[country_index]}}
+              </view>
+            </picker>
+          </view>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_store_location*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">地址</text>
+          <input placeholder="请输入详细地址" placeholder-style="color:#C0C0C0;" bindinput="bindAdress" value='{{pageData.apply_info.address}}'></input>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_bank_user*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">开卡人</text>
+          <input placeholder="请输入开卡人姓名" placeholder-style="color:#C0C0C0;" bindinput="bindName" value='{{pageData.apply_info.bank_user}}'></input>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_bank*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">银行卡</text>
+          <input type="number" placeholder="请输入银行卡号" placeholder-style="color:#C0C0C0;" bindinput="bindBanknum" value='{{pageData.apply_info.bank}}'></input>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_open_bank*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">开户行</text>
+          <input placeholder="请输入开户行" placeholder-style="color:#C0C0C0;" bindinput="bindOpenBank" value='{{pageData.apply_info.open_bank}}'></input>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_id_card*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">身份证</text>
+          <input type="idcard" placeholder="请输入身份证号" placeholder-style="color:#C0C0C0;" bindinput="bindIdnum" value='{{pageData.apply_info.id_card}}'></input>
+        </view>
+        <view class="register-item register-add" wx:if="{{pageData.required_field.show_id_card_pic*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes register-mes-id">身份证图片</text>
+          <view class="register-img">
+            <view class="imaged" bindtap="upImg" data-imgtype='upImgSrc1'>
+              <view class="register-img-add" wx:if="{{upImgSrc1}}">
+                <image src="{{upImgSrc1}}" class="slide_img" mode="aspectFit"></image>
+              </view>
+              <view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+              <view>身份证正面</view>
+            </view>
+            <view class="imaged" bindtap="upImg" data-imgtype='upImgSrc2'>
+              <view class="register-img-add" wx:if="{{upImgSrc2}}">
+                <image src="{{upImgSrc2}}" class="slide_img" mode="aspectFit"></image>
+              </view>
+              <view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+              <view>身份证反面</view>
+            </view>
+          </view>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_license_code*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">营业执照</text>
+          <input placeholder="请输入营业执照号" placeholder-style="color:#C0C0C0;" bindinput="bindlicnum" value='{{pageData.apply_info.license_code}}'></input>
+        </view>
+        <view class="register-item register-add" wx:if="{{pageData.required_field.show_license_pic*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes register-mes-pic">营业执照照片</text>
+          <view class="register-img">
+            <view class="imaged" bindtap="upImg" data-imgtype='upImgSrc3'>
+              <view class="register-img-add" wx:if="{{upImgSrc3}}">
+                <image src="{{upImgSrc3}}" class="slide_img" mode="aspectFit"></image>
+              </view>
+              <view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+              <view>营业执照</view>
+            </view>
+            <!-- <view class="imaged" bindtap="upImg" data-imgtype='upImgSrc4'>
+              <view class="register-img-add" wx:if="{{upImgSrc4}}">
+                <image src="{{upImgSrc4}}" class="slide_img" mode="aspectFit"></image>
+              </view>
+              <view class="iconfont icon-jia1 register-img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:else></view>
+              <view>营业执照反面</view>
+            </view> -->
+          </view>
+        </view>
+        <view class="register-item" wx:if="{{pageData.required_field.show_store_category*1}}">
+          <text class="register-star"><block>*</block></text>
+          <text class="register-mes">主营类目</text>
+          <view class="regionSelection register-category">
+            <picker mode="multiSelector" bindchange="pickerType" bindcolumnchange="pickerColumnType" value="{{typeIndex}}" range="{{typeArr}}">
+              <text class="pick-child">{{typeArr[0][typeIndex[0]]}}</text>
+              <text class="pick-child">{{typeArr[1][typeIndex[1]]}}</text>
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="register-bottom">
+      <view class="register-rule">
+        <text class="iconfont icon-xuanzhong1" bindtap="chooseRule" style="color:{{isRule?'':'#999'}};"></text>
+        <view class="register-rule-content">
+          <text>提交视为同意</text>
+          <navigator url="/pages/LIVEVIDEO/pages/userLive/ruleSystem?ruleContent={{pageData.agreement}}&ruleName=开店协议" open-type="navigate">《开店协议》</navigator>
+        </view>
+      </view>
+      <!-- <button class="now-apply-btn" style="background-color:{{themeColorValue}}" bindtap="orderFun" wx:if="{{pageData.open_fee_type*1}}">付费开通</button> -->
+      <button class="now-apply-btn" formType="submit" style="background-color:{{themeColorValue}}">提交申请</button>
+    </view>
+  </form>
+  <view class="examing" wx:if="{{pageData.apply_status == 2}}">
+    <view class="iconfont icon-shenhezhong"></view>
+    <view wx:if="{{pageData.open_fee_type*1 == 1}}">
+      <view style="text-align: center;">提交资料后台审核中，</view>
+      请至个人中心我的订单页面完成支付
+    </view>
+    <view wx:if="{{pageData.open_fee_type*1 == 0}}">提交资料后台审核中</view>
+  </view>
+  <view class="examing" wx:if="{{pageData.apply_status == 1}}">
+    <view class="iconfont icon-yitongguo"></view>
+    <view>
+      <view style="text-align: center;">店铺已开通，</view>
+      请下载商家APP来管理商品和订单
+    </view>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

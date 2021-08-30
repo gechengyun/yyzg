@@ -1,0 +1,2 @@
+/* pages/setpassword/index.wxss */
+@import "../../wxss/setPassword/setPassword.wxss";

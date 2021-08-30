@@ -1,0 +1,22 @@
+<!--拼团--产品列表模板-->
+<template name="TproductList">
+    <view class="productTable clearfix" data-page="page.public.productList">
+        <view class="product" wx:for="{{productList}}" wx:key="proudct" bindtap="detailsGo" data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}">
+            <view class="productImg verticalCentering">
+                <image src="{{item.image}}" data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}"></image>
+            </view>
+            <view class="productInfo" data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}">
+                <view class="textOmitted">{{item.name}} <text class="red">{{item.status_txt}}</text></view>
+                <view data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}">
+                    <view data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}">
+                        <text>¥{{item.price}}</text>
+                    </view>
+                    <view data-store="{{item.store_id}}" data-tuan="{{item.tuan_id}}">
+                        <text>{{item.config.number}}人团</text>
+                        <text>已售{{item.config.count}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

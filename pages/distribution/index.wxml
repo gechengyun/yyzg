@@ -1,0 +1,118 @@
+<!--分销管理佣金统计-->
+<!-- 用户没登录 -->
+<!-- 导航 -->
+<view class="nav-block" style="background-color:{{barType==1?'#fff':themeColorValue}};height:{{status + navHeight}}px" >
+  <view class="status-colum" style="height:{{status}}px"></view>
+	<view class="contents" style="height:{{navHeight}}px">
+		<view class="nav-left">
+			<!-- 返回 -->
+			<view class="_centet nav_back">
+				<text class="iconfont icon-shangyibu" bindtap="skip_page"></text>
+			</view>
+		</view>
+		<view class="nav-title _centet" style="color:{{barType==1?'#000':'#fff'}};justify-content:{{is_gift==1?'start':''}}">{{barTil}}管理</view>
+	</view>
+</view>
+<!-- 占位 -->
+<view class='nav-position' style="background-color:{{barType==1?'#fff':themeColorValue}}; height:{{status+navHeight}}px;">占位</view>
+<view class="unlogin-block" wx:if='{{_unlogin}}'>
+    <view class="content">
+        <image src="https://s.404.cn/applet/images/unlogin.png" mode="widthFix" class="pic-unlogin"></image>
+        <text class="tips">
+          由于您没有授权本页面无法展示
+        </text> 
+        <text class="tips">
+          更多信息为了您更好的用户体验，请授权微信登录
+        </text>  
+    </view>
+      
+      <button type='primary' class='btn-l-logins' style="background-color:{{themeColorValue}};color:#fff;" open-type="getUserInfo" bindgetuserinfo="userCall"
+          binderror="errCall">登录
+      </button>
+  </view>
+<block wx:if='{{_unlogin===false}}'>
+<view class="commision {{pageTheme}}" data-page="page.user.index">
+    <!-- <view class="section headerSection">
+        <view class="leftPart"><text class="iconfont icon-qiandai"></text></view>
+        <view class="centerPart">
+            <view class="row1">
+                <view class="money">￥{{storeData.store.income}}</view>
+                <view class="detail"><navigator url="/pages/distribution/detail">明细<text class="iconfont icon-xiayibu"></text></navigator></view>
+            </view>
+            <view class="row2">本店佣金统计(元)</view>
+        </view>
+        <view class="rightPart">
+            <view class="applyCashBtn"><navigator url="/pages/distribution/apply_cash">申请提现</navigator></view>
+        </view>
+    </view> -->
+   <view class="section headerSection" bindtap='goExit'>
+        <view class="leftPart">   
+          <image src='{{ storeData.store.logo }}' mode='aspectFill'></image>
+        </view>
+        <view class="centerPart">
+            <view class="row1">
+                <view class="storeName" >{{ storeData.store.name }}</view> 
+            </view>
+            <view class="row1"><text class='storeName storeName1'>推荐人：{{ storeData.drp_supplier_name }}</text></view>
+        </view> 
+        <view class='go_rg'> <image src='../../images/go_rg.png'></image></view> 
+    </view>
+ 
+    <view class="flex-wrp fansGong" style="flex-direction:row;">
+       <view class="flex-item" bindtap='go_user'>
+            <view>{{ storeData.fans_count }}</view><label>访问用户</label>
+       </view>
+      <view class="flex-item" bindtap='fansGong'>
+            <view >{{ storeData.fx_count }}</view> <label>{{ storeData.fx_name }}</label>
+      </view>
+      <view class="flex-item" >
+        <!-- <navigator  url="{{storeData.store.drp_level == 1 ? '/pages/SPELL/pages/newTeam/newTeam' : '/pages/SPELL/pages/myTeam/myTeam'}}"> -->
+        <navigator  wx:if="{{team_id*1 != 0}}" url="/pages/SPELL/pages/myTeam/myTeam">
+            <view >ID：{{team_id}}</view> 
+            <label>我的团队</label>
+        </navigator>
+        <navigator  wx:if="{{team_id*1 == 0&&storeData.store.drp_level==1}}" url="/pages/SPELL/pages/newTeam/newTeam">
+            <view >0</view> 
+            <label>创建团队</label>
+        </navigator>
+      </view>  
+    </view>  
+
+    <view class="section cakeChartSection" style='padding-bottom:0'>
+       <view class="section headerSection tixianB" style='margin-bottom:0; padding:20rpx'> 
+        <view class="centerPart">
+            <view class="row1">
+                <view class="moneyti">￥{{ storeData.store.balance}}</view>  
+            </view>
+            <view class="tiXian"><text>可提现</text><text bindtap='click_tixian'  class='activity_price_rmb tixian_line'>提现明细</text></view>
+        </view>
+        <view class="rightPart">
+            <view class="applyCashBtn"><navigator url="/pages/distribution/apply_cash">申请提现</navigator></view>
+        </view>
+    </view> 
+     
+     <view class="moneyList">
+            <view class="listItem"><text class="dot dot1"></text><text>已提现：￥{{storeData.store.withdrawal_amount}}</text></view>
+            <view class="listItem"><text class="dot dot2"></text><text>待提现：￥{{storeData.store.balance}}</text></view>
+            <!--<view class="listItem"><text class="dot dot3"></text><text>待结算：￥{{storeData.store.unbalance}}</text></view>-->
+        </view>
+        <view class="sectionTitle tiXian">
+          <view>佣金总额：￥{{storeData.store.income}}</view>  
+          <view bindtap='go_yong' class='activity_price_rmb tixian_line'>佣金明细</view> 
+        </view>
+        <view class="container">
+            <canvas canvas-id="pieCanvas" class="canvas" style="height:150px;width: 750rpx;pointer-events: none;"></canvas>
+        </view>
+    </view>
+    <!-- <view class="section lineChartSection">
+        <view class="sectionTitle">订单佣金折线图</view>
+        <view class="lineChartNav">
+        <view bindtap="switchNav" wx:for="{{lineChartType}}" wx:key="" wx:for-index="index" data-current="{{index}}" data-id="lineChart_{{item.type}}" data-type="{{item.type}}" class="navItem nav_{{item.type}} {{currentTab == index ? 'active' : ''}}">{{item.title}}</view>
+        </view>
+        <view class="container">
+            <canvas canvas-id="lineChart" disable-scroll="true" class="canvas"></canvas>
+        </view>
+    </view> -->
+</view>
+</block>
+<include src="/pages/public/page_footer.wxml"></include>

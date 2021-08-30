@@ -1,0 +1,31 @@
+<!-- 商品搜索 -->
+<template name="membership">
+    <view class="membership bgF" data-page="page.public.membership">
+        <view class="membershipHeard">
+            <image src="{{user.avatar}}"></image>
+        </view>
+        <view wx:if="{{membership}}">{{user.nickname}}
+            <text wx:if="{{user.degree_name}}">{{user.degree_name}}</text>
+        </view>
+        <view wx:if="{{!membership}}">SCOFIELD官方旗舰店
+        </view>
+        <view wx:if="{{membership}}">
+            <text wx:if="{{user.degree_id && user.degree_id>0 && user.show_degree_date == 1}}">截止时间:{{user.degree_date}}</text>
+            <text>当前余额:{{user.store_cash}}</text>
+            <text>当前积分:{{user.store_point}}</text>
+            <text wx:if="{{user.privilege_arr}}">当前特权：{{user.privilege_arr}}</text>
+        </view>
+        <view wx:if="{{!membership}}">
+            <text>这里显示店铺简介，简介内容从后台调取，有可能是两行</text>
+        </view>
+        <view class="membershipCar {{user.degree_id && user.degree_id>0?'marginbnone':''}}" >
+            <image src="{{user.ewm}}"></image>
+        </view>
+        <view wx:if="{{membership}}" >
+            <text>扫一扫上面的二维码，使用此会员卡</text>
+        </view>
+        <view wx:if="{{!membership}}">
+            <text>扫一扫上面的二维码，直接访问本店</text>
+        </view>
+    </view>
+</template>

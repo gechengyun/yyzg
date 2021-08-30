@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "我的账户",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 0
+}

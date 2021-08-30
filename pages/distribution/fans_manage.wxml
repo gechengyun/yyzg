@@ -1,0 +1,128 @@
+<!--pages/distribution/fans_manage.wxml-->
+<view class='{{pageTheme}}'>
+ <view class='ul clearfix'> 
+    <view class='li'><view class='num'>{{ fansData.fans_count }}</view><view class='title'>访问用户总数</view></view>  
+    <view class='li'><view class='num'>{{ fansData.today_fans }}</view><view class='title'>今日新增用户</view></view>  
+    <view class='li'><view class='num'>{{ fansData.yesterday_fans }}</view><view class='title'>昨日新增用户</view></view>  
+ </view>
+
+ <view class="nav bc_white">
+    <block wx:for="{{sidebar}}" > 
+    <view class="{{selectedIndex===index?'red':'default'}}" data-index="{{index}}" data-type="{{item.type}}" bindtap="selected">{{ item.name }}{{ item.count }}</view> 
+    </block>
+ </view>
+
+<view wx:if="{{selectedIndex=='0'}}" class='tab_con'>
+   <view class='tab_til'>
+    <view>头像/昵称</view>
+    <view>所有用户</view>
+    <view>关注时间</view> 
+   </view>  
+   <scroll-view scroll-y   bindscrolltolower="scrollToLower"   style="height:420px" lower-threshold="200"> 
+     <view wx:if="{{ rowData1!='' }}">
+       <view class='row_tiao' wx:for="{{rowData1}}" wx:key="{{item.store_id}}" class="row_tiao {{ item.fx_status=='0'?'gray':'' }}">
+        <view class='row_tiao1 item1'> 
+          <view class='photo_img'>
+            <image src='{{ item.avatar }}' wx:if="{{ item.avatar }}" mode='aspectFill'></image>
+            <image src="{{BASE_IMG_URL}}images/avatar.png"  mode='aspectFill' wx:else></image> 
+          </view>  
+          <view>{{ item.nickname}}</view>  
+          <view wx:if="{{item.is_fx=='1'}}">{{ item.store_name }}</view> 
+        </view>
+        <view class='item2' >{{item.fx_name }}</view>
+        <view class='item3'>{{ item.add_time }}</view>  
+      </view> 
+   </view>  
+    <view wx:else class='center no_pro'>   
+      <image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx' > </image>
+      <view>暂无数据</view>
+    </view> 
+  </scroll-view>  
+</view> 
+
+<view wx:if="{{selectedIndex=='1'}}" class='tab_con'>
+  <view class='tab_til'>
+      <view>头像/昵称</view>
+      <view>锁定粉丝</view>
+      <view>锁定时间</view> 
+  </view> 
+  <scroll-view scroll-y   bindscrolltolower="scrollToLower"   style="height:420px" lower-threshold="200">
+   <view wx:if="{{ rowData!='' }}"> 
+    <view class='row_tiao' wx:for="{{rowData}}" wx:key="{{item.store_id}}" class="row_tiao {{ item.fx_status=='0'?'gray':'' }}">
+          <view class='row_tiao1 item1'> 
+            <view class='photo_img'>
+             <image src='{{ item.avatar }}' wx:if="{{ item.avatar }}" mode='aspectFill'></image>
+             <image src="{{BASE_IMG_URL}}images/avatar.png"  mode='aspectFill' wx:else></image> 
+            </view>  
+            <text>{{ item.nickname}}</text>
+            <view >{{ item.store_name }}</view>
+          </view>
+          <view class='item2'>{{item.fx_name }}</view>
+          <view class='item3'>{{ item.add_time }}</view> 
+      </view>
+   </view>
+   <view wx:else class='center no_pro'>   
+      <image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx' > </image>
+      <view>暂无数据</view>
+    </view> 
+  </scroll-view>
+</view>
+ 
+<view wx:if="{{selectedIndex=='2'}}" class='tab_con' id='Promoter'>
+   <view class='tab_til'>
+      <view>头像/昵称/店名</view>
+      <view>下级{{  diy_fx_seller_name }}</view>
+      <view> {{  fx_name }}时间</view> 
+    </view> 
+    <scroll-view scroll-y   bindscrolltolower="scrollToLower"   style="height:420px" lower-threshold="200">
+     <view wx:if="{{ fenRowData!='' }}">
+      <view class='row_tiao' wx:for="{{fenRowData}}" wx:key="{{item.store_id}}" class="row_tiao {{ item.fx_status=='0'?'gray':'' }}" >
+        <view class='row_tiao1 item1'> 
+          <view class='photo_img'>
+           <image src='{{ item.avatar }}' wx:if="{{ item.avatar }}" mode='aspectFill'></image>
+            <image src="{{BASE_IMG_URL}}images/avatar.png"  mode='aspectFill' wx:else></image> 
+          </view>  
+          <text>{{ item.nickname}}</text>
+           <view>{{ item.name }}</view> 
+        </view>
+        <view class='item2' bindtap='clickNum' data-store_id='{{ item.store_id }}' data-next_seller_num="{{ item.next_seller_num }}" > 
+        <text class='fen_num activity_price_rmb'   >{{ item.next_seller_num }}</text></view>
+        <view class='item3'>{{ item.add_time }}</view>
+          
+       </view>
+     </view> 
+     <view wx:else class='center no_pro'>   
+      <image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx' > </image>
+      <view>暂无数据</view>
+    </view> 
+
+    </scroll-view>
+   </view> 
+</view>
+
+<!-- 弹窗 --> 
+            <view class='tan' style='right:0;bottom:0;z-index:999999;background:rgba(0,0,0,.5)' wx:if='{{ tan_show }}' data-store_id='{{ item.store_id }}' >
+            <view class='tan_box' style='position:absolute;left:7%;z-index:999;' > 
+              <view class='tan_til'>
+                {{  title }} 
+              <icon type="clear" size="26" bindtap='clickClose' class='close'/>
+              </view>
+            <scroll-view scroll-y bindscrolltolower="scrollToLowerPage" class='tan_con' style='height:200px' data-store_id='{{ item.store_id }}'>
+              <view class='tan_con'> 
+              <view class="row_tiao row_tiaoTan {{ item.fx_status=='0'?'gray':'' }}" wx:for="{{  tiaoTanData }}"   wx:key="index"> 
+                <view class='row_tiao1'> 
+                  <view class='photo_img'>
+                    <image src='{{ item.avatar }}' wx:if="{{ item.avatar }}" mode='aspectFill'></image>
+                    <image src="{{BASE_IMG_URL}}images/avatar.png"  mode='aspectFill' wx:else></image> 
+                  </view>   
+                  <text>{{ item.nickname}}</text>
+                  <view >{{ item.name }}</view>
+                </view>
+                <view> {{ item.add_time }}</view>
+              </view> 
+              </view>
+              </scroll-view> 
+            </view>
+          </view>  
+          <!-- 弹窗 end --> 
+<include src="/pages/public/page_footer.wxml"></include>

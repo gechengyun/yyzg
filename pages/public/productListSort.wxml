@@ -1,0 +1,104 @@
+<!-- 公共商品列表 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="productListSort">
+  <block wx:if="{{modelContent.show_type==2}}">
+    <view class="model_1 clearfix shopProductList " data-page="page.public.productList" data-desc="公共商品列表">
+      <view class="clearfix" wx:for="{{content.product_list}}" wx:key="">
+        <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}" class="navigator"
+          hover-class="none" open-type="navigate">
+          <view class="productImg verticalCentering">
+            <image src="{{item.image}}" style="will-change:transform;" mode="widthFix"></image>
+
+            <!-- 售完判断-->
+
+            <view class='sold-out' id='{{item.show_sold_out}}' wx:if='{{item.show_sold_out==1}}'>
+              <view class='txt texts'>售罄</view>
+            </view>
+            <view class='sold-out' style='opacity:0;' wx:else>
+            </view>
+            <!-- end -->
+          </view>
+        </navigator>
+        <view class="productInfo clearfix ">
+          <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+            <text class="productName textOmitted" wx:if="{{modelContent.show_name=='1'}}">{{item.name}}</text>
+            <!-- <view>销量:{{item.sales}}</view> -->
+            <view class="productPriceall">
+              <view wx:if="{{modelContent.show_price=='1'}}">
+                <text class="productPrice ">
+                ￥{{filter.transBigNumber(item.price,1)}}
+              </text>
+              </view>
+              <view wx:if="{{modelContent.show_line_price=='1'}}">
+                <text class="originalPrice  originalPriceall" wx:if="{{item.original_price && item.original_price * 1 != 0 && item.original_price != item.price}}">
+                  ￥{{filter.transBigNumber(item.original_price,1)}}
+                </text>
+              </view>
+            </view>
+
+          </navigator>
+          <block wx:if="{{modelContent.buy_btn=='1'}}">
+            <text bindtap="oppenShopping" data-type="add_cart" wx:if="{{item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}" data-product="{{item.product_id}}">
+                            <text class="shoppingCatButton icon{{modelContent.buy_btn_type}}" bindtap="oppenShopping">
+                            </text>
+
+
+            </text>
+            <text bindtap="oppenShopping" class="appointment appointmentall" data-type="make" wx:if="{{item.is_reservation*1==1}}" data-product="{{item.product_id}}" style="color:{{themeColor}};border-color:{{themeColor}}">{{item.custom_reservation_name ? item.custom_reservation_name :'预约'}}
+            </text>
+          </block>
+        </view>
+
+      </view>
+    </view>
+  </block>
+  <block wx:if="{{modelContent.show_type==1}}">
+
+    <view class="model_2 clearfix shopProductList " data-page="page.public.productList" data-desc="公共商品列表">
+      <view class="clearfix" wx:for="{{content.product_list}}" wx:key="">
+        <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}" class="navigator"
+          hover-class="none" open-type="navigate">
+          <view class="productImg verticalCentering">
+            <image src="{{item.image}}" style="will-change:transform;" mode="widthFix"></image>
+
+            <!-- 售完判断-->
+
+            <view class='sold-out' id='{{item.show_sold_out}}' wx:if='{{item.show_sold_out==1}}'>
+              <view class='txt texts'>售罄</view>
+            </view>
+            <view class='sold-out' style='opacity:0;' wx:else>
+            </view>
+            <!-- end -->
+          </view>
+        </navigator>
+        <view class="productInfo  ">
+          <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+            <text class="productName textOmitted" wx:if="{{modelContent.show_name=='1'}}">{{item.name}}</text>
+            <!-- <view>销量:{{item.sales}}</view> -->
+
+            <view class="productPriceall">
+              <view wx:if="{{modelContent.show_price=='1'}}">
+                <text class="productPrice ">
+                ￥{{filter.transBigNumber(item.price,1)}}
+              </text>
+              </view>
+              <view wx:if="{{modelContent.show_line_price=='1'}}">
+                <text class="originalPrice  originalPriceall" wx:if="{{item.original_price && item.original_price * 1 != 0 && item.original_price != item.price}}">
+                  ￥{{filter.transBigNumber(item.original_price,1)}}
+                </text>
+              </view>
+            </view>
+          </navigator>
+          <block wx:if="{{modelContent.buy_btn=='1'}}">
+            <text bindtap="oppenShopping" data-type="add_cart" wx:if="{{item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}" data-product="{{item.product_id}}">
+                            <text class="shoppingCatButton icon{{modelContent.buy_btn_type}}" bindtap="oppenShopping">
+                            </text>
+            </text>
+            <text bindtap="oppenShopping" class="appointment appointmentall" data-type="make" wx:if="{{item.is_reservation*1==1}}" data-product="{{item.product_id}}" style="color:{{themeColor}};border-color:{{themeColor}}">{{item.custom_reservation_name ? item.custom_reservation_name :'预约'}}</text>
+          </block>
+        </view>
+
+      </view>
+    </view>
+  </block>
+</template>

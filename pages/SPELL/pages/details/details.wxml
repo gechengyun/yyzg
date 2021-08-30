@@ -1,0 +1,19 @@
+<!--pages/SPELL/pages/details/details.wxml-->
+<!-- <text>pages/SPELL/pages/details/details.wxml</text> -->
+<view class="tabel">
+  <view class="tit">
+    <view class="item">名称</view>
+    <view class="item">销售额(元)</view>
+    <view class="item">利润(元)</view>
+  </view>
+  <view class="com">
+    <view class="tr" wx:for="{{distributorList}}" wx:key="{{id}}">
+      <view class="item">{{item.name}}</view>
+      <view class="item">{{item.sales}}</view>
+      <view class="item">{{item.income}}</view>
+    </view>
+    <view class="empty" hidden="{{!empty}}">
+      暂无数据
+    </view>
+  </view>
+</view>

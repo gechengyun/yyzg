@@ -1,0 +1,99 @@
+/* pages/LIVEVIDEO//pages/openShop/openShop.wxss */
+page, .container{
+  padding-bottom: 0;
+}
+.register-header{
+  width: 100%;
+  height: 1100rpx;
+  margin-bottom: 20rpx;
+  position: relative;
+}
+.back-box{
+  position: absolute;
+  width: calc(100% - 64rpx);
+  left: 32rpx;
+  top: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.icon-shangyibu{
+  color:#fff;
+  width:70rpx;
+  text-align: left;
+}
+.title{
+  flex: 1;
+}
+.shop-content{
+  background-color: #fff;
+  padding: 30rpx 24rpx;
+}
+.shop-mes{
+  background-color: #fff;
+  border-radius: 15rpx;
+  padding: 24rpx 24rpx;
+  box-shadow: 1px 1px 5px 1px #eaeaea;
+}
+.shop-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 26rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+.shop-user{
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333333;
+  font-weight: 600;
+}
+.shop-avatar{
+  width: 87rpx;
+  height: 87rpx;
+  margin-right: 20rpx;
+}
+.shop-top .icon-icon-pen{
+  font-size: 40rpx;
+  font-weight: 600;
+}
+.shop-middle{
+  display: flex;
+  justify-content: space-between;
+  font-size: 26rpx;
+  color: #333;
+  padding: 20rpx 0;
+}
+.shop-bottom{
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #333;
+}
+.shop-bottom .icon-xuanzhong1{
+  color: #D23A3D;
+  margin-right: 12rpx;
+  margin-top: 4rpx;
+}
+.register-rule-content{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.register-rule-content navigator{
+  color: #D23A3D;
+}
+.now-apply-btn{
+  width: 700rpx;
+  margin: 0 auto;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #fff;
+  background-color: #D83A2B;
+  border-radius: 46rpx;
+  margin-top: 40rpx;
+}

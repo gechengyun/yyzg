@@ -1,0 +1,140 @@
+.list-page {
+  background: #efefef;
+}
+
+page {
+  background: #efefef;
+  padding-bottom: 0;
+}
+
+.header {
+  width: 100vw;
+  box-sizing: border-box;
+  background: #7948fd;
+  position: relative;
+  text-align: justify;
+  height: 310rpx;
+
+}
+.header .header-block{
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  display: block;
+  padding: 12rpx 5% 25rpx;
+  z-index: 1;
+}
+
+.blackTheme .header {
+  background: #000;
+}
+
+.redTheme .header {
+  background: #fa0029;
+}
+
+.orangeTheme .header {
+  background: #ff5c1c;
+}
+
+.blueTheme .header {
+  background: #0098f8;
+}
+
+.brownTheme .header {
+  background: #b7a392;
+}
+
+.purpleTheme .header {
+  background: #7948fd;
+}
+
+.pinkDarkTheme .header {
+  background: #ff007c;
+}
+
+.fixed-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  /* margin-top:50rpx; */
+  margin-bottom: 20rpx;
+}
+
+.bus-photo {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 5%;
+}
+
+.bus-name {
+  font-size: 36rpx;
+  /* font-weight:bold; */
+  margin-left: 30rpx;
+  color: #fff;
+  flex: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.bus-desc>view {
+  font-size: 24rpx;
+  color: #fff;
+  line-height: 35rpx;
+  display:-webkit-box;
+  overflow:hidden;
+  -webkit-line-clamp:2;
+  -webkit-box-orient:vertical;
+  width: 100%;
+  text-indent: 0;
+  text-align: left;
+}
+
+.header .head-bg {
+  width: 100%;
+  height: 160rpx;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.main {
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+.newAdd.productTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rpx;
+}
+
+.newAdd.productTitle>view {
+  flex: 1;
+  font-size:28rpx;
+  font-weight:bold;
+  color: #555;
+
+}
+.newAdd.productTitle>view .price{
+  color: #555;
+}
+.no-data {
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+  padding-bottom: 10rpx;
+}

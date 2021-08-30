@@ -1,0 +1,3 @@
+<!--pages/webview/index.wxml-->
+<web-view wx:if='{{showWebView}}' src="{{options.url}}"></web-view>
+<include src="/pages/public/page_footer.wxml"></include>

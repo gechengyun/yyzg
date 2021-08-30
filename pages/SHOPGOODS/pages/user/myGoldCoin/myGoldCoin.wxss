@@ -1,0 +1,273 @@
+/* pages/SHOPGOODS//pages/user/myGoldCoin/myGoldCoin.wxss */
+/* Tab */
+.gold-header {
+  width: 100%;
+  height: 100rpx;
+  border-top: 1rpx solid #e1e1e1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: white;
+  color: #333;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+.gold-header .item {
+  font-size: 30rpx;
+  font-weight: 600;
+  height: 70rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.line {
+  width: 60rpx;
+  height: 8rpx;
+  border-radius: 4rpx;
+  background-color: white;
+}
+/* 提现方式 */
+.cash-type{
+  margin-top: 20rpx;
+}
+.cash-title{
+  display: flex;
+  justify-content: space-between;
+  padding: 40rpx 24rpx;
+  font-size: 26rpx;
+  color: rgb(51,51,51);
+  border-bottom: 1px solid rgb(241,241,241);
+  background-color: #fff;
+}
+.cash-title-num{
+  margin-left: 30rpx;
+  font-size: 40rpx;
+  color: rgb(240,27,57);
+  vertical-align: sub;
+}
+.cash-title-unnum{
+  color: rgb(153,153,153);
+  font-size: 24rpx;
+}
+
+.balance-tip{
+  padding: 30rpx 24rpx;
+  font-size: 24rpx;
+  color: rgb(102,102,102);
+  background-color: #fff;
+}
+.cashmoney {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  padding: 0 24rpx;
+}
+.cashmoney .money {
+  width: 100%;
+  height: 140rpx;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #eee;
+}
+
+.cashmoney .money input {
+  width: 500rpx;
+  font-size: 36rpx;
+  color: rgb(51,51,51);
+  height: 70rpx;
+  font-weight: 500;
+}
+.give-money{
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 20rpx 20rpx 0;
+}
+.give-money input{
+  background-color: #f7f7f7;
+  flex: 1;
+  padding: 8rpx 20rpx;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+.balance-tips{
+  font-size: 22rpx;
+  padding: 20rpx 0;
+  background-color: #fff;
+  display: flex;
+}
+.balance-tips text:first-child{
+  margin-right: 5rpx;
+  vertical-align: middle;
+}
+
+.cash-des{
+  background-color: #fff ;
+  margin-top: 20rpx;
+  padding: 24rpx;
+}
+.cash-des-content{
+  color: rgb(153,153,153);
+  font-size: 22rpx;
+  margin-bottom: 20rpx;
+}
+.cash-des-title{
+  color: rgb(51,51,51);
+  font-size: 26rpx;
+  line-height: 60rpx;
+}
+/* 底部提现按钮 */
+.submit-btn{
+  padding: 40rpx;
+  margin-bottom: 20rpx;
+}
+.txbtn{
+  margin: 0 auto;
+  width: 100%;
+  height: 80rpx;
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 10rpx;
+}
+
+.go-live-money{
+  margin-top: 30rpx;
+}
+/* 提现明细 */
+.cash-list-title{
+  display: flex;
+  align-items: center;
+  padding-left: 24rpx;
+  margin-bottom: 30rpx;
+}
+.line-left{
+  height: 30rpx;
+  width: 8rpx;
+  margin-right: 10rpx;
+}
+
+/* 提现列表 */
+.cash-box{
+  margin-top: 20rpx;
+}
+.list-item{
+  padding: 24rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #fff;
+  border-bottom: 1px solid #f9f9f9;
+}
+.li-left{
+  display: flex;
+  flex-direction: column;
+  color: rgb(16, 16, 16);
+  font-size: 24rpx;
+}
+.li-name{
+  font-size: 28rpx;
+}
+.li-product-name{
+  width: 440rpx;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: sub;
+}
+.li-tip{
+  color: rgb(250, 0, 40);
+  background-color: rgba(250, 0, 40,.2);
+  padding: 2rpx 10rpx;
+  border-radius: 22rpx;
+  margin-left: 10rpx;
+  font-size: 24rpx;
+}
+.li-time{
+  margin: 6rpx 0;
+}
+.li-time text:first-child{
+  font-size: 26rpx;
+  font-weight: 600;
+}
+.li-order{
+  margin: 6rpx 0;
+}
+.exam-status{
+  margin-left: 10rpx;
+  border-radius: 10rpx;
+  color: #fff;
+  padding: 2rpx 8rpx;
+}
+.order-copy{
+  margin-left: 6rpx;
+  color: rgba(250, 0, 40, 1);
+  text-decoration: underline;
+}
+.li-right{
+  font-size: 32rpx;
+  font-weight: 600;
+  color: rgba(250, 0, 40, 1);
+  text-align: right;
+}
+.lr-time{
+  color: rgb(153,153,153);
+  font-size: 20rpx;
+  font-weight: 500;
+  margin-bottom: 18rpx;
+}
+/* 充值列表 */
+.li-time .pay-type{
+  font-size: 28rpx;
+}
+.trade-status{
+  color: rgb(248,129,146);
+  border: 1px solid rgb(248,129,146);
+  border-radius: 4rpx;
+  font-size: 18rpx;
+}
+/* 打赏记录 */
+.reward-box{
+  padding: 0 20rpx;
+}
+.reward-list-item{
+  background-color: #fff;
+  padding: 0 30rpx;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+.reward-list-item:last-child{
+  margin-bottom: 0;
+}
+.reward-time{
+  color: rgb(153,153,153);
+  font-size: 24rpx;
+  padding: 30rpx 0;
+  border-bottom: 1px solid rgb(241,241,241);
+}
+.reward-live-title{
+  color: rgb(51,51,51);
+  font-size: 28rpx;
+  font-weight: 600;
+  padding: 30rpx 0 0;
+}
+.reward-live-mes{
+  color: rgb(102,102,102);
+  font-size: 24rpx;
+  display: flex;
+  padding: 38rpx 0;
+}
+.reward-live-mes-item{
+  flex: 1;
+  text-align: left;
+}

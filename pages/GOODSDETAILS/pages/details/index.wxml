@@ -1,0 +1,211 @@
+<!--拼团详情页面-->
+<import src="../../../../wxParse/wxParse.wxml" />
+<import src="../../../public/detailsTable.wxml" />
+<import src="../../../public/TshoppingCat.wxml" />
+<import src="../../../public/warning.wxml" />
+<view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+    <official-account binderror="officialAccountError"></official-account>
+</view>
+<scroll-view class="container details {{pageTheme}}" style="height: {{scrollHeight}}px;" scroll-y="true" scroll-top="{{scrollTop.scroll_top}}" bindscroll="scrollTopFun" data="page.details.index">
+    <view class="aside" catchtap="goTopFun">
+        <view>
+            <text class="iconfont icon-dingbu"></text>
+            <text>顶部</text>
+        </view>
+        <view bindtap="goBack">
+            <text class="iconfont icon-shangyiye"></text>
+            <text>首页</text>
+        </view>
+        <view bindtap="mycollageGo">
+            <text class="iconfont icon-jingxuan"></text>
+            <text>拼团</text>
+        </view>
+    </view>
+    <view class="detailsHeader">
+        <block wx:if="{{dateilsData.product_image_list&&dateilsData.product_image_list.length>1}}">
+            <view class="detailsImg">
+                <swiper autoplay interval="5000"
+                        style="height: 100%;"
+                        indicatorDots="true"
+                        duration="500" indicator-active-color="#ff3867">
+                    <block wx:for="{{dateilsData.product_image_list}}" wx:key="index">
+                        <swiper-item>
+                            <view style="background:url({{item.image}})  center/ 100% 100%; background-size:percentage;width: 100%;height: 100%;">
+
+                            </view>
+                        </swiper-item>
+                    </block>
+                </swiper>
+                <view class="status_txt" style="top: 0;">
+                    <text>{{dateilsData.tuan.status_txt}}</text>
+                </view>
+            </view>
+        </block>
+        <block wx:else>
+            <view class="detailsImg"
+                  style="background:url({{dateilsData.product.image}})  center/ 100% 100%; background-size:percentage">
+                <view class="status_txt">
+                    <text>{{dateilsData.tuan.status_txt}}</text>
+                </view>
+            </view>
+        </block>
+        <view class="detailsInfo clearfix">
+            <view class="detailsName">
+                <view class='ziying theme-bg-color' wx:if="{{dateilsData.product.is_self_support==0}}">自营</view>
+                <text class="textOmitted">{{dateilsData.product.product_name || dateilsData.product.name}}</text>
+                
+                <text>¥{{dateilsData.product.price}}</text>
+            </view>
+            <view class="deatilsShear">
+                <view>
+                    <text class="iconfont icon-like  {{dateilsData.tuan.is_collect==1 ? 'active' : ''}} " bindtap="collect" data-tuan="{{dateilsData.tuan.tuan_id}}"></text>
+                    <button class="shareBtn" bindtap="shareTap">
+                        <text class="iconfont icon-share"></text>
+                    </button>
+                </view>
+                <view>已售{{dateilsData.product.sales}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="choicGroup">
+        <view class="choicGroupTitle clearfix">
+            <text class="iconfont icon-tap"></text>
+            <text>选择拼团类型开团</text>
+        </view>
+        <view class="choicList clearfix">
+            <view class="v{{index+1}}" bindtap="oppenShopping" data-item="{{item.item_id}}" data-tuan="{{dateilsData.tuan.tuan_id}}" wx:for="{{dateilsData.tuan_config_list}}" wx:key="index">
+                <text data-item="{{item.item_id}}" data-tuan="{{dateilsData.tuan.tuan_id}}">¥{{item.price}}</text>
+                <text data-item="{{item.item_id}}" data-tuan="{{dateilsData.tuan.tuan_id}}" wx:if="{{item.grade_type!=0}}">{{item.number}}人团</text>
+                <text data-item="{{item.item_id}}" data-tuan="{{dateilsData.tuan.tuan_id}}" wx:if="{{item.grade_type==0}}">不限</text>
+            </view>
+        </view>
+    </view>
+    <view class="groupInfoTxt" wx:if="{{dateilsData.team_list!=''}}">下列团长正在招募团员，您可以直接参团
+      <text class='cha_more' bindtap='chaMore' wx:if="{{ dateilsData.team_list.length>2}}">查看更多</text>
+    </view>
+
+     <swiper class="swiper_groupList" wx:if="{{ dateilsData.team_list.length>2}}" vertical="true" autoplay="true" circular="true" interval="5000" display-multiple-items='2'>
+       <view class="groupList">
+        <block wx:for="{{dateilsData.team_list}}" wx:key="index">
+          <swiper-item class="group_block" >
+              <view class="group clearfix" >
+                    <view class="groupImg">
+                        <image src="{{item.user.avatar}}"></image>
+                    </view>
+                    <view class="groupInfo">
+                        <text class='overp'>{{item.user.nickname}}</text>
+                        <text>截止{{item.end_time_txt}}</text>
+                    </view>
+                    <view class="groupTime">
+                        <view>
+                            <text wx:if="{{item.type*1==0}}">不限 {{item.order_number}}</text>
+                            <text wx:if="{{item.type*1!=0}}" class='overp'>{{item.number}}人团 {{item.order_number}}</text>
+                            <text>/{{item.number}}</text>
+                        </view>
+                    </view>
+                    <button bindtap="joinGo" data-tuan="{{item.tuan_id}}" data-type="{{item.type}}" data-item="{{item.item_id}}"
+                    data-team="{{item.team_id}}">去参团
+                        <text class="iconfont icon-xiayibu"></text>
+                    </button>
+                </view>
+
+          </swiper-item>
+        </block>
+       </view>
+    </swiper>
+
+    <view class="groupList groupListOne {{ dateilsData.team_list.length==2? 'groupListTwo' : '' }}" wx:if="{{ dateilsData.team_list.length<=2 && dateilsData.team_list.length>0}}" >
+        <block wx:for="{{dateilsData.team_list}}" wx:key="index">
+              <view class="group clearfix" >
+                    <view class="groupImg">
+                        <image src="{{item.user.avatar}}"></image>
+                    </view>
+                    <view class="groupInfo">
+                        <text class='overp'>{{item.user.nickname}}</text>
+                        <text>截止{{item.end_time_txt}}</text>
+                    </view>
+                    <view class="groupTime overp">
+                        <view>
+                            <text wx:if="{{item.type*1==0}}">不限 {{item.order_number}}</text>
+                            <text wx:if="{{item.type*1!=0}}">{{item.number}}人团 {{item.order_number}}</text>
+                            <text class='overp'>/{{item.number}}</text>
+                        </view>
+                    </view>
+                    <button bindtap="joinGo" data-tuan="{{item.tuan_id}}" data-type="{{item.type}}" data-item="{{item.item_id}}"
+                    data-team="{{item.team_id}}">去参团
+                        <text class="iconfont icon-xiayibu"></text>
+                    </button>
+                </view>
+
+
+        </block>
+    </view>
+
+    <view class="groupLink clearfix" bindtap="shopGO">
+        <view class="groupImg">
+            <image src="{{dateilsData.store.logo}}"></image>
+        </view>
+        <view class="groupInfo">
+            <text class="textOmitted">{{dateilsData.store.name}}</text>
+            <text>活动有效期：{{dateilsData.tuan.start_time_txt}}至{{dateilsData.tuan.end_time_txt}}</text>
+        </view>
+    </view>
+    <template is="detailsTable" data="{{currentTab:currentTab, productInfo:productInfo,  description:description}}" />
+
+    <!-- 团员招募中 -->
+    <view class='tuan_alap' hidden='{{ tuanHide }}'>
+      <view class='tuan_con'>
+        <view class='close_btn'  bindtap='close_btn'>+</view>
+        <!-- <image src='/images/closeBtn.png'  bindtap='close_btn'></image>   -->
+        <view class='tuan_til'>团员招募中</view>
+        <view class='tuan_boxcon'>
+           <view class="groupList">
+                <view class="group clearfix" wx:for="{{dateilsData.team_list}}" wx:key="index">
+                    <view class="groupImg">
+                        <image src="{{item.user.avatar}}"></image>
+                    </view>
+                    <view class="groupInfo groupInfoCan">
+                        <text class='overp'>{{item.user.nickname}}</text>
+                        <text>截止{{item.end_time_txt}}</text>
+                    </view>
+                    <view class="groupTime">
+                        <view>
+                            <text wx:if="{{item.type*1==0}}">不限 {{item.order_number}}</text>
+                            <text wx:if="{{item.type*1!=0}}">{{item.number}}人团 {{item.order_number}}</text>
+                            <text>/{{item.number}}</text>
+                        </view>
+                    </view>
+                    <button class='cantuan' bindtap="joinGo" data-tuan="{{item.tuan_id}}" data-type="{{item.type}}" data-item="{{item.item_id}}"
+                    data-team="{{item.team_id}}">去参团
+                        <text class="iconfont icon-xiayibu"></text>
+                    </button>
+                </view>
+            </view>
+        </view>
+      </view>
+    </view>
+    <!-- 团员招募中 end -->
+
+</scroll-view>
+<button wx:if="{{dateilsData.tuan.status!=2}}" style="bottom:{{store_nav_list_show?'88rpx':0}}" class="tuan ftBtn gray {{isIpx}}__footer__btn-group">{{dateilsData.tuan.status_txt}}</button>
+
+<block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="TshoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,pageTheme:pageTheme,store_nav_list_show,store_nav_list_show}}" />
+</block>
+ 
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<!--海报画布-->
+<canvas canvas-id='tuanPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+  <!-- <shareModal id='shareModal' 
+            title='我是标题' 
+            content="content" 
+            cancelText='取消' 
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+</shareModal>   -->
+
+<bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+
+
+<include src="/pages/public/page_footer.wxml"></include>

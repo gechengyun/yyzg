@@ -1,0 +1,3 @@
+<!--图片广告-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="image_ad"></template>

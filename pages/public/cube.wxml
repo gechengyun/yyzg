@@ -1,0 +1,13 @@
+<!--小程序魔方模块模板-->
+<template name="cube">
+    <view style="position: relative;height: {{content.maxHeight}}rpx;line-height:0;font-size:0;top:0;left:0;border: 0;margin: 0;padding: 0;box-sizing: border-box;margin-top:{{phoneModel.model == 'M2002J9E'?-2:''}}rpx;">
+        <navigator
+                hover-class="none"
+                url="{{item.url}}"
+                open-type="{{item.type=='switchTab'?'reLaunch':'navigate'}}"
+                wx:for="{{content.content}}"
+                wx:key="index"
+                style="position: absolute;width: {{item.colspan * 188.5}}rpx;height: {{item.rowspan * 188.5}}rpx;background: url({{item.image}}) center center;left:{{item.x * 187.5}}rpx;top:{{item.y * 187.5}}rpx;background-size: 100% 100%;font-size:0;">
+        </navigator>
+    </view>
+</template>

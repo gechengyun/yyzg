@@ -1,0 +1,652 @@
+/* pages/payment/index.wxss */
+@import "../../wxss/payment/cash-pay.wxss";
+/* 2019-5-22-xq-新增 */
+.newPosta.paymentPostage>view{
+  margin: 0;
+  border-bottom:1rpx solid #ebeaea;
+  padding-bottom:0;
+}
+.newPosta.paymentPostage>view view{
+  
+width:202rpx;
+height:70rpx;
+margin:10rpx 20rpx;
+font-size:28rpx;
+line-height:69rpx;
+background:#fff;
+border-radius:5rpx;
+margin-left:0rpx;
+border:1rpx dashed #cecbcb;
+}
+.payment .address{
+  margin-top: 0;
+  position:relative;
+  height:150rpx;
+  padding:0 20rpx;
+  padding-top:20rpx;
+  font-size:28rpx;
+  background:#fff;
+  box-sizing:border-box;
+}
+.order-info{
+  width: 100%;
+  box-sizing: border-box;
+  padding:0;
+  padding-left: 22rpx;
+  padding-right: 22rpx;
+  background: #fff;
+  /* margin-top: 20rpx; */
+}
+.order-info .container {
+  width: 100%;
+  height: 75rpx;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  border-bottom: 1rpx solid #f1f1f2;
+  background: #fff;
+  padding: 0!important;
+}
+.order-info .container .name{
+  font-size: 28rpx;
+  color: #999999;
+  height: 75rpx;
+  line-height: 75rpx;
+}
+.order-info .container .value{
+  font-size: 24rpx;
+  color: #010000;
+  height: 75rpx;
+  line-height: 75rpx;
+  margin-right: 20rpx;
+
+}
+.paymentInfo.newPayInfo{
+  padding: 0;
+  padding-left: 20rpx;
+}
+.paymentInfo.newPayInfo .customMessage{
+  height: 75rpx;
+  border-bottom: 1rpx solid #f1f1f2;
+  line-height: 75rpx;
+  background: #fbfbfd;
+  margin-right: 20rpx;
+
+}
+.paymentInfo.newPayInfo .customMessage .input:last-child{
+  line-height: 75rpx;
+  height: 75rpx;
+}
+.paymentInfo.newPayInfo .customMessage .input:last-child>input{
+  height: 100%;
+}
+.paymentInfo.newPayInfo .customMessage .input .section{
+  box-shadow: 0 0 10rpx rgba(53, 52, 52, 0.1)
+}
+.shoppingProduct{
+  margin-bottom: 0;
+}
+
+/* 提交*/
+.ready-submit{
+  width: 100%;
+  height: 110rpx;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  padding: 0;
+  padding-left: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-top: 8rpx solid #f4f4f4;
+  z-index: 2;
+  
+}
+.ready-submit .pay-price{
+  font-size: 28rpx;
+  color: #353535;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap
+}
+
+.pay-price .mini-y{
+  font-size: 24rpx;
+}
+.btn-submit{
+width:200rpx;
+height:100%;
+border-radius:0;
+color:#fff;
+font-size:32rpx;
+text-align:center;
+line-height:100rpx;
+letter-spacing: 4rpx;
+}
+.expand-h{
+  height: 120rpx;
+  color: transparent;
+  background:transparent;
+}
+.pay-gray{
+  width: 100%;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   z-index: 9;
+   background: rgba(102,102,102,.4);
+  right: 0;
+  top: 0;
+
+}
+.pay-type-contain{
+   width: 100%;
+   box-sizing: border-box;
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   z-index: 10;
+   background: #fff;
+}
+.pay-type-contain .paymentButton {
+  margin: 0;
+}
+.pay-type-contain .paymentButton view.button{
+  font-size: 30rpx!important;
+  border-radius: 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ececec;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 40rpx;
+  align-items: center;
+  height: 100rpx;
+}
+.pay-type-contain .paymentButton view.button .ic-check{
+  font-size: 40rpx;
+  color: #999;
+}
+.pay-type-contain .paymentButton view.button .ic-check.icon-xuanzhong2{
+  font-size: 48rpx;
+  margin-right: -2rpx;
+}
+
+.golden-beans-unpay{
+  border-bottom: 1px solid #fff;
+  position: relative;
+}
+.brownTheme .golden-beans-unpay view.button {
+  background-color: #999;
+}
+
+.golden-beans-pay{
+  border-bottom: 1px solid #fff;
+  position: relative;
+}
+.all-golden-beans{
+  font-size: 24rpx;
+  flex: 1;
+  text-align: left;
+  margin-left: 10rpx;
+}
+.pay-type-contain .paymentButton view.button.offline{
+  border: none;
+  border-bottom: 1rpx solid #ececec;
+  height: 110rpx;
+
+}
+/* .pay-type-contain .paymentButton:last-of-type view.button.offline{ */
+.pay-type-contain .paymentButton:nth-last-child(1){
+  border: none;
+  background: #fcc;
+}
+.pay-type-contain .btn-cancel{
+  width: 100%;
+  height: 110rpx;
+  line-height: 110rpx;
+  text-align: center;
+  border-top: 8rpx solid #f4f4f4;
+  color: #353535;
+  font-size: 28rpx;
+}
+.mini-y{
+  font-size: 24rpx!important;
+}
+.paymentInfo{
+  padding: 0 22rpx;
+}
+.paymentInfo view {
+font-size:24rpx;
+color:#353535;
+line-height:60rpx;
+/* height:60rpx; */
+
+}
+.customMessage .input.msg{
+  width: 500rpx;
+  border: 1rpx solid #f4f4f4;
+}
+.paymentProduct{
+  margin-top: 20rpx;
+}
+.shoppingProduct.shoppingPayment .shoppingInfo .shoppingName{
+  margin-bottom: 15rpx!important;
+  color: #353535;
+}
+.n_store{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  height: 140rpx;
+  background: #fff;
+
+}
+.n_store .logo{
+  width: 70rpx;
+  height: 70rpx;
+  border-radius: 50%;
+  margin-right: 13rpx;
+}
+.n_store .addressInfo .store_name{
+  font-size: 28rpx;
+  color: #353535;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+.n_store .addressInfo .store_address{
+  font-size: 24rpx;
+  color: #b5b5b5;
+  width: 100%;
+}
+.n_store .addressInfo .store_time{
+  font-size: 24rpx;
+  color: #b5b5b5;
+  width: 100%;
+}
+.n_store .call-box{
+  width: 80rpx;
+
+}
+.user-info{
+  margin-bottom: 10rpx;
+}
+.user-info>text{
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #444;
+}
+.addressInfo .address{
+  color: #666;
+}
+.paymentProduct .shopName{
+  padding: 16rpx 20rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+}
+.shoppingProduct{
+  padding: 19rpx 20rpx!important;
+}
+.list-slide-down,.msg-box{
+  width: 100%;
+  height: 96rpx;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10rpx;
+  box-sizing: border-box;
+  align-items: center;
+  border-top: 1rpx solid #f4f4f4;
+  /* position: relative; */
+}
+
+.con_txt{
+  flex: 1;
+  text-align: left;
+  color: #999;
+  padding: 0 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list-slide-down .slid-txt{
+  color: #acadad;
+  font-size: 28rpx;
+}
+.list-slide-down .slid-txt .iconfont{
+  margin-left: 10rpx;
+  font-size: 24rpx;
+}
+.list-slide-down .btnSendMsg,.msg-box .btnSendMsg{
+  width: 128rpx;
+  height: 50rpx;
+  /* position: absolute; */
+  /* right: 20rpx; */
+  /* top: 50%; */
+  /* margin-top: -25rpx; */
+  /* border: 1rpx solid #f4f4f4; */
+  line-height: 50rpx;
+  text-align: center;
+  border-radius: 5rpx;
+  font-size: 28rpx;
+}
+.box-title{
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  /* background: #f5f5f5; */
+  font-size: 28rpx;
+  color: #666666;
+  text-indent: 20rpx;
+  margin-top: 20rpx;
+}
+
+/* ����--- */
+.show-btn {
+  margin-top: 100rpx;
+  color: #22cc22;
+}
+
+.modal-mask {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+  z-index: 9000;
+  color: #fff;
+}
+
+.modal-dialog {
+  width: 540rpx;
+  overflow: hidden;
+  position: fixed;
+  top: 35%;
+  left: 0;
+  z-index: 9999;
+  background: #f9f9f9;
+  margin: -180rpx 105rpx;
+  border-radius: 15rpx;
+}
+
+.modal-title {
+  padding-top: 30rpx;
+  font-size: 36rpx;
+  color: #030303;
+  text-align: center;
+}
+
+.modal-content {
+  padding: 50rpx 32rpx;
+}
+
+.modal-input {
+  display: flex;
+  background: #fff;
+  border: 2rpx solid #ddd;
+  border-radius: 4rpx;
+  font-size: 28rpx;
+}
+.modal-input textarea {
+  width: 100%;
+  height: 300rpx;
+  font-size: 28rpx;
+  line-height: 40rpx;
+  padding: 10rpx 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+.input {
+  width: 100%;
+  height: 82rpx;
+  font-size: 28rpx;
+  line-height: 28rpx;
+  padding: 0 20rpx;
+  box-sizing: border-box;
+  color: #333;
+}
+
+input-holder {
+  color: #666;
+  font-size: 28rpx;
+}
+
+.modal-footer {
+  display: flex;
+  flex-direction: row;
+  height: 86rpx;
+  border-top: 1px solid #dedede;
+  font-size: 34rpx;
+  line-height: 86rpx;
+}
+
+.btn-cancel {
+  width: 50%;
+  color: #666;
+  text-align: center;
+  border-right: 1px solid #dedede;
+}
+
+.btn-confirm {
+  width: 50%;
+  color: #ec5300;
+  text-align: center;
+}
+.paymentInfo .fullCut view{
+  margin-top:6rpx;
+  margin-right:10rpx;
+  padding:0;
+  font-size:24rpx;
+  color:#fff;
+  display:inline-block;
+  vertical-align:top;
+  overflow:hidden;
+  background:#fe6b31;
+  border-radius:5rpx;
+  width:70rpx;
+  height:40rpx;
+  text-align:center;
+  line-height:40rpx;
+
+}
+.paymentInfo .fullCut{
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  height:auto;
+  padding-bottom:10rpx;
+}
+.paymentInfo .fullCut text.rewardTxt{
+  display: inline;
+  line-height: 35rpx;
+  overflow: hidden;
+  flex: 1;
+  text-overflow: ellipsis;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+}
+/* ����ѡ����ʽ���� */
+.paymentInfo .integral text{
+  margin-top: 0
+}
+.paymentInfo .integral{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom:1rpx solid #f4f4f4;
+}
+.paymentInfo .integral text.active{
+  border: none;
+  background: none;
+  overflow: visible;
+  background: transparent!important;
+  margin-top: -20rpx;
+  font-size: 36rpx;
+
+}
+/* 金豆 */
+.golden-beans{
+  font-size: 24rpx;
+  background-color: #fff;
+  padding: 24rpx;
+  margin-top: 20rpx;
+}
+.radio-group{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.radio{
+  transform: scale(.7);
+}
+.isChannel{
+  font-size: 20rpx;
+  border: 1px solid;
+  border-radius: 10rpx;
+  display: inline-block;
+  padding: 0 10rpx;
+  margin: 8rpx 0 0 6rpx;
+}
+.community_store{
+  width: 100%;
+	min-height: 166rpx;
+	background-color: #ffffff;
+	box-shadow: 0rpx 0rpx 46rpx 0rpx 
+		rgba(0, 0, 0, 0.06);
+	/* border-radius: 10rpx; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 auto;
+  /* margin-bottom: 10rpx; */
+}
+.community_store .head{
+  width: 160rpx;
+  height: 100%;
+  display: flex;
+  /* align-items: center; */
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.community_store .head .head_img{
+  width: 86rpx;
+	height: 86rpx;
+  border-radius: 50%
+}
+.community_store .head .head_img image{
+  width: 86rpx;
+	height: 86rpx;
+  border-radius: 50%;
+
+}
+.community_store .head  .head_name{
+  font-family: PingFang-SC-Bold;
+	font-size: 28rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+  width: 100%;
+  height: 44rpx;
+  text-align: center;
+}
+.community_store .address_store .address_name{
+	font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 60rpx;
+	letter-spacing: 0rpx;
+	color: #c7c7c7;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20rpx 20rpx 20rpx 0;
+  align-items: baseline 
+}
+.community_store .address_store .address_name .view{
+
+	font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 30rpx;
+	letter-spacing: 0rpx;
+	color: #c7c7c7;
+}
+.community_store .address_store .address_name .text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90rpx;
+	height: 26rpx;
+	background-color: #ffcebf;
+	border-radius: 13rpx;
+	font-family: PingFang-SC-Regular;
+	font-size: 20rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	/* line-height: 60rpx; */
+	letter-spacing: 0rpx;
+	color: #fd5d2c;
+  margin-right: 10rpx;
+}
+.community_store .address_store .store_name{
+  	font-family: PingFang-SC-Bold;
+	font-size: 36rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #333333;
+}
+.community_store .address_store  .store_time{
+  font-family: PingFang-SC-Regular;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 44rpx;
+	letter-spacing: 0rpx;
+	color: #444444;
+}
+.community_store .address_store  .store_time text{
+	font-size: 24rpx;
+}
+
+/* 0426 */
+.pay-type-contain .paymentButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
+.pay-type-contain .paymentButton .ic-logo{
+  width: 120rpx;
+  text-align: center;  
+  font-size: 40rpx;
+}
+.pay-type-contain .paymentButton .ic-logo.icon-wechat-pay-fill{
+  color:#09bb07;
+  font-size: 42rpx;
+}
+/* 虚拟商品 */
+.virtual-goods{
+  font-size: 24rpx;
+  margin-top: 16rpx;
+  padding: 0 16rpx;
+  height: 86rpx;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}

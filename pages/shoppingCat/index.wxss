@@ -1,0 +1,327 @@
+/* pages/shoppingCat/index.wxss */
+.editProduct .shoppingCatSize.size_3>wx-view .productInfo .shoppingInput text {
+  display: inline-block;
+  padding: 0;
+  border-radius: 8rpx;
+  font-size: 33rpx;
+  color: #333;
+  margin-right: 0;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.editProduct .shopProductList>view .productInfo text{
+  padding: 0;
+}
+/* 2019-5-20-xq新增购物袋样式 */
+.shoppingCatTitle.newShopping{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  background: #fff;
+}
+.shoppingCatTitle.newShopping .editCart{
+  width: 100%;
+  text-align: right;
+  padding-right: 24rpx;
+  font-size: 24rpx;
+  color: #333333;
+  height: 72rpx;
+  line-height: 72rpx;
+}
+.shoppingCatTitle.newShopping .store-box{
+  flex: 1;
+}
+.store-box{
+  display: flex;
+  align-items: flex-start;
+  height: 60rpx;
+  justify-content: start;
+}
+.store-box .store-name{
+  font-size: 28rpx;
+  max-width: 60%;
+  min-width: 35%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical; */
+   margin-bottom:5rpx;
+
+}
+.store-box .icon-qiehuan{
+  font-size: 28rpx;
+}
+.store-box .btn-change-store{
+  padding: 10rpx 15rpx;
+  border-radius: 30rpx;
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 24rpx;
+}
+.editProduct .size_3 .shopProductList>view .productInfo .productName{
+  margin-bottom: 10rpx;
+}
+ .shoppingCat{
+  width: 702rpx;
+  margin-left:24rpx;
+  border-radius: 0 0 12rpx 12rpx!important;
+  background: #fff;
+}
+.shopProductList>view {
+  border-radius: 0!important;
+  background:none!important;
+
+}
+.forbid-buy{
+  width: 100%;
+}
+.forbid-buy .title{
+  width: 702rpx;
+  margin-left: 24rpx;
+  font-size:28rpx;
+  font-weight:500;
+  color:#333!important;
+  margin-top:10px;
+  height:50rpx;
+  line-height:50rpx;
+  background: #fff;
+  border-radius: 12rpx 12rpx 0 0;
+  padding-top: 18rpx;
+}
+.forbid-buy .title .iconfont{
+/* font-size: 38rpx; */
+margin-left: 0rpx!important;
+}
+.shoppingChoice text.disabled-txt{
+  background:#d6d5d5;
+  border-radius:50%;
+}
+.disabled-txt{
+  background:#d6d5d5;
+  border-radius:50%;
+}
+
+.forbid-list .size_3 .shopProductList>view.clearfix{
+  /* border-top: 1rpx solid rgb(241, 240, 240) */
+}
+.editProduct .shopProductList>view .productInfo view.show-tips{
+  width: 100%!important;
+  font-size: 24rpx!important;
+  color: #f00!important;
+  padding-bottom: 60rpx;
+
+}
+.shoppingCatFooter .total{
+  margin-left: 20rpx;
+  width: 350rpx;
+}
+.shoppingCatFooter .settlement{
+  width: 230rpx;
+}
+.shoppingCatFooter .settlement::after{
+  border: none;
+}
+.shoppingCatFooter .shoppingChoice{
+  width: 165rpx;
+}
+.editProduct .size_3 .shopProductList>view.title_new {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.new-store  {
+  /* margin-left: 20rpx; */
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.new-store  .icon {
+  width: 32rpx;
+  height: 32rpx;
+  margin-top: 0; 
+  margin:0 11rpx;
+  color:#E1251B;
+  display: inline-block;
+  position: relative;
+  padding-left: 24rpx;
+  bottom:5rpx
+}
+.new-store  .icon:before {
+  width: 32rpx;
+  height: 32rpx;
+  display: inline-block;
+  border: 1rpx solid #ccc;
+  border-radius: 50%;
+  content: '';
+  box-sizing: border-box;
+}
+.new-store .icon.active:before {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 36rpx;
+  border: 0;
+  content: '\e606';
+  padding-left: 24rpx;
+}
+
+
+/* 2020-6-22 */
+.recommendList .topicContainer {
+  width: 750rpx;
+  height: 64rpx;
+  display: flex;
+  align-items: center;
+}
+.recommendList .topicContainer .topicNav {
+  width: 10rpx;
+  height: 40rpx;
+  margin-left: 12rpx;
+  float: left;
+}
+.recommendList .topicContainer .content {
+  margin-left: 24rpx;
+  font-size: 32rpx;
+  height: 36rpx;
+  line-height: 36rpx;
+  color: black;
+}
+.shopProductList .item{
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.productNames {
+  width: 420rpx!important;
+  font-size: 24rpx!important;
+  color: #333!important;
+  display: -webkit-box!important;
+  -webkit-line-clamp: 2!important;
+  -webkit-box-orient: vertical!important;
+  overflow: hidden;
+  line-height: 34rpx;
+}
+.ggtext {
+  position: relative!important;
+  top:0;
+  right: 0;
+  width: 75rpx!important;
+  background: #F3F3F3!important;
+  color:#333!important;
+  border-radius: 18rpx!important;
+  padding: 0 20rpx!important;
+  font-size: 20rpx;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.productInfo text.productPrice {
+  font-size: 36rpx!important;
+  font-weight: 500;
+  color: #E1251B;
+  position: absolute;
+  bottom: 10rpx;
+}
+.productInfo text.productPrice text {
+  margin-right: 0!important;
+}
+.rmb {
+  font-size: 20rpx!important;
+  font-weight: 400!important;
+  color: #EB4232!important;
+}
+.icon-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+.storeName {
+  padding-left: 10rpx;
+}
+.sx-title {
+  padding-left: 24rpx;
+  font-weight: 400!important;
+  color: #333333!important;
+}
+.clear-title {
+  font-size: 20rpx!important;
+  font-weight: 400!important;
+  color: #E1251B!important;
+  float: right;
+  padding-right: 24rpx;
+}
+.forbid-list .productNames {
+  color: #999999!important;
+}
+#show-tips {
+  font-weight: 400!important;
+  color: #333333!important;
+  position: absolute;
+  bottom: 0;
+}
+.proimgbg {
+  position: absolute;
+  top:0;
+  bottom: 0;
+  z-index: 10;
+  background: rgba(216, 216, 216, 0.5);
+  width: 100%;
+  height: 100%;
+}
+.unprotips {
+  width: 88rpx;
+  height: 28rpx;
+  background: #333333;
+  border-radius: 14rpx;
+  font-size: 20rpx;
+  color:#fff;
+  text-align: center;
+  line-height: 28rpx;
+  margin: 78rpx auto;
+}
+.promptMsg {
+  padding-top: 250rpx!important;
+}
+.promptMsg image{
+ width: 300rpx;
+ height: 220rpx;
+}
+#nulltitle {
+  font-size: 30rpx;
+  font-weight: 400;
+  color: #999999;
+}
+.promptMsg text:last-child {
+  width: 136rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  border-radius: 28rpx;
+  border: 2rpx solid #CCCCCC;
+  background: #fff!important;
+  font-size: 24rpx;
+  color: #333333;
+}
+.btn-l-logins {
+ background: linear-gradient(270deg, #EC1B34 0%, #FF2395 100%);
+ color:#fff;
+}
+.gg-view {
+  margin-bottom:10rpx;
+  background:#F3F3F3;
+  color:#333333;
+  border-radius:18rpx;
+  padding:0 10rpx;
+  font-size: 20rpx;
+  overflow: hidden!important;    
+  text-overflow:ellipsis!important;    
+  white-space: nowrap!important;
+
+}

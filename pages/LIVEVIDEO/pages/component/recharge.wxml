@@ -1,0 +1,39 @@
+<template name="recharge">
+  <cover-view class="live-component-cloth">
+		<cover-view class="layer" bindtap="rechargeClose" catchtouchmove="ture"></cover-view>
+		<cover-view class="shoppingLayer" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.recharge">
+			<cover-view class="recharge-header" wx:if="{{0}}">
+        <cover-view>首充有礼海报</cover-view>
+        <cover-view class="recharge-more" bindtap="rechargeMore" style="background-color:{{themeColorValue}};">了解更多</cover-view>
+      </cover-view>
+      <cover-view class="recharge-title">
+        <cover-view>我的{{goldLevel.coin_name}}:</cover-view>
+        <cover-view class="recharge-title-num after-box">{{goldLevel.user_coin}}</cover-view>
+      </cover-view>
+      <cover-view class="recharge-list">
+        <cover-view class="recharge-list-title">请选择充值数量</cover-view>
+        <cover-view class="recharge-item-cloth">
+          <cover-view class="recharge-item {{modeIdx == index?'active':''}}" data-idx="{{index}}" data-id="{{item.id}}" bindtap="balanceMode" wx:for="{{goldLevel.recharge_list}}" wx:key="index">
+            <cover-view>{{item.get_coin_num}}{{goldLevel.coin_name}}</cover-view>
+            <cover-view class="recharge-item-send-num" wx:if="{{item.recharge_coin}}">赠{{item.recharge_coin}}{{goldLevel.coin_name}}</cover-view>
+            <cover-view class="after-box">￥{{item.recharge_money}}</cover-view>
+          </cover-view>
+          <cover-view class="recharge-item" bindtap="goRecharge" wx:if="{{goldLevel.open_custom_amount}}">
+            <cover-view>其他金额</cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="recharge-pay-type">
+        <cover-view class="recharge-list-title">支付方式</cover-view>
+        <cover-view class="recharge-item recharge-pay-item active">
+          <cover-image class="recharge-weixin" src="https://s.404.cn/applet/images/qudao/zhibo/weixin.png"></cover-image>
+          <cover-view>微信支付</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="recharge-btn" bindtap="goldPay">
+        立即支付<block wx:if="{{modeAmount}}">￥{{modeAmount}}</block>
+        <block wx:else>￥{{goldLevel.recharge_list[0].recharge_money}}</block>
+      </cover-view>
+		</cover-view>
+	</cover-view>
+</template>

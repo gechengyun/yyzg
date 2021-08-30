@@ -1,0 +1,213 @@
+<!-- 公共商品列表 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="goodsList">
+  <!-- 滑动模块 -->
+  <view style="display:none">
+    <!-- 隐藏其他样式 -->
+    <swiper class='my-goods' wx:if='{{content.display_style==3&&content.checked_row && content.checked_row>1}}' display-multiple-items="{{content.display_style==2?(content.product_list&&content.product_list.length<=1?1:1.5):((content.display_style==3)?(content.product_list&&content.product_list.length<=2?content.product_list.length:2.5):1.5)}}"
+      style='height:{{(content.image_zoom==1?(264+165)*content.checked_row:(content.image_zoom==2?(176+165)*content.checked_row:(content.image_zoom==3?(352+165)*content.checked_row:(264+165)*content.checked_row)))+(filter.isExit(content.goods_info_show,"g_group")==1?content.checked_row>1?200:100:0)}}rpx;'>
+      <block wx:for="{{content.product_list}}" wx:for-index="idx" wx:for-item="fitem" wx:key='{{idx}}'>
+        <swiper-item>
+          <view class='goods-box' wx:for="{{fitem}}" wx:if='{{item.name}}' wx:key='{{index}}' style='border-radius:{{content.border_radius?content.border_radius:0}}rpx;overflow:hidden;width:{{content.product_list&&content.product_list.length<=1?100:94}}%'>
+            <!-- 商品图片 -->
+            <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+              class="navigator" hover-class="none" open-type="navigate">
+              <view class="productImg">
+                <view class='only-pic {{content.image_zoom==1?"one-one":(content.image_zoom==2?"three-two":(content.image_zoom==3?"three-four":"three-two"))}}' style='width:100%;background:url("{{item.image}}") no-repeat center center/cover;'>
+                  <!-- 售罄 -->
+                  <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                    <view class='txt'>售罄</view>
+                  </view>
+                </view>
+              </view>
+            </navigator>
+            <!-- 商品信息 -->
+            <navigator class='only-goods-info' wx:if='{{content.goods_info_show&&content.goods_info_show.length>0}}' url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+              <!-- 商品名称 -->
+              <view class="product-name textOmitted2" style='padding:8rpx 10rpx 0;' wx:if='{{filter.isExit(content.goods_info_show,"g_name")==1}}'>
+                <text class='theme-bg-color' style='background:{{themeColor}};padding-right:5rpx;' wx:if="{{item.is_self_support==0}}" id='ziying_text'>自营</text>{{item.name}}
+              </view>
+              <!-- 商品价格 如果填充，加padding-->
+              <view class='product-infos' style='padding:0 10rpx;'>
+                <view class='left'>
+                  <text class='price' wx:if='{{filter.isExit(content.goods_info_show,"g_price")==1}}' style='color:{{themeColor}}'>
+                <text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.price,1)}}</text>
+                  <text class='dele-price' wx:if='{{filter.isExit(content.goods_info_show,"g_line")==1&&filter.transBigNumber(item.original_price,1)!=0}}'><text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.original_price,1)}}</text>
+                </view>
+                <!-- 已购买、购物袋 -->
+                <view class='right'>
+                  <!-- 已购暂时不展示-->
+                  <view class='user' style='display:none;'>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    已购
+                  </view>
+                  <text class='iconfont icon-jiarugouwuche' style='color:{{themeColor}};font-size:56rpx;' catchtap="oppenShopping" wx:if='{{filter.isExit(content.goods_info_show,"g_car")==1&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}'
+                    data-type="add_cart" data-product="{{item.product_id}}"></text>
+                </view>
+              </view>
+            </navigator>
+            <!-- 分组标签 -->
+            <view class="groupTips" wx:if='{{(filter.isExit(content.goods_info_show,"g_group")==1)}}'>
+              <block wx:for="{{item.group_lable_list}}" wx:key="" wx:for-index="idx">
+                <block wx:if="{{idx<2}}">
+                  <view style="border-color:{{themeColor}};color:{{themeColor}}" bindtap="goGroupListT" data-groupid="{{item.group_id}}" data-name="goods_group4">
+                    <text>{{item.group_name}}</text>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <swiper class='my-goods' wx:if='{{(content.display_style==2 ||content.display_style==3)&&content.checked_row==1}}' display-multiple-items="{{content.display_style==2?(content.product_list&&content.product_list.length<=1?1:1.5):(content.display_style==3)?(content.product_list&&content.product_list.length<=2?content.product_list.length:2.5):1.5}}"
+      style='height:{{(content.display_style==3?(content.image_zoom==1?(264+165):(content.image_zoom==2?(176+165):(content.image_zoom==3?(352+165):(264+165))))+((filter.isExit(content.goods_info_show,"g_group")==1?100:0)):(filter.isExit(content.goods_info_show,"g_group")==1?710:610))}}rpx;}}'>
+      <block wx:for="{{content.product_list}}" wx:key='{{index}}'>
+        <swiper-item>
+          <view class='goods-box' style='border-radius:{{content.border_radius?content.border_radius:0}}rpx;overflow:hidden;width:{{content.product_list&&content.product_list.length<=1?100:94}}%'>
+            <!-- 商品图片 -->
+            <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+              class="navigator" hover-class="none" open-type="navigate">
+              <view class="productImg">
+                <view class='only-pic {{content.image_zoom==1?"one-one":(content.image_zoom==2?"three-two":(content.image_zoom==3?"three-four":"one-one"))}}' style='width:100%;background:url("{{item.image}}") no-repeat center center/cover;'>
+                  <!-- 售罄 -->
+                  <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                    <view class='txt'>售罄</view>
+                  </view>
+                </view>
+              </view>
+            </navigator>
+            <!-- 商品信息 -->
+            <navigator class='only-goods-info' wx:if='{{content.goods_info_show&&content.goods_info_show.length>0}}' url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+              <!-- 商品名称 -->
+              <view class="product-name textOmitted2" style='padding:8rpx 10rpx 0;' wx:if='{{filter.isExit(content.goods_info_show,"g_name")==1}}'>
+                <text class='theme-bg-color' style='background:{{themeColor}};padding-right:5rpx;' wx:if="{{item.is_self_support==0}}" id='ziying_text'>自营</text>{{item.name}}
+              </view>
+              <!-- 商品价格 如果填充，加padding-->
+              <view class='product-infos ---' style='padding:0 10rpx;'>
+                <view class='left'>
+                  <text class='price' wx:if='{{filter.isExit(content.goods_info_show,"g_price")==1}}' style='color:{{themeColor}}'>
+                <text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.price,1)}}</text>
+                  <text class='dele-price' wx:if='{{filter.isExit(content.goods_info_show,"g_line")==1&&filter.transBigNumber(item.original_price,1)!=0}}'><text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.original_price,1)}}</text>
+                </view>
+                <!-- 已购买、购物袋 -->
+                <view class='right'>
+                  <!-- 已购暂时不展示-->
+                  <view class='user' style='display:none;'>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    <image src='{{baseImgUrl}}images/avatar.png'></image>
+                    已购
+                  </view>
+                  <text class='iconfont icon-jiarugouwuche' style='color:{{themeColor}};font-size:56rpx;' catchtap="oppenShopping" wx:if='{{filter.isExit(content.goods_info_show,"g_car")==1&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}'
+                    data-type="add_cart" data-product="{{item.product_id}}"></text>
+                </view>
+              </view>
+            </navigator>
+            <!-- 分组标签 -->
+                <view class="groupTips" wx:if='{{(filter.isExit(content.goods_info_show,"g_group")==1)}}'>
+              <block wx:for="{{item.group_lable_list}}" wx:key="" wx:for-index="idx">
+                <block wx:if="{{idx<2}}">
+                  <view style="border-color:{{themeColor}};color:{{themeColor}}" bindtap="goGroupListT" data-groupid="{{item.group_id}}" data-name="goods_group4">
+                  <text>{{item.group_name}}</text>
+                  </view>
+                </block>
+              </block>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class='goods-box' wx:for="{{content.product_list}}" wx:key="index">
+    <!-- 商品图片 -->
+    <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+      class="navigator" hover-class="none" open-type="navigate">
+      <!-- 是否填充 -->
+      <!-- <view class="productImg verticalCentering fillImg"  style='position:relative'> -->
+      <view class="productImg" style='position:relative;'>
+        <!-- <view class='only-pic {{index==1?"only-pic-nd":""}} {{content.display_style==1 ? (content.image_zoom==1?"one-one":(content.image_zoom==2?"three-two":"three-one")):"one-one"}}' style='width:100%;background:url("{{item.image}}") no-repeat center center/cover;background-size:100% 100%;'> -->
+        <view class='only-pic {{index==1?"only-pic-nd":""}} {{content.display_style==1 ? (content.image_zoom==1?"one-one":(content.image_zoom==2?"three-two":"three-one")):"one-one"}}' style='width:100%;background:url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/zw.png") no-repeat center center/cover;background-size:100% 100%;'>  
+          <image src="{{item.image}}" style="border-radius: 12rpx"/>
+          <!-- 售罄 -->
+          <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+            <view class='txt'>售罄</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+    <!-- 商品信息 -->
+    <navigator url="/pages/product/details?product_id={{item.product_id}}" class='only-goods-info' hover-class="none" open-type="navigate" style='height:{{content.display_style==6?content.resizeH+"px":""}}'  style='height:{{((item.self_by_get_money!=0)&&show_index_img==0&&is_gift==1&&(size==4 || size==5 || (size==7&&index%3!=0)))?"180rpx":"150rpx"}}'  wx:if='{{content.goods_info_show&&content.goods_info_show.length>0}}'>
+      <!-- 商品名称 -->
+      <view class="product-name textOmitted2" wx:if='{{filter.isExit(content.goods_info_show,"g_name")==1}}'>
+         <view class="yyyx-img"><image class="yyyx-icon image" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/yiicon.png" /></view>
+        <view class="name-text">{{item.name}}</view>
+        <!-- <text class='theme-bg-color' style='background:{{themeColor}};padding-right:5rpx;' wx:if="{{item.is_self_support==0}}" id='ziying_text'>自营</text>{{item.name}} -->
+      </view>
+      <view class="sales">销量:{{item.sales}}</view>
+      <!-- 商品价格 如果填充，加padding//is_member==1&&-->
+      <view class='product-infos' style='padding:0 20rpx;align-items:{{((item.self_by_get_money!=0)&&show_index_img==0&&is_gift==1&&(size==4 || size==5 || (size==7&&index%3!=0))) ?"flex-start":"center"}}'>
+        <view class='left'>
+          <text class='price' wx:if='{{filter.isExit(content.goods_info_show,"g_price")==1}}' style='color:{{themeColor}}'>
+              <text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.price,1)}}</text>
+          <text class='dele-price' wx:if='{{filter.isExit(content.goods_info_show,"g_line")==1&&filter.transBigNumber(item.original_price,1)!=0}}'><text style='font-size:24rpx;'>￥</text>{{item.original_price}}</text>
+        </view>
+        <!-- 已购买、购物袋 -->
+        <view class='right'>
+          <!-- 已购暂时不展示-->
+          <view class='user' style='display:none;'>
+            <image src='{{baseImgUrl}}images/avatar.png'></image>
+            <image src='{{baseImgUrl}}images/avatar.png'></image>
+            <image src='{{baseImgUrl}}images/avatar.png'></image>
+            已购
+          </view>
+          <!-- <text class='iconfont icon-jiarugouwuche' catchtap="oppenShopping" wx:if='{{filter.isExit(content.goods_info_show,"g_car")==1&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&content.display_style!=5 &&(item.self_by_get_money=="0.00"||storeData.show_gift_preincome=="0")}}'
+            data-type="add_cart" data-product="{{item.product_id}}"></text> -->
+          <image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/shopcaticon.png"  catchtap="oppenShopping" wx:if='{{filter.isExit(content.goods_info_show,"g_car")==1&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&content.display_style!=5 &&(item.self_by_get_money=="0.00"||storeData.show_gift_preincome=="0")}}' data-type="add_cart" data-product="{{item.product_id}}" class="shopcaticon"/>
+          <view wx:if='{{item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&data.size!=4 &&item.self_by_get_money!=="0.00"&&storeData.show_gift_preincome=="1"&&item.is_fx*1==1&&storeData.show_gift*1==1}}' style='position:relative'>
+            <view style='background:{{themeColor}};opacity:0.2;height:52rpx' class="income">
+            </view>
+            <text style='color:{{themeColor}};position:absolute;top:10rpx;font-size:24rpx;left:0;width:200rpx;text-align:center'>预估收益￥{{item.self_by_get_money}}</text>
+          </view>
+          <!-- 预估收益 -->
+          <view class='profit-box' wx:if='{{(item.self_by_get_money!=0)&&show_index_img==0&&is_gift==1&&(size==1 || size==6 || (size==7&&index%3==0)) && storeData.show_gift_preincome*1 == 1&&item.is_fx*1==1&&storeData.show_gift*1==1}}'>
+            <view class='profit-info'>
+              <text class='text'>预估收益</text>
+              <text class='price-tip' style='font-size:20rpx;'>￥</text>
+              <text class='price'>{{item.self_by_get_money}}</text>
+            </view>
+            <!-- <view class='profit-icon'>
+              <text class='iconfont icon-zhuanfa' style='font-size:22rpx;'></text>
+            </view> -->
+          </view>
+        </view>
+      </view>
+      <!-- 预估收益 -->
+      <!-- <view class='profit-box position-profit' wx:if='{{(item.self_by_get_money!=0)&&show_index_img==0&&is_gift==1&&(size==4 || size==5 || (size==7&&index%3!=0)) && storeData.show_gift_preincome*1 == 1}}'>
+        <view class='profit-info'>
+          <text class='text'>预估收益</text>
+          <text class='price-tip' style='font-size:20rpx;'>￥</text>
+          <text class='price'>{{item.self_by_get_money}}</text>
+        </view>
+      </view> -->
+    </navigator>
+    <!-- 分组标签 -->
+
+    <view class="groupTips" wx:if='{{(filter.isExit(content.goods_info_show,"g_group")==1)&&size!=5}}'style='width:{{size==6?"100%":"auto"}};'>
+      <block wx:for="{{item.group_lable_list}}" wx:key="" wx:for-index="idx">
+        <block wx:if="{{idx<2}}">
+          <view style="border-color:{{themeColor}};color:{{themeColor}}" bindtap="goGroupListT" data-groupid="{{item.group_id}}" data-name="goods_group4">
+            <text>{{item.group_name}}</text>
+          </view>
+        </block>
+      </block>
+    </view>
+ 
+  </view>
+  <!-- <view class="bottom-line">
+    <image class="bottom-line-image" src="../../images/line.png"/> 
+  </view> -->
+</template>

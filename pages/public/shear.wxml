@@ -1,0 +1,8 @@
+<!-- 分享提示 -->
+<template name="shear">
+    <view class="layer" bindtap="shear">
+    </view>
+    <view class="shearLayer" data-page="page.public.shear" bindtap="shear">
+        <image src="../../images/share.png"></image>
+    </view>
+</template>

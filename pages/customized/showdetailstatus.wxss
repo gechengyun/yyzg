@@ -1,0 +1,81 @@
+.save-realname{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.show-realname-part{
+  padding: 20rpx 30rpx;
+  margin: 0rpx 30rpx 20rpx;
+  font-size: 28rpx;
+  line-height: 50rpx;
+  color: #333;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 18rpx 0px 
+		rgba(0, 0, 0, 0.07);
+	border-radius: 10rpx;
+}
+.show-realname-part:nth-of-type(1){
+  margin-top: 40rpx;
+}
+.set-operation view{
+  float: right;
+}
+.set-operation icon{
+  color: #ccc;
+  font-size: 26rpx;
+  margin-right: 10rpx;
+}
+.realname-none{
+  margin-top: 300rpx;
+}
+.realname-none image{
+  display: block;
+  margin: 0 auto;
+  width: 200rpx;
+  height:200rpx;
+}
+.realname-none view{
+  text-align: center;
+  line-height: 80rpx;
+  font-size: 32rpx;
+}
+.navigator{
+  display: block;
+}
+
+/* 实名认证添加 */
+.save-realname{
+  margin: 30rpx 0 0;
+  display: block;
+  width: 100%;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #ccc;
+  color: #fff;
+  text-align: center;
+  font-size: 32rpx;
+  border: none;
+  border-radius: 0;
+}
+.save-realname::after{
+  border: none;
+}
+.order-info-title{
+  font-size: 28rpx;
+  color: #353535;
+  font-weight: bold;
+  padding-bottom: 15rpx;
+  border-bottom: 1rpx solid #f4f4f4;
+  margin-bottom: 5rpx;
+}
+.btn-copy{
+  padding:5rpx 20rpx;
+  background:#f4f4f4;
+  border:1px dashed #f4f4f4;
+  margin-left:10px;
+  display:inline-block;
+  border-radius:5rpx;
+  font-size:24rpx;
+
+
+}

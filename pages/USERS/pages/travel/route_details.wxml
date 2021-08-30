@@ -1,0 +1,13 @@
+<!--route_details.wxml-->
+<import src="../../../public/shear.wxml" />
+<import src="../../../public/shoppingCat.wxml" />
+<import src="../../../public/orderLayer.wxml" />
+<import src="../../../public/warning.wxml" />
+<import src="../../../../wxParse/wxParse.wxml" />
+<scroll-view scroll-top="{{scrollTop}}" class="routeDetails container" scroll-y="true" style="height:{{scrollHeight}}px;" 
+  bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="pages.travel.route_details">
+  <view class="routeItem">
+    <template is="wxParse" data="{{wxParseData:info.nodes}}" />
+  </view>
+</scroll-view>
+<include src="/templates/page_footer.wxml"></include>

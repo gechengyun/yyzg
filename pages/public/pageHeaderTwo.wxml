@@ -1,0 +1,38 @@
+<!--  店铺抬头2 -->
+<template name="tpl_shop">
+    <wxs module="filter" src="../../utils/filter.wxs"></wxs>
+    <view class="tplShopBorder" data-page="page.public.pageHeaderTwo">
+        <view class="pageHeaderOne" style="background:{{content.content.bgcolor}} url({{content.content.shop_head_bg_img}}) center center no-repeat;    background-size: cover;">
+            <view class="pageLogo verticalCentering"  style="{{(content.content.is_circle == 'true' || content.content.is_circle*1 == 1) ? 'border-radius:50%' : ''}}">
+                <image src="{{content.content.shop_head_logo_img}}"> </image>
+            </view>
+            <view class="pageInfo">
+                <view class="shopName">
+                    <view style="color:{{content.content.fontcolor}}">{{filter.getName(content.content.title,14)}}</view>
+                </view>
+                <view class="clearfix shopInfoList">
+                    <view>
+                        <navigator url="/pages/product/productList" class="navigator" hover-class="none" open-type="{{filter.getOpenType('/pages/product/productList',store_nav_list)}}">
+                            <view class="">{{content.content.product_count}}</view>
+                            <text>全部商品</text>
+                        </navigator>
+                    </view>
+                    <view>
+                        <navigator url="{{_unlogin==false ?'/pages/SHOPGOODS/pages/user/myCollection/index':''}}" bindtap="userLogin" class="navigator" hover-class="none" open-type="navigate">
+                            <view class="">  <text class="iconfont icon-shoucang"></text></view>
+                            <text>我的收藏</text>
+                        </navigator>
+                    </view>
+                    <view>
+                        <navigator url="{{_unlogin==false ? '/pages/user/order/orderList':''}}" bindtap="userLogin" class="navigator" hover-class="none" open-type="navigate">
+                            <view>
+                                <text class="iconfont icon-geren"></text>
+                            </view>
+                            <text> 我的订单 </text>
+                        </navigator>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

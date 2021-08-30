@@ -1,0 +1,25 @@
+<!--pages/user/scancode/scancode.wxml-->
+<view>
+  <view class="search">
+    <view class="search-code">
+      <input placeholder="输入自提码" value="{{drawCode}}" bindinput="watchOrder"></input>
+      <text class="iconfont icon-saoma" style='color:{{themeColorValue}}' bindtap="scancode"></text>
+    </view>
+    <button type="default" size="mini" bindtap="search" style='brder-color:{{themeColorValue}};color:{{themeColorValue}};'>查询</button>
+  </view>
+  <view class="list">
+    <view class="list-item">
+      <text>订单号</text>
+      <input disabled="true" style='color:{{themeColorValue}};' value="{{orderList.order_no}}"></input>
+    </view>
+    <view class="list-item">
+      <text>订单价格</text>
+      <input disabled="true" style='color:{{themeColorValue}};' value="{{orderList.total}}"></input>
+    </view>
+    <view class="list-item" wx:for="{{orderList.product_id_name||1}}" wx:for-item="orderitem">
+      <text>商品名称</text>
+      <input disabled="true" style='color:{{themeColorValue}};' value="{{orderitem.product_name}}"></input>
+    </view>
+  </view>
+  <button class="confirm" type="default" bindtap="draw" style='background-color:{{themeColorValue}};color:#fff;'> 确认自提 </button>
+</view>

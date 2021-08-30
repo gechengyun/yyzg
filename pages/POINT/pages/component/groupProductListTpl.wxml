@@ -1,0 +1,369 @@
+<!-- 公共商品列表 -->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<template name="groupProductListTpl">
+    <view wx:if="{{data.size==5}}"
+          class="clearfix shopProductList {{pageTheme}} Zy {{content.product_list.length==0?'haspos':''}}"
+          data-page="page.public.productList" data-desc="公共商品列表">
+        <swiper class='group-swiper' wx:if='{{content.product_list.length>0}}'
+                style='height:{{size_type==2?((418-108+40)*(data.show_line?data.show_line:1)):(432*((data.show_line&&content.product_list.length>1)?data.show_line:1))}}rpx;'
+                display-multiple-items='{{content.product_list.length<=3?content.product_list.length:2.3}}'>
+            <block wx:if='{{data.show_line==2}}' wx:for="{{content.product_list}}" wx:for-item='fitem'
+                   wx:for-index='findex' wx:key="{{findex}}">
+                <swiper-item>
+                    <view class="clearfix grouplist goods_box menu-style{{data.menu_style?data.menu_style:0}} box-radius{{data.pic_angle?data.pic_angle:0}}"
+                          wx:for="{{fitem}}" wx:if='{{item.name}}' wx:key='{{index}}'>
+                        <navigator
+                                url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+                                class="navigator"
+                                hover-class="none" open-type="navigate">
+                            <view class="productImg verticalCentering" style='position:relative'>
+                                <!-- <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(!data.size)}}' src='{{BASE_IMG_URL}}images/component/ange{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+                                <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(data.size)}}' src='{{BASE_IMG_URL}}images/component/ange_s_{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+                                <image wx:if='{{data.buy_ange==1&&data.goods_angle==6}}' src='{{data.angepic_url}}' class='ange-pic ange{{data.goods_angle}}' mode='aspectFill'></image> -->
+
+                                <image src="{{item.image}}" class='cover-img'
+                                       style="will-change:transform;border-radius:{{data.pic_angle==1?20:0}}rpx"
+                                       mode="{{data.pic_fill==1?'aspectFit':'aspectFill'}}"></image>
+                                <!-- 售罄 -->
+                                <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                                    <view class='txt'>售罄</view>
+                                </view>
+                                <view class='easy-price'>
+                                    <text style='font-size:24rpx;'>￥</text>
+                                    <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}</text>
+                                </view>
+                            </view>
+                        </navigator>
+                        <!-- 商品信息 -->
+                        <view class='goods_bottom' wx:if='{{size_type==undefined||size_type==1}}'>
+                            <navigator class='goods_bottom_nav'
+                                       url="/pages/product/details?product_id={{item.product_id}}" hover-class="none"
+                                       open-type="navigate">
+                                <!-- 商品名称 -->
+                                <view class="product-name textOmitted" wx:if='{{data.show_title==1}}'>
+                                    <text style='background:{{themeColorValue}}' wx:if="{{item.is_self_support==0}}"
+                                          id='ziying_text'>自营
+                                    </text>
+                                    {{item.name}}
+                                </view>
+                                <!-- 商品描述 -->
+                                <view class='product-desc' wx:if='{{data.describe}}'>
+                                    {{item.intro}}
+                                </view>
+                                <!-- 商品价格信息 -->
+                                <view class='product-msg'>
+                                    <!-- 价格 -->
+                                    <view class='left'>
+                                        <text class='price' wx:if='{{data.price==1}}' style='color:{{themeColorValue}}'>
+                                            <text style='font-size:24rpx;'>￥</text>
+                                            <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}
+                                            </text>
+                                        </text>
+
+                                    </view>
+                                    <!-- 购物袋按钮 -->
+                                    <view class='right' wx:if="{{data.buy_btn==1}}">
+                                        <text class='iconfont {{data.buy_btn_type==1?"icon-jiarugouwuche":"icon-jiahao"}}'
+                                              style='color:{{themeColorValue}};font-size:{{data.buy_btn_type==1?48:40}}rpx;'
+                                              catchtap="oppenShopping"
+                                              wx:if='{{data.buy_btn_type<=2&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}'
+                                              data-type="add_cart" data-product="{{item.product_id}}"></text>
+
+                                        <!-- 选择按钮类型3 -->
+                                        <!-- <view class='btn-car btn3'>购买</view> -->
+                                        <!-- wx:if='{{data.buy_btn_type>=4&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}' -->
+                                        <view class='btn-car btn{{data.buy_btn_type}}'
+                                              style='background:{{data.buy_btn_type==6?"transparent":themeColorValue}};border-color:{{data.buy_btn_type==6?themeColorValue:"none"}};color:{{data.buy_btn_type==6?themeColorValue:"#fff"}}'>
+                                            {{data.buy_btn_type==4?'订购': ((data.buy_btn_type>=5&&data.buy_btn_type
+                                            <=7)?((data.buy_btn_txt&&data.buy_btn_txt!='' )?data.buy_btn_txt: '马上抢'):
+                                            '')}}
+                                        </view>
+                                        <!-- <text class="appointText">{{item.custom_reservation_name ? item.custom_reservation_name : '预约'}}</text> -->
+                                    </view>
+                                </view>
+                            </navigator>
+                        </view>
+
+
+                    </view>
+                </swiper-item>
+            </block>
+
+            <block wx:if='{{data.show_line==1||(!data.show_line)}}' wx:for="{{content.product_list}}"
+                   wx:key="index">
+                <swiper-item>
+                    <view class="clearfix grouplist goods_box menu-style{{data.menu_style?data.menu_style:0}} box-radius{{data.pic_angle?data.pic_angle:0}}">
+                        <navigator
+                                url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+                                class="navigator"
+                                hover-class="none" open-type="navigate">
+
+                            <view class="productImg verticalCentering" style='position:relative'>
+                                <!-- <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(!data.size)}}' src='{{BASE_IMG_URL}}images/component/ange{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+                                <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(data.size)}}' src='{{BASE_IMG_URL}}images/component/ange_s_{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+                                <image wx:if='{{data.buy_ange==1&&data.goods_angle==6}}' src='{{data.angepic_url}}' class='ange-pic ange{{data.goods_angle}}' mode='aspectFill'></image> -->
+                                <image src="{{item.image}}" class='cover-img'
+                                       style="will-change:transform;border-radius:{{data.pic_angle==1?20:0}}rpx"
+                                       mode="{{data.pic_fill==1?'aspectFit':'aspectFill'}}"></image>
+                                <!-- 售罄 -->
+                                <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                                    <view class='txt'>售罄</view>
+                                </view>
+                                <view class='easy-price'>
+                                    <text style='font-size:24rpx;'>￥</text>
+                                    <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}</text>
+                                </view>
+                            </view>
+                        </navigator>
+                        <!-- 商品信息 -->
+                        <view class='goods_bottom' wx:if='{{size_type==undefined||size_type==1}}'>
+                            <navigator class='goods_bottom_nav'
+                                       url="/pages/product/details?product_id={{item.product_id}}" hover-class="none"
+                                       open-type="navigate">
+                                <!-- 商品名称 -->
+                                <view class="product-name textOmitted" wx:if='{{data.show_title==1}}'>
+                                    <text style='background:{{themeColorValue}}' wx:if="{{item.is_self_support==0}}"
+                                          id='ziying_text'>自营
+                                    </text>
+                                    {{item.name}}
+                                </view>
+                                <!-- 商品描述 -->
+                                <view class='product-desc' wx:if='{{data.describe}}'>
+                                    {{item.intro}}
+                                </view>
+                                <!-- 商品价格信息 -->
+                                <view class='product-msg'>
+                                    <!-- 价格 -->
+                                    <view class='left'>
+                                        <text class='price' wx:if='{{data.price==1}}' style='color:{{themeColorValue}}'>
+                                            <text style='font-size:24rpx;'>￥</text> 
+                                            <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}
+                                            </text>
+                                        </text>
+                                    </view>
+                                    <!-- 购物袋按钮 -->
+                                    <view class='right' wx:if="{{data.buy_btn==1}}">
+                                        <text class='iconfont {{data.buy_btn_type==1?"icon-jiarugouwuche":"icon-jiahao"}}'
+                                              style='color:{{themeColorValue}};font-size:{{data.buy_btn_type==1?48:40}}rpx;'
+                                              catchtap="oppenShopping"
+                                              wx:if='{{data.buy_btn_type<=2&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&data.size!=4}}'
+                                              data-type="add_cart" data-product="{{item.product_id}}"></text>
+
+                                        <!-- 选择按钮类型3 -->
+                                        <!-- <view class='btn-car btn3'>购买</view> -->
+                                        <!-- wx:if='{{data.buy_btn_type>=4&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}' -->
+                                        <view class='btn-car btn{{data.buy_btn_type}}' wx:if='{{data.size!=4}}'
+                                              style='background:{{data.buy_btn_type==6?"transparent":themeColorValue}};border-color:{{data.buy_btn_type==6?themeColorValue:"none"}};color:{{data.buy_btn_type==6?themeColorValue:"#fff"}}'>
+                                            {{data.buy_btn_type==4?'订购': ((data.buy_btn_type>=5&&data.buy_btn_type
+                                            <=7)?((data.buy_btn_txt&&data.buy_btn_txt!='' )?data.buy_btn_txt: '马上抢'):
+                                            '')}}
+                                        </view>
+                                        <!-- <text class="appointText">{{item.custom_reservation_name ? item.custom_reservation_name : '预约'}}</text> -->
+                                    </view>
+                                </view>
+                            </navigator>
+                        </view>
+
+
+                    </view>
+                </swiper-item>
+            </block>
+
+        </swiper>
+        <view class='no-group-data' wx:if='{{content.product_list.length==0}}' style='background:transparent;'>
+            <image class='no-product-pic' src='{{BASE_IMG_URL}}images/imgTxtCommon.png'></image>
+            <text>该分组下没有商品哦</text>
+        </view>
+
+
+    </view>
+
+
+    <view wx:if="{{data.size!=5}}"
+          class="clearfix shopProductList {{pageTheme}} Zy {{content.product_list.length==0?'haspos':''}}"
+          data-page="page.public.productList" data-desc="公共商品列表"
+          style="justify-content:{{content.product_list.length==1?'flex-start':'space-between'}}">
+        <view wx:if='{{content.product_list.length>0}}'
+              class="clearfix grouplist goods_box menu-style{{data.menu_style?data.menu_style:0}} box-radius{{data.pic_angle?data.pic_angle:0}}"
+              wx:for="{{content.product_list}}" wx:key="index">
+            <navigator
+                    url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+                    class="navigator"
+                    hover-class="none" open-type="navigate">
+                <view class="productImg verticalCentering" style='position:relative'>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(!data.size)}}'
+                           src='{{BASE_IMG_URL}}images/component/ange{{data.goods_angle}}.png'
+                           class='ange-pic ange{{data.goods_angle}}'></image>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(data.size)}}'
+                           src='{{BASE_IMG_URL}}images/component/ange_s_{{data.goods_angle}}.png'
+                           class='ange-pic ange{{data.goods_angle}}'></image>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle==6}}' src='{{data.angepic_url}}'
+                           class='ange-pic ange{{data.goods_angle}}' mode='aspectFill'></image>
+                    <image src="{{item.image}}"
+                           style="will-change:transform;border-radius:{{data.pic_angle==1?(data.size==3?10:20):0}}rpx"
+                           mode="{{data.pic_fill==1?'aspectFit':'aspectFill'}}"></image>
+                    <!-- 售罄 -->
+                    <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                        <view class='txt'>售罄</view>
+                    </view>
+                    <!-- <view class='ziying theme-bg-color' wx:if="{{item.is_self_support==0&&(content.show_title==0||show_title==0)}}">自营</view> -->
+                </view>
+            </navigator>
+            <!-- 商品信息 -->
+            <view class='goods_bottom' wx:if='{{data.show_title==1 || data.price==1 || data.describe || data.buy_btn}}'>
+                <navigator class='goods_bottom_nav' url="/pages/product/details?product_id={{item.product_id}}"
+                           hover-class="none" open-type="navigate">
+                    <!-- 商品名称 -->
+                    <view class="product-name textOmitted" wx:if='{{data.show_title==1}}'>
+                        <text style='background:{{themeColorValue}}' wx:if="{{item.is_self_support==0}}"
+                              id='ziying_text'>自营
+                        </text>
+                        {{item.name}}
+                    </view>
+                    <!-- 商品描述 -->
+                    <view class='product-desc' wx:if='{{data.describe}}'>
+                        {{item.intro}}
+                    </view>
+                    <!-- 商品价格信息 -->
+                    <view class='product-msg'>
+                        <!-- 价格 -->
+                        <view class='left'>
+                            <text class='price' wx:if='{{data.price==1}}' style='color:{{themeColorValue}}'>
+                                <text style='font-size:24rpx;'>￥</text>
+                                <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}</text>
+                                <!-- 下划价格 -->
+                                <text style='font-size:24rpx;color:#a0a0a0;padding-left:7rpx;text-decoration: line-through'
+                                      wx:if='{{item.original_price*1>0}}'>
+                                    ￥{{filter.transBigNumber(item.original_price,1)}}
+                                </text>
+                            </text>
+                        </view>
+                        <!-- 购物袋按钮 -->
+                        <view class='right' wx:if="{{data.buy_btn==1}}">
+                            <text class='iconfont {{data.buy_btn_type==1?"icon-jiarugouwuche":"icon-jiahao"}}'
+                                  style='color:{{themeColorValue}};font-size:{{data.buy_btn_type==1?48:40}}rpx;'
+                                  catchtap="oppenShopping"
+                                  wx:if='{{data.buy_btn_type<=2&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&data.size!=4}}'
+                                  data-type="add_cart" data-product="{{item.product_id}}"></text>
+
+                            <!-- 选择按钮类型3 -->
+                            <!-- <view class='btn-car btn3'>购买</view> -->
+                            <!-- wx:if='{{data.buy_btn_type>=4&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}' -->
+                            <view class='btn-car btn{{data.buy_btn_type}}' wx:if='{{data.size!=4}}'
+                                  style='background:{{data.buy_btn_type==6?"transparent":themeColorValue}};border-color:{{data.buy_btn_type==6?themeColorValue:"none"}};color:{{data.buy_btn_type==6?themeColorValue:"#fff"}}'>
+                                {{data.buy_btn_type==4?'订购': ((data.buy_btn_type>=5&&data.buy_btn_type
+                                <=7)?((data.buy_btn_txt&&data.buy_btn_txt!='' )?data.buy_btn_txt: '马上抢'): '')}}
+                            </view>
+                            <!-- <text class="appointText">{{item.custom_reservation_name ? item.custom_reservation_name : '预约'}}</text> -->
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!-- 没有数据 -->
+        <!-- <view class='no-group-data' wx:if='{{content.product_list.length==0}}' style='background:transparent;'>
+          <image class='no-product-pic' src='{{BASE_IMG_URL}}images/imgTxtCommon.png'></image>
+          <text>该分组下没有商品哦</text>
+        </view> -->
+
+
+    </view>
+
+
+
+<view wx:if="{{data.size!=5}}"
+          class="clearfix shopProductList {{pageTheme}} Zy {{content.product_list.length==0?'haspos':''}}"
+          data-page="page.public.productList" data-desc="公共商品列表"
+          style="justify-content:{{content.product_list.length==1?'flex-start':'space-between'}}">
+        <view wx:if='{{content.product_list.length>0}}'
+              class="clearfix grouplist goods_box menu-style{{data.menu_style?data.menu_style:0}} box-radius{{data.pic_angle?data.pic_angle:0}}"
+              wx:for="{{content.product_list}}" wx:key="index">
+            <navigator
+                    url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+                    class="navigator"
+                    hover-class="none" open-type="navigate">
+                <view class="productImg verticalCentering" style='position:relative'>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(!data.size)}}'
+                           src='{{BASE_IMG_URL}}images/component/ange{{data.goods_angle}}.png'
+                           class='ange-pic ange{{data.goods_angle}}'></image>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(data.size)}}'
+                           src='{{BASE_IMG_URL}}images/component/ange_s_{{data.goods_angle}}.png'
+                           class='ange-pic ange{{data.goods_angle}}'></image>
+                    <image wx:if='{{data.buy_ange==1&&data.goods_angle==6}}' src='{{data.angepic_url}}'
+                           class='ange-pic ange{{data.goods_angle}}' mode='aspectFill'></image>
+                    <image src="{{item.image}}"
+                           style="will-change:transform;border-radius:{{data.pic_angle==1?(data.size==3?10:20):0}}rpx"
+                           mode="{{data.pic_fill==1?'aspectFit':'aspectFill'}}"></image>
+                    <!-- 售罄 -->
+                    <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+                        <view class='txt'>售罄</view>
+                    </view>
+                    <!-- <view class='ziying theme-bg-color' wx:if="{{item.is_self_support==0&&(content.show_title==0||show_title==0)}}">自营</view> -->
+                    {{data.field_type}}
+                </view>
+            </navigator>
+            <!-- 商品信息 -->
+            <view class='goods_bottom' wx:if='{{data.show_title==1 || data.price==1 || data.describe || data.buy_btn}}'>
+                <navigator class='goods_bottom_nav' url="/pages/product/details?product_id={{item.product_id}}"
+                           hover-class="none" open-type="navigate">
+                    <!-- 商品名称 -->
+                    <view class="product-name textOmitted" wx:if='{{data.show_title==1}}'>
+                        <text style='background:{{themeColorValue}}' wx:if="{{item.is_self_support==0}}"
+                              id='ziying_text'>自营
+                        </text>
+                        {{item.name}}
+                    </view>
+                    <!-- 商品描述 -->
+                    <view class='product-desc' wx:if='{{data.describe}}'>
+                        {{item.intro}}
+                    </view>
+                    <!-- 商品价格信息 -->
+                    <view class='product-msg'>
+                        <!-- 价格 -->
+                        <view class='left'>
+                            <text class='price' wx:if='{{data.price==1}}' style='color:{{themeColorValue}}'>
+                                <text style='font-size:24rpx;'>￥</text>
+                                <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}</text>
+                                <!-- 下划价格 -->
+                                <text style='font-size:24rpx;color:#a0a0a0;padding-left:7rpx;text-decoration: line-through'
+                                      wx:if='{{item.original_price*1>0}}'>
+                                    ￥{{filter.transBigNumber(item.original_price,1)}}
+                                </text>
+                            </text>
+                        </view>
+                        <!-- 购物袋按钮 -->
+                        <view class='right' wx:if="{{data.buy_btn==1}}">
+                            <text class='iconfont {{data.buy_btn_type==1?"icon-jiarugouwuche":"icon-jiahao"}}'
+                                  style='color:{{themeColorValue}};font-size:{{data.buy_btn_type==1?48:40}}rpx;'
+                                  catchtap="oppenShopping"
+                                  wx:if='{{data.buy_btn_type<=2&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&data.size!=4}}'
+                                  data-type="add_cart" data-product="{{item.product_id}}"></text>
+
+                            <!-- 选择按钮类型3 -->
+                            <!-- <view class='btn-car btn3'>购买</view> -->
+                            <!-- wx:if='{{data.buy_btn_type>=4&&item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}' -->
+                            <view class='btn-car btn{{data.buy_btn_type}}' wx:if='{{data.size!=4}}'
+                                  style='background:{{data.buy_btn_type==6?"transparent":themeColorValue}};border-color:{{data.buy_btn_type==6?themeColorValue:"none"}};color:{{data.buy_btn_type==6?themeColorValue:"#fff"}}'>
+                                {{data.buy_btn_type==4?'订购': ((data.buy_btn_type>=5&&data.buy_btn_type
+                                <=7)?((data.buy_btn_txt&&data.buy_btn_txt!='' )?data.buy_btn_txt: '马上抢'): '')}}
+                            </view>
+                            <!-- <text class="appointText">{{item.custom_reservation_name ? item.custom_reservation_name : '预约'}}</text> -->
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </view>
+        <!-- 没有数据 -->
+        <!-- <view class='no-group-data' wx:if='{{content.product_list.length==0}}' style='background:transparent;'>
+          <image class='no-product-pic' src='{{BASE_IMG_URL}}images/imgTxtCommon.png'></image>
+          <text>该分组下没有商品哦</text>
+        </view> -->
+
+
+    </view>
+
+
+
+
+
+</template>

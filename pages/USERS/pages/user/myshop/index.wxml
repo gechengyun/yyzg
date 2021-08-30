@@ -1,0 +1,64 @@
+<!--pages/USERS/pages/user/myshop/index.wxml-->
+<!-- 图片广告 -->
+<import src="../../../../public/image_ad2.wxml" />
+<!--图片导航 -->
+<import src="../../../../public/editImageNav.wxml" />
+<!--魔方模块-->
+<import src="../../../../public/cube.wxml"></import>
+<!--富文本-->
+<import src="../../../../public/editText.wxml"></import>
+<view class="myshop_container">
+	<view class="myshop_head">
+		<image style="width:100%" mode="aspectFill" src="{{shopHomeData.agent_store_bg}}" />
+		<image class="myshop_storeLogo" src="{{shopHomeData.storelogo}}"/>
+		<view class="myshop_storeName">{{shopHomeData.storename}}</view>
+		<view wx:if="{{shopHomeData.is_my_fx_store==1}}" class="myshop_storeUpadate" style="background:rgba(244,244,244,0.59);color:#fff"
+     bindtap="getUserInfo"
+    >更新资料</view>
+		<!-- <view class="myshop_share iconfont icon-share1"></view> -->
+		<button class="myshop_share iconfont icon-share1" open-type='share' catchtap='_shareGroup'></button>
+		<view class="myshop_middleMoney">
+			<view class="myshop_balance">
+				<view class="myshop_balanceTop" data-type="balance" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+					<view class="myshop_balanceTopTitle">贷款余额</view>
+					<view class="myshop_balanceTopPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.store_balance:'_ _'}}</view>
+				</view>
+				<view class="myshop_balanceBottom">
+					<view class="myshop_balanceBottomLeft" data-type="allmoney" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+						<view class="myshop_bottomLeftPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.store_income:'_ _'}}</view>
+						<view class="myshop_bottomLeftTitle">累计收益(元)</view>
+					</view>
+					<view class="myshop_balanceBottomRight" data-type="jifen" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+						<view class="myshop_bottomRightPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.point:'_ _'}}</view>
+						<view class="myshop_bottomRightTitle">积分</view>
+					</view>
+				</view>
+			</view>
+			<view class="myshop_Withdrawal">
+				<view class="myshop_WithdrawalTop" data-type="usermoney" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+					<view class="myshop_balanceTopTitle">店铺余额</view>
+					<view class="myshop_balanceTopPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.balance:'_ _'}}</view>
+				</view>
+				<view class="myshop_WithdrawalBottom">
+					<view class="myshop_balanceBottomLeft" data-type="mouthmoney" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+						<view class="myshop_bottomLeftPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.monthincome:'_ _'}}</view>
+						<view class="myshop_bottomLeftTitle">本月收益</view>
+					</view>
+					<view class="myshop_balanceBottomRight" data-type="datemoney" bindtap="{{shopHomeData.is_my_fx_store==0?'askButton':'myCountData'}}">
+						<view class="myshop_bottomRightPrice" style="margin-top:{{shopHomeData.is_my_fx_store==1?'0rpx':'-12rpx'}}">{{shopHomeData.is_my_fx_store==1?my_account.todayincome:'_ _'}}</view>
+						<view class="myshop_bottomRightTitle">今日收益</view>
+					</view>
+				</view>
+			</view>
+			<view style="position:absolute;top:0rpx;left:0rpx;width:100%;height:100%;z-index:999" wx:if="{{_unlogin}}" catchtap="goDetail"></view>
+		</view>
+	</view> 
+  <view style="margin-top:240rpx"></view>
+  <button class="imgShare" open-type='share' catchtap='_shareGroup' style="background:url({{shopHomeData.agent_share_image}});background-size:100% 100%;background-repeat:no-repeat;"></button>
+  <template wx:for="{{shopHomeData.custom_field_list}}" 
+   wx:key="index"
+   wx:if="{{item.field_type}}" 
+   is="{{item.field_type}}"
+   data="{{content:item,sendcodeStatus,codenum,resetValue,videoSrc,imgSrc,actionSheetHidden,actionSheetVideo,province_index,province_name_arr,city_index,city_name_arr,country_index,country_name_arr,currentTab:currentTab,productList:productList,keyword:keyword,winWidth:winWidth, searchWrapObj: searchWrapObj, t_index: index,store_nav_list,themeColorValue,BASE_IMG_URL,field_type:item.field_type,mode_tyle,load_txt,is_member:shopHomeData.is_member,show_index_img:shopHomeData.show_index_img,last_index,make_fiex,showSearch,field_id:item.field_id,_unlogin,canIUse,is_gift:shopHomeData.is_gift,live_list,currentChannel,tagid,live_fiex,status,navHeight,last_filed_type,live_next_page,swiperCurIndex,subscribe_template_id,tempIndex:index,tempLastIndex:shopHomeData.custom_field_list.length,nowImgH,storeData:shopHomeData.store,phoneModel}}"/>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

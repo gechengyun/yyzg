@@ -1,0 +1,101 @@
+@import "../../css/tuan.wxss";
+.groupInfoTxt{
+  position: relative;
+}
+.cha_more{
+  position: absolute;
+  right: 10rpx;
+  top:20rpx;
+}
+.tuan_alap{
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top:0;
+  left: 0;
+  z-index: 9999;
+ }
+ .tuan_con{
+   width: 90%;
+   margin: 20% auto;
+   background: #fff;
+   z-index: 99999;
+   border-radius: 10rpx;
+   padding-bottom: 40rpx;
+ }
+ .tuan_til{
+   line-height: 90rpx;
+   height: 90rpx;
+   color: #333;
+   border-bottom: 1px solid #ddd;
+   width: 100%;
+   text-align: center;
+   font-size: 32rpx;
+   font-weight: bold;
+ }
+ .details .groupList .group .groupInfo.groupInfoCan{ width: 270rpx; }
+  .details .groupList .group button{ margin-right: 30rpx;}
+ .details .groupList .group button.cantuan{width: 60px; margin-right: 0}
+ .tuan_boxcon{ max-height: 600rpx; overflow-y: scroll; }
+ .close_btn{
+   position: absolute;
+   right: 20rpx;
+   top:9%;
+   width: 60rpx;
+   height: 60rpx;
+   z-index: 999;
+   background: #c8c8c8;
+   border-radius: 50%;
+   color: #fff;
+   transform: rotate(-45deg);
+   line-height: 60rpx;
+   text-align: center;
+   font-size: 50rpx;
+ }
+ .swiper_groupList{
+   height: 260rpx;
+   overflow: hidden;
+   background: #fff;
+ }
+ .details .groupList.groupListOne{
+   height: 120rpx;
+ }
+  .details .groupList.groupListTwo{
+     height: 240rpx;
+ }
+ .details .groupList.groupList.groupListOne .group button{
+   margin-right: 0
+ }
+ .details .groupList .group .groupInfo{
+   width: 290rpx;
+  }
+.overp{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+.details .groupList .group .groupTime{
+     width: 148rpx;
+     margin-right: 5rpx;
+    text-align: right
+}
+.details .groupList .group .groupTime text{
+  text-align: right;
+  margin-top:11rpx;
+
+}
+
+.detailsInfo .ziying{
+  width:60rpx;
+  height:30rpx;
+  line-height:30rpx;
+  font-size:22rpx!important;
+  color:white!important;
+  text-align:center;
+  border-radius:5rpx;
+  margin-top:10rpx;
+  display:inline-block;
+  float:left;
+
+}

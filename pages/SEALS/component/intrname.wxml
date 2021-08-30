@@ -1,0 +1,6 @@
+<template name="intrname">
+  <view class="card-introduce card-list">
+    <view class="ci-name list-name">{{titleName.tname}}</view>
+    <view class="ci-content">{{cardData.introduce}}</view>
+  </view>
+</template>

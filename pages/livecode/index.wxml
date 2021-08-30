@@ -1,0 +1,37 @@
+<!--pages/livecode/qrcode.wxml-->
+<view class="live-code-page {{pageTheme}}">
+    <view class="live-code-main-content" wx:if="{{live_code_data}}">
+        <view class="live-code-main-title">
+            邀请函
+        </view>
+        <view class="live-code-underline"></view>
+        <view class="live-code-header">
+            <view class="live-code-logo">
+                <image src="{{live_code_data.logo}}"></image>
+            </view>
+            <view class="live-code-shop">
+                <view class="live-code-shop-name">{{live_code_data.name}}</view>
+                <view class="live-code-desc">诚挚的邀请您加入{{live_code_data.live_code_title||"live_code_data.group_name"}}</view>
+            </view>
+        </view>
+        <view class="live-code-qrcode">
+            <image src="{{live_code_data.url}}"></image>
+        </view>
+        <image class="live-code-bg-1" src="{{BASE_IMG_URL}}images/balloon.png"></image>
+        <image class="live-code-bg-2" src="{{BASE_IMG_URL}}images/balloon.png"></image>
+    </view>
+    <view class="live-code-tips">用微信扫一扫，或将海报发送给好友长按即可入群</view>
+    <view class="live-code-btns">
+        <button bindtap="sharePost" class="theme-bg-color">生成图片</button>
+        <button open-type="share" class="theme-bg-color">立即分享</button>
+    </view>
+    <canvas canvas-id='sharePost'
+            style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position: absolute;left: 2000rpx;top: 0;"></canvas>
+</view>
+<dialog-modal
+        dialogHidden="{{dialog.dialogHidden}}"
+        titleMsg="{{dialog.titleMsg}}"
+        auth-btn="{{true}}"
+        determineBtnTxt="{{dialog.determineBtnTxt}}"
+></dialog-modal>
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,94 @@
+.apply-form-wrap{
+  height: 100%;
+}
+
+.apply-form-input-bordernone{
+  border: none;
+}
+.apply-form-input text:nth-of-type(1){
+  width: 13rpx;
+	height: 12rpx;
+  line-height: 16rpx;
+	font-size: 26rpx;
+	color: #ff6030;
+}
+.apply-form-input input::placeholder{
+  color: #cccccc;
+}
+.apply-form-button button{
+  width:180rpx;
+  height:80rpx;
+  line-height: 80rpx;
+  font-size: 36rpx;
+  border-radius: 20rpx;
+  border: none;
+  margin: 0;
+  background: none;
+}
+.confrim{
+  background: lightgreen!important;
+  color: #fff!important;
+  
+}
+.reject{
+  margin: 0 60rpx 0 150rpx!important;
+  border: 1rpx solid #ccc!important;
+}
+textarea{
+  width: 636rpx;
+	height: 125rpx;
+  padding: 24rpx 27rpx;
+  font-size: 30rpx;
+	background-color: #f7f7f7;
+	border: solid 1rpx #f1f1f1;
+}
+.margin-top-20{
+  margin-top: 20rpx;
+}
+.textareabj{
+  padding: 0 30rpx 32rpx;
+  background: #fff;
+}
+
+.getwxtel{
+  color: #fff;
+  background-color: #ff6030;
+}
+.getcode{
+  color: #333333;
+  background-color: #ff6030;
+  
+}
+.now-apply-text{
+  display: block;
+  margin-bottom: 30rpx;
+  text-align: center;
+  font-size: 24rpx;
+	color: #999999;
+}
+.addressEditCentent input {width:70%;padding:0 10rpx;font-size:26rpx;color:#666;line-height:40rpx;display:inline-block;vertical-align:top;border:0;}
+ .addressEditCentent .regionSelection {width:70%;height:40rpx;padding:0 10rpx;font-size:0;color:#666;line-height:40rpx;display:inline-block;vertical-align:top;overflow:hidden;border:0;}
+.addressEditCentent picker {width:33%;height:40rpx;padding:0 10rpx;font-size:26rpx;color:#666;line-height:40rpx;text-align:center;display:inline-block;vertical-align:top;overflow:hidden;border:0;box-sizing:border-box;}
+.addressEditCentent:last-child {border-bottom:0;}
+.goSelect{
+  border-left: 1rpx  #f1f1f1 solid;
+  width: 15%;
+  height: 60rpx;
+  position: relative;
+}
+.goSelect::before{
+   position: absolute;
+  top: 0;
+  line-height: 60rpx;
+  right: 5rpx;
+  font-family: 'iconfont' !important;
+  font-size: 40rpx;
+  font-style: normal;
+  font-weight: 100;
+  /* color: #f00; */
+  color: #999999;
+  display: block;
+  content: '\e636';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

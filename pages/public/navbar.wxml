@@ -1,0 +1,24 @@
+<!-- 导航模板 -->
+<!-- 订单提醒功能 -->
+<template name="navbar">
+    <block>
+      <view class='navbox {{set_para.need_fixed?"fixed-top":""}}' id='nav_bar' style='background:{{nav_data.bgcolor?nav_data.bgcolor:"transparent"}};border-bottom:1rpx solid {{(nav_data.line==1)?nav_data.hgcolor:"transparent"}}'>
+<swiper
+display-multiple-items="{{set_para.multiple_num}}"
+style='height:90rpx;'
+
+>
+  <block wx:for="{{nav_data.nav}}" wx:key="index">
+    <swiper-item>
+     <view class='nav-content'>
+        <view class='nav-txt' data-id='{{index}}' data-url='{{item.url}}' style='color:{{set_para.nav_check_id==index? nav_data.hgcolor:(nav_data.color?nav_data.color:"")}};border-bottom: 1rpx solid {{set_para.nav_check_id==index? nav_data.color:"transparent"}}' bindtap='addNavCheck' >
+        {{item.title}}
+        </view>
+     </view>
+    </swiper-item>
+  </block>
+</swiper>
+</view>
+<view class='next-navbar' wx:if="{{set_para.need_fixed}}" style='background:{{nav_data.bgcolor?nav_data.bgcolor:"transparent"}};'></view>
+    </block>
+</template>

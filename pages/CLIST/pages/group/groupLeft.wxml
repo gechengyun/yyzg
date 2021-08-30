@@ -1,0 +1,55 @@
+<!--pages/CLIST//pages/group/groupLeft.wxml-->
+<import src="../../../public/editProductSearch.wxml" /><!--商品搜索 -->
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/shoppingCat.wxml" /><!-- 购物袋 -->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+  <!--商品搜索 -->
+    <template is="search" data="{{themeColorValue,BASE_IMG_URL,showSearch,fiexdTop:false}}" />
+    <view class="posi-box" wx:if='{{fiexdTop==true}}'>占位</view>
+<view class="group-page" style="border-top:10rpx solid #ececec;">
+  <!-- 商品列表 -->
+  <view class="goods-menu">
+    <view wx:for='{{goods_group_list}}' wx:key='{{index}}' data-index='{{index}}' data-groupid='{{item.group_id}}' class="{{currentTab==index?'active':''}}" style="color:{{currentTab==index?themeColorValue:'#353535'}};border-left:4rpx solid {{currentTab==index?themeColorValue:'transparent'}};" bindtap="checkGroup">{{item.title}}</view>
+
+  </view>
+  <view class="goods-block" >
+  <scroll-view scroll-y style="height: 82vh;" bindscrolltolower="loadingGoods" scroll-top="{{scrollTop}}" data-groupid='{{checkGroupId}}'>
+  <navigator wx:for='{{product_list}}' wx:key='{{index}}'  url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}" class="navigator"
+              hover-class="none" open-type="navigate">
+    <view class="goods-box" data-productid='{{item.product_id}}'>
+      <view class="img-box">
+        <image src="{{item.image}}" lazy-load='{{true}}' mode='aspectFill' class="img-goods"></image>
+        <!-- 售罄 -->
+        <view class="sold-out" wx:if='{{item.show_sold_out==1}}'>售罄</view>
+      </view>
+      
+      <view class="goods-info">
+        <view class="name">{{item.name}}</view>
+        <view class="opra">
+          <view class="price" style="color:{{themeColorValue}};">
+            <text class="price-desc">￥</text>
+            <text class="price-text">{{filter.transBigNumber(item.price,1)}}</text>
+
+            <text class="originalPrice" wx:if="{{item.original_price && item.original_price * 1 != 0 && item.original_price != item.price}}">￥{{filter.transBigNumber(item.original_price,1)}}</text>
+          </view>
+          <text class="iconfont icon-jiahao" catchtap="oppenShopping" wx:if='{{item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97}}' style="color:{{themeColorValue}};width:60rpx;text-align:left;font-size:40rpx;" data-type="add_cart" data-product="{{item.product_id}}"></text>
+        </view>
+      </view>
+      
+    </view>
+    </navigator>
+
+    <view wx:if='{{page!=0 && product_list.length==0}}' class="no-data">此分组商品暂无数据</view>
+    <view class="load-over" wx:if='{{product_list.length!=0}}'>{{no_data}}</view>
+  </scroll-view>
+    
+
+
+  </view>
+</view>
+
+<block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+</block>
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<include src="/pages/public/page_footer.wxml"></include>

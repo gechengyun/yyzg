@@ -1,0 +1,59 @@
+<template name="fans">
+<!-- fansStatus: 0:为成为粉丝，1：已成为粉丝,2:粉丝团规则 -->
+  <cover-view class="live-component-cloth">
+		<cover-view class="layer" bindtap="nowRankClose" catchtouchmove="ture"></cover-view>
+		<cover-view class="shoppingLayer" animation="{{animation}}" data-page="pages.LIVEVIDEO.pages.component.fans">
+			<cover-view style="overflow-y: scroll;height:600rpx;">
+        <cover-view class="fans-title" style="background-color:{{fansStatus?'#f5f5f5':''}}">
+          <block wx:if="{{fansStatus == 2}}">
+            <cover-view class="go-fans" bindtap="goFans">
+              <cover-view class="go-fans-before"></cover-view>
+              <cover-view class="go-fans-after"></cover-view>
+            </cover-view>
+            <cover-view class="fans-title-txt" wx:if="{{fansStatus}}">粉丝团规则说明</cover-view>
+          </block>
+          <block wx:else>
+            <cover-image class="fans-img-l" src="https://s.404.cn/applet/images/qudao/zhibo/fans_back.png" bindtap="fansList"></cover-image>
+            <cover-view class="fans-title-txt" wx:if="{{fansStatus}}">我的粉丝团等级</cover-view>
+            <cover-image class="fans-img-r" src="https://s.404.cn/applet/images/qudao/zhibo/fans_rule.png" bindtap="fansRule" wx:if="{{fansData.description}}"></cover-image>
+          </block>
+        </cover-view>
+        <cover-view class="fansed-content" wx:if="{{fansStatus == 1}}">
+          <cover-view class="fansed-des">粉丝特权持续在线，让主播时刻看到你~</cover-view>
+          <cover-view class="fansed-tip2">
+            <cover-image class="fansed-img" src="https://s.404.cn/applet/images/degreebg/degree_bg{{fansData.now_level}}.png"></cover-image>
+            <cover-view class="fansed-tip-name">{{fansData.level_name}}</cover-view>
+          </cover-view>
+          <cover-view class="fansed-gared">
+            <cover-view class="fansed-tip" wx:if="{{fansData.next_level}}">差一点点就能升一级，加油哦~</cover-view>
+            <cover-view class="fansed-tip" wx:else>
+              <cover-view>恭喜您已达到粉丝团最高级别</cover-view>
+              <cover-view>敬请期待解锁更高等级</cover-view>
+            </cover-view>
+            <cover-view class="fansed-progress">
+              <cover-image class="fansed-progress-bar" src="https://s.404.cn/applet/images/qudao/zhibo/bgbuy.png" style="width: {{fansData.intimacy/fansData.next_intimacy*100}}%;"></cover-image>
+            </cover-view>
+            <cover-view class="fansed-progress-num">
+              <cover-view>Lv.{{fansData.now_level}}</cover-view>
+              <cover-view>Lv.{{fansData.next_level?fansData.next_level:fansData.now_level}}</cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class="fans-rule-content" wx:elif="{{fansStatus == 2}}">{{fansData.description}}</cover-view>
+        <cover-view class="fansing-content" wx:else>
+          <cover-view class="fansing-top">
+            <cover-view class="fansed-des fansing-des">{{liveVideoData.nickname}}的粉丝团·{{fansData.fans_num}}人</cover-view>
+            <cover-view class="fansed-tip">加入粉丝团即可享受粉丝专属特权</cover-view>
+          </cover-view>
+          <cover-view class="fansing-middle">
+            <cover-view class="fansing-title"><cover-view class="fansing-title-text">粉丝特权</cover-view></cover-view>
+            <cover-image class="fansing-img" src="https://s.404.cn/applet/images/qudao/zhibo/fans_img.png"></cover-image>
+            <cover-view class="fansing-tips">专属进场</cover-view>
+          </cover-view>
+          <cover-view class="fansing-bottom" bindtap="joinFans">{{fansData.reward_money}}加入粉丝团</cover-view>
+        </cover-view>
+      </cover-view>
+		</cover-view>
+    <cover-image class="fans-img-avatar" src="{{liveVideoData.avatar}}" wx:if="{{fansStatus == 0}}"></cover-image>
+	</cover-view>
+</template>

@@ -1,0 +1,48 @@
+.cash-pay .layer { height: 100%; width: 100%; position: fixed; top: 0; opacity: 0.62; background-color: #000000; z-index: 2; }
+
+.cash-pay .box { position: fixed; left: 85rpx; top: 100rpx; width: 580rpx; height: 450rpx; background-color: #fafafa; border-radius: 24rpx; z-index: 10; animation-duration: 0.5s; animation-name: zoomInFade; }
+
+.cash-pay .box .box-header { height: 99rpx; line-height: 99rpx; width: 100%; text-align: center; border-bottom: solid 1px #dfdfdf; }
+
+.cash-pay .box .header-title { font-weight: bold; color: #333333; font-size: 32rpx; }
+
+.cash-pay .box .header-close { position: absolute; top: 0; right: 28rpx; font-size: 36rpx; color: #777777; }
+
+.cash-pay .box .box-content { padding: 25rpx; }
+
+.cash-pay .box .order-count-title { text-align: center; font-size: 30rpx; color: #333333; }
+
+.cash-pay .box .order-count { margin-top: 10rpx; text-align: center; font-size: 64rpx; font-weight: bold; color: #333333; }
+
+.cash-pay .box .order-info { margin-top: 10rpx; height: 44rpx; }
+
+.cash-pay .box .order-info .password-title { float: left; font-family: PingFang-SC-Regular; font-size: 30rpx; font-weight: normal; font-stretch: normal; letter-spacing: 0px; color: #6e6e6e; }
+
+.cash-pay .box .order-info .remain-money { float: right; font-family: PingFang-SC-Regular; font-size: 26rpx; font-weight: normal; font-stretch: normal; letter-spacing: 0px; }
+
+.cash-pay .box .password-field { margin-top: 10rpx; position: relative; }
+
+.cash-pay .box .password-field .password-hidden { position: absolute; left: 0; top: 0; height: 0rpx; width: 528rpx; z-index: -1; }
+
+.cash-pay .box .password-field .password-field-container { display: flex; width: 528rpx; border: 1px solid #b5b5b5; border-right: none; z-index: 3; }
+
+.cash-pay .box .password-field .password-field-container .password-field-item { flex: 1; width: 88rpx; height: 88rpx; line-height: 83rpx; border-right: 1px solid #b5b5b5; text-align: center; }
+
+.blackTheme.cash-pay .box .remain-money { color: #000000; }
+
+.redTheme.cash-pay .box .remain-money { color: #FA0029; }
+
+.orangeTheme.cash-pay .box .remain-money { color: #FF5C1C; }
+
+.blueTheme.cash-pay .box .remain-money { color: #0098F8; }
+
+.pinkDarkTheme.cash-pay .box .remain-money { color: #FF007C; }
+
+.purpleTheme.cash-pay .box .remain-money { color: #7948FD; }
+
+.brownTheme.cash-pay .box .remain-money { color: #B7A392; }
+
+@keyframes zoomInFade { from { transform: scale(1.2);
+    opacity: .5; }
+  to { transform: scale(1);
+    opacity: 1; } }

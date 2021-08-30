@@ -1,0 +1,246 @@
+<!--pages/SHOPGOODS//pages/user/balanceManage/balanceManage.wxml-->
+<import src="../../../../public/warning.wxml" />
+<wxs src="../../../../../utils/filter.wxs" module="filter"></wxs>
+<view class='mymoney {{pageTheme}}'>
+	<block wx:if="{{showHead}}">
+		<view class='header'>
+			<view class='item  {{btn_index==0?"theme-color":""}}' data-index='0' catchtap='switchTab'>
+				充值
+				<view class='line {{btn_index==0?"theme-bg-color":""}}'></view>
+			</view>
+			<view class='item  {{btn_index==1?"theme-color":""}}' data-index='1' catchtap='switchTab'>
+				使用明细
+				<view class='line {{btn_index==1? "theme-bg-color": ""}} '></view>
+			</view>
+		</view>
+		<view style="height: 110rpx;"></view>
+	</block>
+	<!--充值-->
+	<block wx:if="{{btn_index==0}}">
+		<view class="balance-title">
+			<text>我的余额</text>
+			<view class="balance-num">{{cashConfig.cash?cashConfig.cash:'0.00'}}</view>
+		</view>
+		<view class="balance-tip">请{{balanceType == 2?'选择':'输入'}}充值金额</view>
+		<block wx:if="{{balanceType == 2}}">
+			<view class="balance-mode" wx:if="{{cashConfig.recharge_set.length>0}}">
+			  <!-- 做点击事件的时候记得判断有无代金券，有则显示代金券，没有不显示 -->
+				<view class="balance-mode-item" data-idx="{{index}}" data-id="{{item.id}}" bindtap="balanceMode" style="border-color:{{modeIdx == index?themeColorValue:''}}" wx:for="{{cashConfig.recharge_set}}" wx:key="index" data-coupon_count="{{item.coupon_count}}" data-couponList="{{item.coupon}}">
+					<text>￥{{item.money}}</text>
+					<text class="balance-mode-item-b" wx:if="{{item.money_given>0}}">赠送￥{{item.money_given}}</text>
+					<text class="balance-mode-item-b" wx:if="{{item.coupon_count>0}}">赠送{{item.coupon_count}}张代金劵</text>
+				</view>
+			</view>
+			<view class="balance-ipt" wx:if="{{0}}">
+				<input placeholder="点击输入其他金额" bindinput="changeMoneyNum" type='digit' value="{{amount}}"></input>
+			</view>
+			<view class="balance-tips" style="color: {{themeColorValue}}" wx:if="{{cashConfig.istype==3}}">注意：充值送余额啦~充值即送余额，数量有限，先到先得~</view>
+			<view class="balance-tips" style="color: {{themeColorValue}}" wx:if="{{cashConfig.istype==2}}">注意：充充值送券啦~充值即送代金券，数量有限，先到先得~</view>
+			<view class="balance-tips" style="color: {{themeColorValue}}" wx:if="{{cashConfig.istype==4}}">注意：送券又送余额，充值有礼正在进行中~</view>
+		</block>
+		<block wx:elif="{{balanceType == 1}}">
+			<view class="cashmoney">
+				<view class='money'>
+					<view class='num'>
+						￥<input placeholder='0.00' bindinput="changeMoneyNum" placeholder-style='color:#333;' type='digit' value='{{amount}}'></input>
+					</view>
+				</view>
+				<view class="give-money">
+					<text>赠送金额/元：</text>
+					<input placeholder='0.00' placeholder-style='color:#bbb;' value="{{giveAmount}}" disabled="{{true}}"></input>
+				</view>
+				<view class="balance-tips" style="color: {{themeColorValue}}">充值有礼：余额充值按{{cashConfigItem.per}}%比例赠送。充多增多。时间有限，先到先得~</view>
+			</view>
+		</block>
+		<block wx:elif="{{balanceType == 0}}">
+			<view class="cashmoney">
+				<view class='money'>
+					<view class='num'>
+						￥<input placeholder='0.00' bindinput="changeMoneyNum" placeholder-style='color:#333;' type='digit' value='{{amount}}'></input>
+					</view>
+				</view>
+			</view>
+		</block>
+		<view class='message' wx:if="{{0}}">
+			<view class='title'>备注</view>
+			<input placeholder="请填写备注" bindinput="changeBak" value="{{bak}}"></input>
+		</view>
+		<!-- 点击充值金额显示优惠券 -->
+		<!-- <scroll-view scroll-y class='coupon' wx:if="{{couponShowOrHide}}" style="height:{{filter.getRechargeCoupon(coupon_count)}}rpx">
+		  <view class="rechargeCouponsList" wx:for="{{couponList}}" wx:key="{{item.id}}">
+			  <view class="couponsItem">
+				   <image src="{{BASE_IMG_URL}}/images/grass/coupons.png" mode="aspectFit"></image>
+					 <view class="couponsMoney" style="color:{{themeColorValue}}"><text style="font-size:22rpx">￥</text>{{item.face_money}}</view>
+					 <view class="couponsType">{{item.is_all_product=='0'?'不限商品':'限商品'}}</view>
+					 <view class="couponsPrice">{{item.name}}</view>
+					 <view class="couponsUse">{{item.limit_money=='0.00'?'不限金额':'满'+item.limit_money+'可用'}}</view>
+					 <view wx:if="{{item.value_type=='0'}}" class="couponsTermOfVilid">领取后{{item.late_begin==0?'当':item.late_begin}}天生效,有效期{{item.late_value}}天</view>
+					 <view wx:if="{{item.value_type=='1'}}" class="couponsTermOfVilid">有效期{{item.start_time}}至{{item.end_time}}</view>
+				</view>
+      </view>
+		</scroll-view> -->
+		<view class='coupon' wx:if="{{couponShowOrHide}}">
+		  <view class="rechargeCouponsList" wx:for="{{couponList}}" wx:key="{{item.id}}">
+			  <view class="couponsItem">
+				   <image src="{{BASE_IMG_URL}}/images/grass/coupons.png" mode="aspectFit"></image>
+					 <view class="couponsMoney" style="color:{{themeColorValue}}"><text style="font-size:22rpx">￥</text>{{item.face_money}}</view>
+					 <view class="couponsType">{{item.is_all_product=='0'?'不限商品':'限商品'}}</view>
+					 <view class="couponsPrice">{{item.name}}</view>
+					 <view class="couponsUse">{{item.limit_money=='0.00'?'不限金额':'满'+item.limit_money+'可用'}}</view>
+					 <view wx:if="{{item.value_type=='0'}}" class="couponsTermOfVilid">领取后{{item.late_begin==0?'当':item.late_begin}}天生效,有效期{{item.late_value}}天</view>
+					 <view wx:if="{{item.value_type=='1'}}" class="couponsTermOfVilid">有效期{{item.start_time}}至{{item.end_time}}</view>
+				</view>
+      </view>
+		</view>
+		<!-- 充值成功弹窗 -->
+    <view class="couponsAllContainer" wx:if="{{couponsShowOrTrue}}">
+      <view class="couponsAllContainer_1 animated zoom{{couponsType}}">
+        <view class="couponsCenterContainer" style="background:{{themeColorValue}};height:{{filter.getSuccessContainer(Rechargecount)}}rpx">
+				  <image src="{{BASE_IMG_URL}}/images/grass/coupons_success_header.png" class="couponsContainer_header"></image>
+					<view class="couponsTitle">充值成功</view>
+          <view bindtap="closeAgency" class="iconfont icon-iconfonticonfontclose couponsContainer_close_btn"></view>
+					<view class="couponsDescripe">- {{Rechargecount}}张优惠券已成功下发账户 -</view>
+	        <scroll-view scroll-y class='coupon_success' style="height:{{filter.getRechargeCouponSuccess(Rechargecount)}}rpx">
+		        <view class="rechargeCouponsSuccessList" wx:for="{{couponSuccessList}}" wx:key="{{item.id}}">
+		      	  <view class="coupons_successItem">
+		      		   <image src="{{BASE_IMG_URL}}/images/grass/coupons_success.png" mode="aspectFit"></image>
+		      			 <view class="coupons_successMoney" style="color:{{themeColorValue}}"><text style="font-size:22rpx">￥</text>{{item.face_money}}</view>
+		      			 <view class="coupons_successPrice">{{item.cname}}</view>
+		      			 <view class="coupons_successUse">{{item.limit_money=='0.00'?'不限定':'满'+item.limit_money+'可用'}}</view>
+								 <view class="coupons_successReceived" style="background:{{themeColorValue}}">已领取</view>
+		      		</view>
+            </view>
+		      </scroll-view>
+					<view class="couponsApply" style="color:{{themeColorValue}}" catchtap="getMyApply">立即使用</view>
+        </view>
+      </view>
+    </view>
+		<view class="balance-type">
+			<view class="balance-type-title">支付方式</view>
+			<view class="balance-type-list">
+				<view class="balance-type-item" data-idx="{{0}}" bindtap="balanceTypes" wx:if="{{cashConfig.isalipay}}">
+					<view class="balance-type-left">
+						<text class="iconfont icon-umidd17"></text>
+						<text>支付宝支付</text>
+					</view>
+					<view class="balance-type-right">
+						<text class="iconfont {{balanceIdx == 0?'icon-xuanzhong':'icon-unselected'}}" style="color: {{balanceIdx == 0?themeColorValue:''}};"></text>
+					</view>
+				</view>
+				<view class="balance-type-item" data-idx="{{1}}" bindtap="balanceTypes" wx:if="{{cashConfig.isappletpay}}">
+					<view class="balance-type-left">
+						<text class="iconfont icon-weixin"></text>
+						<text>微信支付</text>
+					</view>
+					<view class="balance-type-right">
+						<text class="iconfont {{balanceIdx == 1?'icon-xuanzhong':'icon-unselected'}}" style="color: {{balanceIdx == 1?themeColorValue:''}};"></text>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="submit-btn">
+			<view class='txbtn theme-bg-color' style="background:{{amount!=0 || modeIdx != -1?'':'#e1e1e1'}}" catchtap='{{amount!=0 || modeIdx != -1?"getMycash":""}}'>确认支付<text wx:if="{{amount!=0 || modeIdx != -1}}">￥{{amount || modeAmount}}</text></view>
+		</view>
+
+		<!-- 充值流水 -->
+		<view class="cash-list">
+			<view class="cash-title">充值流水<view class='line theme-bg-color}}'></view></view>
+			<view class="cash-box" wx:if="{{listData.cash_list&&listData.cash_list.length != 0}}">
+				<view class="list-item" wx:for="{{listData.cash_list}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-time">
+              <text>{{item.dateline_str}}</text>
+            </view>
+            <view class="li-order">
+              <text>订单编号：{{item.trade_no}}</text>
+              <text class="order-copy" data-ordernum="{{item.trade_no}}" bindtap="orderCopy">复制</text>
+            </view>
+						<view class="li-order" wx:if="{{0}}">备注：{{item.bak?item.bak:'无'}}</view>
+          </view>
+          <view class="li-right" style="color:{{item.money*1>0?'green':''}}">{{item.money*1>0?'+':''}}{{item.money}}</view>
+        </view>
+        <view wx:if="{{isOver1}}" class='isover'>没有更多数据啦~</view>
+			</view>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view>
+	</block>
+  <!--使用明细-->
+	<block wx:if="{{btn_index==1}}">
+		<view class='list'>
+			<view class='date'>
+				<view class='month' catchtap='chooseDate'>{{showDate==''?"本月":showDate}}
+				<text class="iconfont icon-xia"></text>
+				</view>
+				<view class="total">总金额：<text>￥{{listData.totalmoney?listData.totalmoney:'0.00'}}</text></view>
+			</view>
+      <block wx:if="{{listData.cash_list&&listData.cash_list.length != 0}}">
+        <view class="list-item" wx:for="{{listData.cash_list}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-name">
+              <text>{{item.type_txt}}</text>
+							<text class="li-product-name" wx:if="{{item.product.length == 1}}">【{{item.product[0].name}}】</text>
+							<text class="li-product-name" wx:if="{{item.product.length > 1}}">【{{item.product[0].name}}】等{{item.product.length}}件</text>
+            </view>
+            <view class="li-time">{{item.dateline_str}}</view>
+            <view class="li-order">
+              <text>订单编号：{{item.trade_no}}</text>
+              <text class="order-copy" data-ordernum="{{item.trade_no}}" bindtap="orderCopy">复制</text>
+            </view>
+          </view>
+          <view class="li-right" style="color:{{item.money*1>0?'green':''}}">{{item.money*1>0?'+':''}}{{item.money}}</view>
+        </view>
+        <view wx:if="{{isOver2}}" class='isover'>没有更多数据啦~</view>
+      </block>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view>
+	</block>
+	<!--底部日期-->
+	<view class='chosedate upDown' wx:if="{{chosedatestate}}">
+		<view class='title'>
+			<!-- <view class='txt theme-color' catchtap='changeDateType'>按{{time_type==1?'月':'日'}}选择</view> -->
+			<view class='txt theme-color'>按{{time_type==1?'月':'日'}}选择</view>
+			<view class='btntrue theme-color' catchtap='okTrue'>完成</view>
+		</view>
+		<!--按日-->
+		<block wx:if="{{time_type==2}}">
+			<view class='showdate'>
+				<input class='time theme-color' placeholder='{{start_time}}' catchtap='bindDate' data-type="start" value='{{start_time}}' disabled="{{true}}"></input>
+				<view style='margin:0 20rpx'>至</view>
+				<input class='time theme-color' placeholder='{{end_time}}' catchtap='bindDate' data-type="end" value='{{end_time}}' disabled="{{true}}"></input>
+			</view>
+			<picker-view indicator-style="height: 50px;" style="width: 100%; height: 400rpx;" value="{{value}}" bindchange="bindChange">
+				<picker-view-column>
+					<view wx:for="{{years}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{months}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{days}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+			</picker-view>
+		</block>
+		<!--按月-->
+		<block wx:elif="{{time_type==1}}">
+			<view class='showdate'>
+				<input class='time theme-color' placeholder='{{now_month}}' value='{{now_month}}' disabled="{{true}}"></input>
+			</view>
+			<picker-view indicator-style="height: 50px;" style="width: 100%; height: 400rpx;" value="{{value}}" bindchange="bindChange">
+				<picker-view-column>
+					<view wx:for="{{years}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{months}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+			</picker-view>
+		</block>
+	</view>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,39 @@
+<!--我的订单-维权详情页面 -->
+<import src="../../public/payment.wxml" />
+<import src="../../public/warning.wxml" />
+<import src="../../public/logistics.wxml" />
+<import src="../../public/showBigPic.wxml" />
+<view class="container payment {{pageTheme}}" data-page="page.order.returnCompletion">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <template is="payment" data="{{paymentData:returnData,postage:postage, showMessage: showMessage,store_nav_list}}" />
+    <view class="paymentTitle">申请维权信息</view>
+    <view class="paymentInfo">
+        <view>维权数量：{{returnData.rights.pro_num}}</view>
+        <view>维权原因：{{returnData.rights.type_txt}}</view>
+        <view>手机号码：{{returnData.rights.phone}}</view>
+        <view>维权说明：{{returnData.rights.content}}</view>
+        <view>维权时间：{{returnData.rights.dateline_txt}}</view>
+        <view wx:if="{{returnData.rights.images!=''}}">维权图片</view>
+        <view wx:if="{{returnData.rights.images!=''}}" class="returnArticle addImgCentent">
+            <view class="addImgList">
+                <view wx:for="{{returnData.rights.images}}" wx:key="">
+                    <image src="{{item}}" bindtap="showBigPic"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="paymentTitle">审核信息</view>
+    <view class="paymentInfo">
+        <view>申请状态：
+            <text class="red">{{returnData.rights.status_txt}}</text>
+        </view>
+        <view wx:if="{{(returnData.rights.status==2)}}">
+            <view>审核时间：{{returnData.rights.cancel_dateline_txt}}</view>
+            <view>审核理由：{{returnData.rights.store_content}}</view>
+        </view>
+    </view>
+    <block wx:if="{{showBigPic}}">
+        <template is="showBigPic" data="{{content: imgList, showBigPic: showBigPic}}" />
+    </block>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

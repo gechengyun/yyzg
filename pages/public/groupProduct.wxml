@@ -1,0 +1,45 @@
+<!-- 餐饮小食2 -->
+<template name="goods_group4">
+  <import src="../public/groupProductList.wxml" />
+  <view data-page="page.public.editProductList" id='product' class="{{content.content.goods_group_list == '' ? 'hide' : '' }}" data-desc="餐饮小食2">
+    <!-- 商品分组标题 -->
+    <view class='group-titile' bindtap='goGroupList' data-name='goods_group4' data-fieldid='{{field_id}}' >
+      <view class='title'>{{content.content.group_title || '商品分组'}}</view>
+      <view style='display:flex;align-items:center;'>
+        <text class='see-more' decode='true'>查看更多</text>
+        <text class='iconfont icon-xiayibu' style='color:#999;font-size:28rpx;'></text>
+      </view>
+      
+    </view>
+    <!-- 新增导航分组 -->
+    <view class='group-bar {{(content.content.posi_style==1&&last_index==t_index)?"fiex-top-my":""}} {{make_fiex?"make_fiex":""}}' style="top:{{make_fiex?( status+navHeight) :0}}px">
+      <swiper class='swiper-group' display-multiple-items='{{content.content.goods_group_list.length<4?content.content.goods_group_list.length:4}}'>
+        <block wx:for="{{content.content.goods_group_list}}" wx:key="index">
+          <swiper-item>
+            <view class='nav-box'>
+              <view class="navtxt nav{{content.content.title_style?content.content.title_style:1}} {{productList[t_index]==index ? 'active' : ''}}" data-t_index="{{t_index}}" data-groupid="{{item.group_id}}" data-curindex="{{index}}" data-productlist="{{index}}" bindtap="groupListSwichNav"
+                style='border-color:{{productList[t_index]==index?((content.content.title_style==1||!content.content.title_style)?themeColorValue:"transparent"):"transparent"}};background:{{productList[t_index]==index?((content.content.title_style==2||content.content.title_style==3)?themeColorValue:"transparent"):"transparent"}}'>
+                {{item.title}}
+              </view>
+              <text wx:if="{{content.content.title_style==3&&productList[t_index]==index}}" style='color:{{themeColorValue}}' class='iconfont icon-xia icon-checked-nav'></text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+    <view class='exitbar' wx:if='{{make_fiex}}'>占位bar</view>
+
+    <!-- 商品分组信息 -->
+    <view class="editProductListCentent editProduct {{field_type=='goods_group4'?'goods_group4':''}}" style='box-size:border-box;padding:0 {{content.content.page_distance?content.content.page_distance:20}}rpx;'>
+      <view class="shopProductTable {{productList[t_index]==index ? 'active' : ''}} size_{{content.content.size}} size_type_{{content.content.size_type}} buy_btn_type_{{content.content.buy_btn_type}} buy_btn_{{content.content.buy_btn}}  show_title_{{content.content.show_title}} price_{{content.content.price}}  {{productTable}}"
+        wx:for="{{content.content.goods_group_list}}" wx:for-item="list" wx:key="index">
+        <template is="groupProductList" data="{{content:list,productTable:productTable,show_title:content.content.show_title,BASE_IMG_URL,data:content.content,themeColorValue,size_type:content.content.size_type,size:content.content.size,group_label:content.content.group_label,show_gift_preincome:shopHomeData.store.show_gift_preincome,storeData:storeData}}" />
+      </view>
+    </view>
+
+
+    <!-- 数据加载状态 -->
+    <view wx:if='{{mode_tyle=="goods_group4" && tempIndex==(tempLastIndex-1)}}' class='no-data'>{{load_txt}}</view>
+
+  </view>
+</template>

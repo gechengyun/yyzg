@@ -1,0 +1,18 @@
+<!--小程序魔方模块模板-->
+<template name="map">
+    <view class='contact_store'>
+       <view class="storeName" style='width:75%;'>{{content.content.store_name?content.content.store_name:'暂无店铺名称'}}</view>
+       <view><label class="icon_addess adress_title">
+        <image src='{{BASE_IMG_URL}}images/store_map/dizhi.png' style="width:17rpx; height:22rpx;"></image>
+       {{content.content.province}}{{content.content.city}}{{content.content.area}}{{content.content.address}}
+       {{content.content.tel}}</label></view>
+       <view class='contact_icon' style='top:5rpx;'>
+        <view class="icon_contact dianhua" wx:if="{{ content.content.tel_play==1 }}" bindtap='callTel' data-tel="{{content.content.storetel}}">
+         <image src='{{BASE_IMG_URL}}images/store_map/dianhua.png' style="width:60rpx; height:60rpx;"></image>
+        </view>
+        <navigator open-type="navigate" class="icon_contact adressIcon" wx:if="{{ content.content.store_play==1 }}"  bindtap='goAdress' data-latitude="{{content.content.lat}}" data-longitude="{{content.content.lng}}" data-province='{{ content.content.province }}'  data-city='{{ content.content.city }}' data-area='{{ content.content.area }}' data-storeName='{{ content.content.storename }}' data-address='{{ content.content.address }}' >
+         <image src='{{BASE_IMG_URL}}images/store_map/jingqujiaotong-daozhequ.png' style="width:60rpx; height:60rpx;"></image>
+        </navigator>
+       </view>
+    </view>
+</template>

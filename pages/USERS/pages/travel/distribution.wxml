@@ -1,0 +1,45 @@
+<!--distribution.wxml-->
+<scroll-view scroll-top="{{scrollTop}}" class="distribution container {{pageTheme}}" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="pages.travel.distribution">
+    <view class="section headerSection">
+        <view class="leftText">亲爱的分销商：
+            <text>{{product.store.name}}</text>
+        </view>
+        <view class="rightText">让我们互利共赢，创生活</view>
+    </view>
+    <view class="section infoSection">
+        <navigator hover-class="none" url='/pages/USERS/pages/travel/index?product_id={{product.product_id}}'>
+            <image style="width: 120rpx; height: 120rpx; background-color: #eeeeee;" mode="aspectFit" src="{{product.product.image}}"></image>
+            <view class="infoBox">
+                <view class="infoName">{{product.product.name}}</view>
+                <view class="infoPrice">{{product.price_label}}
+                    <text>￥{{product.product.price}}</text>
+                </view>
+            </view>
+        </navigator>
+    </view>
+    <view class="section shareSection share1Section clearfix">
+        <view class="title">{{product.share_method_page}}</view>
+        <view class="sectionSection clearfix">
+            <view class="shareDesc">
+                <textarea bindblur="bindDescBlur" auto-height placeholder="输入推荐语" placeholder-style="color:#999;font-size:26rpx;" />
+            </view>
+            <button class="button" bindtap="setDisabled" open-type="share">{{product.btn_share_now}}</button>
+        </view>
+    </view>
+    <!-- 此功能暂时不做 -->
+    <!--   <view class="section shareSection share2Section clearfix">
+    <view class="title">分享方式二：获取商品海报，发送给朋友</view>
+    <view class="sectionSection clearfix">
+      <view class="postList clearfix">
+        <view wx:for="{{8}}" class="listItem" wx:for-item="item" wx:for-index="idx" data-idx="{{idx}}" bindtap="chooseItem">
+          <image mode="aspectFit" src="../../images/travel_03.png"></image>
+          <view class="itemLayer {{idx == currentidx && choose == true ? 'show-inline' : 'hide'}}">
+            <image mode="aspectFit" src="../../images/checked.png"></image>
+          </view>
+        </view>
+      </view>
+      <view class="button">立即获取</view>
+    </view>
+  </view> -->
+</scroll-view>
+<include src="/templates/page_footer.wxml"></include>

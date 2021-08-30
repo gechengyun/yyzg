@@ -1,0 +1,110 @@
+<import src="../../wxParse/wxParse.wxml" />
+<!--富文本-->
+<import src="../public/editText.wxml" />
+<!--主页页面-->
+<import src="../public/swiper.wxml" />
+<!-- 图片广告 -->
+<import src="../public/editEnterShop.wxml" />
+<!-- 进入店铺  -->
+<import src="../public/editGuide.wxml" />
+<!-- 辅助空白-->
+<import src="../public/editGuideBlank.wxml" />
+<!-- 辅助线  -->
+<import src="../public/editImageNav.wxml" />
+<!--图片导航 -->
+<import src="../public/editProductGrouping.wxml" />
+<!-- 餐饮小食1 -->
+<import src="../public/editProductList.wxml" />
+<!-- 餐饮小食2 -->
+<import src="../public/editProductSearch.wxml" />
+<!--商品搜索 -->
+<import src="../public/editStoreCollection.wxml" />
+<!--店铺收藏和预览-->
+<import src="../public/editStoreTextNavigation.wxml" />
+<!--标题 -->
+<import src="../public/pageHeaderOne.wxml" />
+<!-- 网页抬头1 -->
+<import src="../public/pageHeaderTwo.wxml" />
+<!-- 网页抬头2 -->
+<import src="../public/shopCouponList.wxml" />
+<!-- 优惠券 -->
+<import src="../public/shopIndex.wxml" />
+<!-- 店铺动态 -->
+<import src="../public/shopNotice.wxml" />
+<!-- 店铺公告 -->
+<import src="../public/shopProduct.wxml" />
+<!-- 商品 -->
+<import src="../public/shoppingCat.wxml" />
+<!-- 购物袋 -->
+<import src="../public/warning.wxml" />
+<!--警告提示-->
+<import src="../public/orderLayer.wxml" />
+<!--活动模块-->
+<import src="../public/newActivityModule.wxml" />
+<!--订单提醒-->
+<import src="../public/cube.wxml"></import>
+<!--魔方模块-->
+
+<import src="../public/seckill_module.wxml"></import>
+<!--秒杀模块-->
+<import src="../public/bargain_module.wxml"></import>
+<!--砍价模块-->
+<import src="../public/presale_module.wxml"></import>
+<!--预售模块-->
+<import src="../public/tuan_module.wxml"></import>
+<!--拼团模块-->
+<import src="../public/store_map.wxml"></import>
+<!--联系店铺-->
+<import src="../public/image_ad2.wxml"></import>
+<!--新的广告组件-->
+<import src="../public/goodsTemp.wxml"></import>
+<!-- 商品模板 -->
+<import src="../public/groupProduct.wxml"></import>
+<!-- 商品分组3 -->
+<import src="../public/showVideo.wxml"></import>
+<!-- 视频模块 -->
+<import src="../public/contact.wxml"></import>
+<!-- 联系客服 -->
+<!-- <import src="../public/customNav.wxml"></import> -->
+<!--自定义导航模板-->
+<import src="../public/shopProductPoint.wxml"></import>
+<!-- 积分商品模块 tc 2019.10.21-->
+<!-- 表单组件 -->
+<import src="../public/inputModule.wxml"></import>
+<!-- 限时折扣 -->
+<import src="../public/timeLimitDiscount.wxml"></import>
+
+<!-- 直播组件 -->
+<import src="../public/livePlayer.wxml"></import>
+
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+
+<!-- 富文本 商品 标题 商品搜索 辅助线 辅助空白 进入店铺 公告 餐饮小食1 餐饮小食2 网页抬头1,2 店铺收藏和预览 图片导航 图片广告 店铺动态 优惠券 -->
+
+<!-- <scroll-view class="container" style="height: {{scrollHeight}}px; background:{{shopHomeData.bgcolor}} " scroll-y="true" scroll-top="{{scrollTop.scroll_top}}" data="page.index.index" bindscroll="scroll"> -->
+<view class="container {{pageTheme}}" style="background:{{shopHomeData.bgcolor}} " data="page.index.index">
+  <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+  <view class="asideDetails ">
+    <text class="goTop iconfont icon-dingbu" bindtap="goTopFun" style="display:{{scrollTop.goTopShow ? 'block' : 'none'}};"></text>
+    <!-- <navigator url="/pages/shoppingCat/index" hover-class="none" open-type="{{filter.getOpenType('/pages/shoppingCat/index',store_nav_list)}}">
+      <text class="iconfont icon-gouwuche1 shoppingCatIcon" wx:if="{{shoppingCatNum}}"></text>
+    </navigator> -->
+  </view>
+  <block>
+    <template is="orderLayer" wx:if="{{businessShow}}" data="{{business:business}}" />
+  </block>
+  <!-- <template wx:for="{{shopHomeData.custom_field_list}}" wx:key="index" wx:if="{{item.field_type}}" is="{{item.field_type}}" data="{{content:item,currentTab:currentTab,productList:productList,keyword:keyword,winWidth:winWidth, searchWrapObj: searchWrapObj, t_index: index,store_nav_list,themeColorValue,BASE_IMG_URL,field_type:item.field_type,mode_tyle,load_txt}}" -->
+  <view class="website">
+    <template wx:for="{{shopHomeData.custom_field_list}}" wx:key="index" wx:if="{{item.field_type}}" is="{{item.field_type}}" data="{{content:item,sendcodeStatus,codenum,resetValue,videoSrc,imgSrc,actionSheetHidden,actionSheetVideo,province_index,province_name_arr,city_index,city_name_arr,country_index,country_name_arr,currentTab:currentTab,productList:productList,keyword:keyword,winWidth:winWidth, searchWrapObj: searchWrapObj, t_index: index,store_nav_list,themeColorValue,BASE_IMG_URL,field_type:item.field_type,mode_tyle,load_txt,is_member:shopHomeData.is_member,show_index_img:shopHomeData.show_index_img,last_index,make_fiex,showSearch,scrollHeight:scrollHeights,field_id:item.field_id,_unlogin,videoData:item.content,playIndex,live_list,currentChannel,tagid,live_fiex,status,navHeight,last_filed_type,live_next_page,swiperCurIndex,subscribe_template_id,tempIndex:index,tempLastIndex:shopHomeData.custom_field_list.length,nowImgH,storeData:shopHomeData.store,phoneModel,discount_showOrHide,cuwer,discount_fiex}}"/>
+  </view>
+  <block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+  </block>
+  <template is="contact"  data="{{shoppingCatNum}}"/>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+  <bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <!-- <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal> -->
+</view>
+<!-- </scroll-view> -->
+  <template is="warning" wx:if="{{shopHomeData.custom_field_list.length==0}}" data="{{warningTxt:'暂无装修内容'}}" />
+<include src="/pages/public/page_footer.wxml"></include>

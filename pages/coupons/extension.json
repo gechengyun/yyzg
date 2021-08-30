@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "bottom-modal": "../../components/bottomModal/index",
+    "dialog":"../../components/dialog/index"
+  }
+}

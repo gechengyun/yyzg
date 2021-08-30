@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "订单确认",
+    "usingComponents":{
+        "dialog": "../../components/dialog/index"
+    }
+}

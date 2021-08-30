@@ -1,0 +1,641 @@
+<!--支付页面-->
+<import src="../public/payment.wxml" />
+<import src="../public/choiceAddress.wxml" />
+<import src="../public/editAddress.wxml" />
+<import src="../public/warning.wxml" />
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
+<view class="container payment {{pageTheme}}" data-page="page.payment.index">
+  <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+
+
+  <!-- 门店显示 -->
+  <!-- <view class='n_store' wx:if="{{nowPhysical&&open_community_group!=1&&paymentData.order.virtual_goods_order*1 != 1}}">
+    <image class='logo' src="{{nowPhysical.images}}" mode='aspectFill'></image>
+    <view class="addressInfo" style="width: 80%;">
+      <view class='store_name'>
+        {{nowPhysical.name}}
+      </view>
+      <view class='store_address'>
+        <text class="textOmitted">{{nowPhysical.address}}</text>
+      </view>
+      <view class='store_time'>
+        <block wx:if="{{nowPhysical.business_hours}}">
+          营业时间：{{nowPhysical.business_hours}}
+        </block>
+        <block wx:if="{{!nowPhysical.business_hours}}">营业时间：全天</block>
+      </view>
+    </view>
+    <view class='call-box'>
+      <text class="iconfont icon-phone" style='color:{{themeColorValue}};font-size:42rpx;' bindtap="calling" data-num="{{nowPhysical.phone2}}"></text>
+    </view>
+  </view> -->
+  <!-- 社区团购模式订单头部 -->
+  <view class="community_store" wx:if="{{nowPhysical&&open_community_group==1&&paymentData.order.virtual_goods_order*1 != 1}}">
+    <view class="head">
+      <view class="head_img">
+        <image src="{{nowPhysical.images}}" mode='aspectFill'></image>
+      </view>
+      <view class="head_name">
+        {{nowPhysical.nickname}}
+      </view>
+    </view>
+    <view class="address_store">
+      <view class="address_name">
+        <view class="text">自提点</view>
+        <view class="view" bindtap="oppeMap" data-lat="{{nowPhysical.lat}}" data-long="{{nowPhysical.long}}">
+          <text>{{nowPhysical.address}}</text>
+          <icon role="img" class="iconfont icon-dizhi"></icon>
+        </view>
+      </view>
+      <view class="store_name">
+        {{nowPhysical.name}}
+      </view>
+      <view class="store_time">
+        <block wx:if="{{nowPhysical.business_hours}}">
+          营业时间：{{nowPhysical.business_hours}}
+        </block>
+        <block wx:if="{{!nowPhysical.business_hours}}">营业时间：全天</block>
+        <text class="iconfont icon-phone" style='color:{{themeColorValue}};' bindtap="calling" data-num="{{nowPhysical.phone2}}"></text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 社区团购模式头部 -->
+
+  <!--物流方式-->
+
+
+  <view class="paymentPostage newPosta" style="display:none">
+    <!-- <view wx:if='{{paymentData.product_list[0].special_product_type==95}}'>
+          <view class="active" data-paymentpostage="{{paymentData.logistic_list[1].type}}" bindtap="{{paymentData.order.type !='10'? 'paymentPostage':''}}"  wx:key="" style='border:1rpx dashed {{themeColorValue}}'>{{paymentData.logistic_list[1].name}}</view>
+      </view> -->
+
+    <view wx:if='{{paymentData.product_list[0].special_product_type==95 && paymentData.logistic_list[1].type=="local"}}'>
+      <view class="active" data-paymentpostage="{{paymentData.logistic_list[1].type}}" bindtap="{{paymentData.order.type !='10'? 'paymentPostage':''}}" wx:key="" style='border:1rpx dashed {{themeColorValue}}'>{{paymentData.logistic_list[1].name }}</view>
+    </view>
+    <view wx:elif='{{paymentData.logistic_list[0].type=="local"}}'>
+      <view class="active" data-paymentpostage="{{paymentData.logistic_list[0].type}}" bindtap="{{paymentData.order.type !='10'? 'paymentPostage':''}}" wx:key="" style='border:1rpx dashed {{themeColorValue}}'>{{paymentData.logistic_list[0].name }}</view>
+    </view>
+
+
+
+    <view wx:else>
+      <view class="{{paymentPostage==item.type ? 'active' : ''}}" data-paymentpostage="{{item.type}}" bindtap="{{paymentData.order.type !='10'? 'paymentPostage':''}}" wx:for="{{paymentData.logistic_list}}" wx:key="" style='border:1rpx dashed {{themeColorValue}}'>{{item.name}}</view>
+    </view>
+  </view>
+
+  <!--商品信息列表-->
+  <template is="payment" data="{{no_postage_text,paymentData:paymentData, postage:postage, paymentPostage:paymentPostage, showMessage:showMessage, pay_page: pay_page,api_url,oppenShopList,addressList,addressEdit,open_local_physical_list,nowPhysical,forbidChangeAddress,themeColorValue,NUM,slide_txt,slide,multiIndex,multiArray,serviceShow,msubDate,disabledTime,open_community_group,customMessage}}"
+  />
+
+
+  <!--<view class="paymentInfo" wx:if="{{paymentData.order.type=='10'}}">
+            <view class="customMessage" wx:for="{{paymentData.product_list[0].comment_arr}}">
+                <text>{{item.name}}</text>
+                <view class="input">
+                    {{item.value}}
+                </view>
+            </view>
+        </view> -->
+
+  <!-- 金豆使用 -->
+  <view wx:if="{{paymentData.channel && paymentData.channel && paymentData.channel.is_can_channel_pay==0}}" class="golden-beans">
+    <text>下单商品含有不是{{paymentData.channel.privilege_name}}余额支付的商品，不支持{{paymentData.channel.privilege_name}}支付</text>
+  </view>
+  <!--优惠券使用-->
+  <view class="paymentInfo" wx:if="{{paymentData.order.type!='10'}}">
+    <view class="{{forbidChangeAddress?'':'open'}} ticket" wx:for="{{paymentData.user_coupon_list}}" wx:if="{{paymentData.order.status=='0'}}" wx:key="">优惠券
+      <text bindtap="{{forbidChangeAddress?'':'oppenCoupon'}}" data-index="{{index}}" wx:if="{{oppenCouponTxt[index]}}">{{oppenCouponTxt[index]}}</text>
+      <text bindtap="{{forbidChangeAddress?'':'oppenCoupon'}}" data-index="{{index}}" class="redCoupon" wx:if="{{!oppenCouponTxt[index]}}">可用 {{item.length}}张</text>
+    </view>
+    <view class="ticket" wx:for="{{paymentData.user_coupon_list}}" wx:if="{{paymentData.order.status=='1'}}" wx:key="">优惠券
+      <text data-index="{{index}}">{{item.cname}}</text>
+    </view>
+    <view class="fullCut" style='border-bottom:1rpx solid #f4f4f4;' wx:for="{{paymentData.reward_list}}" wx:key="" wx:if="{{!(paymentData.reward_list.length == 1 && paymentData.reward_list[0].reward_content == '')}}">
+      <view>满减</view>
+      <text class='rewardTxt'>{{item.reward_content}}</text>
+    </view>
+    <view>
+    </view>
+    <view class="integral" bindtap="integral" wx:if="{{(paymentData.points_data)&&integralTxt}}">
+      <text class="iconfont {{integral}} {{integral?'icon-dui':''}}"></text>{{integralTxt}}
+    </view>
+    <view class="integral" wx:if="{{paymentData.order_point.money}}">
+      <text class="iconfont active icon-dui"></text>使用{{paymentData.order_point.point}}积分抵扣￥{{paymentData.order_point.money}}元
+    </view>
+
+  </view>
+
+
+  <view class='box-title' wx:if="{{paymentData.order.type != 10 && paymentData.order.product_coupon != 1 && !oppenShopList &&paymentPostage=='selffetch'}}">配送信息</view>
+  <view class="paymentInfo newPayInfo  {{paymentPostage=='selffetch' ? 'active' : 'customInfo'}}" wx:if="{{paymentData.order.type != 10 && paymentData.order.product_coupon != 1 && !oppenShopList &&paymentPostage=='selffetch'}}" style='margin-top:0;'>
+    <view class="customMessage">
+      <text>取货人</text>
+      <view class="input">
+        <input type="text" placeholder="请填写取货人姓名" bindblur="bindAppointmentName" value="{{paymentData.user_address.name}}"></input>
+      </view>
+    </view>
+    <view class="customMessage">
+      <text>联系电话</text>
+      <view class="input">
+        <input type="text" placeholder="联系方式" bindblur="bindAppointmentTel" value="{{paymentData.user_address.tel}}"></input>
+      </view>
+    </view>
+    <view class="customMessage">
+      <text>自提时间</text>
+      <view class="input">
+        <view class="section">
+          <picker mode="date" value="{{tomorrowDate}}" start="2015-09-01" end="2217-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              {{tomorrowDate}}
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <picker mode="time" value="{{time}}" start="09:01" end="23:59" bindchange="bindTimeChange">
+            <view class="picker">
+              {{time}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 新增订单描述 -->
+  <view class='box-title'>订单信息</view>
+  <!-- 预约定金情况 -->
+  <view class='order-info' wx:if="{{paymentData.order.type=='10'}}">
+    <view class='container'>
+      <view class='name'>预约定金</view>
+      <view class='value'>
+        <text class='mini-y'>￥</text>{{paymentData.order.total>0?paymentData.order.total:0}}</view>
+    </view>
+  </view>
+  <!-- 不预约，直接购买 -->
+  <view class='order-info' wx:if="{{paymentData.order.type!='10'}}">
+    <!-- 商品原价 -->
+    <!-- <view class='container' wx:if='{{paymentData.product_sub_total>0}}'>
+      <view class='name'>商品原价</view>
+      <view class='value'>
+        <text class='mini-y'>￥</text>{{paymentData.product_sub_total}}</view>
+    </view> -->
+    <!-- 商品价格 -->
+    <view class='container'>
+      <view class='name'>商品价格</view>
+      <view class='value'>
+        <text class='mini-y'>￥</text>{{filter.saveDouble(paymentData.order.sub_total*1-(paymentData.order.float_amount > 0?paymentData.order.float_amount*1:0))}}</view>
+    </view>
+    <!-- 会员折扣 -->
+    <view class='container' wx:if='{{discountPrice>0&&paymentData.order.is_point_exchange!=1}}'>
+      <view class='name'>会员折扣</view>
+      <view class='value'>
+        <block wx:if='{{discountPrice!=0}}'>-
+          <text class='mini-y'>￥</text>
+        </block>{{discountPrice}}</view>
+    </view>
+    <!-- 满减优惠 -->
+    <view class='container' wx:if='{{rewardPrice>0}}'>
+      <view class='name'>满减优惠</view>
+      <view class='value'>
+        <block wx:if='{{rewardPrice!=0}}'>-
+          <text class='mini-y'>￥</text>
+        </block>{{rewardPrice}}</view>
+    </view>
+    <!-- 积分抵扣 -->
+    <view class='container' wx:if='{{integralPricePage>0}}'>
+      <view class='name'>积分抵扣</view>
+      <view class='value'>
+        <block wx:if='{{integralPricePage!=0}}'>-
+          <text class='mini-y'>￥</text>
+        </block>{{filter.saveDouble(integralPricePage)}}</view>
+    </view>
+    <!-- 优惠券 -->
+    <view class='container' wx:if='{{couponMoney>0}}'>
+      <view class='name'>优惠券</view>
+      <view class='value'>
+        <block wx:if='{{couponMoney!=0}}'>-
+          <text class='mini-y'>￥</text>
+        </block>{{couponMoney}}</view>
+    </view>
+    <!-- 预估税费 -->
+    <view class='container' wx:if='{{paymentData.order.predict_order_tax*1>0}}'>
+      <view class='name'>预估税费</view>
+      <view class='value'>
+        <block wx:if='{{paymentData.order.predict_order_tax*1!=0}}'>
+          <text class='mini-y'>￥</text>
+        </block>{{paymentData.order.predict_order_tax*1}}
+      </view>
+    </view>
+    <!-- 预付款 -->
+    <!-- <view class='container' wx:if='{{presaleDingjin>0}}'>
+        <view class='name'>预付款</view>
+        <view class='value'><block wx:if='{{presaleDingjin!=0}}'><text class='mini-y'>￥</text></block>{{presaleDingjin}}</view>
+      </view> -->
+    <!-- 预售抵现 -->
+    <view class='container' wx:if='{{presaleReducePrice>0}}'>
+      <view class='name'>预售抵现</view>
+      <view class='value'>
+        <block wx:if='{{presaleReducePrice!=0}}'>-
+          <text class='mini-y'>￥</text>
+        </block>{{presaleReducePrice}}</view>
+    </view>
+
+    <!-- 改价 -->
+    <view class='container' wx:if='{{paymentData.order.float_amount&&paymentData.order.float_amount*1!=0}}'>
+      <view class='name'>改价</view>
+      <view class='value'>
+        <!-- <block wx:if='{{paymentData.order.float_amount*1!=0}}'>
+        {{paymentData.order.float_amount>0?'+':'-'}}<text class='mini-y'>￥</text>
+        </block> -->
+        {{paymentData.order.float_amount*1}}
+      </view>
+    </view>
+    <!-- 运费 -->
+    <view class='container' wx:if='{{paymentData.order.postage*1>0}}'>
+      <view class='name'>运费</view>
+      <view class='value'>
+        <block wx:if='{{paymentData.order.postage*1!=0}}'>
+          <text class='mini-y'>￥</text>
+        </block>{{paymentData.order.postage*1}}</view>
+    </view>
+    <!-- 会员优惠 --礼包模式立减-->
+    <view class='container' wx:if='{{paymentData.profit_amount && paymentData.profit_amount*1>0}}'>
+      <view class='name'>会员优惠</view>
+      <view class='value'>
+        <block>
+          <text class='mini-y'>-￥</text>
+        </block>{{paymentData.profit_amount}}</view>
+    </view>
+  </view>
+  <!-- 虚拟商品提示语 -->
+  <view class="virtual-goods" wx:if="{{paymentData.order.virtual_goods_order*1 == 1}}">
+    <view>注意：</view>
+    <text>本件商品为特殊商品类型，若无特殊情况概不退换！请谨慎购买。</text>
+  </view>
+  <!--商品总价计算描述-->
+  <!-- <view class="paymentInfo Need" wx:if="{{paymentData.order.type!='10'}}">
+        <view>商品总价￥{{paymentData.order.sub_total-(paymentData.order.float_amount > 0?paymentData.order.float_amount:0)}}
+            <block>+运费￥{{paymentData.order.postage*1}}</block>
+            <block wx:if="{{discountPrice}}">-折扣￥{{discountPrice}}</block>
+            <block wx:if="{{rewardPrice}}">-满减￥{{rewardPrice}}</block>
+            <block wx:if="{{integralPricePage}}">-积分抵扣￥{{integralPricePage}}</block>
+            <block wx:if="{{couponMoney}}">-优惠券￥{{couponMoney}}</block>
+            <block wx:if="{{presaleReducePrice}}">-预售抵扣￥{{presaleReducePrice}}</block>
+            <block wx:if="{{paymentData.order.float_amount > 0}}">+加价￥{{paymentData.order.float_amount}}</block>
+            <block wx:if="{{paymentData.order.float_amount < 0}}">-减价￥{{paymentData.order.float_amount * -1}}</block>
+        </view>
+       <view>合计:¥
+            <block wx:if="{{paymentMoney>0}}">{{paymentMoney}}</block>
+            <block wx:if="{{paymentMoney<=0}}">0</block>
+        </view>
+</view> -->
+  <!-- wx:if="{{paymentData.order.type=='10'}}" -->
+  <!-- <view class="paymentInfo Need" >
+        <view></view>
+        <view>预约定金:¥{{paymentData.order.total}}</view>
+    </view> -->
+
+
+
+  <!-- 新增提交订单 优惠券列表和提交订单列表展示的时候不展示此板块 -->
+  <view class='expand-h' wx:if='{{!show_pay_list&&oppenCoupon==false}}'>占位符</view>
+  <view class='ready-submit' wx:if='{{!show_pay_list&&!oppenCoupon}}'>
+    <view class='pay-price'>
+      <view style='color:{{themeColorValue}};font-size:24rpx;'>{{paymentData.order.type=='10'?'预约定金':'合计'}}：</view>
+      <view class='price' style='color:{{themeColorValue}};' wx:if="{{paymentData.order.point_exchange_num!=0}}">
+        积分{{paymentData.order.point_exchange_num}} +
+      </view>
+      <view class='mini-y' style='color:{{themeColorValue}};'>￥</view>
+      <view class='price' style='color:{{themeColorValue}};'>
+        <block wx:if="{{paymentData.order.is_point_exchange!=1}}">
+          {{paymentData.order.type==10?(paymentData.order.total>0?paymentData.order.total:0):(paymentMoney>0 ? paymentMoney:0)}}
+        </block>
+        <block wx:else>
+          <!-- 积分价格加上会员折扣 不改变原来订单逻辑 -->
+          {{paymentData.order.type==10?(paymentData.order.total>0?filter.transBigNumber(paymentData.order.total)+filter.transBigNumber(discountPrice):0):(paymentMoney>0 ? filter.transBigNumber(paymentMoney)+filter.transBigNumber(discountPrice):0)}}
+        </block>
+      </view>
+
+
+
+    </view>
+    <view class='btn-submit' catchtap='readySubmit' style='background:{{(freight_stauts=="post" || is_door_servce==false)?"#ccc":themeColorValue}}'>提交</view>
+  </view>
+
+
+  <!--支付方式-->
+  <view class="pay-gray"wx:if='{{show_pay_list}}' catchtap='hidePayList'></view>
+  <view class='pay-type-contain' wx:if='{{show_pay_list}}'>
+    <!-- 全积分兑换 -->
+    <block wx:if="{{paymentData.product_list[0].special_product_type=='101' && paymentData.product_list[0].point_price=='0.00'&&paymentData.order.postage*1==0}}">
+      <view class="paymentButton" wx:key="">
+        <text class="iconfont ic-logo icon-jifen" style="color:{{themeColorValue}}"></text>
+        <view class="button " data-type="point" bindtap="paymentButton" style="background:#fff;color:#333;">积分兑换
+        <text class="iconfont ic-check {{checkPay=='point' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+          style="color:{{checkPay=='point' ? '#09bb07' : '#999'}}"
+          ></text>
+        </view>
+          
+      </view>
+    </block>
+    <!-- 全积分兑换 -->
+    <block wx:else>
+      <!-- 金豆支付 -->
+      <block wx:if="{{paymentData.channel && paymentData.channel.is_can_channel_pay==1}}">
+        <block wx:if="{{paymentData.order.is_point_exchange!=1}}">
+          <block wx:if="{{paymentData.order.type==10?(paymentData.order.total>0?paymentData.order.total:0):(paymentMoney>0 ? paymentMoney:0) > paymentData.channel.total_balance}}">
+            <view class="paymentButton golden-beans-unpay">
+              <text class="iconfont ic-logo icon-jindou" style="color:#c09f06"></text>
+              <view class="button" data-type="channel" bindtap="unpaymentbtn" style="background:#fff;color:#333;">{{paymentData.channel.privilege_name}}支付
+                <text class="all-golden-beans">(余额{{paymentData.channel.total_balance}}元)</text>
+                <text class="iconfont ic-check {{checkPay=='channel' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+                style="color:{{checkPay=='channel' ? '#09bb07' : '#999'}}"
+                ></text>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="paymentButton golden-beans-pay">
+              <text class="iconfont ic-logo icon-jindou" style="color:#c09f06"></text>
+              <view class="button" data-type="channel" bindtap="paymentButton" style="background:#fff;color:#333;">{{paymentData.channel.privilege_name}}支付
+                <text class="all-golden-beans">(余额{{paymentData.channel.total_balance}}元)</text>
+                <text class="iconfont ic-check {{checkPay=='channel' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+                style="color:{{checkPay=='channel' ? '#09bb07' : '#999'}}"
+                ></text>
+              </view>
+            </view>
+          </block>
+        </block>
+        
+        <block wx:else>
+          <!-- 积分价格加上会员折扣 不改变原来订单逻辑 -->
+          <block wx:if="{{paymentData.order.type==10?(paymentData.order.total>0?filter.transBigNumber(paymentData.order.total)+filter.transBigNumber(discountPrice):0):(paymentMoney>0 ? filter.transBigNumber(paymentMoney)+filter.transBigNumber(discountPrice):0) > paymentData.channel.privilege_name}}">
+            <view class="paymentButton golden-beans-unpay">
+              <text class="iconfont ic-logo icon-jindou" style="color:#c09f06"></text>
+              <view class="button" data-type="channel" bindtap="unpaymentbtn" style="background:#fff;color:#333;">{{paymentData.channel.privilege_name}}支付
+                <text class="all-golden-beans">(余额{{paymentData.channel.total_balance}}元)</text>
+                <text class="iconfont ic-check {{checkPay=='channel' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+                style="color:{{checkPay=='channel' ? '#09bb07' : '#999'}}"
+                ></text>
+              </view>
+            </view>
+          </block>
+          
+          <block wx:else>
+            <view class="paymentButton golden-beans-pay">
+              <text class="iconfont ic-logo icon-jindou" style="color:#c09f06"></text>
+              <view class="button" data-type="channel" bindtap="paymentButton" style="background:#fff;color:#333;">{{paymentData.channel.privilege_name}}支付
+                <text class="all-golden-beans">(余额{{paymentData.channel.total_balance}}元)</text>
+                <text class="iconfont ic-check {{checkPay=='channel' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+                style="color:{{checkPay=='channel' ? '#09bb07' : '#999'}}"
+                ></text>
+              </view>
+            </view>
+          </block>
+        </block>
+      </block>
+
+     
+      <view class="paymentButton" wx:key="" wx:if="{{((postage)||(paymentPostage=='selffetch'))&&(isVspallinpay)}}">
+        <text class="iconfont ic-logo icon-wechat-pay-fill"></text>
+        <view class="button" data-type="weixin" bindtap="paymentButton" style="background-color:#fff;color:#333;">微信支付
+          <text class="iconfont ic-check {{checkPay=='weixin' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+          style="color:{{checkPay=='weixin' ? '#09bb07' : '#999'}}"
+          ></text>
+        </view>
+      </view>
+       <block wx:for="{{paymentData.pay_list}}" wx:key="index">
+          <view class="paymentButton" wx:if="{{(postage) && item.type == 'balance'}}">
+          <text class="iconfont ic-logo icon-yue" style="color:{{themeColorValue}}"></text>
+            <view class="button offline" data-type="balance" bindtap="paymentButton" data-ispwd="{{item.ispwd}}">余额支付
+              <text class="iconfont ic-check {{checkPay=='balance' ? 'icon-xuanzhong2' : 'icon-unselected'}}" 
+              style="color:{{checkPay=='balance' ? '#09bb07' : '#999'}}"
+              ></text>
+            </view>
+          </view>
+
+          <view class="paymentButton" wx:if="{{(postage) && paymentData.store.top_supplier_id == null && item.type == 'gift_card'}}">
+            <text class="iconfont ic-logo icon-qiapian" style="color:{{themeColorValue}}"></text>
+            <view class="button offline" data-type="gift_card" bindtap="paymentButton">礼品卡支付
+              <text class="iconfont ic-check {{checkPay=='gift_card' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+              style="color:{{checkPay=='gift_card' ? '#09bb07' : '#999'}}"
+              ></text>
+            </view>
+          </view>
+
+
+          <view class="paymentButton" wx:if="{{paymentData.is_have_home_service!=1&&(postage) && paymentPostage!='selffetch' && paymentData.store.top_supplier_id == null && paymentData.order.type != 6 && paymentData.order.type != 10 && item.type == 'offline'}}">
+            <text class="iconfont ic-logo icon-huodaofukuan" style="color:{{themeColorValue}}"></text>
+            <view class="button offline" data-type="offline" bindtap="paymentButton">货到付款
+              <text class="iconfont ic-check {{checkPay=='offline' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+              style="color:{{checkPay=='offline' ? '#09bb07' : '#999'}}"
+              ></text>
+            </view>
+          </view>
+
+          <view class="paymentButton" wx:if="{{(postage) && item.type == 'vspallinpay'}}">
+            <text class="iconfont ic-logo icon-shouyin" style="color:{{themeColorValue}}"></text>
+            <view class="button offline" data-type="vspallinpay" bindtap="paymentButton">{{item.name?item.name:'收银宝'}}
+              <text class="iconfont ic-check {{checkPay=='vspallinpay' ? 'icon-xuanzhong2' : 'icon-unselected'}}"
+              style="color:{{checkPay=='vspallinpay' ? '#09bb07' : '#999'}}"
+              ></text>
+            </view>
+          </view>
+
+
+
+       </block>
+
+      
+
+      
+
+      
+      
+    </block>
+    <view class="btn-cancel" catchtap='hidePayList'>取消</view>
+  </view>
+
+  <cover-view class="theme-bg-color" style="height:90rpx;width:100%;position:fixed;z-index:10;line-height:90rpx;bottom:0;text-align:center;color: #fff;font-size: 26rpx;" wx:if="{{(postage==false)&&(paymentPostage!='selffetch')}}">
+    {{no_postage_text}}</cover-view>
+  <dialog dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" open-type="{{dialog.openType}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog>
+</view>
+
+<!--收货地址选择-->
+<block wx:if="{{addressList}}">
+  <view class="layer" bindtap="closeAddress"></view>
+  <view class="logisticsLayer {{pageTheme}}">
+    <view class="logisticsLayerTitle">选择收货地址</view>
+    <template is="choiceAddress" data="{{addressData:addressData,currentTab:currentTab}}" />
+  </view>
+</block>
+<block wx:if="{{addressEdit}}">
+  <view class="layer" bindtap="closeAddress"></view>
+  <view class="logisticsLayer {{pageTheme}}">
+    <view class="logisticsLayerTitle">收货地址</view>
+    <view wx-if="{{positionError}}" class='position-error position-error-style'>请选择详细定位</view>
+    <view class="addressPages">
+      <template is="editAddress" data="{{user_address:user_address,province_index:province_index,province_name_arr:province_name_arr,city_index:city_index,city_name_arr:city_name_arr,country_index:country_index,country_name_arr:country_name_arr,country_index:country_index,warning:warning,positionError:positionError}}"
+      />
+    </view>
+  </view>
+</block>
+
+<!-- 付款人是否有实名认证 -->
+<view class='showplayman-box {{pageTheme}}' wx:if="{{playmanStatus}}">
+  <view class='title'>实名认证
+    <text class="iconfont icon-iconfonticonfontclose" bindtap='closeRealname'></text>
+  </view>
+  <view class='desc'>因你购买的跨境商品清关需要，请填写你将用于支付的“付款账号”的实名信息</view>
+  <view class='content'>
+    <view>
+      <input placeholder='付款账号的真实姓名' value='{{formArr.realname}}' bindblur='setValue' data-value='realname'></input>
+    </view>
+    <view>
+      <input placeholder='付款账号的身份证号码（将加密处理）' value='{{formArr.code}}' bindblur='setValue' data-value='code'></input>
+    </view>
+    <view>
+      <input placeholder='付款账号的手机号' value='{{formArr.phone}}' bindblur='setValue' data-value='phone'></input>
+    </view>
+    <button class='producetype' bindtap='saveRealName' data-type="weixin">提交</button>
+  </view>
+</view>
+<!--自提门店选择-->
+<block wx:if="{{oppenShopList}}">
+  <view class="layer" bindtap="oppenShopList"></view>
+  <view class="shoppingLayer {{pageTheme}}">
+    <view class="shoppingTitle black">选择门店
+      <text class="iconfont icon-chacha" bindtap="oppenShopList"></text>
+    </view>
+    <view class="shopHomeList">
+      <view class="listItem" wx:for="{{paymentData.selffetch_list}}" wx:key="">
+        <image src="{{item.logo}}"></image>
+        <view class="addressInfo">
+          <view class="infoName">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="infoAddress">
+            <text>{{item.address}}</text>
+            <text class="iconfont icon-telephone" bindtap="calling" data-num="{{item.tel}}"></text>
+          </view>
+          <view class="infoTime">
+            <text>{{item.juli}} </text>
+            <text wx:if="{{!item.business_hours}}">营业时间：全天</text>
+            <text wx:if="{{item.business_hours}}"> 营业时间：{{item.business_hours}}</text>
+          </view>
+        </view>
+        <text wx:if="{{item.is_valid==1 && item.status == 1}}" class="choice {{productList==index?'active':''}}" data-productList="{{index}}" bindtap="productListSwichNav" data-index="{{index}}">选择</text>
+        <text wx:if="{{item.is_valid==0 || item.status == 2}}" class="choice gray">不可选</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!--同城配送门店选择-->
+<block wx:if="{{open_local_physical_list}}">
+  <view class="layer" bindtap="toggleLocalPhysicalList"></view>
+  <view class="shoppingLayer {{pageTheme}}">
+    <view class="shoppingTitle black">选择门店
+      <text class="iconfont icon-chacha" bindtap="toggleLocalPhysicalList"></text>
+    </view>
+    <view class="shopHomeList">
+      <view class="listItem" wx:for="{{paymentData.local_physical_list}}" wx:key="">
+        <image src="{{item.logo}}"></image>
+        <view class="addressInfo">
+          <view class="infoName">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="infoAddress">
+            <text>{{item.address}}</text>
+            <text class="iconfont icon-telephone" bindtap="calling" data-num="{{item.tel}}"></text>
+          </view>
+          <view class="infoTime">
+            <text>{{item.juli}} </text>
+            <text wx:if="{{!item.business_hours}}">营业时间：全天</text>
+            <text wx:if="{{item.business_hours}}"> 营业时间：{{item.business_hours}}</text>
+          </view>
+        </view>
+        <text wx:if="{{item.is_valid==1 && item.status == 1}}" class="choice active" data-productList="{{index}}" bindtap="switchLocalPhysical" data-index="{{index}}">选择</text>
+        <text wx:if="{{item.is_valid==0 || item.status == 2}}" class="choice gray">不可选</text>
+      </view>
+    </view>
+  </view>
+</block>
+
+<!--优惠券选择-->
+<block wx:if="{{oppenCoupon}}">
+  <view class="layer" bindtap="oppenCoupon" data-flag='true'></view>
+  <view class="shoppingLayer {{pageTheme}}">
+    <view class="shoppingTitle black">选择优惠券
+      <text class="iconfont icon-chacha" bindtap="oppenCoupon" data-flag='true'></text>
+    </view>
+    <view class="shopHomeList">
+      <view class="listItem no_use clearfix">
+        <view class="addressInfo shopCoupon">
+          <text class="shopCouponName textOmitted">不使用优惠券</text>
+        </view>
+        <text class="choice {{couponTab== -1 ?'active':''}}" data-couponTab="-1" data-couponPrice="0" data-couponTxt="" data-couponId="0" data-self="true" catchtap="CouponSwichNav">选择</text>
+      </view>
+      <view wx:for="{{paymentData.user_coupon}}" class="listItem clearfix" wx:key="">
+        <view class="addressInfo shopCoupon">
+          <text class="shopCouponName textOmitted">{{item.cname}}</text>
+          <text>￥{{item.face_money}}</text>
+        </view>
+        <text class="choice {{couponTab==index?'active':''}}" data-couponTab="{{index}}" data-couponPrice="{{item.face_money}}" data-couponTxt="{{item.cname}}" data-couponId="{{item.coupon_id}}" data-self="{{item.is_self}}" bindtap="CouponSwichNav">选择</text>
+      </view>
+    </view>
+  </view>
+</block>
+<!--输入余额支付密码弹窗-->
+<view class="cash-pay {{pageTheme}}" wx:if="{{passwordInputShow}}">
+  <view class="layer" bindtap="setPasswordInputShow"></view>
+  <view class="box">
+    <view class="box-header">
+      <text class="header-title">余额支付</text>
+      <text class="header-close" bindtap="setPasswordInputShow">×</text>
+    </view>
+    <view class="box-content">
+      <view class="order-count-title">订单金额</view>
+      <!-- 预约 -->
+      <view class="order-count" wx:if="{{paymentData.order.type=='10'}}">￥{{paymentData.order.total>0?paymentData.order.total:0}}</view>
+      <!-- 正常购买 -->
+      <view class="order-count" wx:else>￥{{paymentMoney}}</view>
+      <view class="order-info">
+        <text class="password-title">支付密码</text>
+        <text class="remain-money">当前余额：￥{{currentAccountRemainMoney}}</text>
+      </view>
+      <view class="password-field" bindtap="focusPassword" wx:if="{{no_password!=1}}">
+        <input type="number" class="password-hidden" bindinput="passwordInput" focus="{{passwordInputFocus}}" />
+        <view class="password-field-container">
+          <view class="password-field-item" wx:for="{{[1,2,3,4,5,6]}}" wx:key="index">{{inputPassword.length >= item ? "●" : ""}}</view>
+        </view>
+      </view>
+      <view class="paymentButton" wx:if="{{no_password==1}}">
+        <view class="button" data-no_password="1" data-type="balance" bindtap="paymentButton">免密支付</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<!-- 用户留言弹窗 wx:if="{{showModal}}"-->
+<view class="modal-mask" bindtap="hideModal" catchtouchmove="preventTouchMove" wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+  <view class="modal-title">买家留言</view>
+  <view class="modal-content">
+    <view class="modal-input">
+      <textarea placeholder-class="input-holder" wx:if="{{!oppenShopList&&!addressEdit&&!open_local_physical_list}}" bindinput="inputChange" value='{{customMessage}}' class="input" placeholder="请填写对本次交易的说明"></textarea>
+    </view>
+  </view>
+  <view class="modal-footer">
+    <view class="btn-cancel" bindtap="onCancel" data-status="cancel">取消</view>
+    <view class="btn-confirm" bindtap="onConfirm" data-status="confirm" style='color:{{themeColorValue}}'>确定</view>
+  </view>
+</view>
+
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+
+
+<include src="/pages/public/page_footer.wxml"></include>

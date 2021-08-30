@@ -1,0 +1,4 @@
+<!-- 辅助线 -->
+<template name="line">
+     <view class="editGuide" data-page="page.public.editGuide"></view>
+</template>

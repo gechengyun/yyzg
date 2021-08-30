@@ -1,0 +1,209 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view style="display: none;"></view>
+<block wx:if="{{store_nav_list_show}}">
+
+  <view style="height: 88rpx;" class="{{isIpx}}__footer__btn-group tab-bar-empty"></view>
+  <view class="{{pageTheme}} {{isIpx}}__nav tab-bar" style="position: fixed;border-top: 1px solid #2323;bottom: 0;width: 100%;left: 0;display: flex;height: {{phoneModel.model == 'iPhone 11'?100:88}}rpx;padding: 5rpx;background-color: #fff;color: #999999;font-size: 26rpx;z-index: 999;">
+
+    <navigator url="{{(item.active||item.pagePath=='contact')?'':item.pagePath}}" wx:for="{{store_nav_list}}" open-type="reLaunch" style="flex: 1;text-align: center;border-right: 1px;position: relative;" wx:key="index">
+      <view style="width: 50rpx;height: {{item.text?'50rpx':'80rpx'}};margin: 0 auto;margin-top: 2rpx;">
+        <image style="margin-top: {{item.text?'0':'15rpx'}};width: 50rpx;height: 50rpx;" src="{{item.active?item.iconActive:item.icon}}"></image>
+      </view>
+      <view wx:if="{{item.text}}" style="font-size:22rpx;margin-top:2rpx;" class="{{item.active?'theme-color':''}}">
+        <text>{{item.text}}</text>
+      </view>
+      <button class="navigate-contact" wx:if="{{item.pagePath=='contact'}}" hover-class="none" open-type="contact"></button>
+    </navigator>
+  </view>
+</block>
+<!-- //11.7 用hidden因为 wx:if 之中的模板也可能包含数据绑定，所以当 wx:if 的条件值切换时，框架有一个局部渲染的过程，因为它会确保条件块在切换时销毁或重新渲染。 -->
+<view hidden="{{!showLoginModal}}">
+  <block wx:if="{{tym_open}}">
+    <block wx:if="{{modalTyepe.type==1}}">
+      <view class='alap_box'>
+        <view class='get-user-container  {{pageTheme}}'>
+          <view class="get-user-text-title">{{modalTyepe.auth_title}}</view>
+          <image src='{{modalTyepe.auth_img|| "https://s.404.cn/applet/images/get-user.png"}}' mode="widthFix" class='get-user-img'></image>
+          <block wx:if='{{canIUse!==false}}'>
+            <view class='get-user-text'>{{modalTyepe.auth_intro}}</view>
+            <view class="btnbox">
+              <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+              <button type='primary' class='get-user-btn' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">登录
+              </button>
+            </view>
+          </block>
+          <block wx:else>
+            <view style="font-size: 28rpx;text-align: center;color: #f00;">当前微信版本过低，请先升级微信版本</view>
+            <view class="btnbox">
+              <button type="button" class='btn-uplevel' bindtap="closeModal" style="background-color:{{themeColorValue}}">去升级</button>
+            </view>
+          </block>
+        </view>
+      </view>
+    </block>
+
+    <block wx:if="{{modalTyepe.type==2}}">
+      <block wx:if='{{canIUse!==false}}'>
+        <view class="register_box">
+          <view class="container">
+            <view class="tit">注册</view>
+            <view class="item">
+              <input placeholder="请输入手机号" maxlength="11" bindinput="numInput" bindblur="phoneYz" value="{{modalTyepe.phone}}" disabled="{{modalTyepe.phone?true:false}}" style="color:{{modalTyepe.phone?'#999':'#000'}}">{{phone}}</input>
+            </view>
+            <view class="item2" wx:if="{{!modalTyepe.phone}}">
+              <view class="inp">
+                <input placeholder="请输入验证码" bindinput="codeInput">{{codeInput}}</input>
+              </view>
+
+              <view class="getCode" bindtap="{{coden}}">{{btntext}}</view>
+            </view>
+            <view class="item">
+              <input placeholder="请输入邀请码" bindinput="inviteInput">{{inviteInput}}</input>
+            </view>
+            <view class="agreement" wx:if="{{modalTyepe.agreement_list.length}}">
+              <view class="radio">
+
+                <checkbox-group bindchange="radioChange">
+                  <checkbox value="true" />
+
+                </checkbox-group>
+              </view>
+              <view class="text">
+                同意
+                <block wx:for="{{modalTyepe.agreement_list}}" wx:for-index="idx" wx:key>
+                  <text data-idx="{{idx}}" bindtap="read">《{{item.name}}》</text>
+                </block>
+
+              </view>
+            </view>
+
+            <view class="btnbox">
+              <button type="button" class='cancel but' bindtap="closeModal">取消</button>
+              <block wx:if="{{phoneYz}}">
+                <block wx:if="{{modalTyepe.agreement_list.length}}">
+                  <button class='login but {{(butDisabled&&modalTyepe.agreement_list.length&&phone&&codeInput&&inviteInput)?"login_bg":"login_bg2"}}' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall" disabled="{{!(butDisabled&&modalTyepe.agreement_list.length&&phoneYz&&codeInput&&inviteInput)}}">登录
+                  </button>
+                </block>
+                <block wx:else>
+                  <button class='login but {{(phone&&codeInput&&inviteInput)?"login_bg":"login_bg2"}}' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall" disabled="{{!(phoneYz&&codeInput&&inviteInput)}}">登录
+                  </button>
+                </block>
+              </block>
+              <block wx:else>
+                <!-- 淘有卖登录模式跳转，有手机号无上级 //modalTyepe.agreement_list.length用户须知-->
+                <block wx:if="{{modalTyepe.phone}}">
+                  <block wx:if="{{modalTyepe.agreement_list.length}}">
+                    <button class='login but {{(butDisabled&&modalTyepe.agreement_list.length&&inviteInput)?"login_bg":"login_bg2"}}' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall" disabled="{{!(butDisabled&&modalTyepe.agreement_list.length&&inviteInput)}}">登录
+                    </button>
+                  </block>
+                  <block wx:else>
+                    <button class='login but {{(inviteInput)?"login_bg":"login_bg2"}}' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall" disabled="{{!(inviteInput)}}">登录
+                    </button>
+                  </block>
+                </block>
+                <block wx:else>
+                  <button class="login_bg2 but" bindtap="yanz">
+                    登录
+                  </button>
+                </block>
+              </block>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class='alap_box'>
+          <view class='get-user-container  {{pageTheme}}'>
+            <view class="get-user-text-title">登录提示</view>
+            <image src='{{BASE_IMG_URL || "https://s.404.cn/applet/"}}images/get-user.png' mode="widthFix" class='get-user-img'></image>
+
+            <view style="font-size: 28rpx;text-align: center;color: #f00;">当前微信版本过低，请先升级微信版本</view>
+            <view class="btnbox">
+              <button type="button" class='btn-uplevel' bindtap="closeModal" style="background-color:{{themeColorValue}}">去升级</button>
+            </view>
+
+          </view>
+        </view>
+      </block>
+    </block>
+
+
+    <block wx:if="{{modalTyepe.type==3}}">
+      <view class='alap_box'>
+        <view class='get-user-container  {{pageTheme}}'>
+          <view class="get-user-text-title">登录提示</view>
+          <image src='{{BASE_IMG_URL || "https://s.404.cn/applet/"}}images/get-user.png' mode="widthFix" class='get-user-img'></image>
+          <block wx:if='{{canIUse!==false}}'>
+            <view class='get-user-text'>授权后即可购物，享受优惠和参与活动</view>
+            <view class="btnbox">
+              <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+              <button type='primary' class='get-user-btn' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">登录
+              </button>
+            </view>
+          </block>
+
+          <block wx:else>
+
+            <view style="font-size: 28rpx;text-align: center;color: #f00;">当前微信版本过低，请先升级微信版本</view>
+            <view class="btnbox">
+              <button type="button" class='btn-uplevel' bindtap="closeModal" style="background-color:{{themeColorValue}}">去升级</button>
+            </view>
+          </block>
+
+        </view>
+
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view class='alap_box'>
+      <view class='get-user-container  {{pageTheme}}'>
+        <view class="get-user-text-title">登录提示</view>
+        <image src='{{BASE_IMG_URL || "https://s.404.cn/applet/"}}images/get-user.png' mode="widthFix" class='get-user-img'></image>
+        <block wx:if='{{canIUse!==false}}'>
+          <view class='get-user-text'>授权后即可购物，享受优惠和参与活动</view>
+          <view class="btnbox">
+            <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+            <button type='primary' class='get-user-btn' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">登录
+            </button>
+          </view>
+        </block>
+        <block wx:else>
+          <view style="font-size: 28rpx;text-align: center;color: #f00;">当前微信版本过低，请先升级微信版本</view>
+          <view class="btnbox">
+            <button type="button" class='btn-uplevel' bindtap="closeModal" style="background-color:{{themeColorValue}}">去升级</button>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
+</view>
+<web-view src="{{userLoginUrl}}" wx:if="{{userLoginUrl}}" bindload="loginLoaded" binderror="errorLoaded"></web-view>
+<view class="agreement_box" wx:if="{{agreementShow}}">
+  <view class="head">
+    <view class="left" bindtap="closeAgreementShowBox">
+      <text class="iconfont icon-shangyibu"></text>
+    </view>
+    <view class="name">
+      {{readTit}}
+    </view>
+  </view>
+  <view class="body" scroll-y="true">
+    <view class="com">
+      <template is="wxParse" data="{{wxParseData:readCom.nodes}}" />
+    </view>
+  </view>
+</view>
+<view class="get-phone alap_box" wx:if="{{showgetPhone}}">
+  <view class='get-user-container  {{pageTheme}}'>
+    <view class="get-user-text-title">获取手机号</view>
+      <image src='{{modalTyepe.auth_img|| "https://s.404.cn/applet/images/get-user.png"}}' mode="widthFix" class='get-user-img'></image>
+      <block wx:if='{{canIUse!==false}}'>
+        <view class='get-user-text'>{{modalTyepe.auth_intro}}</view>
+        <view class="btnbox">
+          <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+          <button type='primary' class='get-user-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取</button>
+        </view>
+      </block>
+  </view>
+</view>

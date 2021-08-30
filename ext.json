@@ -1,0 +1,10 @@
+{
+    "extEnable": true,
+    "extAppid": "wx04a1043cacaddfe9",
+    "ext": {
+      "apiUrl": "https://admin.artsheep.cn/", 
+      "apiJavaUrl": "https:/test.artsheep.cn/",
+      "token":4,
+      "type": 1
+    }
+  }

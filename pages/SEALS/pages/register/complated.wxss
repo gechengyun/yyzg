@@ -1,0 +1,62 @@
+/* pages/SEALS//pages/register/complated.wxss */
+.container{
+  padding: 0 40rpx;
+}
+.complated-top{
+  color: #08132D;
+  font-size: 44rpx;
+  font-weight: 600;
+  text-align: center;
+  padding: 10rpx 80rpx 136rpx;
+  margin-top: 10rpx;
+}
+.tips-img{
+  width: 168rpx;
+  margin-bottom: 64rpx;
+}
+.sub-btn{
+  margin-bottom: 20rpx;
+  color: #fff;
+}
+.back-btn::after{
+  border: none;
+  background-color: rgb(0, 0, 0,.2);
+  border-radius: 0;
+}
+.message{
+  margin-top: 120rpx;
+}
+.title{
+  color: #08132D;
+  font-size: 32rpx;
+  margin-bottom: 20rpx;
+}
+.title text:first-child{
+  margin-right: 12rpx;
+  width: 6rpx;
+  height: 35rpx;
+  display: inline-block;
+  vertical-align: sub;
+}
+.list view{
+  color: #919398;
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+.list text{
+  display: inline-block;
+  background-color: #919398;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  margin-right: 5rpx;
+  vertical-align: middle;
+  margin-top: -3rpx;
+}
+.list text:nth-child(2){
+  width: 15rpx;
+  height: 15rpx;
+}
+.list text:nth-child(3){
+  margin-right: 0;
+}

@@ -1,0 +1,119 @@
+<import src="../public/warning.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter" />
+<template name="inputModule">
+	<form bindsubmit="inputSubmit" bindreset="formReset">
+		<view class="addressEdit" style="padding:0 30rpx;position:relative;back;background:{{shopHomeData.bgcolor}}">
+			<view class="addressEditList inputList" style="border-bottom: 0rpx solid #eee;border-left:1rpx solid #eee;border-right:1rpx solid #eee;background:{{shopHomeData.bgcolor}}">
+				<view class="addressEditCentent" wx:for="{{content.content}}" wx:key="pigcms_id" wx:for-item="item" wx:for-index="index" style="background:{{shopHomeData.bgcolor}}">
+					<text style="color:red;width:2%;margin-right:10rpx;" wx:if="{{item.required}}">*</text>
+					<!-- <text style="margin-right:{{item.required == false ?'10':'0'}}rpx;"></text> -->
+					<text wx:if="{{item.type==1||item.type==2||item.type==6||item.type==3||item.type==7||item.type==9}}" style="margin-left:{{item.required==true?'0':'22rpx'}}">{{item.title}}</text>
+					<text wx:if="{{item.type==4||item.type==5||item.type==8||item.type==10}}" style="width:85%;margin-left:{{item.required==true?'0':'22rpx'}}">{{item.title}}</text>
+					<!-- 文本 -->
+					<input wx:if="{{item.type==1}}" type="text" name="{{item.name}}" placeholder="{{item.default_value}}" maxlength="{{item.max}}" bindfocus='savaValue' value="{{resetValue}}" data-required="{{item.required}}" data-index="{{index}}" data-name="{{item.name}}" data-reg="{{item.reg}}"/>
+					<!-- 密码 -->
+					<input wx:if="{{item.type==2}}" type="text" name="{{item.name}}" placeholder="{{item.default_value}}" maxlength="{{item.max}}" bindfocus='savaValue' password value="{{resetValue}}" data-index="{{index}}" data-reg="{{item.reg}}"/>
+					<!-- 长文本 -->
+					<!-- <textarea wx:if="{{item.type==8}}" value="{{resetValue}}" class="areas" placeholder='{{item.default_value}}' maxlength="{{item.max}}" bindinput="saveAreas" bindfocus="loginAreas" name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}">
+					  <text class="currentWordNumber">{{item.a}}/{{item.max}}</text>
+					</textarea> -->
+					<view class="my-list" bindtap="showTextarea"  wx:if="{{item.type==8}}" data-index="{{index}}">
+             <textarea value="{{resetValue}}" class="areas" placeholder='{{item.default_value}}' maxlength="{{item.max}}" bindinput="saveAreas"name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}"
+						 placeholder-style="color:#C0C4CC;" bindblur="hideTextarea" style="height:{{item.textareaShow?310:0}}rpx"></textarea>
+						 <rich-text nodes="{{item.group_value}}" class="new-textarea" wx:if="{{!item.textareaShow}}"></rich-text>
+             <text wx:if="{{item.max>=0}}" class="currentWordNumber">{{item.a}}/{{item.max}}</text>
+          </view> 
+					<!-- 复选框 -->
+					<checkbox-group wx:if="{{item.type==4}}" value="{{item.default_value}}" class="checkbox-group" bindchange="checkboxChange" name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}">
+						<label class="checkbox" wx:for="{{item.optionArr}}" wx:key="name" wx:for-item='item_2' wx:for-index="index_2">
+						  <view wx:if="{{index_2<3}}">
+							  <checkbox value="{{item_2.name}}" checked="{{filter.isExit(item.default_value,item_2.name)==1?true:false}}" style="vertical-align: middle;" /><text style="margin-left:10rpx;vertical-align: middle;width:85%">{{item_2.value}}</text>
+							</view>
+							<view wx:if="{{index_2==3&&item.a==false}}" style="color:{{themeColorValue}};margin-top:-10rpx;margin-bottom:16rpx" bindtap="showMore" data-index="{{index}}" data-defaultValue="{{item.default_value}}">查看更多</view>
+							<view wx:if="{{index_2>=3 && item.a==true}}">
+							  <checkbox value="{{item_2.name}}" checked="{{filter.isExit(item.default_value,item_2.name)==1?true:false}}" style="vertical-align: middle;" /><text style="margin-left:10rpx;vertical-align: middle;width:85%">{{item_2.value}}</text>
+							</view>
+							<view wx:if="{{index_2==item.optionArr.length-1&&item.a== true}}" style="color:{{themeColorValue}};margin-top:20rpx;margin-bottom:16rpx" catchtap="hideMore" data-index="{{index}}" data-defaultValue="{{item.default_value}}">收起</view>
+						</label>
+					</checkbox-group>
+					<!-- 图片 -->
+					<view wx:if="{{item.type==5}}" class="upSource" style="margin-top:20rpx" name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}">
+						<view class="img-list">
+							<block wx:for="{{imgSrc}}" wx:if="{{imgSrc.length>0}}" wx:key='index'>
+								<view class="imaged">
+									<image src="{{item}}" class="slide_img"></image>
+									<view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="image"></view>
+								</view>
+							</block>
+							<view class="iconfont icon-jia1 imaged img-add" style="color:{{themeColorValue}}" bindtap="chooseStyle" wx:if="{{imgSrc.length<item.max}}"></view>
+						</view>
+						<!-- 上传类型选择 -->
+						<action-sheet hidden="{{actionSheetHidden}}" bindchange="actionSheetbindchange">
+							<action-sheet-item bindtap="addImage" data-max="{{item.max}}">上传图片</action-sheet-item>
+							<action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+						</action-sheet>
+					</view>
+					<!-- 视屏 -->
+					<view wx:if="{{item.type==10}}" class="upSource" style="margin-top:20rpx" name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}">
+						<view class="img-list">
+							<block wx:for="{{videoSrc}}" wx:if="{{videoSrc.length>0}}" wx:key='index'>
+								<view class="imaged">
+									<video src="{{item.furl}}" id='video{{index}}' controls class='slide_video' poster="{{item.vthumb}}" data-index="{{index}}"></video>
+									<view class="iconfont icon-iconfonticonfontclose close" bindtap="delFile" data-index="{{index}}" data-type="video"></view>
+								</view>
+							</block>
+							<view class="iconfont icon-jia1 imaged img-add" style="color:{{themeColorValue}}" bindtap="chooseVideo" wx:if="{{videoSrc.length<item.max}}"></view>
+						</view>
+						<!-- 上传类型选择 -->
+						<action-sheet hidden="{{actionSheetVideo}}" bindchange="actionSheetBindVideo">
+							<action-sheet-item bindtap="addVideo" data-max="{{item.max}}">上传视频</action-sheet-item>
+							<action-sheet-cancel class="cancel">取消</action-sheet-cancel>
+						</action-sheet>
+					</view>
+					<!-- 下拉框/单选框 -->
+					<picker wx:if="{{item.type==6||item.type==3}}" bindchange="selectChange" value="{{item.default_value}}" range="{{item.optionArr}}" range-key="value" name="{{item.name}}" data-index="{{index}}" data-reg="{{item.reg}}">
+						<view class="picker">
+						{{filter.radioArr(item.optionArr,item.default_value)?filter.radioArr(item.optionArr,item.default_value):item.optionArr[0].value}}
+						<text style="position:absolute;top:20rpx;right:10rpx;font-weight:bold;font-size:30rpx" class="iconfont icon-xiayibu"></text>
+					  </view>	
+					</picker>
+					<!-- 省市区 -->
+					<view wx:if="{{item.type==7}}" class="regionSelection" data-region="{{item.name}}" data-reg="{{item.reg}}">
+						<picker name="province" bindchange="pickerProvince" value="{{province_index}}" range="{{province_name_arr}}">
+							<view class="picker" style='color:{{change_color || "#666"}}'>
+								{{province_name_arr[province_index]}}
+							</view>
+						</picker>
+						<picker name="city" bindchange="pickerCity" value="{{city_index}}" range="{{city_name_arr}}">
+							<view class="picker" style='color:{{change_color || "#666"}}'>
+								{{city_name_arr[city_index]}}
+							</view>
+						</picker>
+						<picker name="area" bindchange="pickerCountry" value="{{country_index}}" range="{{country_name_arr}}">
+							<view class="picker" style='color:{{change_color || "#666"}}'>
+								{{country_name_arr[country_index]}}
+							</view>
+						</picker>
+					</view>
+					<view wx:if="{{item.type==7}}" style="margin-top:20rpx">
+						<input style="margin-left:{{item.required==true?'0':'22rpx'}};width:91%;border-bottom:1rpx solid #eee" type="text" name="{{item.name}}" placeholder="{{item.default_value}}" maxlength="{{item.max}}" bindfocus='savaValue' value="{{resetValue}}" data-required="{{item.required}}" data-index="{{index}}" data-name="{{item.name}}" data-reg="{{item.reg}}"/>
+					</view>
+					<!-- 手机号码及验证码 -->
+					<input bindblur="bindTel" bindfocus="focusTel" wx:if="{{item.type==9}}" style="border-bottom: 1rpx solid #eee" type="text" name="{{item.name}}" placeholder="{{item.default_value}}" maxlength="{{item.max}}" value="{{resetValue}}" data-required="{{item.required}}" data-index="{{index}}" data-name="{{item.name}}" data-reg="{{item.reg}}"/>
+					<view wx:if="{{item.type==9}}" style="margin-top:10rpx">
+							<text style="color:red;width:2%;margin-right:10rpx;" wx:if="{{item.required}}">*</text>
+						  <text class="register-mes">验证码</text>
+              <input placeholder="请输入短信验证码"  bindblur="bindCode" value='{{resetValue}}' class="sendMsg" name="sms_code"></input>
+              <button class='gecode' bindtap='getTelcode'>{{sendcodeStatus?(codenum+'秒'):'获取验证码'}}</button>
+					</view>
+				</view>
+			</view>
+			<view class="submitContainer"style="border-bottom: 1rpx solid #eee;border-left:1rpx solid #eee;border-right:1rpx solid #eee;background:{{shopHomeData.bgcolor}}">
+				<button class="submit inputSubmit" formType="submit" style="height: 80rpx;line-height: 80rpx;margin-top: 100rpx;padding: 0;border-radius:14rpx" wx:if="{{content.allow_submit==1}}" data-form_id="{{content.form_id}}" data-videoname="{{filter.getNameData(content.content,'10')}}" data-imagename="{{filter.getNameData(content.content,'5')}}" data-areaname="{{filter.getNameData(content.content,'7')}}">{{content.submit_text}}</button>
+				<button class="submit inputSubmit" style="height:80rpx;line-height:80rpx;padding: 0;border-radius:14rpx;background:#BABABA;color:#eee" wx:if="{{content.allow_submit==0}}">{{content.submit_text}}</button>
+			</view>
+			<view style="position:absolute;top:0rpx;left:0rpx;width:100%;height:100%;z-index:999" wx:if="{{_unlogin}}" catchtap="goDetail"></view>
+		</view>
+	</form>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</template>

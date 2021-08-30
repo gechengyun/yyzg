@@ -1,0 +1,78 @@
+<!--我的订单详情页面-->
+<import src="../../public/orderPayInfo.wxml" />
+<import src="../../public/newLogistics.wxml" />
+<import src="../../public/appointment.wxml" />
+<import src="../../public/productcoupon.wxml" />
+<import src="../../public/selffetch.wxml" />
+<import src="../../public/warning.wxml" />
+<import src="../../public/circle-buy-timeline.wxml" /><!--周期购买时间线-->
+<view class="container payment {{pageTheme}}" data-page="page.order.index">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <template is="orderPayInfo" data="{{paymentData:orderData,postage:postage,orderAddress:orderAddress, showMessage: showMessage,store_nav_list,order_no,slide_txt,slide,NUM,open_community_group,themeColorValue,showMoreTxt,writeLen}}" />
+    <template is="circle-buy-timeline" data="{{deliver_data:orderData.deliver_data,order:orderData.order}}" wx:if="{{orderData.deliver_data && orderData.deliver_data.deliver_list.length > 0}}"></template>
+    <template is="newLogistics" wx:for="{{orderData.package_list}}" wx:key="order_id" data="{{package_list:item,logistics:logistics,logisticsShow:logisticsShow,order:orderData.order}}" />
+    <!--     <view class="paymentButton" wx:if='{{orderData.order.status==6}}'>
+    <view bindtap="returnGo" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">查看退货</view>
+</view> -->
+    <view class="paymentButton" wx:if='{{orderData.order.status==0 || orderData.order.status==1}}'>
+        <view bindtap="cancelOrder">取消</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==0 || orderData.order.status==1}}'>
+        <view bindtap="paymentGo">去支付</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==3}}'>
+        <view bindtap="completeReceipt">确认收货</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.type==7 && orderData.presale_pay_btn}}'>
+        <view bindtap="finalPayment">付尾款</view>
+    </view>
+    <view class="paymentButton" wx:if="{{orderData.order.is_comment && orderData.order.virtual_used_type!=1}}">
+        <navigator url="/pages/user/order/{{orderData.order.comment_btn=='评价订单'?'publishedEvaluation':'evaluation'}}?order_id={{orderData.order.order_id}}" hover-class="none" open-type="navigate">
+            <view >{{orderData.order.comment_btn}}</view>
+        </navigator>
+    </view>
+    <view class="paymentButton" wx:if="{{orderData.order.shipping_method == 'selffetch' && orderData.order.type != 10 &&(orderData.order.status!= 0 && orderData.order.status!= 1 && orderData.order.status!= 4 && orderData.order.status!= 5 && orderData.order.status!= 7 &&!orderData.order_product_coupon)}}">
+        <view bindtap="selffetch">核销码</view>
+    </view>
+    <view class="paymentButton" wx:if='{{(orderData.order.type*1==10)&&(orderData.order.status!= 0 && orderData.order.status!= 1 && orderData.order.status!= 4 && orderData.order.status!= 5 && orderData.order.status!= 6)}}'>
+        <view bindtap="selffetch">预约核销码</view>
+    </view>
+    <view class="paymentButton"
+          wx:if="{{orderData.order.product_coupon == 1 && orderData.order.status == 4 && orderData.order_product_coupon && orderData.order_product_coupon.length > 0}}"
+          wx:for="{{orderData.order_product_coupon}}"
+          wx:key="index">
+        <view style="{{item.status!=0?'background-color: #b9b9b7;border: #b9b9b7;':''}}"
+              data-status="{{item.status}}"
+              data-id="{{item.id}}"
+              data-index="{{index + 1}}"
+              bindtap="productcoupon"
+        >核销二维码（{{index + 1}}）{{item.status!=0?"（已核销）":""}}</view>
+    </view>
+    <view class="paymentButton" wx:if='{{(orderData.order.status==7)&&has_return && orderData.order.virtual_used_type!=1}}'>
+        <view bindtap="completeOrder" data-order="{{orderData.order.order_no_txt}}">交易完成</view>
+    </view>
+    <view class="paymentButton" wx:if="{{orderData.order.status == 4 && orderData.order.virtual_used_type==1}}">
+        <navigator url="/pages/user/order/{{orderData.order.comment_btn=='评价订单'?'publishedEvaluation':'evaluation'}}?order_id={{orderData.order.order_id}}" hover-class="none" open-type="navigate">
+            <view >{{orderData.order.comment_btn}}</view>
+        </navigator>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.show_virtual_code == 1}}'>
+        <view bindtap="writeCode" data-cardno="{{orderData.write_off_code[0].card_no}}" data-order_no="{{orderData.order.order_no}}" data-idx="{{-1}}" data-writetype="{{1}}" wx:if="{{orderData.write_off_code.length == 1}}">核销二维码</view>
+        <view bindtap="writeCode" data-order_no="{{orderData.order.order_no}}" data-idx="{{-1}}" data-writetype="{{0}}" wx:else>一键使用全部</view>
+    </view>
+    <block>
+        <template is="appointment" wx:if="{{appointment}}" data="{{verify_image_code:orderData.order.verify_image_code,themeColorValue}}" />
+    </block>
+    <block>
+        <template is="selffetch" wx:if="{{selffetch}}" data="{{selffetch_img_url:orderData.order.verify_image_code,themeColorValue,selffetch_text:orderData.order.order_no,selffetch_type:flag}}" />
+    </block>
+    <block>
+        <template is="productcoupon" wx:if="{{productcoupon}}" data="{{productcoupon_qrcode:orderData.productcoupon_qrcode,productcoupon_qrcode_code:orderData.productcoupon_qrcode_code,productcoupon_qrcode_index:orderData.productcoupon_qrcode_index,themeColorValue}}" />
+    </block>
+    <block>
+        <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+    </block>
+
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,29 @@
+<!--pages/LIVEVIDEO//pages/liveVideo/liveVideoList.wxml-->
+<!-- 直播列表 -->
+<import src="../component/liveList.wxml" />
+<!-- 提示弹窗 -->
+<import src="../../../public/warning.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="container">
+	<view class="scroll-tab tab-fiexd">
+		<view class="tab-header">
+			<block wx:for="{{tabName}}" wx:key="index">
+				<view class="tab-swiper {{index == tabIndex?'tab-active':''}}" data-tabinx="{{index}}" data-tabid="{{item.id}}" bindtap="tabSelect" id="view{{index}}">
+					<view>{{item.tagname}}</view>
+					<image wx:if="{{index == tabIndex}}" class="tab-active-icon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/livelist/active.png" />
+				</view>
+			</block>
+		</view>
+	</view>
+	<view class="live-content">
+		<scroll-view scroll-y bindscrolltolower="scrollToLower" style="height:calc(100vh - 306rpx);" wx:if="{{!onlyAppletLive.only_applet_live}}">
+			<template is="liveList" data="{{videoListData:videoListData,tabIndex:tabIndex,videoListFail:videoListFail,onlyAppletLive:onlyAppletLive,themeColorValue}}" />
+			<view class="bottom-line" wx:if='{{videoListData.length>0 && no_more}}'>
+      	<image class="bottom-line-image" src="../../../../images/line.png"/> 
+    	</view>
+		</scroll-view>
+	</view>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

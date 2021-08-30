@@ -1,0 +1,82 @@
+<!--警告提示-->
+<import src="../public/warning.wxml" />
+<!--create_distribution.wxml-->
+ <!-- 用户没登录 -->
+  <view class="unlogin-block" wx:if='{{_unlogin}}'>
+    <view class="content">
+        <image src="https://s.404.cn/applet/images/unlogin.png" mode="widthFix" class="pic-unlogin"></image>
+        <text class="tips">
+          由于您没有授权本页面无法展示
+        </text> 
+        <text class="tips">
+          更多信息为了您更好的用户体验，请授权微信登录
+        </text>  
+    </view>
+      
+      <button type='primary' class='btn-l-logins' style="background-color:{{themeColorValue}};color:#fff;" open-type="getUserInfo" bindgetuserinfo="userCall"
+          binderror="errCall">登录
+      </button>
+  </view>
+<block wx:if='{{_unlogin===false}}'>
+<view class="createDistribution container {{pageTheme}}" data-page="pages.travel.create_distribution">
+    <view class="section supplierInfo">
+      <view class="title">供货商信息</view>
+      <view>
+        <view class="infoItem">
+          <text class="leftLabel">店铺</text>
+          <view class="rightBox"><text>{{shopData.store_data.root_store_name}}</text></view>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">上级</text>
+          <view class="rightBox"><text>{{shopData.store_data.supplier_store_name}}</text></view>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">所属团队</text>
+          <view class="rightBox"><text>{{shopData.store_data.team_name}}</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="section distributionInfo">
+      <view class="title">创建{{shopData.diy_fx_name}}店铺</view>
+      <view>
+        <view class="infoItem" wx:if="{{shopData.allow_mdfy_drp_store_name==1}}">
+          <text class="leftLabel">店铺名称</text>
+          <view class="rightBox"><input type="text" placeholder="不填默认为主店名称" class="shopName" bindblur='shopNameBlur' placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" /></view>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">手机号码(账号)</text>
+          <view class="rightBox"><input type="text" placeholder="填写手机号码" class="userTel" bindblur='userTelBlur' placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" /></view>
+        </view>
+         <view class="infoItem" style="flex-wrap:wrap;" wx:if="{{shopData.sms_open*1}}">
+          <text class="leftLabel">验证码</text>
+          <view class="rightBox" style="display:flex;justify-content: flex-end;">         
+             <button type="button" class="btn-yzm" bindtap="getVerificatCode">{{sendcodeStatus ? (codenum+' 秒'):'获取验证码'}}</button>
+          </view>
+          <input type="text" wx:if="{{sendcodeStatus && codenum<60}}" class="txt-verificate" placeholder="请输入验证码" bindinput="inputVeriCode"></input>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">真实姓名</text>
+          <view class="rightBox"><input type="text" placeholder="请填写真实姓名避免影响提现" class="userName" bindblur='userNameBlur' placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" /></view>
+
+        </view>
+       
+      </view>
+    </view>
+
+    <view class="agreementBox">
+        <label bindtap="agreeEvent" data-active="{{agree}}"> <checkbox color="{{themeColor}}" value="{{item.name}}" size="40" checked="{{agree ? 'checked' : ''}}"/>我已阅读并同意</label>
+        <text class="agreement  {{err_code == 1 ? '' : 'disabled'}}" bindtap="{{err_code == 1 ? 'showAgreementEvent' : ''}}" data-status="open">{{shopData.diy_fx_name}}协议</text>
+    </view>
+    <view class="button {{err_code == 1 ? '' : 'disabled'}}" bindtap="{{err_code == 1 ? 'createShop' : ''}}">立即挣钱</view>
+  
+
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<view class="layer" style="display:{{showAgreement ? 'block' : 'none'}};" bindtap="showAgreementEvent" data-status="close"></view>
+<view class="agreementPop" style="display:{{showAgreement ? 'block' : 'none'}};z-index:99;">
+        <view class="title">{{shopData.diy_fx_name}}协议</view>
+        <view class="content">{{shopData.agreement}}</view>
+</view>
+</block>
+
+<include src="/pages/public/page_footer.wxml"></include>

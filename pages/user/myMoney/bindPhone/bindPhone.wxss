@@ -1,0 +1,55 @@
+/* pages/user/myMoney/bindPhone/bindPhone.wxss */
+
+page {
+  background: white;
+  color: #101010;
+}
+
+.bindphone {
+  padding: 96rpx 0;
+}
+
+.title {
+  font-size: 50rpx;
+  font-weight: 500;
+  color: #101010;
+  margin-left:80rpx; 
+}
+
+.phone {
+  margin-top: 90rpx;
+  margin-left:80rpx; 
+  width: 590rpx;
+}
+
+.phone .inpphone {
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+  margin-bottom: 30rpx;
+  border-bottom: 1rpx solid #ccc;
+}
+
+.phone .inpphone image {
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.phone .inpphone .numma {
+  color: #3e4a59;
+  font-size: 26rpx;
+}
+
+button {
+  width: 630rpx;
+  height: 89rpx;
+  margin: 172rpx auto;
+  background-color: #ff5c1c;
+  border-radius: 10rpx;
+  color: #ffffff;
+  font-size: 34rpx;
+  line-height: 89rpx;
+  text-align: center;
+}

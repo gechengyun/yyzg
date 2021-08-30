@@ -1,0 +1,8 @@
+
+<import src="../public/navbar.wxml" />
+<!-- 调用导航 -->
+
+<view>
+  <template is="navbar" data="{{nav_data,set_para}}" />
+</view>
+

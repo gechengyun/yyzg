@@ -1,0 +1,32 @@
+<view class="open_screen_coupon_container" wx:if="{{show && openScreen && openScreen.can_get != 0}}">
+	<view class="open_screen_coupon_{{openScreen.templet_code}} animated zoom{{zoom}}">
+		<view class="open_screen_coupon_center">
+			<image src="{{BASE_IMG_URL}}images/coupon/close_btn.png" bindtap="closeCoupon" class="open_screen_coupon_close_btn"></image>
+			<image src="{{BASE_IMG_URL}}images/coupon/coupon_bg{{openScreen.templet_code}}.png" class="open_screen_coupon_bg"></image>
+			<image bindtap="closeCoupon" wx:if='{{openScreen.templet_code!=3}}' src="{{BASE_IMG_URL}}images/coupon/receive_btn{{openScreen.templet_code}}.png" class="open_screen_coupon_receive_btn"></image>
+			<!-- 立即领取 -->
+			<view class='open_screen_coupon_receive_btn' bindtap="{{isClick?'closeCoupon':''}}" wx:if='{{openScreen.templet_code==3}}'>
+				<view class='txt'>立即领取</view>
+				<image src='{{BASE_IMG_URL}}images/coupon/icon-right.jpg' class='icon'></image>
+			</view>
+			<text class="open_screen_coupon_rule_name">{{openScreen.name}}</text>
+			<scroll-view scroll-y class="coupons_box clearfix">
+				<block wx:for="{{openScreen.coupon_list}}" wx:key="index">
+					<view class="open_screen_coupon_item">
+						<view class="open_screen_coupon_item_inner">
+							<text class="open_screen_coupon_title">
+                            <text style='font-size:24rpx;'>￥</text>
+							<text class="open_screen_coupon_title_price" style='font-size:32rpx;font-weight:bold;'>{{item.face_money}}</text>
+							<text wx:if="{{openScreen.templet_code == 3}}" class="open_screen_coupon_tail"></text>
+							</text>
+							<text class="open_screen_coupon_desc">{{openScreen.templet_code == 3?'单笔订单':''}}{{item.limit_money==0?"无限制":"满"+item.limit_money+"元使用"}}</text>
+
+							<!-- 新增领取按钮 -->
+							<button class='btn-get-counpon' bindtap="{{isClick?'closeCoupon':''}}">领取</button>
+						</view>
+					</view>
+				</block>
+			</scroll-view>
+		</view>
+	</view>
+</view>

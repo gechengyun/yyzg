@@ -1,0 +1,4 @@
+/* pages/product/productList.wxss */
+.productTop .productTopFiexd{
+  position: absolute;
+}

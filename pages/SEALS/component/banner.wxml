@@ -1,0 +1,9 @@
+<template name="advtitle">
+  <view class="card-banner">
+    <view class="cardSwiper banner-img">
+      <navigator url="{{cardData.advinfo[0].adUrl.url}}" hover-class="none" open-type="navigate">
+        <image src="{{cardData.advinfo[0].adImgsrc}}" mode="widthFix"></image>
+      </navigator>      
+    </view>
+  </view>
+</template>

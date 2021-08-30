@@ -1,0 +1,142 @@
+/* pages/SHOPGOODS//pages/user/recharge/recharge.wxss */
+.recharge{
+  font-size: 26rpx;
+}
+.balance-title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx;
+  font-weight: 600;
+  background-color: #fff;
+  margin: 10rpx 0 1px;
+}
+.balance-num{
+  font-size: 36rpx;
+}
+.balance-tip{
+  padding: 30rpx 0 30rpx 30rpx;
+  background-color: #fff;
+  font-size: 24rpx;
+  color: #9a9a9a;
+}
+/* 支付选择 */
+.balance-mode{
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 30rpx;
+}
+.balance-mode-item{
+  background-color: #f7f7f7;
+  border-radius: 12rpx;
+  margin-right: 30rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 210rpx;
+  margin-bottom: 30rpx;
+  padding: 20rpx 0;
+  box-sizing: border-box;
+  border: 1px solid #f7f7f7;
+  font-size: 24rpx;
+}
+.recharge-item-send-num{
+  margin: 2rpx 0;
+  font-size: 18rpx;
+}
+.balance-mode-item:nth-child(3n){
+  margin-right: 0;
+}
+.balance-mode-item-b{
+  color: #9a9a9a;
+}
+.balance-ipt{
+  padding: 0 30rpx;
+  background-color: #fff;
+  text-align: center;
+}
+.balance-ipt input{
+  padding: 20rpx 30rpx;
+  background-color: #f7f7f7;
+}
+.balance-ipt::after{
+  content: '';
+  width: 100%;
+  display: block;
+  /* border-bottom: 1px solid #bbb; */
+  border-bottom: 1px solid #fff;
+  margin-top: 30rpx;
+}
+.balance-tips{
+  text-align: center;
+  padding: 20rpx 0;
+  background-color: #fff;
+}
+/* 支付方式 */
+.balance-type{
+  background-color: #fff;
+  padding: 0 30rpx;
+  margin-top: 20rpx;
+}
+.balance-type-title{
+  padding: 30rpx 0;
+  font-weight: 600;
+}
+.balance-type-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30rpx 0;
+  margin-bottom: 1px;
+}
+.balance-type-left .iconfont{
+  margin-right: 20rpx;
+  font-size: 40rpx;
+  vertical-align: middle;
+}
+.icon-umidd17{
+  color: #1196db;
+}
+.icon-weixin{
+  color: #22d025;
+}
+
+/* 底部提现按钮 */
+.submit-btn{
+  background-color: #fff;
+  padding: 40rpx;
+  text-align: left;
+  margin-bottom: 20rpx;
+}
+.txbtn{
+  margin: 0 auto;
+  width: 80%;
+  height: 80rpx;
+  color: white;
+  line-height: 80rpx;
+  text-align: center;
+  font-size: 36rpx;
+  border-radius: 10rpx;
+}
+/* 协议 */
+.register-rule{
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #333;
+  padding: 30rpx 28rpx;
+}
+.register-rule .icon-xuanzhong1{
+  color: #D23A3D;
+  margin-right: 12rpx;
+  margin-top: 4rpx;
+}
+.register-rule-content{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.register-rule-content navigator{
+  color: #D23A3D;
+}

@@ -1,0 +1,14 @@
+/* pages/shoppingCat/index.wxss */
+.editProduct .shoppingCatSize.size_3>wx-view .productInfo .shoppingInput text {
+  display: inline-block;
+  padding: 0;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  color: #333;
+  margin-right: 0;
+  height: 50rpx;
+  line-height: 50rpx;
+}
+.editProduct .shopProductList>view .productInfo text{
+  padding: 0;
+}

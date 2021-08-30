@@ -1,0 +1,91 @@
+<!--限时折扣测试模板-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="limited_module">
+	<view class="clearfix discount_allContainer" style="margin-top:15rpx;">
+		<!-- 限时折扣顶部图片 -->
+		<!-- <view class="discount_topImageContainer">
+			<image class="topImage" mode="aspectFit" src="{{BASE_IMG_URL}}images/today_spec_sale.png"></image>
+		</view> -->
+		<!-- 时间导航 -->
+		<view class="discount_scrollTab {{discount_fiex ? 'fixedToTop1' :''}}" style="top:{{status+navHeight}}px">
+			<text class="discount_header iconfont icon-flash_Sale" style="color:{{themeColorValue}}"></text>
+			<scroll-view class="discount_timeContainer" scroll-x scroll-with-animation="true" scroll-into-view="{{cuwer}}">
+				<view class="discount_timeItem" wx:for="{{content.content.activities}}" id="activity{{index}}" wx:key="index">
+					<view class="discount_content" bindtap="tabSelect" data-tabinx="{{index}}" data-tabid="{{item.id}}" data-pageid="{{content.field_id}}">
+						<view class="discount_time" style="color:{{index == content.content.nowKey? themeColorValue:''}};margin-bottom:{{index == content.content.nowKey ? '15':''}}rpx">{{item.activities_name}}</view>
+						<view class="discount_title {{index == content.content.nowKey ? 'discount_active':''}} " style="background:{{index == content.content.nowKey ? themeColorValue:''}}">{{item.statusText}}</view>
+					</view>
+				</view>
+			</scroll-view>
+		</view>
+		<!-- 大图 -->
+		<view style="margin-top:{{index==0?'46rpx':'31rpx'}}" wx:if="{{content.content.config.list_display_style ==1}}" class="discount_contentContainer" wx:for="{{content.content.goodsLists}}" wx:key="index">
+			<navigator class="discount_contentItem" url="/pages/product/details?product_id={{item.product_id}}&is_limited=1" hover-class="none" open-type="navigate" wx:if="{{discount_showOrHide==true}}">
+				<!-- 图片 -->
+				<view class="discount_imgContainer">
+					<!-- <image src="../../images/test.png" mode="aspectFit" class="discount_img"></image> -->
+					<view class="discount_img" style="background: url('{{item.limited_discount_img}}') center no-repeat;background-size:100% 100%;width:{{content.content.config.main_image_fill_style==1?'100%':'60%'}}">
+					</view>
+					<view class="discount_label" style="background:{{themeColorValue}}">
+						<image class="discount_labelImg" src="{{BASE_IMG_URL}}images/discount_label.png" mode="aspectFit"></image>
+					</view>
+				</view>
+				<!-- 商品内容部分 -->
+				<view class="discount_shoppingContainer">
+					<!-- 上部活动限时 -->
+					<view class="discount_shoppingTop" style="background:{{item.startStatus==1?'#646D70':themeColorValue}}">
+						<view class="discount_shoppingTimeContainer" style="justify-content:{{item.startStatus==1?'space-between':''}};width:{{content.content.config.show_share==false?'648rpx':'572rpx'}}">
+							<!-- 这里需要判断时间结束与否 -->
+							<view wx:if="{{item.startStatus==3}}" class="discount_shoppingTitle">距开始</view>
+							<view wx:if="{{item.startStatus==2}}" class="discount_shoppingTitle">距结束</view>
+							<view wx:if="{{item.startStatus==1}}" class="discount_shoppingTitle">已结束</view>
+							<view class="discount_shoppingTime" wx:if="{{item.startStatus!=1}}">
+								<span style="color:#fff;font-size:24rpx">{{item.total_show}}</span>
+								<em wx:if="{{item.total_show !=''}}">天</em>
+								<span class="discount_shoppingTime_item" style="color:{{themeColorValue}}">{{item.hours_show}}</span>
+								<em>:</em>
+								<span class="discount_shoppingTime_item" style="color:{{themeColorValue}}">{{item.minutes_show}}</span>
+								<em>:</em>
+								<span class="discount_shoppingTime_item" style="color:{{themeColorValue}}">{{item.seconds_show}}</span>
+							</view>
+							<view class="discount_progressBarContainer" wx:if="{{content.content.config.show_reserve_percentage=='true'&&(item.startStatus!=3)}}" style="margin-left:{{content.content.config.show_share==false&&item.startStatus!=1?'180rpx':'80rpx'}}">
+								<view class="discount_progressBar"></view>
+								<view style="width: 100%;height: 100%;border-radius: 16px;background: #fff;overflow: hidden;background: {{themeColorValue}};position: relative;opacity: 0.6">
+									<view class="discount_progressBarOver" style="width:{{item.percentage}};color:#fff">已抢购{{item.percentage}}</view>
+									<view class="discount_progressBarPercent" style="width:{{item.percentage}};color:{{item.startStatus==1?'#646D70':themeColorValue}}">已抢购{{item.percentage}}</view>
+									</view>
+							</view>
+						</view>
+						<view class="discount_shoppingShare iconfont icon-fenxiang_time" style="color:{{item.startStatus==1?'#646D70':'#fff'}};background:{{item.startStatus==1?'#fff':''}}" wx:if="{{content.content.config.show_share=='true'}}" catchtap='shareTap' data-product_id="{{item.product_id}}" data-index="{{index}}">
+						</view>
+					</view>
+					<!-- 下部内容详情 -->
+					<view class="discount_shoppingBottom">
+						<view class="discount_shoppingBottomTitle">{{item.name}}</view>
+						<!-- 标签 -->
+						<view class="discount_bottomTopicContainer" wx:if="{{content.content.config.show_product_desc=='true'&&item.label.length>0}}">
+							<view class="discount_bottomTopic" wx:for="{{item.label}}" wx:for-item="labelItem" wx:for-index="labelIndex" wx:key="index" wx:if="labelIndex<=1">
+								<view class="discount_bottomTopicBg" style="background:{{themeColorValue}}"></view>
+								<view class="discount_bottomTopicTitle" style="color:{{themeColorValue}}">{{labelItem}}</view>
+							</view>
+						</view>
+						<view class="discount_shoppingBottomPrice">
+							<view>
+								<em style="color:{{themeColorValue}}">￥</em>
+								<text class="discount_discountPrice" style="color:{{themeColorValue}}">{{item.now_money}}</text>
+								<text class="discount_originalPrice" wx:if="{{content.content.config.show_product_price=='true'&&item.original_price>0}}">{{item.original_price}}</text>
+							</view>
+							<view class="discount_profit" style="background:{{item.startStatus==1?'#646D70':themeColorValue}};opacity:0.6;" wx:if="{{item.startStatus!=3&&content.content.config.show_gift_preincome =='true'&&item.self_by_get_money!='0.00'}}">
+								<view class="discount_profitTitle" style="font-size:24rpx;font-family:PingFang SC;font-weight:500;color:#fff">赚</view>
+								<view class="discount_profitPrice">￥{{item.self_by_get_money}}</view>
+							</view>
+							<view wx:if="{{item.startStatus!=3}}" class="discount_rushPurchase iconfont icon-quqianggou" style="color:{{item.startStatus==1?'#646D70':themeColorValue}}">
+								<view class="discount_rushPurchaseTitle" style="color:#fff">{{content.content.config.buy_btn_name}}</view>
+							</view>
+						</view>
+					</view>
+				</view>
+			</navigator>
+		</view>
+	</view>
+</template>

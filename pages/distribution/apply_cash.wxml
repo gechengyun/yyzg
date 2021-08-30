@@ -1,0 +1,120 @@
+<!--申请提现页面-->
+<import src="../public/warning.wxml" />
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<view class="applyCash container {{pageTheme}}" style="background-color:#f9f9f9;">
+  <view class="section cashSection">
+    <view class="sectionItem">
+      <view class="leftLabel">可提现金额</view>
+      <view class="rightBox">￥{{storeData.store.balance}}</view>
+    </view>
+  </view>
+    <view class="section moneySection">
+      <view class="sectionItem sectionTitle">输入提取金额</view>
+      <view class="sectionItem sectionInput">
+        <text>￥</text>
+        <input type="digit" bindblur="verifyApplyMoney" value='{{applyMoney}}' placeholder="请在这里输入金额" placeholder-style="font-size:26rpx;color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+      </view>
+    </view>
+    <!-- 提现方式 -->
+    <view class="cash-type">
+      <view class="cash-type-title">提现方式:</view>
+      <view class="cash-type-lists">
+        <view class="icon-item {{cashIndex == 0?'active':''}}" data-cashtype="0" bindtap="cashType"><text class="iconfont icon-yinxingqia3"></text>银行卡</view>
+        <view class="icon-item {{cashIndex == 2?'active':''}}" data-cashtype="2" bindtap="cashType"><text class="iconfont icon-zhifubao"></text>支付宝</view>
+      </view>
+    </view>
+
+  <view class="section applySection" wx:if="{{cashIndex == 0}}">
+    <view class="sectionItem">
+      <view class="leftLabel">银行卡</view>
+      <view class="rightBox bankChoose">
+      <!-- disabled="{{storeData.store.bank_card != ''&& storeData.store.bank_card != 0 ? true : false}}" -->
+        <input type="number" bindblur="verifyBankCard" value="{{storeData.store.bank_card != 0 ? storeData.store.bank_card : ''}}"  placeholder="输入银行卡号" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+        <text class="iconfont icon-camera" bindtap="chooseImg" wx:if="{{false}}"></text>
+      </view>
+    </view>
+    <view class="sectionItem">
+      <view class="leftLabel">持卡人</view>
+      <view class="rightBox">
+      <!-- disabled="{{storeData.store.bank_card_user != '' ? true : false}}" -->
+        <input type="text" bindblur="verifyBankCardUser" value="{{storeData.store.bank_card_user}}"  placeholder="输入持卡人姓名" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+      </view>
+    </view>
+    <view class="sectionItem">
+      <view class="leftLabel">开户行</view>
+      <view class="rightBox">
+      <!-- disabled="{{storeData.store.opening_bank != '' ? true : false}}" -->
+        <input type="text" bindblur="verifyOpeningBank" value="{{storeData.store.opening_bank}}"   placeholder="输入开户行" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+      </view>
+    </view>
+    <view class="sectionItem" bindtap="modalControl" data-statu="open">
+      <view class="leftLabel">发卡银行</view>
+      <view class="rightBox">
+        <input type="text" value="{{bank_name}}"  placeholder="选择银行" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+      </view>
+    </view>
+  </view>
+
+  <block wx:if="{{cashIndex == 2}}">
+    <view class="applySection" style="background-color:#fff;">
+      <view class="sectionItem" style="border-bottom: 1px solid #e6e6e6;">
+        <view class="leftLabel">支付宝号</view>
+        <view class="rightBox bankChoose">
+          <input type="text" bindinput="zfbNum" 
+          value="{{alipay_account?alipay_account:''}}"  
+          placeholder="输入支付宝号" 
+          style="font-size:30rpx;"
+          placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+        </view>
+      </view>
+      <view class="blank"></view>
+    </view>
+  </block>
+
+  <view class='message'>
+    <view class='title'>提现说明</view>
+    <textarea wx:if="{{!applySuc}}" class="area-block" placeholder="暂无说明" bindinput="remarkValueFun">
+    </textarea>
+  </view>
+
+ 
+  <view class="applyButton" bindtap="applyButtonEvent">
+    立即提现
+  </view>
+</view>
+
+<!--弹窗-->
+<!--layer-->
+<view class="drawer_screen" bindtap="{{storeData.store.bank_name == '' ? 'modalControl' : ''}}"  data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">
+  <!--drawer content-->
+  <view class="drawer_title">卡片所属银行或卡组织</view>
+  <view class="drawer_content">
+    <radio-group class="radio-group"  bindchange="bankChoose">
+      <label class="radio" wx:for="{{bankList}}" wx:key="index">
+        <text>{{item.name}}</text>
+        <radio value="{{item.bank_id}}" checked="{{bank_id == item.bank_id ? true : false}}"/>
+      </label>
+    </radio-group>
+  </view>
+  <view class="btn_ok" bindtap="modalControl" data-statu="close">确定</view>
+</view>
+
+<!--提现申请成功-->
+<view class="applySucPop" style="display:{{applySuc == true ? 'block': 'none'}}">
+    <view class="popSign">
+        <image src="https://s.404.cn/applet/images/wxcopy/ok.png"></image>
+    </view>
+    <view class="popStatu">提现申请成功</view>
+    <view class="popInfo">
+        <text>提现金额￥{{applyMoney}}</text>
+        <text>请耐心等待工作人员人工处理</text>
+    </view>
+    <view class="popLink">
+        <navigator url="/pages/distribution/index"><text>查看提现记录</text><text class="iconfont icon-xiayibu"></text></navigator>
+    </view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

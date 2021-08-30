@@ -1,0 +1,170 @@
+<!--pages/LIVEVIDEO//pages/myTeam/myTeam.wxml-->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="container {{pageTheme}}">
+  <view class="team-header" style="height:{{status + navHeight}}px;background-color:{{barType==1?'#fff':themeColorValue}};color:{{barType==1?'#000':'#fff'}}">
+    <view class='back-box' style='top:{{boundtop?boundtop:26}}px;height:{{boundHeight?boundHeight:32}}px;'>
+      <view class='iconfont icon-shangyibu' style='height:100%;line-height:{{boundHeight?boundHeight:32}}px' bindtap='goback'></view>
+      <view class='team-title'>
+        <view class="title-item">团队合计</view>
+      </view>
+    </view>
+  </view>
+  <view class="fixed-content" style="top:{{status + navHeight}}px">
+    <view class="team-tip">
+      <text class="iconfont icon-dengpaobeifen"></text>
+      <view>
+        <view>只能查看下级人员的利润</view>
+        <text wx:if="{{0}}">金额过百不显示小数，金额过万显示一位小数</text>
+      </view>      
+    </view>
+    <view class="team-item my-team">
+      <view class="team-mes">
+        <view class="team-mes-l">
+          <image class="team-avatar" src="{{teamAddData.avatar?teamAddData.avatar:'https://s.404.cn/applet/images/qudao/zhibo/charavatar.png'}}"></image>
+          <view class="team-n-p">
+            <view class="team-name">
+              <text>{{teamAddData.name}}</text>
+              <view class="team-step">
+                <text class="iconfont icon-zhubo"></text>
+                <text>{{teamAddData.level_name}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="team-mes-r" bindtap="unFold">{{isUnFold?'收起':'展开'}}</view>
+      </view>
+      <view class="team-income" wx:if="{{isUnFold}}">
+        <view class="team-mun-list">
+          <text>今日收益</text>
+          <view class="team-mun">￥<text class="team-val">{{teamAddData.now_day_income*1 == 0?'0.00':filter.transBigNumber3(teamAddData.now_day_income,1,1,'w')}}</text></view>
+        </view>
+        <view class="team-mun-list">
+          <text>累计收益</text>
+          <view class="team-mun">￥<text class="team-val">{{teamAddData.income*1 == 0?'0.00':filter.transBigNumber3(teamAddData.income,1,1,'w')}}</text></view>
+        </view>
+        <block wx:if="{{teamAddData.team_level*1 != 1}}">
+          <view class="team-mun-list">
+            <text>本月新增</text>
+            <view class="team-mun"><text class="team-val">{{filter.transBigNumber3(teamAddData.month_user_num,1,1,'w')}}</text>人</view>
+          </view>
+          <view class="team-mun-list">
+            <text>团队人数</text>
+            <view class="team-mun"><text class="team-val">{{filter.transBigNumber3(teamAddData.team_user_num,1,1,'w')}}</text>人</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="search-ipt" wx:if="{{teamAddData.team_level*1 != 1}}">      
+      <input bindconfirm="wxSearchFn" bindinput="wxSearchInput" placeholder="按昵称搜索" type="text" value="{{topicVal}}" confirm-type="search"  placeholder-style="color:#C0C0C0;"></input>
+      <text class="iconfont icon-chazhao" bindtap="searchBtn"></text>
+    </view>
+    <view class="team-list-title" wx:if="{{teamAddData.team_level*1 != 1}}">
+      <view class="team-choose" wx:if="{{teamAddData.team_level*1 == 3}}">
+        <picker bindchange="bindScreenChange" value="{{index}}" range="{{screenArr}}">
+          <text class='iconfont icon-shaixuan'></text>
+          <text>{{screenArr[levelIndex]}}共{{myTeamData.total?myTeamData.total:0}}人</text>
+        </picker>
+      </view>
+      <view class="team-choose" wx:if="{{teamAddData.team_level*1 == 2}}">
+        <text>全部共{{myTeamData.total?myTeamData.total:0}}人</text>
+      </view>
+      <view class="team-choose">
+        <picker bindchange="bindSortChange" value="{{index}}" range="{{sortArr}}">
+          <text class='iconfont icon-paixu'></text>
+          <text>排序</text>
+        </picker>
+      </view>
+    </view>
+  </view>
+  <view style="height:{{status + navHeight + 326}}px" wx:if="{{isUnFold}}"></view>
+  <view style="height:{{status + navHeight + 223}}px" wx:else></view>
+  <view class="team-list" wx:if="{{teamAddData.team_level*1 != 1 && myTeamData.team_list && myTeamData.team_list.length > 0}}">
+    <view class="team-item" wx:for="{{myTeamData.team_list}}" wx:key="index">
+      <view class="team-mes">
+        <view class="team-mes-l">
+          <image class="team-avatar" src="{{item.avatar?item.avatar:'https://s.404.cn/applet/images/qudao/zhibo/charavatar.png'}}"></image>
+          <view class="team-n-p">
+            <view class="team-name">
+              <text>{{item.nickname}}</text>
+              <view class="team-step">
+                <text class="iconfont icon-zhubo"></text>
+                <text>{{item.level_name}}</text>
+              </view>
+            </view>
+            <view class="team-phone">手机号:{{filter.sliceLen(item.phone,0,3)}}****{{filter.sliceLen(item.phone,7,11)}}</view>
+          </view>
+        </view>
+        <view class="team-mes-r" data-uid="{{item.uid}}" data-teamlevel="{{item.team_level}}" bindtap="showDetail">详情</view>
+      </view>
+      <view class="team-income">
+        <view class="team-mun-list">
+          <text>今日收益</text>
+          <view class="team-mun">￥<text class="team-val">{{item.now_day_income*1 == 0?'0.00':filter.transBigNumber3(item.now_day_income,1,1,'w')}}</text></view>
+        </view>
+        <view class="team-mun-list">
+          <text>累计收益</text>
+          <view class="team-mun">￥<text class="team-val">{{item.income == 0?'0.00':filter.transBigNumber3(item.income,1,1,'w')}}</text></view>
+        </view>
+        <block wx:if="{{item.team_level != 1}}">
+          <view class="team-mun-list">
+            <text>本月新增</text>
+            <view class="team-mun"><text class="team-val">{{filter.transBigNumber3(item.month_user_num,1,1,'w')}}</text>人</view>
+          </view>
+          <view class="team-mun-list">
+            <text>团队人数</text>
+            <view class="team-mun"><text class="team-val">{{filter.transBigNumber3(item.team_user_num,1,1,'w')}}</text>人</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class="end" style="margin:80rpx 0;" wx:if='{{no_more}}'>
+      <text>THE  END</text>
+    </view>
+  </view>
+  <view class="team-empy" wx:if="{{myTeamData.team_list && myTeamData.team_list.length == 0}}">
+    <view class="iconfont icon-wode"></view>
+    <view>空无一人</view>
+  </view>
+  <!-- 详情弹窗 -->
+  <block wx:if="{{isDetail}}">
+    <view class="detail-cloth">
+      <view class="layer" bindtap="closeDetail"></view>
+      <view class="detail-position">
+        <view class="detail-title">
+          <view class="detail-title-name">{{detailData.nickname}}</view>
+          <view bindtap="copyPhone" data-myphone="{{detailData.phone}}">
+            <text>{{filter.sliceLen(detailData.phone,0,3)}}****{{filter.sliceLen(detailData.phone,7,11)}}</text>
+            <!-- <text class="detail-copy">复制</text> -->
+          </view>
+        </view>
+        <view class="detail-income">
+          <view class="team-mun-list">
+            <text>总收益</text>
+            <view class="team-mun">￥<text class="team-val">{{detailData.income == 0?'0.00':filter.transBigNumber3(detailData.income,1,1,'w')}}</text></view>
+          </view>
+          <view class="team-mun-list">
+            <text>上月收益</text>
+            <view class="team-mun">￥<text class="team-val">{{detailData.month_income == 0?'0.00':filter.transBigNumber3(detailData.month_income,1,1,'w')}}</text></view>
+          </view>
+        </view>
+        <view class="detail-list">
+          <view class="detail-item" wx:if="{{teamLevel != 1}}">
+            <view>直邀人数/人</view>
+            <view class="detail-item-num">{{detailData.user_num}}</view>
+          </view>
+          <view class="detail-item">
+            <view>直销订单总数</view>
+            <view class="detail-item-num">{{detailData.order_total}}</view>
+          </view>
+          <view class="detail-item">
+            <view>上月直销订单数</view>
+            <view class="detail-item-num">{{detailData.last_month_order_total}}</view>
+          </view>
+        </view>
+        <view class="iconfont icon-cuowu_quan_001" bindtap="closeDetail"></view>
+      </view>
+    </view>
+  </block>
+</view>
+

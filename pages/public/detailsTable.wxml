@@ -1,0 +1,33 @@
+<!--产品详情切换页面-->
+
+<template name="detailsTable">
+    <import src="../../wxParse/wxParse.wxml" />
+    <view class="detailsTable" data-page="page.public.detailsTable">
+        <view class="detailsTitle">
+            <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">
+                <text data-current="0" bindtap="swichNav">商品详情</text>
+            </view>
+            <view class="{{currentTab==1 ? 'active' : ''}}" bindtap="switchTable" data-current="1" bindtap="swichNav">
+                <text data-current="1" bindtap="swichNav">拼团说明</text>
+            </view>
+        </view>
+        <view class="detailsCentent">
+            <view class="detailsCententTxt {{currentTab==0 ? 'active' : ''}}">
+                <view class="detalsImg">
+                    <template is="wxParse" data="{{wxParseData:productInfo.nodes}}" />
+                </view>
+                <view class="productdDefault" wx:if="{{productInfo==''}}">
+                    <image src="https://s.404.cn/applet/images/wxcopy/que.png"> </image>
+                    <text>卖家还没有添加产品详情哦!</text>
+                </view>
+            </view>
+            <view class="detailsCententTxt illustrate {{currentTab==1 ? 'active' : ''}}">
+                <template is="wxParse" data="{{wxParseData:description.nodes}}" />
+                <view class="productdDefault" wx:if="{{description==''}}">
+                    <image src="https://s.404.cn/applet/images/wxcopy/que.png"> </image>
+                    <text>卖家还没有添加拼团说明哦!</text>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

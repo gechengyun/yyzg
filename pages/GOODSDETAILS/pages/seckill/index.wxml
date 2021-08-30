@@ -1,0 +1,274 @@
+<import src="../../../../wxParse/wxParse.wxml" />
+<import src="../../../public/shoppingCat.wxml" />
+<view class="seckill {{pageTheme}}">
+    <view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+        <official-account binderror="officialAccountError"></official-account>
+    </view>
+    <block wx:if="{{imgUrls.length>1}}">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="b_banner" indicator-active-color="#ff3867">
+            <block wx:for="{{imgUrls}}" wx:key="index">
+                <swiper-item>
+                    <image src="{{item}}" data-src="{{item}}" bindtap="previewImage" class="slide-image" mode="aspectFit" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+    <block wx:else>
+        <view class="b_banner">
+            <image wx:for="{{imgUrls}}" wx:key="index" src="{{item}}" mode="aspectFit"></image>
+        </view>
+    </block>
+
+    <view class="seckillStatus clearfix {{isSecKill?'on':''}}  {{allInfo.is_start==2 || allInfo.is_start==3?'gray':''}}" style="background: #fff;display: flex;width: 100%;height: 110rpx;">
+        <view class="priceRow">
+            <view class="seckillLeft"  style="background:{{themeColorValue}};opacity:0.8;"></view>
+            <view class="seckillpic1" style="background:{{themeColorValue}};opacity:1;margin-top: 3rpx;">
+                <image src="{{BASE_IMG_URL}}images/custom/seckill.png" mode="aspectFit" class="seckill_img"></image>
+            </view>
+            <view class="discountPrice" style="font-size:40rpx;">
+                <view>
+                  <text style="font-size:28rpx;">￥</text>{{show_seckill_price}}
+                  <text class="o_price" style="text-decoration:line-through;text-align:start;margin-left:10rpx">¥{{show_origin_price}}</text>
+                </view>
+                <view class="surplus" style="color:{{themeColorValue}}">
+                  还剩{{seckillInfo.quantity}}件
+                </view>
+            </view>
+            <view class="sign">
+                <image src="{{BASE_IMG_URL}}images/custom/clock.png" mode="aspectFit" style="width:100rpx;height:78rpx"></image>
+            </view>
+        </view>
+        <view class="priceMiddle fr">
+            <view class="triangle-top" style="border-top: 55rpx solid {{themeColorValue}};opacity:0.8">
+            </view>
+            <view class="triangle-bottom" style="border-bottom: 55rpx solid {{themeColorValue}};opacity:0.8">
+            </view>
+            <view class="triangle-right" style="border-right: 55rpx solid {{themeColorValue}};">
+            </view>
+        </view>
+        <view class="statusRow" >
+            <!--<view class="row" wx:if="{{allInfo.is_start==1}}">
+			<p class="h2">尚未开始</p>
+			<p class="h3">{{total_show}}天后开始</p>
+        </view> -->
+        <view class="statusRight" style="background:{{themeColorValue}};opacity:0.1;"></view>
+            <view class="row" wx:if="{{allInfo.is_start==2}}" st>
+                <p class="h2" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">活动已结束</p>
+                <p class="h3" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">抱歉您来晚一步！</p>
+            </view>
+            <view class="row" wx:elif="{{allInfo.is_start==3}}">
+                <p class="h4">活动已关闭</p>
+            </view>
+            <view class="row"  style="position:absolute;" wx:else>
+                <!---秒杀中-->
+                <block wx:if="{{isSecKill}}">
+                    <!-- <block wx:if="{{total_show>0}}"> -->
+                        <!-- <p class="h2 red" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">秒杀中……</p> -->
+                        <!-- <p class="h3 red" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">{{total_show}}天后结束</p> -->
+                    <!-- </block>
+                    <block wx:else> -->
+                        <p class="h2 red" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">距离结束还剩：</p>
+                        <view class="countDown">
+                            <text style="color:{{themeColorValue}};font-size:22rpx;margin-right:10rpx" wx:if="{{total_show*1!=0}}">{{total_show}}天</text>
+                            <span class="discount-span-time" style="color:#fff;background-color:{{themeColorValue}}">{{hours_show}}</span>
+                            <em style="color:{{themeColorValue}};font-size:24rpx;">:</em>
+                            <span style="color:#fff;background-color:{{themeColorValue}}">{{minutes_show}}</span>
+                            <em style="color:{{themeColorValue}};font-size:24rpx;">:</em>
+                            <span style="color:#fff;background-color:{{themeColorValue}}">{{seconds_show}}</span>
+                        </view>
+                    <!-- </block> -->
+                </block>
+                <!---倒计时-->
+                <block wx:else>
+                    <!-- <block wx:if="{{total_show>0}}">
+                        <p class="h2" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">尚未开始</p>
+                        <p class="h3" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">{{total_show}}天后开始</p>
+                    </block> -->
+                    <!-- <block wx:else> -->
+                        <p class="h2 red" style="color:{{themeColorValue}};font-size:24rpx;font-family:PingFang SC;font-weight:500;">开抢倒计时</p>
+                        <view class="countDown">
+                            <text style="color:{{themeColorValue}};font-size:22rpx;margin-right:10rpx" wx:if="{{total_show*1!=0}}">{{total_show}}天</text>
+                            <span class="discount-span-time" style="color:#fff;background-color:{{themeColorValue}}">{{hours_show}}</span>
+                            <em style="color:{{themeColorValue}};font-size:24rpx;">:</em>
+                            <span style="color:#fff;background-color:{{themeColorValue}}">{{minutes_show}}</span>
+                            <em style="color:{{themeColorValue}};font-size:24rpx;">:</em>
+                            <span style="color:#fff;background-color:{{themeColorValue}}">{{seconds_show}}</span>
+                        </view>
+                    <!-- </block> -->
+                </block>
+            </view>
+        </view>
+        
+    </view>
+    <view class="shareBlock">
+        <button class="fr shareBtn" bindtap="shareTap" style="background-color:{{themeColorValue}}">
+            <i class="iconfont icon-share1" style="font-size:28rpx;color:#fff;padding: 6rpx"></i>
+            <text wx:if="{{allInfo.is_start == 1 && seckillInfo.preset_time > 0}}" style="font-size:24rpx;color:#fff;padding: 6rpx">分享</text>
+            <text wx:if="{{allInfo.is_start != 1 || (allInfo.is_start == 1 && seckillInfo.preset_time == 0)}}" style="font-size:24rpx;color:#fff;padding: 6rpx">分享</text>
+        </button>
+        <view class="seckillName">
+          
+            <view class="table">
+                <view class="t_cell textOmitted2">
+                     <view class='circle-buy-tag theme-bg-color' wx:if="{{proInfo.is_self_support==0}}">自营</view>
+                    <text style="font-size: 32rpx;font-weight: bold;font-family: PingFang SC;">{{proInfo.name}}</text>
+                    <em>{{allInfo.property_value.value}}</em>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="share_p" wx:if="{{allInfo.is_start == 1 && seckillInfo.preset_time > 0}}">
+        <view class="wrap">
+            分享每个用户查看后都将给你的时间缩短{{seckillInfo.preset_time}}秒哦~
+        </view>
+    </view>
+    <view class="team" wx:if="{{allInfo.shareUser.length > 0 && seckillInfo.preset_time > 0}}">
+        <view class="hd">
+            <view class="wrap">
+                <i class="iconfont icon-good"></i>
+                <span>棒棒哒，抢购提前
+                    <em>{{seckillInfo.preset_time * allInfo.shareUser.length}}</em>秒</span>
+            </view>
+        </view>
+        <view class="bd flex flex-middle">
+            <view class="li" wx:for="{{allInfo.shareUser}}" wx:key="index" wx:if="{{index<5}}">
+                <image src="{{item.avatar}}"></image>
+            </view>
+        </view>
+        <view class="ft">
+            <span bindtap="checkTeamAll">查看我的秒杀亲友团</span>
+        </view>
+    </view>
+    <view class="d_desc">
+        <view class="secTit" wx:if="{{seckillInfo.description != ''}}">
+            <view class="h3" style="color:{{themeColorValue}};">{{rightCode}}<text style="font-weight:600;"> 活动说明 </text>{{leftCode}}</view>
+        </view>
+        <view class="pureText" wx:if="{{seckillInfo.description != ''}}">
+            <view class="wrap">
+                <text>{{seckillInfo.description}}</text>
+            </view>
+        </view>
+        <view class="secTit">
+            <view class="h3" style="color:{{themeColorValue}};">{{rightCode}}<text style="font-weight:600;"> 图文详情 </text>{{leftCode}}</view>
+        </view>
+        <view class="thisDesc" wx:if="{{proInfo.info != ''}}">
+            <template is="wxParse" data="{{wxParseData:infoHtml.nodes}}" />
+        </view>
+        <view class="showTxt" wx:if="{{proInfo.info == ''}}">
+            <image src="{{BASE_IMG_URL}}images/imgTxtCommon.png"></image>
+            <view>暂无商品图文详情哦！</view>
+        </view>
+    </view>
+
+  <!-- <form report-submit="true" bindsubmit="formSubmit">
+        <button form-type="submit"
+                data-bindtap="{{payType}}"
+                style="bottom:{{store_nav_list_show?'88rpx':0}}"
+                class="ftBtn {{buttonColor}} {{isIpx}}__footer__btn-group">{{shoppingCatButton}}</button>
+    </form> -->
+
+  <button form-type="submit" data-bindtap="{{payType}}" bindtap="oppenCat" style="bottom:{{store_nav_list_show?'88rpx':0}};background-color:{{themeColorValue}};" class="ftBtn {{buttonColor}} {{isIpx}}__footer__btn-group">{{shoppingCatButton}}</button>
+
+
+
+    <view class="mask" wx:if="{{maskShow}}" bindtap="maskClick"></view>
+    <view class="teamList" wx:if="{{teamShow}}">
+        <span class="iconfont icon-cuowu_quan_001" bindtap="maskClick"></span>
+        <view class="h2">秒杀亲友团</view>
+        <view class="wrap">
+            <view class="t_list">
+                <view class="ul">
+                    <view class="li clearfix" wx:for="{{allInfo.shareUser}}" wx:key="index">
+                        <image src="{{item.avatar}}" class="fl"></image>
+                        <view class="desc">
+                            <span class="fr cut">提前
+                                <em>{{item.preset_time}}</em> 秒</span>
+                            <p class="name">{{item.nickname}}</p>
+                            <p class="time">{{item.addtime_str}}</p>
+                        </view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>
+<!--海报画布-->
+    <canvas canvas-id='seckillPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+<!-- <shareModal id='shareModal'
+            title='我是标题'
+            content="content"
+            cancelText='取消'
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+</shareModal> -->
+
+<bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+
+<include src="/pages/public/page_footer.wxml"></include>
+
+
+<view class="thisItemWindow {{pageTheme}}" style="bottom:{{store_nav_list_show?'88rpx':'0'}};" wx:if="{{itemWindowShow}}">
+  <view class="itemDetails">
+    <view class="wrap">
+      <view class="hd">
+        <text class="xClosed iconfont icon-cuowu_quan_001" bindtap="maskClick"></text>
+        <view class="pic">
+          <image src="{{allInfo.product_imgs[0].image}}"></image>
+        </view>
+        <view class="itemDesc">
+          <p class="h2">
+            {{allInfo.productInfo.name}}
+          </p>
+
+        </view>
+      </view>
+      <view class="itemAttrDesc">
+        <view class="ies">
+          <view class="pic">
+            <em>总价：</em>￥{{originTotal}}
+          </view>
+          <view class="kc">
+            <em>库存：</em>{{kcNum}}
+          </view>
+        </view>
+      </view>
+
+      <view class="itemAttrSet">
+
+        <view class="attrSetBlock" wx:for="{{propertyList}}" wx:key="id" wx:for-index="id">
+          <p class="h3">{{item.name}}</p>
+          <view class="attrBtn">
+
+            <span class="{{(shoppingData.specList[id].vid==itemName.vid) ? 'on' : ''}}" wx:for="{{item.values}}" wx:for-item="itemName" wx:key="index" data-name="{{itemName.value}}" data-id="{{id}}" data-pid="{{item.pid}}" data-vid="{{itemName.vid}}"
+              bindtap="setMyAttr" 
+              style="background:{{(shoppingData.specList[id].vid==itemName.vid) ?bgcolor:''}}">
+              {{itemName.value}}
+            </span>
+          </view>
+        </view>
+      </view>
+
+      <view class="itemNumSet">
+        <span>购买数量</span>
+        <view class="numCtrl">
+          <!-- <view>1</view> -->
+          <em class="reduce" bindtap="addNum"></em>
+                    <input type="" name="" type="number" bindinput="bindKeyInput" disabled maxlength="3" value="{{num1}}" />
+                    <em class="add" bindtap="addNum"></em>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <form report-submit="true" bindsubmit="formSubmit">
+    <button form-type="submit" data-bindtap="{{payType}}" style="bottom:{{store_nav_list_show?'88rpx':0}};  background: {{bgcolor}}" class="ftBtn {{buttonColor}} {{isIpx}}__footer__btn-group">{{shoppingCatButton}}</button>
+  </form>
+</view>
+
+<!--加入购物袋弹窗-->
+<block wx:if="{{shoppingData.shoppingShow}}">
+  <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,serviceval,bgcolor:bgcolor}}" />
+</block>
+
+<view bindtap="maskClick" class="mask" wx:if="{{itemWindowShow}}"></view>

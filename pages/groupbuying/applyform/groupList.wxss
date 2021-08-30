@@ -1,0 +1,125 @@
+/* pages/groupbuying/applyform/groupList.wxss */
+
+/* components/groupList/index.wxss */
+@import "/wxParse/wxParse.wxss";
+@import "/iconfont/iconfont.wxss";
+
+page {
+  background: #fff;
+}
+
+.groupSearch {
+  position: relative;
+  width: 90%;
+  margin: 20rpx auto;
+  padding: 5rpx 10rpx;
+  line-height: 66rpx;
+  border: 1rpx solid #e6e6e6;
+  border-radius: 10rpx;
+  box-sizing: border-box;
+  background: #fff;
+  z-index: 0;
+}
+
+.groupSearch text {
+  margin-top: 5rpx;
+  font-size: 36rpx;
+  color: #999;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.groupSearch text:before {
+  font-size: 42rpx;
+}
+
+.groupSearch text:last-child {
+  position: absolute;
+  right: 0rpx;
+  font-size: 32rpx;
+  color: #fe6b31;
+  padding: 0 30rpx;
+}
+
+.groupSearch input {
+  width: 90%;
+  font-size: 26rpx;
+  line-height: 66rpx;
+  height: 66rpx;
+  display: inline-block;
+  vertical-align: top;
+  background: none;
+  box-sizing: border-box;
+  padding: 0 20rpx;
+}
+
+.groupList {
+  width: 100%;
+  height: auto;
+}
+
+.groupList .item {
+  width: 90%;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+  margin: 0 auto;
+  font-family: PingFang-SC-Medium;
+  font-size: 32rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #1e1e1e;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.groupList .item .red,.groupList .item2 .red  {
+  display: inline-block;
+  width: 10rpx;
+  height: 10rpx;
+  background-color: #fd5d2c;
+  margin: 0 20rpx;
+  margin-right: 50rpx;
+  border-radius: 50%;
+}
+
+.groupList .item2 {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 120rpx;
+  line-height: 40rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+  margin: 0 auto;
+  font-size: 24rpx;
+}
+
+.groupList .item2 view {
+  width: 100%;
+}
+.groupList .item2 .tips {
+  font-family: PingFang-SC-Medium;
+  font-size: 32rpx;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 50rpx;
+  letter-spacing: 0rpx;
+  color: #1e1e1e;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.groupList .item2  .com{
+  padding-left: 84rpx;
+	font-family: PingFang-SC-Regular;
+	font-size: 24rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 40rpx  ;
+	letter-spacing: 0rpx;
+	color: #c7c7c7;
+}

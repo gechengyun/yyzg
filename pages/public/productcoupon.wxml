@@ -1,0 +1,21 @@
+<!-- 商品券核销二维码 -->
+<template name="productcoupon">
+    <view class="layer" bindtap="productcoupon">
+    </view>
+    <view class="shearLayer">
+        <view class="container" style="border-radius: 10rpx">
+            <view class="qrcode-header theme-bg-color center" style="height: 88rpx;line-height: 88rpx;color: #ffffff;position: relative">
+                <text>核销二维码<block wx:if="{{productcoupon_qrcode_index*1 > 0}}">（{{productcoupon_qrcode_index}}）</block></text>
+                <view style="position: absolute;right: 22rpx;top: 0;font-size: 44rpx;font-weight: bold;" bindtap="productcoupon">×</view>
+            </view>
+            <view class="qrcode-content">
+                <image src="{{productcoupon_qrcode}}" style='height:440rpx; width:100%' mode="aspectFit"></image>
+            </view>
+            <view class="qrcode-footer center" style="line-height: 60rpx;" bindtap="copy_productcoupon_qrcode_code"
+                  data-code="{{productcoupon_qrcode_code}}">
+                <view class="product-coupon-code">{{productcoupon_qrcode_code}}<text class="card-copy" data-cardnum="{{productcoupon_qrcode_code}}" bindtap="cardCopy" style="color:{{themeColorValue}};">复制</text></view>
+                <view style="font-size: 28rpx">请勿转发给其他人，以免造成不必要的损失</view>
+            </view>
+        </view>
+     </view>
+</template>

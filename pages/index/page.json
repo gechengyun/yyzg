@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "open-screen-coupon":"../../components/openScreenCoupon/index",
+    "time-count-down":"../../components/timeCountDown/index",
+    "bottom-modal": "../../components/bottomModal/index",
+    "dialog-modal":"../../components/dialog/index"
+  }
+}

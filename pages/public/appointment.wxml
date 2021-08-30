@@ -1,0 +1,12 @@
+<!-- 预约核销二维码 -->
+<template name="appointment">
+    <view class="layer" bindtap="appointment">
+    </view>
+    <view class="shearLayer" bindtap="appointment">
+        <view class="ewmHeader" style="background:{{themeColorValue}}">核销码</view>
+        <view class="ewmClose iconfont icon-iconfonticonfontclose"></view>
+        <image src="{{verify_image_code}}" style='height:330rpx; width:100%' mode="aspectFit"></image>
+        <view class="ewmWarn">请勿转发给他人，以免造成不必要的损失</view>
+        <view class="copy" wx:if="{{selffetch_type}}" bindtap='copyText' data-text="{{selffetch_text}}">复制</view>
+     </view>
+</template>

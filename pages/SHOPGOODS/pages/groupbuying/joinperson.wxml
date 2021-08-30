@@ -1,0 +1,41 @@
+<wxs module="indexModule">
+ module.exports.getName = function(name, starlen, endlen) {
+      return name.slice(starlen, endlen);
+  }
+</wxs>
+<view>
+  <scroll-view class="orderState" scroll-y="{{order_list!=''}}" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh">
+    <view class="jion-group-commander {{pageTheme}}">
+      <image src='{{nowGrouperData.leader.avatar}}'></image>
+      <view class='now-group'>当前团长</view>
+      <view class='now-group-detail'>
+        <text>{{nowGrouperData.leader.nickname}}</text>
+        <text class='wx-space' wx:if="{{!nowGrouperData.leader.buy_status}}">微信号：******</text>
+        <text class='wx-space' wx:else>微信号：{{nowGrouperData.leader.weixin_name}}</text>
+        <text class='tel-space' bindtap="calling" data-num="{{nowGrouperData.leader.address_tel}}"wx:if="{{!nowGrouperData.leader.buy_status}}"><text class="iconfont icon-phone" style='color:{{themeColorValue}};' ></text>{{indexModule.getName(nowGrouperData.leader.phone, 0, 3)}}****{{indexModule.getName(nowGrouperData.leader.phone, 7, 11)}}</text>
+        <text class='tel-space' bindtap="calling" data-num="{{nowGrouperData.leader.phone}}" wx:else><text class="iconfont icon-phone" style='color:{{themeColorValue}};' ></text>{{nowGrouperData.leader.phone}}</text>
+        <text class='adress-space1'>{{nowGrouperData.leader.province}}{{nowGrouperData.leader.city}}{{nowGrouperData.leader.county}}</text>
+        <text class='adress-space2' data-lat="{{nowGrouperData.leader.lat}}" data-long="{{nowGrouperData.leader.lng}}" bindtap="oppeMap">{{nowGrouperData.leader.province}}{{nowGrouperData.leader.city}}{{nowGrouperData.leader.county}}{{nowGrouperData.leader.address}}<text class='iconfont icon-dizhi' ></text></text>
+      </view>
+    </view>
+    <view class='jion-group-warp' wx:if="{{nowGrouperData.buy_list.length>0}}">
+      <view class='jion-group-list' wx:for="{{nowGrouperDataList}}" wx:for-item="buylist">
+        <view class='image-box'>
+          <image src='{{buylist.user_info.avatar}}'></image>
+        </view>
+        <view class='text-wrap'>
+          <view class='text-name'>
+            <text>{{buylist.user_info.nickname}}</text>
+            <text>{{buylist.products.paid_time}}</text>
+          </view>
+          <view class='text-desc' wx:for="{{buylist.products}}" wx:for-item="goodslist">
+            <text>{{goodslist.name}}</text>
+            <text wx:for="{{goodslist.sku_data}}" class="specs" decode='true'>{{item.name}}:{{item.value}}&nbsp;</text>
+          </view>
+        </view>
+      
+      </view>
+    </view>
+    <view hidden="{{!no_more}}" class="no-more">暂无更多数据</view>
+  </scroll-view>  
+</view>

@@ -1,0 +1,13 @@
+<!-- 进入店铺 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="store">
+    <view class="editEnterShop open" data-page="page.public.editEnterShop">
+        <view>
+            <text class="iconfont icon-storek"></text>
+            {{content.name}}
+        </view>
+        <navigator url="/pages/index/index" class="navigator" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">进入店铺
+            <text style="font-size:20rpx;color:transparent;">占</text>
+        </navigator>
+    </view>
+</template>

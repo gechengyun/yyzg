@@ -1,0 +1,33 @@
+<!--pages/SHOPKEEPER//pages/userPage/userList.wxml-->
+<import src="../../../public/warning.wxml" />
+<view class="{{pageTheme}}">
+  <view class="list-tab" bindtap="switchTab">
+    <view class="tab-item {{tabIndex==0?'tab-active':''}}" data-tabindex="{{0}}" style="border-color:{{tabIndex==0?themeColorValue:''}}">关注{{listData.subscribecount}}</view>
+    <view class="tab-item {{tabIndex==1?'tab-active':''}}" data-tabindex="{{1}}" style="border-color:{{tabIndex==1?themeColorValue:''}}">粉丝{{listData.fanscount}}</view>
+  </view>
+  <view style="height:108rpx;"></view>
+  <view class="list-content">
+    <block wx:if="{{listData.list && listData.list.length>0}}">
+      <view class="list-item" wx:for="{{listData.list}}" wx:key="index">
+        <view class="list-l" data-uid="{{tabIndex == 0?item.anchor_id:item.uid}}" data-isanchor="{{item.is_anchor}}" bindtap="goPage">
+          <image class="list-avatar" src="{{item.avatar}}"></image>
+          <text class="list-name">{{item.nickname}}</text>
+        </view>
+        <block wx:if="{{tabIndex == 0}}">
+          <view class="list-r" data-uid="{{item.anchor_id}}" data-index="{{index}}" bindtap="aboutClick"><text class="iconfont icon-correct"></text>已关注</view>
+        </block>
+        <block wx:if="{{tabIndex == 1}}">
+          <view class="list-r" data-uid="{{item.uid}}" data-index="{{index}}" data-ismutual="{{item.ismutual}}" bindtap="aboutClick" style="background-color:{{item.ismutual*1 == 0?themeColorValue:''}}"><text class="iconfont {{item.ismutual*1 == 0?'icon-iconfont7':'icon-luxian'}}"></text>{{item.ismutual*1 == 0?'关注':'互相关注'}}</view>
+        </block>
+      </view>
+      <view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+        <text>THE  END</text>
+      </view>
+    </block>
+    <view class="anchor-list-empy" wx:elif="{{listData.list && listData.list.length==0}}">
+      <image src="https://s.404.cn/applet/images/qudao/liveteam/grass_bg.png" mode="widthFix"></image>
+      <view>暂无{{tabIndex == 0?'关注':'粉丝'}}~</view>
+    </view>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt,warningColor:warning.warningColor}}" />
+</view>

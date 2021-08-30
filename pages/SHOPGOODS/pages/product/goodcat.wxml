@@ -1,0 +1,45 @@
+<!--商品列表页面-->
+<import src="/pages/public/productList.wxml" />
+<import src="/pages/public/editProductSearch.wxml" />
+<import src="/pages/public/shoppingCat.wxml" />
+<!-- 购物袋 -->
+<import src="/pages/public/warning.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<!--警告提示-->
+<view class="container {{pageTheme}}" data-page="pages.product.goodcat">
+  <view class="search_area {{pageTheme}}">
+    <view class="input-icon" bindtap="bindSearchGoods">
+      <text class="iconfont icon-chazhao"></text>
+    </view>
+    <input type="text" placeholder="搜索商品" confirm-type="search" bindinput="inputKeyWord" bindconfirm="bindSearchGoods" />
+    <image src="/images/home_icon.png" bindtap="backToHome"></image>
+  </view>
+
+
+  <view class="editProduct" id="productListScrollView">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="asideDetails productListPage">
+      <navigator url="/pages/shoppingCat/index" hover-class="none" open-type="{{filter.getOpenType('/pages/shoppingCat/index',store_nav_list)}}">
+        <text class="iconfont icon-gouwuche1 shoppingCatIcon" wx:if="{{shoppingCatNum}}"></text>
+      </navigator>
+      <text class="goTop iconfont icon-dingbu" bindtap="goTopFun" style="display:{{scrollTop.goTopShow ? 'block' : 'none'}};"></text>
+    </view>
+    <view class="editProduct Zy">
+      <view class="shopProductTable {{productTable}}" style="display:block">
+        <template is="productList" wx:if='{{productListData.product_list&&productListData.product_list.length>0}}' data="{{content:productListData}}" />
+        <view class='search-block' wx:if='{{productListData.product_list&&productListData.product_list.length==0}}'>
+          <image style='width:184rpx;height:184rpx;' src='{{BASE_IMG_URL}}images/shop_03.png'></image>
+          <view class='txt-tips'>没有找到相关商品哦</view>
+        </view>
+        <view style="height:80rpx;width:100%;line-height:80rpx;text-align:center;color: #333;font-size: 26rpx;" wx:if="{{no_more_data}}">
+          {{no_more_data}}</view>
+
+      </view>
+    </view>
+    <block wx:if="{{shoppingData.shoppingShow}}">
+      <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+    </block>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+  </view>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

@@ -1,0 +1,87 @@
+<!--我的订单-退货申请页面-->
+<import src="../../public/payment.wxml" />
+<import src="../../public/warning.wxml" />
+<view class="container payment {{pageTheme}}" data-page="page.order.returnGoods">
+        <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <template is="payment" data="{{paymentData:returnData,postage:postage, showMessage: showMessage,store_nav_list}}" />
+    <block wx:if="{{returnData.order.show_virtual_code}}">        
+        <view class="write-code-list" wx:for="{{returnData.order.write_off_code}}" wx:key="index" wx:if="{{index < writeLen}}">
+          <view class="write-code-l">
+            <view>卡号：{{item.card_no}}_1 <text class="card-copy" data-cardnum="{{item.card_no}}_1" bindtap="cardCopy" style="color:{{themeColorValue}};">复制</text></view>
+            <view wx:if="{{item.card_pwd != ''}}">密码：{{item.card_pwd}}</view>
+          </view>
+        </view>
+        <view class="show-more" bindtap="showMore" style="color:{{themeColorValue}}" wx:if="{{returnData.order.write_off_code.length>5}}">{{showMoreTxt}}</view>
+    </block>
+    <view class="paymentTitle">填写订单信息</view>
+    <view class="returnList">
+    <view class="returnArticle" wx:if="{{returnData.order.status != 2}}">
+            <view>退货方式</view>
+            <view class="open">
+                <picker bindchange="bindPickerReturnType" range-key="name" value="{{typeIndex}}" range="{{methodList}}" mode="selector">
+                    <view class="picker">
+                        {{methodList[typeIndex]["name"]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>退货数量</view>
+            <block wx:if="{{returnData.order.is_virtual_order*1 == 1}}">
+                <view>{{pro_num}}</view>
+            </block>
+            <block wx:else>
+                <view wx:if="{{numList==''}}">
+                    1
+                </view>
+                <view class="open"  wx:if="{{numList!=''}}">
+                    <picker bindchange="bindPickerNum" value="{{numIndex}}" range="{{numList}}" mode="selector">
+                        <view class="picker">
+                            {{numList[numIndex]}}
+                        </view>
+                    </picker>
+                </view>
+            </block>
+        </view>
+        <view class="returnArticle">
+            <view>退货原因</view>
+            <view class="open">
+                <picker bindchange="bindPickerReason" value="{{index}}" range="{{type_arr}}" mode="selector">
+                    <view class="picker">
+                        {{type_arr[index]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>手机号码</view>
+            <view>
+                <input type="text" bindblur="phoneNumber" placeholder="输入手机号码" />
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>退货说明</view>
+            <view>
+                <input type="text" placeholder="输入退货说明" bindblur="returnExplain" />
+            </view>
+        </view>
+        <view class="returnArticle addImgCentent">
+            <view>图片举证
+              <text>（最多5张）</text>
+            </view>
+            <view class="addImgList">
+              <view wx:for="{{imgList}}" wx:key="{{index}}" class="addImgItem">
+                <image src="../../../images/close.png" class="deletImg" data-index='{{index}}' bindtap="deleteImg"></image>
+                <image src="{{item}}"></image>
+              </view>
+              <view class="addImg" bindtap="addImg">+</view>
+            </view>
+        </view>
+    </view>
+    <view class="paymentButton">
+        <view bindtap="applyRefund">提交申请</view>
+    </view>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

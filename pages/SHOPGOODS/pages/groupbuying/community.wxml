@@ -1,0 +1,102 @@
+<wxs module="indexModule">
+  module.exports.getName = function(name, starlen, endlen) {
+    return name.slice(starlen, endlen);
+  }
+</wxs>
+<view class='groupbuying-position content-padding'>
+  <icon class='iconfont icon-dizhi'></icon>
+  <text>{{positionName}}</text>
+  <view class='edit-address' bindtap='chooseLocation'>
+    <text>修改</text>></view>
+</view>
+
+<view class='content-padding groupbuying-person-content {{pageTheme}}' wx-if="{{grouperData.now_leader.nickname||grouperData.leader_list.length>0}}">
+  <!-- <view class='content-padding groupbuying-person-content' wx:if="{{grouperData.now_leader||grouperData.leader_list.length>0}}"> -->
+  <!-- <view class='current-person' wx-if="{{grouperData.now_leader}}">
+    <view class='current-person-title'>当前团长</view>
+    <view class='current-person-namefans'>
+      <text>{{grouperData.now_leader.nickname}}</text>
+      <view class='fans-num'><label>粉丝</label>{{grouperData.now_leader.fans_num}}</view>
+      <view class='current-person-position'  wx-if="{{grouperData.now_leader.show_detail_info == 0}}"><icon class='iconfont icon-dizhi'></icon>{{grouperData.now_leader.province}}{{grouperData.now_leader.city}}{{grouperData.now_leader.county}}{{ grouperData.now_leader.address}}</view>
+    </view>
+    <view class='current-person-detail' wx-if="{{grouperData.now_leader.show_detail_info == 1}}">
+      <view wx:if="{{!grouperData.now_leader.buy_status}}"><label>微信号</label>******</view>
+      <view wx:else><label>微信号</label>{{grouperData.now_leader.weixin_name}}</view>
+      <view wx:if="{{!grouperData.now_leader.buy_status}}"><label>手机号</label>{{indexModule.getName(grouperData.now_leader.phone, 0, 3)}}****{{indexModule.getName(grouperData.now_leader.phone, 7, 11)}}</view>
+      <view wx:else><label>手机号</label>{{grouperData.now_leader.phone}}</view>
+      <view><label>社   区</label>{{grouperData.now_leader.name}}</view>
+    </view>
+    <view class='icon-wrap'>
+      <image src='{{grouperData.now_leader.avatar}}'>
+      </image>
+      <view data-value="{{grouperData.now_leader}}" bindtap='chooseGrouper'>
+        <text>进入团购</text>
+      </view>
+    </view>
+  </view>  -->
+  <!-- 社区团购优化 -->
+  <view class="groupbuying-now" wx-if="{{grouperData.now_leader}}">
+   <view class='current-title'>当前团长</view>
+    <view class="top">
+      <view class="now-head">
+        <image  src='{{grouperData.now_leader.avatar}}'></image>
+        <view class="now-name">{{grouperData.now_leader.nickname}}</view>
+      </view>
+      <view class="now-distance">
+        <view class="nickname">
+        <text class="siteTips" >自提点</text>
+        {{grouperData.now_leader.name}}
+        </view>
+        <view class="address-name" data-lat="{{grouperData.now_leader.lat}}" data-long="{{grouperData.now_leader.lng}}" bindtap="oppeMap">
+          <text>{{grouperData.now_leader.address}}</text>
+          <icon class='iconfont icon-dizhi'></icon>
+        </view>
+      </view>
+      <view class="now-but">
+      <view data-value="{{grouperData.now_leader}}" bindtap='chooseGrouper'>
+        <text>进入团购</text>
+      </view>
+      </view>
+    </view>
+    <view class="bottom"  wx:if="{{grouperData.now_leader.buy_list.length>0}}">
+      <navigator url='/pages/SHOPGOODS/pages/groupbuying/joinperson' hover-class='none' open-type='navigate' > 
+        <view class='buying-preson-wrap'>
+          <view class='buying-preson-box' wx:for="{{grouperData.now_leader.buy_list}}" wx:for-item="buylist" wx:key="{{index}}">
+            <image src='{{buylist.user_info.avatar}}'></image>
+            <text>{{buylist.user_info.nickname}}</text>
+          </view>
+          <view class='lookmore'>
+            购买了 >
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+
+  <view wx-if="{{grouperData.leader_list && grouperData.leader_list.length>0}}">
+    <view class='groupbuying-person-part' wx:for="{{grouperData.leader_list}}" wx:key="index" wx:for-item="grouperPerson" >
+      <view class='iconwarp'>
+        <image src='{{grouperPerson.avatar}}'></image>
+        <text>团长</text>
+      </view>
+      <view>
+        <view class='position-distance'><view><text class="siteTips">自提点</text>{{grouperPerson.community_name}}</view>
+          <text class="right">距离您{{grouperPerson.distance}}</text>
+        </view>
+        <view class='address-name' ><view  data-lat="{{grouperPerson.lat}}" data-long="{{grouperPerson.lng}}" bindtap="oppeMap">{{grouperPerson.address}}<icon class='iconfont icon-dizhi'></icon></view><text data-value="{{grouperPerson}}" class="xuanTa" bindtap='chooseGrouper'>选TA</text></view>
+      </view>
+
+    </view>
+  </view>
+</view>
+<view class='none-grouper' wx-if="{{!grouperData.now_leader.nickname && grouperData.leader_list.length<=0}}">
+  <!-- <view class='none-grouper' wx:else> -->
+  <image src="https://s.404.cn/applet/images/wxcopy/que.png"></image>
+  <view class="tip">无数据</view>
+  <text>亲，你当前所在区域范围内，暂时没有团长哦！</text>
+  <navigator open-type='navigate' url='/pages/groupbuying/applytogroup/applytogroup' hover-class='none'>
+    <view class='now-apply-btn'>立即申请团长</view>
+  </navigator>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

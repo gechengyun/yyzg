@@ -1,0 +1,13 @@
+<!-- 订单提醒功能 -->
+<template name="orderLayer">
+    <view class="orderLayer clearfix"  data-page="pages.public.orderLayer">
+        <view class="orderImg">
+            <image src="{{business.avatar}}"></image>
+        </view>
+        <view class="orderInfo">
+            <text class="">{{business.nickname}}</text>下了
+            <text>1</text>笔订单
+            <text class="">{{business.time}}</text>
+        </view>
+    </view>
+</template>

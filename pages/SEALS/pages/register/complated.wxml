@@ -1,0 +1,26 @@
+<!--pages/SEALS//pages/register/complated.wxml-->
+<view class="container {{pageTheme}}">
+  <view class="complated-top">
+    <image class="tips-img" mode="widthFix" src='https://s.404.cn/applet/images/wxcopy/completed.png'></image>
+    <view>注册完成，并已保存名片二维码到相册</view>
+  </view>
+  <view>
+    <navigator url="../card/card?uId={{uId}}" hover-class="none" open-type="navigate">
+      <button size="default" class="sub-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">进入小程序</button>
+    </navigator>
+    <navigator url="./register?cardid={{uId}}" hover-class="none" open-type="navigate">
+      <button size="default" class="sub-btn back-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">更改注册</button>
+    </navigator>
+  </view>
+  <view class="message">
+    <view class="title">
+      <text style="background-color:{{themeColorValue}}"></text>
+      <text>小程序使用技巧</text>
+    </view>
+    <view class="list">
+      <view>1、点击右上角小点点【<text></text><text></text><text></text>】</view>
+      <view>2、选择【添加到我的小程序】</view>
+      <view>3、微信首页下拉刷新，即可快速进入当前小程序</view>
+    </view>
+  </view>
+</view>

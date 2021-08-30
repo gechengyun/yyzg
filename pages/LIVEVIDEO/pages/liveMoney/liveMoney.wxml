@@ -1,0 +1,276 @@
+<!--pages/LIVEVIDEO//pages/liveMoney/liveMoney.wxml-->
+<import src="../../../public/warning.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class='mymoney {{pageTheme}}'>
+	<view class='header'>
+		<view class='item  {{btn_index==0?"theme-color":""}}' data-index='0' catchtap='switchTab'>
+			账户明细<view class='line {{btn_index==0?"theme-bg-color":""}}'></view>
+		</view>
+		<!-- <view class='item  {{btn_index==1?"theme-color":""}}' data-index='1' catchtap='switchTab'>
+			提现<view class='line {{btn_index==1? "theme-bg-color": ""}} '></view>
+		</view> -->
+		<view class='item  {{btn_index==2?"theme-color":""}}' data-index='2' catchtap='switchTab' wx:if="{{0}}">
+			我的金币<view class='line {{btn_index==2? "theme-bg-color": ""}} '></view>
+		</view>
+	</view>
+	<view style="height: 110rpx;"></view>
+	<!--账户明细-->
+	<block wx:if="{{btn_index==0}}">
+		<view class='list'>
+			<view class='date'>
+				<view class='month' catchtap='chooseDate'>{{showDate==''?"本月":showDate}}
+				<text class="iconfont icon-xia"></text>
+				</view>
+				<view class="total">合计：<text>￥{{listData.profit_total?listData.profit_total:'0.00'}}</text></view>
+			</view>
+      <block wx:if="{{listData.list&&listData.list.length != 0}}">
+        <view class="list-item" wx:for="{{listData.list}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-name" wx:if="{{item.type*1 == 0}}">
+              <text>{{item.profit_type?'直播间销售收益':'团队销售分润'}}</text>
+              <text class="li-tip">{{item.price_type?'自行定价':'平台定价'}}</text>
+            </view>
+						<view class="li-name" wx:else>
+              <text>金币兑换</text>
+            </view>
+            <view class="li-time">{{item.complete_time}}</view>
+            <view class="li-order">
+              <text>订单编号：{{item.order_no}}</text>
+              <text class="order-copy" data-ordernum="{{item.order_no}}" bindtap="orderCopy">复制</text>
+            </view>
+          </view>
+          <view class="li-right">+{{item.profit}}</view>
+        </view>
+        <view wx:if="{{isOver1}}" class='isover'>没有更多数据啦~</view>
+      </block>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view>
+	</block>
+
+	<!--提现-->
+	<block wx:if="{{btn_index==1}}">
+		<view class='cashmoney'>
+			<view class='title'>
+				<view> 可提现金额<text>￥{{tiXianData.balance?tiXianData.balance:'0.00'}} </text></view>
+			</view>
+      <view class="ipt-tip">输入提取金额</view>
+			<view class='money'>
+				<view class='num'>
+					￥<input placeholder='0.00' bindinput="changeMoneyNum" placeholder-style='color:#333;' type='digit' value='{{amount}}'></input>
+				</view>
+				<view class="cashbtn theme-color" catchtap='getAllcash' wx:if="{{0}}">全部提现</view>
+			</view>
+			<view class='notice theme-color' wx:if="{{tiXianData.open_withdrawal_weixin_mchpay == 0}}">单笔最高提现额为{{tiXianData.max_amount}}元,单笔最低提现额为{{tiXianData.min_amount}}元</view>
+		</view>
+    <view class="cash-type" wx:if="{{tiXianData.open_withdrawal_weixin_mchpay == 0}}">
+      <view>提现方式:</view>
+      <view style="{{cashIndex == 0 ? 'background-color:'+ themeColorValue +';color:#fff':''}}" class="icon-item"  data-cashtype="0" bindtap="cashType"><text class="iconfont icon-yinxingqia3"></text>银行卡</view>
+      <view style="{{cashIndex == 1 ? 'background-color:'+themeColorValue+';color:#fff':''}}"  class="icon-item "  data-cashtype="1" bindtap="cashType"><text class="iconfont icon-wechat-pay-fill"></text>微信</view>
+      <view style="{{cashIndex == 2 ? 'background-color:'+themeColorValue+';color:#fff':''}}"  class="icon-item "  data-cashtype="2" bindtap="cashType"><text class="iconfont icon-zhifubao"></text>支付宝</view>
+    </view>
+		<view class="section applySection" wx:if="{{tiXianData.open_withdrawal_weixin_mchpay == 0}}">
+			<block wx:if="{{cashIndex == 0}}">
+				<view class="sectionItem">
+					<view class="leftLabel">银行卡</view>
+					<view class="rightBox bankChoose">
+						<input type="number" bindinput="cardNum" value="{{cashConfig.bank_card ? cashConfig.bank_card : ''}}"  placeholder="输入银行卡号" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+					</view>
+				</view>
+				<view class="sectionItem">
+					<view class="leftLabel">持卡人</view>
+					<view class="rightBox">
+						<input type="text" bindinput="cardName" value="{{cashConfig.bank_user_name?cashConfig.bank_user_name:''}}"  placeholder="输入持卡人姓名" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+					</view>
+				</view>
+				<view class="sectionItem">
+					<view class="leftLabel">开户行</view>
+					<view class="rightBox">
+						<input type="text" bindinput="cardBank" value="{{cashConfig.opening_bank?cashConfig.opening_bank:''}}"   placeholder="输入开户行" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{cashIndex == 1}}">
+				<view class="sectionItem">
+					<view class="leftLabel">微信号</view>
+					<view class="rightBox bankChoose">
+						<input type="text" bindinput="wxNum" value="{{cashConfig.wechat?cashConfig.wechat:''}}"  placeholder="输入微信号" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+					</view>
+				</view>
+			</block>
+			<block wx:if="{{cashIndex == 2}}">
+				<view class="sectionItem">
+					<view class="leftLabel">支付宝号</view>
+					<view class="rightBox bankChoose">
+						<input type="text" bindinput="zfbNum" value="{{cashConfig.alipay_account?cashConfig.alipay_account:''}}"  placeholder="输入支付宝号" placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+					</view>
+				</view>
+			</block>
+		</view>
+		<view class='message' wx:if="{{tiXianData.open_withdrawal_weixin_mchpay == 0}}">
+			<view class='title'>提现说明</view>
+			<view class='info' wx:if="{{tiXianData.desc&&tiXianData.desc!=''}}">
+				<block wx:for="{{tixianDes}}" wx:key="index">
+					<text decode="true">{{item}}</text>
+				</block>
+			</view>
+			<view class="info" wx:else>暂无说明</view>
+		</view>
+		<view class="cash-des" wx:else>
+			<view class="cash-des-content">
+				<view class="cash-des-title">提现说明</view>
+				<view class="cash-des-list">
+					<view class="cash-des-item">1、单日提现总金额不得超过5000元；</view>
+					<view class="cash-des-item">2、若提现金额不符合实际情况，将自动提现失败；</view>
+					<view class="cash-des-item">3、提现成功后将自动打款至微信零钱中。</view>
+				</view>
+			</view>
+		</view>
+		<view class='txbtn theme-bg-color' style="background:{{amount==0?'#e1e1e1':''}}" catchtap='{{amount==0?"":tiXianData.open_withdrawal_weixin_mchpay == 0?"getMycash":"getMycash1"}}'>{{tiXianData.open_withdrawal_weixin_mchpay == 0?'立即提现':'提现'}}</view>
+
+		<!-- 提现明细 -->
+		<view class="cash-list">
+			<view class="cash-title">提现明细<view class='line theme-bg-color}}'></view></view>
+			<view class="cash-box" wx:if="{{cashList.list&&cashList.list.length != 0}}">
+				<view class="list-item" wx:for="{{cashList.list}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-name">
+              <text>{{item.add_time}}</text>
+              <text class="li-tip">{{item.status==3?'提现成功':item.status==4?'提现失败':'申请中'}}</text>
+            </view>
+            <view class="li-time">提现流水：{{item.trade_no}}</view>
+						<block wx:if="{{item.withdraw_type!=3}}">
+							<block wx:if="{{item.account_type == 0}}">
+								<view class="li-order">银行卡：****{{filter.sliceLen(item.bank_card,item.bank_card.length - 4,item.bank_card.length)}}
+								<block wx:if="{{0}}">（{{item.opening_bank}}）</block></view>
+							</block>
+							<block wx:if="{{item.account_type == 1}}">
+								<view class="li-order">微信号：****{{filter.sliceLen(item.wechat,item.wechat.length - 4,item.wechat.length)}}</view>
+							</block>
+							<block wx:if="{{item.account_type == 2}}">
+								<view class="li-order">支付宝号：****{{filter.sliceLen(item.alipay_account,item.alipay_account.length - 4,item.alipay_account.length)}}</view>
+							</block>
+						</block>
+						<block wx:if="{{item.withdraw_type==3}}">
+							<view class="li-order">发放到微信零钱</view>
+						</block>
+          </view>
+          <view class="li-right">￥{{item.amount}}</view>
+        </view>
+        <view wx:if="{{isOver2}}" class='isover'>没有更多数据啦~</view>
+			</view>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view>
+	</block>
+	<!-- 我的金币 -->
+	<block wx:if="{{btn_index==2}}">
+		<view class='cashmoney'>
+			<view class='title gold-title'>
+				<view>我的金币<text>2000</text></view>
+				<view class="cash-title-unnum">不可提现金额  1000</view>
+			</view>
+      <view class="ipt-tip">请输入提取金币</view>
+			<view class='money'>
+				<view class='num'>
+					<input placeholder='请输入金币数' bindinput="changeGoldNum" placeholder-style='color:#333;' type='number' value='{{goldAmount}}'></input>
+				</view>
+			</view>
+			<view class="give-money">
+				<text>兑换金额：</text>
+				<input placeholder='兑换金额' placeholder-style='color:#bbb;' value="{{giveAmount}}" disabled="{{true}}"></input>
+			</view>
+			<view class="balance-tips" style="color: {{themeColorValue}}">
+				<text>*</text>
+				<text>金币兑换比例为：10金币=1元人民币，单笔最高提现额为200.00元，单笔最低提现额为1.55元</text>
+			</view>
+		</view>
+		<view class="cash-des">
+			<view class="cash-des-content">
+				<view class="cash-des-title">提现说明</view>
+				<view class="cash-des-list">
+					<view class="cash-des-item">1、支付宝账户绑定，指您指定的银行卡账户（以下简称“银行卡”）和支付宝账户关联并绑定</view>
+				</view>
+			</view>
+			<view class="cash-des-content">
+				<view class="cash-des-title">提现规则</view>
+				<view class="cash-des-list">
+					<view class="cash-des-item">1、收到打赏的金币可提现</view>
+					<view class="cash-des-item">2、10金币可提现1元人民币</view>
+					<view class="cash-des-item">3、提现将直接提现至微信零钱</view>
+				</view>
+			</view>
+		</view>
+		<view class='txbtn theme-bg-color' style="background:{{goldAmount!=0?'':'#e1e1e1'}}" catchtap='{{goldAmount!=0?"getMygold":""}}'>立即兑换</view>
+
+		<!-- 兑换明细 -->
+		<view class="cash-list">
+			<view class="cash-title">兑换明细<view class='line theme-bg-color}}'></view></view>
+			<view class="cash-box" wx:if="{{1}}">
+				<view class="list-item" wx:for="{{5}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-name">
+              <text>兑换时间：2020/02/02 19:21:45{{item.add_time}}</text>
+              <text class="li-tip">{{item.status==3?'提现成功':item.status==4?'提现失败':'申请中'}}</text>
+            </view>
+            <view class="li-time">兑换金币数：1000{{item.trade_no}}</view>
+						<view class="li-order">兑换金额：100</view>
+          </view>
+          <!-- <view class="li-right">￥{{item.amount}}</view> -->
+        </view>
+        <view wx:if="{{isOver2}}" class='isover'>没有更多数据啦~</view>
+			</view>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view>
+	</block>
+	<!--底部日期-->
+	<view class='chosedate upDown' wx:if="{{chosedatestate}}">
+		<view class='title'>
+			<!-- <view class='txt theme-color' catchtap='changeDateType'>按{{time_type==1?'月':'日'}}选择</view> -->
+			<view class='txt theme-color'>按{{time_type==1?'月':'日'}}选择</view>
+			<view class='btntrue theme-color' catchtap='okTrue'>完成</view>
+		</view>
+		<!--按日-->
+		<block wx:if="{{time_type==2}}">
+			<view class='showdate'>
+				<input class='time theme-color' placeholder='{{start_time}}' catchtap='bindDate' data-type="start" value='{{start_time}}' disabled="{{true}}"></input>
+				<view style='margin:0 20rpx'>至</view>
+				<input class='time theme-color' placeholder='{{end_time}}' catchtap='bindDate' data-type="end" value='{{end_time}}' disabled="{{true}}"></input>
+			</view>
+			<picker-view indicator-style="height: 50px;" style="width: 100%; height: 400rpx;" value="{{value}}" bindchange="bindChange">
+				<picker-view-column>
+					<view wx:for="{{years}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{months}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{days}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+			</picker-view>
+		</block>
+		<!--按月-->
+		<block wx:elif="{{time_type==1}}">
+			<view class='showdate'>
+				<input class='time theme-color' placeholder='{{now_month}}' value='{{now_month}}' disabled="{{true}}"></input>
+			</view>
+			<picker-view indicator-style="height: 50px;" style="width: 100%; height: 400rpx;" value="{{value}}" bindchange="bindChange">
+				<picker-view-column>
+					<view wx:for="{{years}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+				<picker-view-column>
+					<view wx:for="{{months}}" wx:key="index" style="line-height: 40px;text-align:center">{{item}}</view>
+				</picker-view-column>
+			</picker-view>
+		</block>
+	</view>
+	<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

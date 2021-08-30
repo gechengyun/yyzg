@@ -1,0 +1,13 @@
+<!--收货地址列表-->
+<import src="../../public/choiceAddress.wxml" />
+<view class="container addressPages {{pageTheme}}" data-page="page.address.index">
+	<template is="choiceAddress" data="{{addressData:addressData,currentTab:currentTab, orderData: orderData}}" />
+	<dialog
+		dialogHidden="{{dialog.dialogHidden}}"
+		titleMsg="{{dialog.titleMsg}}"
+		auth-btn="{{true}}"
+		open-type="{{dialog.openType}}"
+		determineBtnTxt="{{dialog.determineBtnTxt}}"
+	></dialog>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

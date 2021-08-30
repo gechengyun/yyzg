@@ -1,0 +1,23 @@
+<!--pages/SHOPGOODS//pages/user/balance/balance.wxml-->
+<view class="container" wx:if="{{balanceData.data.length != 0}}">
+  <view class="all-money">当前余额<text>{{balanceData.total_balance}}</text><text class="iconfont icon-jindou"></text></view>
+  <view class="balance-title">收支明细</view>
+  <scroll-view scroll-y="true" style="height:{{scrollHeight - 110}}px;" bindscrolltolower="bindDownLoad" bindscrolltoupper="bindUpLoad">
+    <view class="balance-list" wx:for="{{balanceData.data}}">
+      <view class="list-l">
+        <view class="title-one" wx:if="{{item.action == 0}}">{{item.second_level_channel}}<text>({{item.one_level_channel}})</text></view>
+        <view class="title-one" wx:else>购物使用<text>(订单号：{{item.order_no}})</text></view>
+        <text class="balance-time">{{item.add_time}}</text>
+      </view>
+      <view class="list-r">{{item.balance}}<text class="iconfont icon-jindou"></text></view>
+    </view>
+    <view class="end" style="margin:80rpx 0;" wx:if='{{no_more}}'>
+      <text>THE  END</text>
+    </view>
+  </scroll-view>
+</view>
+<!-- 页面内容为空 -->
+<view class="data_null_block" style="height:{{scrollHeight}}px;" wx:else>
+  <image src="https://s.404.cn/applet/images/qudao/empty_tip.png" style="width:520rpx;" mode="widthFix"></image>
+  <text class="tips">暂无金豆</text>
+</view>

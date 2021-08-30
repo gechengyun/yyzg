@@ -1,0 +1,125 @@
+.jion-group-commander{
+  position: relative;
+  margin: 45rpx 30rpx 18rpx;
+  padding: 97rpx 65rpx 40rpx;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 17px 1px 
+		rgba(216, 216, 216, 0.68);
+	border-radius: 20rpx;
+}
+.jion-group-commander image{
+  position: absolute;
+  top: -33rpx;
+  width: 120rpx;
+	height: 120rpx;
+  left: 50%;
+  margin-left: -60rpx;
+  border-radius: 50%;
+	background-color: #cce198;
+	border: solid 8rpx #ffffff;
+}
+.now-group{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140rpx;
+	height: 46rpx;
+  text-align: center;
+  line-height: 46rpx;
+  font-size: 22rpx;
+	color: #ffffff;
+	background-image: linear-gradient(90deg, 
+		#feb40d 0%, 
+		#ff6030 100%), 
+	linear-gradient(
+		#cce198, 
+		#cce198);
+	background-blend-mode: normal, 
+		normal;
+	box-shadow: 0px 0px 8px 1px 
+		rgba(248, 88, 40, 0.35);
+	border-radius: 23rpx 23rpx 23rpx 0;
+}
+.now-group-detail text{
+  display: block;
+  text-align: center;
+  font-size: 24rpx;
+	font-weight: normal;
+	color: #666666;
+}
+.now-group-detail text:nth-child(1){
+  font-size: 36rpx;
+	font-weight: bold;
+	color: #202020;
+}
+.wx-space{
+  margin: 15rpx 0 33rpx;
+}
+.tel-space{
+  margin-bottom: 14rpx;
+  font-size: 26rpx!important;
+	color: #333333!important;
+}
+.adress-space1{
+  margin: 29rpx 0 20rpx;
+}
+.adress-space2{
+  line-height: 36rpx;
+  display: flex!important;
+  justify-content: center;
+  align-items: center;
+}
+.adress-space2 text{
+  display: inline-block!important;
+}
+.tel-space text{
+  display: inline-block!important;
+}
+.jion-group-warp{
+  padding: 0 30rpx;
+  background-color: #ffffff;
+}
+.jion-group-list{
+  display: flex;
+  padding: 22rpx 0 24rpx; 
+  border-bottom: 1px solid #ededed;
+}
+.image-box{
+  width: 60rpx;
+}
+.image-box{
+  width: 60rpx;
+	height: 60rpx;
+  border-radius: 50%;
+	background-color: #000000;
+}
+.text-wrap{
+  flex: 1;
+  margin-left: 30rpx;
+}
+.text-name{
+  line-height: 30rpx;
+}
+.text-desc{
+  margin-top: 24rpx;
+  line-height: 26rpx;
+}
+.text-name text:nth-child(1){
+  font-size: 30rpx;
+	color: #202020;
+}
+.text-name text:nth-child(2){
+  font-size: 26rpx;
+  float: right;
+	color: #202020;
+}
+.text-desc text:nth-child(1){
+  font-size: 26rpx;
+	color: #666666;
+}
+.text-desc .specs{
+  font-size: 22rpx;
+  float: right;
+	color: #999999;
+  margin-top: 10rpx;
+}

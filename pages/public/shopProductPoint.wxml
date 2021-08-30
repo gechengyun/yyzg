@@ -1,0 +1,20 @@
+<!-- 商品 -->
+<template name="point_shop_goods">
+  <import src="../public/productListPoint.wxml" />
+  <view bindtap="goGroupListp" class="group-titile integral_tit" data-fieldid="{{field_id}}" data-name="point_shop_goods">
+    <view class="title">
+    <block wx:if="{{content.headline}}">
+    {{content.headline}}
+    </block>
+    </view>
+    <view style="display:flex;align-items:center;">
+      <text class="see-more"></text>
+      <text class="iconfont icon-xiayibu" style="color:#999;font-size:15px;"></text>
+    </view>
+  </view>
+  <view class="shopProduct editProduct integral_com {{content.content.product_list == '' ? 'hide' : '' }}" data-page="page.public.shopProduct" data-desc="商品普通列表">
+    <view class="size_{{content.content.size}} size_type_{{content.content.size_type}} buy_btn_type_{{content.content.buy_btn_type}} buy_btn_{{content.content.buy_btn}}  show_title_{{content.content.show_title}} price_{{content.content.price}}">
+      <template is="productListPoint" data="{{content:content.content}}" />
+    </view>
+  </view>
+</template>

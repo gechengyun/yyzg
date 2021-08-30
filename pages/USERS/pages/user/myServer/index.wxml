@@ -1,0 +1,88 @@
+<!--我的拼团售后-->
+<view class="container {{pageTheme}}" data-page="page.myServer.index">
+    <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <scroll-view scroll-top="" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh">
+        <view class="setTitleList clearfix" data-page="page.user.appointment">
+            <!-- <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav">退货</view> -->
+            <!--<view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav">维权</view>-->
+        </view>
+        <view class="orderState">
+            <view class="orderStateList">
+                <view class="orderList" wx:for="{{orderlistData.return_list}}" wx:for-item="order" wx:if="{{order}}" wx:key="id">
+                    <view class="orderContent">
+                        <view class="orderContentList">
+                            <view class="productImg">
+                                <image src="{{order.image}}"></image>
+                            </view>
+                            <view class="productInfo">
+                                <view class="productName serverName">
+                                    <text class="t1 textOmitted">{{order.name}}</text>
+                                    <text class="t2">{{order.status_txt}}</text>
+                                </view>
+                                <view class="productPrice">¥{{order.pro_price}}
+                                    <text>数量:{{order.pro_num}}</text>
+                                </view>
+                                <view class="orderInfo">
+                                    <text class="t1"></text>
+                                    <text>
+                                      <block wx:for="{{order.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="*this">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                                    </text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderFooter returnButton active clearfix">
+                        <view class="orderButton {{currentTab==0 ? '' : ''}}">
+                            <!-- <text bindtap="cancelReturn" data-returnid="{{order.return_id}}" data-index="{{index}}" wx:if="{{(order.status!=2)&&(order.status!=4)&&(order.status!=5)&&(order.status!=6)}}">取消退货</text> -->
+                            <text class="" bindtap="returnGo" data-order="{{order.order_no}}" data-returnid="{{order.id}}">查看退货</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="productdDefault" wx:if="{{orderlistData.return_list==''}}">
+                <image src="https://s.404.cn/applet/images/shop_03.png"> </image>
+                <text>还没有退货信息哦!</text>
+            </view>
+        </view>
+        <!-- <view class="orderState">
+            <view class="orderStateList">
+                <view class="orderList" wx:for="{{orderlistData.rights_list}}" wx:for-item="order" wx:if="{{order}}" wx:key="{{order.id}}">
+                    <view class="orderContent">
+                        <view class="orderContentList">
+                            <view class="productImg">
+                                <image src="{{order.image}}"></image>
+                            </view>
+                            <view class="productInfo">
+                                <view class="productName serverName">
+                                    <text class="t1 textOmitted">{{order.name}}</text>
+                                    <text class="t2">{{order.status_txt}}</text>
+                                </view>
+                                <view class="productPrice">¥{{order.pro_price}}
+                                    <text>数量:{{order.pro_num}}</text>
+                                </view>
+                                <view class="orderInfo">
+                                    <text class="t1"></text>
+                                    <text>
+                                        <block wx:for="{{order.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                                    </text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderFooter returnButton active clearfix">
+                        <view class="orderButton {{currentTab==1 ? 'active' : ''}}">
+                            <text bindtap="cancelRights" data-returnid="{{order.rights_id}}" data-index="{{index}}" wx:if="{{(order.status!=2)&&(order.status!=4)&&(order.status!=5)&&(order.status!=6)&&(order.status!=10)}}">取消维权</text>
+                            <text class="" bindtap="rightsGo" data-pid="{{order.order_product_id}}" data-order_no="{{order.order_no}}" data-rights_id="{{order.rights_id}}">查看维权</text>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="productdDefault" wx:if="{{orderlistData.rights_list==''}}">
+                <image src="https://s.404.cn/applet/images/shop_03.png"> </image>
+                <text>还没有维权信息哦!</text>
+            </view>
+        </view> -->
+    </scroll-view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

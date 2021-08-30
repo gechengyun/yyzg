@@ -1,0 +1,69 @@
+<!--pages/distribution/pro_details.wxml-->
+<!--警告提示-->
+<import src="../public/warning.wxml" />
+<!--create_distribution.wxml-->
+<view class="createDistribution container {{pageTheme}}" data-page="pages.travel.create_distribution">
+    <view class="section supplierInfo">
+      <view class="title">供货信息</view>
+      <view>
+        <view class="infoItem">
+          <text class="leftLabel">供货商</text>
+          <view class="rightBox"><text>{{proInfo.root_store_name}}</text></view>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">推荐人/上级</text>
+          <view class="rightBox"><text>{{proInfo.drp_store_name}}</text></view>
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">推荐人昵称</text>
+          <view class="rightBox"><text>{{proInfo.drp_nickname}}</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="section distributionInfo">
+      <view class="title">店铺信息</view>
+      <view>
+        <view class="infoItem">
+          <text class="leftLabel">店铺logo</text>
+          <view class="rightBox">
+           <view class='photobox'>
+             <view class='Exitphoto clear' >
+               <image src="{{  store_logo }}"  mode='aspectFill' class='fl'></image>  
+                <!-- wx:if='{{ proInfo.store_logo！="" }}' -->
+               <!-- <image src="../../images/avatar.png"  mode='aspectFill' class='fl' wx:else></image>  -->
+               <view class='fl' style=" color:{{themeColor}}" bindtap='changePhoto'>修改</view>
+             </view>
+           </view>
+           
+          </view> 
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">店铺名称</text>
+          <view class="rightBox"><input type="text" placeholder="请输入店铺名称" value='{{ store_name }}'   bindblur='stroeNameBlur' placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;"   />
+           <i class='rg_point'><image src='../../images/go_rg.png'></image></i>
+          </view>
+
+        </view>
+        <view class="infoItem">
+          <text class="leftLabel">手机号码</text>
+          <view class="rightBox"><input type="text" placeholder="请输入手机号" value='{{  phone }}' class="userTel" bindblur='telBlur' placeholder-style="color:#9c9c9c;font-family:Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;" />
+           <i class='rg_point'><image src='../../images/go_rg.png'></image></i> 
+          </view>
+
+        </view>
+      </view>
+    </view> 
+    <view class="agreementBox" style='color:red'>
+       修改手机号码会同步修改登录的账号（手机号）
+    </view> 
+
+     <view class="button" bindtap='btnKeep' >保存</view> 
+</view>
+
+  
+
+ 
+
+
+
+<include src="/pages/public/page_footer.wxml"></include>

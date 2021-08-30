@@ -1,0 +1,72 @@
+<!-- 购物袋推荐 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="shopCat_recomment">
+	<import src="../public/goodsTempList.wxml" />
+	<view class="shopProduct editProduct" data-page="page.public.shopProduct" data-desc="商品普通列表" style="margin-top:20rpx;">
+		<!-- 新增商品滑动 -->
+		<view class='list-conent my-list'>
+			<view class="goods-list-box show-style-4">
+				<view class='goods-box' wx:for="{{product_list}}" wx:key="index" style='border-radius:0rpx;overflow:hidden;margin-bottom:20rpx'>
+					<!-- 商品图片 -->
+					<navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}" class="navigator" hover-class="none" open-type="navigate">
+						<!-- 是否填充 -->
+						<!-- <view class="productImg verticalCentering fillImg"  style='position:relative'> -->
+						<view class="productImg" style='position:relative;'>
+							<view class='only-pic one-one1' style='width:100%;background:url("{{item.image}}") no-repeat center center/cover;'>
+								<!-- 售罄 -->
+								<view wx:if='{{item.show_sold_out}}' class='sold-out'>
+									<view class='txt'>售罄</view>
+									<!-- <view class='txt'>售罄={{item.show_sold_out}}={{item.price}}</view> -->
+								</view>
+							</view>
+						</view>
+
+					</navigator>
+					<!-- 商品信息 -->
+					<navigator url="/pages/product/details?product_id={{item.product_id}}" class='only-goods-info size_1' hover-class="none" open-type="navigate" style="height:150rpx" role="navigation">
+						<!-- 商品名称 -->
+						<view class="product-name textOmitted2 Zy" style='padding:8rpx 10rpx 0;margin-bottom:5rpx;'>
+							<text class='theme-bg-color' style='background:{{themeColor}};padding-right:5rpx;' wx:if="{{item.is_self_support==0}}" id='ziying_text'>自营</text>{{item.name}}
+						</view>
+						<!-- 商品价格 如果填充，加padding//is_member==1&&-->
+						<view class='product-infos' style='padding:0 10rpx;align-items:{{((item.self_by_get_money!=0)&&show_index_img==0&&is_gift==1&&(size==4 || size==5 || (size==7&&index%3!=0))) ?"flex-start":"center"}}'>
+							<view class='left'>
+								<text class='price' style='color:{{themeColor}}'>
+                  <text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.price,1)}}</text>
+								<text class='dele-price' wx:if='{{filter.transBigNumber(item.original_price,1)!=0}}'><text style='font-size:24rpx;'>￥</text>{{filter.transBigNumber(item.original_price,1)}}</text>
+						  </view>
+							<!-- 已购买、购物袋 -->
+							<view class='right'>
+								<!-- 已购暂时不展示-->
+								<!-- <view class='user' style='display:none;'>
+									<image src='{{baseImgUrl}}images/avatar.png'></image>
+									<image src='{{baseImgUrl}}images/avatar.png'></image>
+									<image src='{{baseImgUrl}}images/avatar.png'></image>
+									已购
+								</view> -->
+								<text class='iconfont icon-jiarugouwuche' style='color:{{themeColor}};font-size:52rpx;' catchtap="oppenShopping" data-type="add_cart" data-product="{{item.product_id}}"></text>
+								<!-- <view wx:if='{{item.is_reservation*1!=1 && item.special_product_type!=98 && item.special_product_type!=97&&data.size!=4 &&item.self_by_get_money!=="0.00"&&storeData.show_gift_preincome=="1"}}' style='position:relative'>
+									<view style='background:{{themeColor}};opacity:0.2;height:52rpx' class="income">
+									</view>
+									<text style='color:{{themeColor}};position:absolute;top:10rpx;left:16rpx;font-size:24rpx;'>预估收益￥{{item.self_by_get_money}}</text>
+								</view> -->
+							</view>
+						</view>
+					</navigator>
+
+					<!-- 分组标签 -->
+
+					<view class="groupTips" wx:if='{{(filter.isExit(content.goods_info_show,"g_group")==1)&&size!=5}}' style='width:{{size==6?"100%":"auto"}};'>
+						<block wx:for="{{item.group_lable_list}}" wx:key="" wx:for-index="idx">
+							<block wx:if="{{idx<2}}">
+								<view style="border-color:{{themeColor}};color:{{themeColor}}" bindtap="goGroupListT" data-groupid="{{item.group_id}}" data-name="goods_group4">
+									<text>{{item.group_name}}</text>
+								</view>
+							</block>
+						</block>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</template>

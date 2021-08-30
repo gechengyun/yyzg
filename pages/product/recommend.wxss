@@ -1,0 +1,27 @@
+/* pages/product/recommend.wxss */
+page{
+  background-color: #f9f9f9;
+}
+.shopTop wx-navigator .re-dianjiatuijian{display: inline-block;background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QAAAAAAAD5Q7t/AAAACXBIWXMAAAsSAAALEgHS3X78AAAChklEQVRYw+3YO2gUQRjA8f+NeWA0alCQGB+FFlEi3uS0EY2FQvBECwVRUSEBQTOVnaBCMKkEC4tpxDSCYCHExk5RUlo4ZfSIaXwUgqCFICqjxQ54HLuzu7ePgORrbm++2fl+s89hYTn+86jkPaBVsg+YAIaENmezjidyxl0EGsA00J/HmB05wToBDVzKc8K5AK2SFeABcKYl1Z0HMI9TfD0EB7ByyYFWyUHgZkS6c8mBwCTQFZFbmwew7ceMVbIf+OCZ5G+gW2hjI/bfAGwV2rz21clyBE/F7N8BDITA1lsl7wOfgMtxRbLcxUcS9KkB75twO4BnwDbX1Bc3QJYjOJygz4EmXBfwuAkHsKsQoFWyB9iSoOtp95wEGAP2tOQHrZK9mYFWyXNWydtNTQNJ9nOTOOG2L0TUP5YJaJWcAB4Ch5uaVyUEAkxZJTuAakT+fNtAq2QNuOv+Vq2Sq932ihTA3cAtz6TqVsnt7R7BO/y70wUw6rZ7SRfXPLkKcDU10CpZBQ61NI+73+8pgXEvhDGr5JpUQOBkSFvdnfZfKYFx0UP4gsMLPBjRfo/o92+WqKcF7oxoHwZmCgDKtMB1ntxQAcCNaYE/CkD4IvS69gG/lAwMrecDzpcMDK3nA86VDAyt5wM+KRk4mwootGkAL0rCvRTavEkFdDFZEnA6KuEFCm3mCJZaRcYjoc3ztoAuFLBQEG4RuOLrEAsU2nwDjgIfc8Z9BkaFNl8zAR1yARgB3uaEawD73bj+2klHFNosAnvJvlCYAWpCm3dJOrf1ZcEquQ+4ARxPOMYf4CkwJbR5laZWpi+sVslNBAvbEYLl2WaCteJPgs8i8wRviFmhTd7X8HIkir9vX4hPdE4c2wAAAABJRU5ErkJggg==');background-size: cover;width: 40rpx;height: 40rpx;vertical-align: middle !important;margin: 0;margin-right: 5px;margin-top: -4rpx}
+.editProduct .shopProductList>view .productInfo text {width:max-content;
+padding:0 10rpx;
+border-radius:8rpx;
+font-size:22rpx;
+color:white;
+margin-right:10rpx;}
+.editProduct .shopProductList > wx-view .productInfo wx-text:nth-child(2) {
+  position:relative;
+  float:right;
+  height:55rpx;
+  /*margin-top:-12rpx;*/
+  padding-top:20rpx;
+  line-height:55rpx;
+  text-align:right;
+}
+.editProduct .shopProductList>view .productInfo .originalPrice{
+  color: #666;
+  font-size: 20rpx;
+  text-decoration: line-through;
+  margin-left: 10rpx;
+  margin-top: 0;
+}

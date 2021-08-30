@@ -1,0 +1,202 @@
+<!--pages/user/vip/vip.wxml-->
+<view class='vip-page'>
+  <view class='navbar'>
+    <view class='back-box' style='top:{{nav_top?nav_top:61}}rpx;'>
+      <text class='iconfont icon-shangyibu' style='color:#fff' bindtap='goback' wx:if="{{!showback}}"></text>
+      <text style='color:#fff;font-size:40rpx;' class='title;'>会员权益</text>
+    </view>
+    
+    <image src='{{base_img_url}}images/hy_head_bg2.jpg' class='img_bg'></image>
+  </view>
+  
+  
+  <!-- 头部 -->
+  <view class='vip-head'>
+    <view class='vip-head-con'>
+      <view class='vip-title'>分享升级{{vipData.member_alias}}
+      </view>
+      <view>
+        <text>////////</text> 终身享自购省钱 分享赚钱
+        <text>////////</text>
+      </view>
+    </view>
+  </view>
+  <!-- main -->
+  <view class='vip-main'>
+    <!-- 粉丝任务 -->
+    <view class='main-top'>
+      <view class='main-top-title'>
+        <view>粉丝任务</view>
+        <view  data-url="/pages/user/myFans/myFans" bindtap='goToPage'>
+          <text>查看全部</text>
+          <text class='iconfont icon-xiayibu'></text>
+        </view>
+      </view>
+      <view class='main-process-tip' catchtap='goToMyFans'>
+        <text wx:if='{{vipData.is_member==1}}'>您已成功升级为{{vipData.member_alias}}</text>
+        <view  wx:else>
+          <text>已邀请{{vipData.now_num?vipData.now_num:0}}人，还差</text>
+          <text style='color:red'>{{less_num?less_num:0}}粉丝</text>成为{{vipData.member_alias?vipData.member_alias:0}}
+        </view>
+  
+        </view>
+      <!-- 进度条 -->
+      <view class='process-bar-box {{vipData.is_member==1 ? distance:""}}' wx:if='{{vipData.is_member!=1}}'>
+        <view class='process-bar'>
+          <!-- 实际进度 -->
+          <view class='process-real-box' style='width:{{probar==0?1:(probar >100)?100:probar}}%'></view>
+        </view>
+        <!-- 进度条底部文字 -->
+        <view class='bar-bottom'>
+          <text>0粉</text>
+          <text>{{vipData.num?vipData.num:0}}粉</text>
+        </view>
+      </view>
+      <view class='bar-bottom' style='height:40rpx;' wx:else>
+      </view>
+      <!-- 立即邀人 -->
+      <view class='btn-inviter' bindtap='{{(has_phone || no_user_phone) ? "showShareOperation":""}}' style='position:relative;'>
+        <image src='{{base_img_url}}images/hy_ban_bg.png'></image>
+        <view class='inviter-con'>
+          <text class='inviter-txt'>立即邀人</text>
+          <!-- <view class='circel'>
+            <text>邀请</text>
+            <text class='iconfont icon-xiayibu'></text>
+          </view> -->
+          <view class='circel'>
+          <image src='{{base_img_url}}images/hy_invite_icon.png' mode='widthFix'></image>
+          </view>
+        </view>
+
+        <!-- 获取用户手机号 -->
+        <button class='getNumer' wx:if='{{(!has_phone) && (!no_user_phone)}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用微信手机号</button>
+
+      </view>
+
+
+    </view>
+
+    <!-- vip权益 -->
+    <view class='vip-box'>
+      <view class='vip-title'>
+      <image src='{{base_img_url}}images/hy_title_bg.png'></image>
+       <view>{{vipData.member_alias}}权益详情</view>
+      </view>
+      <view class='vip-info'>
+        <view class='vip-info-con'>
+            <view><text decode="{{true}}">{{arr_desc}}</text></view>
+        </view>
+
+      </view>
+
+    </view>
+
+    <!-- 会员专享 -->
+    <view class='vip-zuanx vip' wx:if='{{vipData.products}}'>
+      <!-- 标题 -->
+      <view class='member-title'>
+        <image src='{{base_img_url}}images/hy_title_icon.png' class='img'></image>
+        <text class='title-info'>会员专享</text>
+        <view class='line'></view>
+        <view class='more' data-url="/pages/product/productList" bindtap='goToPage'>
+          <text>更多会员专享</text>
+          <text class='iconfont icon-xiayibu'></text>
+        </view>
+      </view>
+      <!-- 商品 -->
+      <view class='goods-box'>
+        <scroll-view scroll-y style="height:100%;" bindscrolltolower="toScroll" lower-threshold="{{50}}" class='{{pageTheme}}'>
+        <view class='tab-main'>
+          <view class="editProduct Zy">
+            <view class="shopProductTable" style="display:block">
+              <view class="clearfix shopProductList {{pageTheme}} Zy" data-page="page.public.productList" data-desc="公共商品列表">
+          <view class="clearfix" wx:for="{{vipData.products}}" wx:key="index">
+            <navigator url="{{'/pages/product/details?product_id=' + item.product_id}}" class="navigator"
+              hover-class="none" open-type="navigate">
+              <view class="productImg verticalCentering" style='position:relative'>
+                <image src="{{item.image}}" style="will-change:transform;margin:0 auto;" mode="aspectFill"></image>
+              </view>
+            </navigator>
+            <view class="productInfo clearfix ">
+              <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+                <view class='pro-name' style='font-weight:bold;'>{{item.name}}
+                </view>
+                <view style='display:flex;align-items:center;'>
+                  <view style="font-weight:bold;color:#c0242f;" class='pro-price'>￥</view>
+                  <view style="font-weight:bold;font-size:32rpx;color:#c0242f;" class='pro-price'>
+                  {{item.price}}
+                 
+                  </view>
+                  <view wx:if='{{item.original_price!="0.00"}}' style="text-decoration:line-through;margin-left:10rpx;">￥{{item.original_price}}</view>
+                </view>
+              </navigator>
+            </view>
+
+          </view>
+        </view>
+
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+
+        
+
+
+
+      </view>
+    </view>
+    <!-- 新人福利 -->
+    <view class='vip-you vip' wx:if="{{vipData.new_products}}">
+      <!-- 标题 -->
+      <view class='member-title'>
+        <image src='{{base_img_url}}images/hy_title_icon2.png' class='img'></image>
+        <text class='title-info'>新人福利</text>
+        <view class='line'></view>
+        <view class='more' data-url="/pages/new_user/index" bindtap='goToPage'>
+          <text>更多新人福利</text>
+          <text class='iconfont icon-xiayibu'></text>
+        </view>
+      </view>
+      <!-- 内容 -->
+      <view class='discount-con'>
+        <view class='goods_list' wx:for="{{vipData.new_products}}" wx:key="index">
+          <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+            <image src="{{item.image}}" style="will-change:transform;" mode="aspectFill"></image>
+            <view class='goods-right'>
+              <view class='goods-title'>
+                {{item.name}}
+              </view>
+               <view style='display:flex;align-items:center;color:#c0242f'>
+                  <view style="font-weight:bold;font-size:24rpx;" class='pro-price'>￥</view>
+                  <view style="font-weight:bold;font-size:32rpx;" class='pro-price'>
+                  {{item.price}}
+                  </view>
+                  <view wx:if='{{item.original_price!="0.00"}}' style="text-decoration:line-through;margin-left:10rpx;font-size:24rpx;color:#999;">￥{{item.original_price}}</view>
+                </view>
+            </view>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{showOpertaion}}">
+  <view class='windowmask' catchtouchmove='false' catchtap='closeCanvas'></view>
+  <image class='haibaoimg' src='{{lafenImgurl}}' catchtouchmove='false'  wx:if="{{haibaoCanvas}}"></image>
+  <view class='sharebutton' catchtouchmove='false' >
+    <button class='item' open-type='share'>
+      <image src='{{base_img_url}}images/haoyou.png'></image>
+      分享好友
+    </button>
+    <!-- <button class='item' catchtap='downLoadHb' > -->
+    <button class='item' catchtap='showCanvasWind' >
+     <image src='{{base_img_url}}images/pengyouquan.png'></image>
+     分享海报图
+    </button>
+  </view>
+</view>
+<block wx:if="{{showback}}" >
+  <include src="/pages/public/page_footer.wxml"></include>
+</block>
+<canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" canvas-id="lafenCanvas" ></canvas>

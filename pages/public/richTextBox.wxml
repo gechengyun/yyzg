@@ -1,0 +1,14 @@
+<!--富文本类弹窗-->
+<template name="richTextBox">
+    <import src="../../wxParse/wxParse.wxml"/> 
+
+    <view class="richTextWrap" data-page="page.public.richTextBox">
+    <view class="richTextBox" decode="{{true}}">
+        <view class="boxTitle">{{content.title}}</view>
+        <scroll-view class="boxContent" decode="{{true}}" scroll-y style="height: 400rpx;">
+            <template is="wxParse" data="{{wxParseData:content.content.nodes}}"/>
+        </scroll-view>
+        <view class="boxFooter" bindtap='hideRichTexBox'>{{content.footer}}</view>
+    </view>
+</view>
+</template>

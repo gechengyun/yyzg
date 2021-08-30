@@ -1,0 +1,184 @@
+/* pages/SPELL/pages/myTeam/myTeam.wxss */
+
+page {
+  background: #eee;
+  min-height: 100vh;
+}
+
+.myTit {
+  width: 100%;
+  height: 280rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #197ffd;
+    color: #ffffff;
+    font-family:  PingFangSC-Regular
+
+}
+
+.myTit .headImg {
+  width: 220rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.myTit .headImg image {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 50%;
+  border: 5rpx solid #fff;
+}
+
+.myTit .text {
+  width: 530rpx;
+  height: 100%;
+}
+
+.myTit .text .team_name {
+  width: 100%;
+  height: 120rpx;
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  align-items: center;
+  padding-left: 40rpx;
+}
+
+.myTit .text .team_name .name {
+  font-size: 40rpx;
+  font-weight: 400;
+  margin-right: 10rpx;
+  color: #fff; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
+.myTit .text .team_name .ranking {
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 20rpx;
+  line-height: 30rpx;
+  padding: 0 15rpx;
+  border-radius: 30rpx;
+  color: #fff
+}
+.myTit .text .creator{
+    font-size: 24rpx;
+    line-height: 70rpx;
+    height: 70rpx;
+    padding-left: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.myTit .text .creator span{
+    margin-right: 10rpx;
+    line-height: 50rpx;
+    height: 50rpx;
+}
+
+.myTit .text .team_num{
+    font-size: 24rpx;
+    line-height: 50rpx;
+    height: 50rpx;
+    padding-left: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.myTit .text .team_num .team_sub{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 50%;
+}
+.myTit .text .team_num .team_sub span{
+    margin-right: 10rpx;
+    line-height: 50rpx;
+    height: 50rpx;
+}
+
+.my_list {
+    width: 100%;
+    height: auto;
+}
+.my_list .item{
+    width: 690rpx;
+    height: 360rpx;
+    border-radius: 20rpx;
+    margin: 30rpx;
+    background: #fff;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+}
+
+.my_list .item .tit{
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1rpx solid #cecece;
+    font-size: 28rpx;
+}
+.my_list .item .tit .icon{
+  color: #999
+}
+.my_list .item .tit .decs{
+    font-weight: 400;
+    color: #000;
+}
+.my_list .item .com{
+    width: 100%;
+    height: 170rpx;
+    border-bottom: 1rpx solid #cecece;
+    line-height: 170rpx;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.my_list .item .com .it{
+    width: 30%;
+    height: 130rpx;
+}
+.my_list .item .com .it .num{
+    width: 100%;
+    text-align: center;
+    line-height: 60rpx;
+    height: 60rpx;
+    font-size: 38rpx;
+    font-weight: 400;
+    color: #000;
+}
+
+.my_list .item .com .it .name{
+    width: 100%;
+    text-align: center;
+    line-height: 50rpx;
+    height: 50rpx;
+    font-size: 20rpx;
+    font-weight: 200;
+    color: #999;
+}
+.my_list .item  .foot{
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    color: #b2b2b2;
+    font-size: 28rpx;
+}
+.noData{
+  width: 100%;
+  margin-top: 300rpx;
+  font-size: 24rpx;
+ text-align: center
+}

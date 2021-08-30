@@ -1,0 +1,383 @@
+/* pages/SEALS//pages/card/card.wxss */
+.card-top{
+  position: relative;
+  width: 100%;
+  height: 447rpx;
+}
+/* .bg-img{
+  width: 100%;
+  height: 500rpx;
+} */
+.card-header{
+  color: #fff;
+  font-size: 26rpx;
+  width: calc(100% - 80rpx);
+  padding: 0 40rpx;
+  position: absolute;
+  top: 20rpx;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ch-left{
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.avatar{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+  overflow: hidden;
+}
+.avatar image{
+  width: 100%;
+}
+.card-name{
+  font-size: 36rpx;
+  margin-bottom: 10rpx;
+}
+.card-edit{
+  font-size: 24rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 10rpx 32rpx;
+  border-radius: 30rpx;
+}
+.company-message{
+  position: absolute;
+  left: 40rpx;
+  top: 170rpx;
+  width: calc(100% - 80rpx);
+  padding: 40rpx 0 0;
+  background-color: rgba(250, 250, 250, 0.9);
+  box-shadow: 0px 17px 17px -17px rgba(180, 180, 180, 0.88);
+  border-radius: 25rpx;
+  overflow: hidden;
+}
+.cm-top{
+  padding: 0 40rpx;
+}
+.company-message .iconfont{
+  display: flex;
+  justify-content: start;
+
+}
+.company-message .iconfont view{
+  margin-left: 16rpx;
+  margin-top: -3rpx;
+}
+.company-name{
+  color: #08132D;
+  font-size: 36rpx;
+  font-weight: 600;
+}
+.company-email{
+  margin: 32rpx 0 24rpx;
+}
+.company-email view,.company-address view{
+  color: #606165;
+  font-size: 24rpx;
+}
+.save-mes{
+  display: flex;
+  padding: 24rpx 0;
+  background-color: rgba(225, 226, 230, 0.5);
+  width: 100%;
+  margin-top: 40rpx;
+  align-items: center;
+}
+.save-mes>view{
+  flex: 1;
+  text-align: center;
+  color: #08132D;
+  font-size: 32rpx;
+  font-weight: 600;
+  padding: 14rpx 0;
+  height: 42rpx;
+}
+.save-mes>view:first-child{
+  border-right: 1px solid #d8d8d8;
+}
+.save-mes>view>view{
+  height: 200%;
+  margin-top: -38rpx;
+  padding: 38rpx 0;
+}
+/* 登录按钮 */
+.card-btn-login{
+  padding: 38rpx;
+  margin: 0;
+  font-size: inherit;
+  background-color: rgba(225, 226, 230, 0);
+  position: initial;
+  margin-top: -38rpx;
+  border-radius: 0;
+  line-height: 42rpx;
+}
+.save-message{
+  background-color: rgba(225, 226, 230, 0.9);
+  color: rgba(8, 19, 45, 0.5);
+}
+
+.user-number{
+  width: 98%;
+  overflow: hidden;
+  margin-left: 1%;
+  margin-top: 150rpx;
+}
+.scroll-header{
+  width: calc(100% - 30rpx);
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+  padding: 30rpx 0 30rpx 30rpx;
+  align-items: center;
+}
+.um-list{
+  background-color: #fff;
+  border: 1px solid #eaeaea;
+  box-shadow: 0 0 15rpx 1rpx #eaeaea;
+  padding: 20rpx 40rpx;
+  text-align: center;
+  margin-right: 20rpx;
+  display: inline-block;
+  border-radius: 10rpx;
+  height: 88rpx;
+  align-self: center;
+}
+.um-list:last-child{
+  margin-right: 4rpx;
+}
+.um-list view{
+  color: #313334;
+  font-size: 28rpx;
+  font-weight: 600;
+}
+.um-list view text{
+  margin-left: 8rpx;
+}
+.um-list>text{
+  color: #919398;
+  font-size: 26rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 340rpx;
+  display: inline-block;
+}
+.card-banner{
+  padding: 70rpx 0;
+  /* height: 200rpx; */
+}
+.cardSwiper{
+  height: 100%;
+  border-radius: 10rpx;
+}
+.banner-img{
+  border-radius: 0rpx;
+  overflow: hidden;
+}
+.banner-img navigator{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.card-bottom{
+  padding: 0 40rpx;
+}
+.card-list{
+  padding: 20rpx 0 40rpx;
+}
+.card-list:last-child{
+  padding-bottom: 0;
+}
+.list-name{
+  color: #08132D;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-bottom: 40rpx;
+}
+.cp-list-out{
+  display: flex;
+  white-space: nowrap;
+}
+.cp-list{
+  display: inline-block;
+  margin-right: 24rpx;
+  margin-bottom: 24rpx;
+  vertical-align: top;
+  height: 406rpx;
+}
+.cp-list:nth-child(odd){
+  float: left;
+}
+.cp-list:nth-child(even){
+  margin-right: 0;
+  float: right;
+}
+.cp-list:last-child{
+  margin-right: 0;
+}
+.cp-img{
+  width: 316rpx;
+  border-radius: 10rpx;
+  border: 1px solid #eaeaea;
+}
+.cp-describe{
+  color: #08132D;
+  font-size: 28rpx;
+  font-weight: 600;
+  width: 320rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  white-space:initial;
+}
+.ci-content{
+  color: #606165;
+  font-size: 28rpx;
+  line-height: 48rpx;
+}
+.picture-img{
+  margin-bottom: 40rpx;
+  border-radius: 10rpx;
+}
+.picture-img:last-child{
+  margin-bottom: 0;
+}
+.end{
+  color: #919398;
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: center;
+  margin: 70rpx 0 60rpx;
+}
+.end text{
+  margin: 0 10rpx;
+}
+.end::before,.end::after{
+  content: '';
+  display: inline-block;
+  width: 100rpx;
+  height: 1px;
+  background-color: #919398;
+  vertical-align: middle;
+}
+.tips{
+  text-align: center;
+  position: absolute;
+  top: 340rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.tips-img{
+  width: 600rpx;
+}
+.tips view{
+  color: #919398;
+  font-size: 36rpx;
+  margin-top: -70rpx;
+  margin-bottom: 10rpx;
+}
+.tips text{
+  color: #C0C4CC;
+  font-size: 30rpx;
+}
+/* 预览海报图 */
+.draw-canvas{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, .6)
+}
+.dc-delete{
+  position: absolute;
+  top: 205rpx;
+  right: 20rpx;
+  z-index: 5;
+  color: #fff;
+  display: inline-block;
+  padding: 10rpx;
+  border-radius: 50%;
+  background-color: rgb(8, 19, 45,.6);
+}
+.dc-img{
+  width: 100%;
+  height: 780rpx;
+  position: absolute;
+  left: 0;
+  top: 200rpx;
+}
+.dc-btn{
+  position: absolute;
+  left: 40rpx;
+  bottom: 40rpx;
+  width: calc(100% - 80rpx);
+}
+/* 自定保存成功义弹窗 */
+.gray {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.gray .modal-main {
+  width: 670rpx;
+  min-height: 562rpx;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0px 40px 80px 0px rgba(24, 50, 102, 0.2);
+  border-radius: 16px;
+  position: relative;
+  margin: 272rpx auto 0;
+  padding: 150rpx 80rpx 160rpx;
+}
+
+.gray .modal-main .img-top {
+  width: 670rpx;
+  height: 335rpx;
+  position: absolute;
+  top: -250rpx;
+  left: 0;
+}
+
+.gray .modal-main .modal-title {
+  width: 100%;
+  height: 60rpx;
+  font-size: 44rpx;
+  font-weight: bold;
+  color: rgba(11, 16, 38, 1);
+  line-height: 60rpx;
+  text-align: center;
+}
+
+.gray .modal-main .modal-text {
+  width: 100%;
+  font-size: 32rpx;
+  color: rgba(145, 147, 152, 1);
+  line-height: 48rpx;
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.gray .modal-main .btn-close {
+  width: 510rpx;
+  height: 88rpx;
+  box-shadow: 0 12rpx 28rpx 0rpx rgba(92, 123, 254, 0.4);
+  border-radius: 44rpx;
+  font-size: 32rpx;
+  color: #fff;
+  position: absolute;
+  bottom: 80rpx;
+  left: 80rpx;
+}

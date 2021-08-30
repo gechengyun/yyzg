@@ -1,0 +1,55 @@
+/* pages/user/scancode/scancode.wxss */
+page{
+  background: #d8d8d8;
+}
+.search{
+  padding: 20rpx;
+  /* overflow: hidden; */
+  display: flex;
+  justify-content: space-between;
+}
+.search-code{
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0rpx 30rpx;
+  width: calc(100% - 250rpx);
+}
+.search-code input{
+  font-size: 28rpx;
+  width: 85%;
+}
+.search-code text{
+  font-size: 38rpx;
+}
+.search button{
+  margin-left: 30rpx;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+.list{
+  padding: 24rpx;
+  background-color: #fff;
+}
+.list-item{
+  overflow: hidden;
+  line-height: 1.4rem;
+}
+.list-item text{
+  float: left;
+  font-size: 28rpx;
+  width: 20%;
+}
+.list-item input{
+  font-size: 30rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.confirm{
+  width: 90%;
+  margin: 30rpx auto 0;
+}

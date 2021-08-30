@@ -1,0 +1,265 @@
+<!--旅游分销-->
+<import src="../../../public/shear.wxml" />
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/richTextBox.wxml" />
+<view class="travelDetail container {{pageTheme}} {{richTextBoxShow ? 'noscroll' : ''}}" data="pages.travel.index">
+    <block>
+        <template is="shear" wx:if="{{shear}}" />
+    </block>
+    <!--轮播图-->
+    <view class="swiper-container">
+        <swiper autoplay="true" interval="{{interval}}" duration="{{duration}}" indicator-active-color="{{themeColorValue}}" current="{{swiperCurrent}}" bindchange="swiperChange" class="swiper">
+            <block wx:for="{{productData.product.images}}" wx:key="unique">
+                <swiper-item data-id="{{index}}" data-url="{{item.image}}">
+                    <image src="{{item.image}}" class="img"></image>
+                </swiper-item>
+            </block>
+        </swiper> 
+        <!-- <view class="dots"> 
+      <block wx:for="{{imgUrls}}" wx:key="unique"> 
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}" bindtap="dotEvent" id="{{index}}">{{index+1}}</view> 
+      </block> 
+    </view>  -->
+        <view class="bannerPage">
+            <text class="first">{{swiperCurrent+1}}</text>
+            <text class="line"></text>
+            <text class="last">{{productData.product.images.length}}</text>
+        </view>
+    </view>
+    <!--分块展示内容-->
+    <view class="section detailsCentent">
+        <view class="productName clearfix">
+            <view class="productH2">{{productData.product.name}}</view>
+            <view class="span">
+                <text class="iconfont icon-xin {{productData.product.is_collect==1?'active':''}}" bindtap="collect" data-dataid="{{productData.product.product_id}}" data-type="1"></text>
+                <button class="shareBtn" open-type="share" bindtap="shareClick">
+                    <text class="iconfont icon-zhuanfa"></text>
+                </button>
+            </view>
+        </view>
+        <view class="productInfo clearfix ">
+            <view class="productPrice">
+                <view>
+                    <text>￥{{productData.product.price}}</text>
+                    <text class="originalPrice">￥{{productData.product.original_price}}</text>
+                </view>
+            </view>
+            <view class="productFX" wx:if="{{is_FX}}">
+                <view>
+                    <navigator hover-class="none" url="{{fx_url}}">
+                        <text>分销</text>
+                    </navigator>
+                </view>
+            </view>
+
+        </view>
+        <view class="productLimit clearfix" bindtap="showQuotaDesc">
+            <view>
+                <text>限购</text>
+            </view>
+            <text>预定人数限{{productData.product.people_quota_min == productData.product.people_quota_max ? productData.product.people_quota_min : productData.product.people_quota_min + '~' + productData.product.people_quota_max}}人</text>
+            <text class="detail iconfont icon-xiayibu"></text>
+        </view>
+    </view>
+    <view class="section discountInfo" wx:if="{{productData.rewards != undefined && productData.rewards.length > 0}}">
+        <view class="infoTitle">优惠信息</view>
+        <view class="infoSection">
+            <view class="discountItem" wx:for="{{productData.rewards}}" wx:key="unique">
+                <text class="itemName">{{item.title}}</text>
+                <text>{{item.content}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="section activityInfo" wx:if="{{productData.activities != undefined && productData.activities.length > 0}}">
+        <view class="infoTitle">活动信息</view>
+        <view class="infoSection">
+            <view class="activityItem" wx:for="{{productData.activities}}" wx:key="unique">
+                <navigator url="{{item.path.url}}" hover-class="none">
+                    <text class="itemName">{{item.label}}</text>
+                    <text>{{item.name}}</text>
+                    <text class="arrow iconfont icon-xiayibu"></text>
+                </navigator>    
+            </view>
+        </view>
+    </view>
+    <view class="section leaveInfo">
+        <view class="infoTitle">{{productData.product.city_text}}出发</view>
+        <view class="infoSection">
+            <view class="leaveList">
+                <view class="leaveItem" wx:for="{{productData.product.dates}}" wx:key="unique">
+                    <navigator url="/pages/USERS/pages/travel/order_travel?productId={{productData.product.product_id}}&preview={{preview}}&date={{item.date}}" hover-class="none">
+                        <text>{{item.text}}</text>
+                        <text class="leavePrice">￥{{item.info[0].price}}</text>
+                    </navigator>
+                </view>
+                <view class="leaveItem">
+                    <navigator url="/pages/USERS/pages/travel/order_travel?productId={{productData.product.product_id}}&preview={{preview}}">
+                        <text style="height:100%;line-height:76rpx;" hover-class="none">更多</text>
+                    </navigator>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="section routeInfo" wx:if="{{productData.product.plans != undefined && productData.product.plans.length > 0}}">
+        <view class="infoTitle">
+            行程介绍
+            <view class="routeDetail">
+                <navigator url="/pages/USERS/pages/travel/route_details?productId={{productData.product.product_id}}&preview={{preview}}" hover-class="none">详细行程
+                    <text class="iconfont icon-xiayibu"></text>
+                </navigator>
+            </view>
+        </view>
+        <view class="infoSection">
+            <view class="routeList">
+                <view class="routeItem" wx:for="{{productData.product.plans}}" wx:key="unique">
+                    <text class="itemTime">D{{item.day}}</text>
+                    <text>{{item.content}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="productInfoList section">
+        <view class="title ulList">
+            <text class="navItem {{currentTab==0 ? 'active' : ''}}" bindtap="switchNav" data-current="0">产品特色</text>
+            <text class="navItem {{currentTab==1 ? 'active' : ''}}" bindtap="switchNav" data-current="1">预定须知</text>
+            <text class="navItem {{currentTab==2 ? 'active' : ''}}" bindtap="switchNav" data-current="2">用户评价</text>
+        </view>
+        <view class="productInfo">
+            <!--产品特色-->
+            <view class="artSection featureSection {{currentTab==0 ? 'active' : ''}}">
+                <view class="infoSection" wx:if="{{productData.product.features != undefined && productData.product.features.length > 0}}">
+                    <view class="featureItem" wx:for="{{productData.product.features}}" wx:key="unique">
+                        <text class="itemName">{{item.title}}</text>
+                        <text>{{item.content}}</text>
+                    </view>
+                </view>
+            </view>
+            <!--预订须知-->
+            <view class="artSection noticeSection {{currentTab==1 ? 'active' : ''}}">
+                <view class="infoSection" wx:if="{{productData.product.extends != undefined && productData.product.extends.length > 0}}">
+                    <view class="noticeItem" wx:for="{{productData.product.extends}}" wx:key="unique">
+                        <text class="itemName">{{item.title}}</text>
+                        <text>{{item.content}}</text>
+                    </view>
+                </view>
+            </view>
+            <!--用户评价-->
+            <view class="artSection productEvaluate {{currentTab==2 ? 'active' : ''}}">
+                <view wx:if="{{productData.comment_data.total*1!=0}}">
+                    <view class="title">
+                        <text class="span">评价({{commentData.count}})</text>
+                        <view class="span" wx:if="{{commentData.comment_list!=''}}">好评
+                            <text>{{perfect_rate}}</text>
+                        </view>
+                    </view>
+                    <view class="evaluateTitle clearfix ulList">
+                        <view class="{{productlist==0 ? 'active' : ''}}" data-productlist="0" data-tab="HAO" bindtap="productListSwichNav">好评
+                            <text data-productlist="0" data-tab="HAO">{{productData.comment_data.t3}}</text>
+                        </view>
+                        <view class="{{productlist==1 ? 'active' : ''}}" data-productlist="1" data-tab="ZHONG" bindtap="productListSwichNav">中评
+                            <text data-productlist="1" data-tab="ZHONG">{{productData.comment_data.t2}}</text>
+                        </view>
+                        <view class="{{productlist==2 ? 'active' : ''}}" data-productlist="2" data-tab="CHA" bindtap="productListSwichNav">差评
+                            <text data-productlist="2" data-tab="CHA">{{productData.comment_data.t1}}</text>
+                        </view>
+                        <view class="{{productlist==3 ? 'active' : ''}}" data-productlist="3" data-tab="IMAGE" bindtap="productListSwichNav">有图
+                            <text data-productlist="3" data-tab="IMAGE">{{productData.comment_data.t4}}</text>
+                        </view>
+                    </view>
+                    <view class="commentList">
+                        <view>
+                            <view class="showTxt smallImg" wx:if="{{commentData.comment_list==''}}">
+                                <image src="https://s.404.cn/applet/images/shop_06.png" alt=""></image>
+                                <view>暂无评价!快来抢沙发吧!</view>
+                            </view>
+                            <view class="evaluateTitleList">
+                                <view wx:for="{{commentData.comment_list}}" wx:for-item="list" wx:key="unique">
+                                    <view class="p">
+                                        <view>
+                                            <image src="{{list.avatar}}"></image>
+                                            <text>{{list.nickname}}</text>
+                                            <text>{{list.score}}分</text>
+                                        </view>
+                                        <view>{{list.date}}</view>
+                                    </view>
+                                    <view class="p">{{list.content}}</view>
+                                    <view class="evaluateImg clearfix">
+                                        <view wx:for="{{list.comment_list}}" wx:key="unique">
+                                            <image src="{{item.file}}"></image>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="showTxt showTxtMore recordTxt" wx:if="{{(commentData.comment_list!='')&&(!commentData.next_page)}}">
+                                <text>只显示最新20条数据!</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+                <view class="showTxt smallImg" wx:if="{{productData.comment_data.total*1==0}}">
+                    <image src="https://s.404.cn/applet/images/shop_06.png" alt=""></image>
+                    <view>该商品还没有人发表评价!</view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+
+    <!--底部菜单-->
+    <view class="shoppingCatFooter">
+        <view class="clearfix  ulList" wx:if="{{productData.product.is_reservation*1!=1}}">
+            <view class="shoppingCatButton zixun" data-tel="13866288016" bindtap="phoneCall" data-statu="open">
+                <text class="iconfont icon-pinglun"></text> 咨询电话
+            </view>
+            <view class="shoppingCatButton {{item.type == 'self_buy' ? 'yuding' : 'soldout'}}" wx:for="{{productData.pay_btn_arr}}" wx:key="unique" data-type="{{item.type}}" data-product="{{productData.product.product_id}}">
+                <navigator url="{{item.type == 'self_buy' ? '/pages/USERS/pages/travel/order_travel?productId=' + productData.product.product_id + '&preview=' + preview: ''}}" hover-class="none" open-type="navigate">
+                    <text>{{item.name}}</text>
+                </navigator>
+            </view>
+        </view>
+    </view>
+
+    <!--悬浮按钮-->
+    <view class="homeButton">
+        <navigator url="/pages/index/index" hover-class="none" open-type="switchTab">
+            <text class="iconfont icon-shouye"></text>
+        </navigator>
+    </view>
+
+
+
+    <!--咨询弹窗-->
+    <view class="travelLayer {{showView?'show':'hide'}}" bindtap="changeConsultPop" data-statu="close"></view>
+    <view class="consultPop {{showView?'show':'hide'}}">
+        <view class="popHeader">
+            <view class="rightBox">400-6888-4989</view>
+            <view class="leftLabel">
+                <text class="iconfont icon-telephone"></text>客服热线</view>
+        </view>
+        <view class="popContent">
+            <view class="contentTitle">
+                <view class="leftLabel">
+                    <text class="iconfont icon-pinglun"></text>客服热线</view>
+            </view>
+            <view class="contentSection">
+                <view class="kefuItem" wx:for="{{3}}" wx:key="unique">
+                    <view class="item">
+                        <image src="src" class="itemAvatar"></image>
+                        <text class="itemName">客服小花</text>
+                    </view>
+                    <view class="toConsult">
+                        <button open-type="contact">点击咨询
+                            <text class="iconfont icon-xin"></text>
+                        </button>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <template is="richTextBox" wx:if="{{richTextBoxShow}}" data="{{content:richTextBoxData}}" />
+</view>
+<include src="/templates/page_footer.wxml"></include>

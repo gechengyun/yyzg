@@ -1,0 +1,145 @@
+.circle-buy-order { background-color: #ffffff; font-size: 24rpx; margin-top: 20rpx; }
+
+.circle-buy-order .send-title { height: 70rpx; line-height: 70rpx; padding: 0 20rpx; }
+
+.circle-buy-order .send-title .send-name { display: inline-block; font-size: 30rpx; }
+
+.circle-buy-order .send-title .send-progress { display: inline-block; margin-left: 537rpx; }
+
+.circle-buy-order .send-title .send-progress-delivered { font-size: 30rpx; }
+
+.circle-buy-order .send-list .send-list-item { height: 100rpx; widows: 100%; padding: 0 20rpx; }
+
+.circle-buy-order .send-list .send-list-item > view { display: inline-block; float: left; }
+
+.circle-buy-order .send-list .send-list-item.delay .item-btn { background-color: #cccccc; }
+
+.circle-buy-order .send-list .send-list-item.delay .item-desc { color: #cccccc; }
+
+.circle-buy-order .send-list .send-list-item.delay .item-indicate { border-color: #CCCCCC; background-color: #ffffff; color: #CCCCCC; border-style: dashed; }
+
+.circle-buy-order .send-list .send-list-item.delay .item-indicate:before { border-style: dotted; border-color: #CCCCCC; }
+
+.circle-buy-order .send-list .send-list-item.delay .item-indicate:after { border-style: dotted; border-color: #CCCCCC; }
+
+.circle-buy-order .send-list .send-list-item.unsended .item-indicate { border-color: #CCCCCC; background-color: #ffffff; color: #CCCCCC; }
+
+.circle-buy-order .send-list .send-list-item.unsended .item-indicate:before { border-color: #CCCCCC; }
+
+.circle-buy-order .send-list .send-list-item.unsended .item-indicate:after { border-color: #CCCCCC; }
+
+.circle-buy-order .send-list .send-list-item:first-child .item-indicate:before { border: none; }
+
+.circle-buy-order .send-list .send-list-item:last-child .item-indicate:after { border: none; }
+
+.circle-buy-order .send-list .item-indicate { position: relative; width: 56rpx; height: 56rpx; line-height: 56rpx; text-align: center; border-radius: 50%; margin-top: 20rpx; color: #ffffff; font-size: 26rpx; font-weight: bold; }
+
+.circle-buy-order .send-list .item-indicate:after { position: absolute; content: ''; width: 0; height: 17rpx; top: 56rpx; left: 25rpx; }
+
+.circle-buy-order .send-list .item-indicate:before { position: absolute; content: ''; width: 0; height: 17rpx; top: -23rpx; left: 25rpx; }
+
+.circle-buy-order .send-list .item-desc { margin-top: 20rpx; margin-left: 20rpx; }
+
+.circle-buy-order .send-list .send-time { margin-left: 170rpx; margin-top: 20rpx; }
+
+.circle-buy-order .send-list .item-btn { margin-left: 30rpx; width: 110rpx; height: 44rpx; line-height: 44rpx; margin-top: 25rpx; color: #ffffff; text-align: center; border-radius: 8rpx; font-size: 22rpx; }
+
+.circle-buy-deliver-info { border-radius: 5rpx; color: #ffffff; float: left; font-size: 24rpx; height: 44rpx; line-height: 44rpx; text-align: center; width: 100%; }
+
+.blackTheme .circle-buy-order .send-list-item.sended .item-desc { color: #000000; }
+
+.blackTheme .circle-buy-order .item-indicate { background-color: #000000; border: 4rpx solid #000000; }
+
+.blackTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #000000; }
+
+.blackTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #000000; }
+
+.blackTheme .circle-buy-order .item-btn { background-color: #000000; }
+
+.blackTheme .circle-buy-order .view-send-detail, .blackTheme .circle-buy-order .send-progress-delivered, .blackTheme .circle-buy-order .send-name { color: #000000; }
+
+.blackTheme .circle-buy-deliver-info { background-color: rgba(0, 0, 0, 0.4); }
+
+.redTheme .circle-buy-order .send-list-item.sended .item-desc { color: #FA0029; }
+
+.redTheme .circle-buy-order .item-indicate { background-color: #FA0029; border: 4rpx solid #FA0029; }
+
+.redTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #FA0029; }
+
+.redTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #FA0029; }
+
+.redTheme .circle-buy-order .item-btn { background-color: #FA0029; }
+
+.redTheme .circle-buy-order .view-send-detail, .redTheme .circle-buy-order .send-progress-delivered, .redTheme .circle-buy-order .send-name { color: #FA0029; }
+
+.redTheme .circle-buy-deliver-info { background-color: rgba(250, 0, 41, 0.4); }
+
+.orangeTheme .circle-buy-order .send-list-item.sended .item-desc { color: #FF5C1C; }
+
+.orangeTheme .circle-buy-order .item-indicate { background-color: #FF5C1C; border: 4rpx solid #FF5C1C; }
+
+.orangeTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #FF5C1C; }
+
+.orangeTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #FF5C1C; }
+
+.orangeTheme .circle-buy-order .item-btn { background-color: #FF5C1C; }
+
+.orangeTheme .circle-buy-order .view-send-detail, .orangeTheme .circle-buy-order .send-progress-delivered, .orangeTheme .circle-buy-order .send-name { color: #FF5C1C; }
+
+.orangeTheme .circle-buy-deliver-info { background-color: rgba(255, 92, 28, 0.4); }
+
+.blueTheme .circle-buy-order .send-list-item.sended .item-desc { color: #0098F8; }
+
+.blueTheme .circle-buy-order .item-indicate { background-color: #0098F8; border: 4rpx solid #0098F8; }
+
+.blueTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #0098F8; }
+
+.blueTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #0098F8; }
+
+.blueTheme .circle-buy-order .item-btn { background-color: #0098F8; }
+
+.blueTheme .circle-buy-order .view-send-detail, .blueTheme .circle-buy-order .send-progress-delivered, .blueTheme .circle-buy-order .send-name { color: #0098F8; }
+
+.blueTheme .circle-buy-deliver-info { background-color: rgba(0, 152, 248, 0.4); }
+
+.pinkDarkTheme .circle-buy-order .send-list-item.sended .item-desc { color: #FF007C; }
+
+.pinkDarkTheme .circle-buy-order .item-indicate { background-color: #FF007C; border: 4rpx solid #FF007C; }
+
+.pinkDarkTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #FF007C; }
+
+.pinkDarkTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #FF007C; }
+
+.pinkDarkTheme .circle-buy-order .item-btn { background-color: #FF007C; }
+
+.pinkDarkTheme .circle-buy-order .view-send-detail, .pinkDarkTheme .circle-buy-order .send-progress-delivered, .pinkDarkTheme .circle-buy-order .send-name { color: #FF007C; }
+
+.pinkDarkTheme .circle-buy-deliver-info { background-color: rgba(255, 0, 124, 0.4); }
+
+.purpleTheme .circle-buy-order .send-list-item.sended .item-desc { color: #7948FD; }
+
+.purpleTheme .circle-buy-order .item-indicate { background-color: #7948FD; border: 4rpx solid #7948FD; }
+
+.purpleTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #7948FD; }
+
+.purpleTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #7948FD; }
+
+.purpleTheme .circle-buy-order .item-btn { background-color: #7948FD; }
+
+.purpleTheme .circle-buy-order .view-send-detail, .purpleTheme .circle-buy-order .send-progress-delivered, .purpleTheme .circle-buy-order .send-name { color: #7948FD; }
+
+.purpleTheme .circle-buy-deliver-info { background-color: rgba(121, 72, 253, 0.4); }
+
+.brownTheme .circle-buy-order .send-list-item.sended .item-desc { color: #B7A392; }
+
+.brownTheme .circle-buy-order .item-indicate { background-color: #B7A392; border: 4rpx solid #B7A392; }
+
+.brownTheme .circle-buy-order .item-indicate:after { border: 4rpx solid #B7A392; }
+
+.brownTheme .circle-buy-order .item-indicate:before { border: 4rpx solid #B7A392; }
+
+.brownTheme .circle-buy-order .item-btn { background-color: #B7A392; }
+
+.brownTheme .circle-buy-order .view-send-detail, .brownTheme .circle-buy-order .send-progress-delivered, .brownTheme .circle-buy-order .send-name { color: #B7A392; }
+
+.brownTheme .circle-buy-deliver-info { background-color: rgba(183, 163, 146, 0.4); }

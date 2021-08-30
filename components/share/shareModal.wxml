@@ -1,0 +1,21 @@
+ <!--components/Dialog/dialog.wxml-->
+    <view class='wx_dialog_container' hidden="{{!isShow}}">
+        <view class='wx-mask'></view>
+        <view class='wx-dialog'>
+            <view class='wx-dialog-title'>{{ title }}</view>
+            <view class='wx-dialog-content'>
+                <button class="item" open-type='share' catchtap='_shareGroup'>
+                    <image mode="aspectFit" src="https://s.404.cn/applet/images/haoyou.png"></image>
+                    <text class="text">分享好友或群</text>
+                </button>
+                <view class="item" catchtap='_shareFriendsCircle'>
+                    <image mode="aspectFit" src="https://s.404.cn/applet/images/pengyouquan.png"></image>
+                    <text class="text">朋友圈海报</text>
+                    <text class="icon">推荐</text>
+                </view>
+            </view>
+            <view class='wx-dialog-footer'>
+              <view class='wx-dialog-btn' catchtap='_cancelEvent'>{{ cancelText }}</view>
+            </view>
+        </view>
+    </view>

@@ -1,0 +1,80 @@
+<!--pages/SPELL/pages/newTeam/newTeam.wxml-->
+<!--<text>pages/SPELL/pages/newTeam/newTeam.wxml</text>-->
+<view class="newTit">
+  <view class="titTop">
+    <view class="head">
+      <image src="{{newUserTeamData.team_logo}}" bindtap="{{newUserTeamData.drp_level>1?'':'addFile'}}"></image>
+    </view>
+    <view class="text">
+    {{newUserTeamData.drp_level>1? '团队创建者才能修改' : '点击左边的图片修改logo'}}
+    </view>
+  </view>
+  <view class="teamName">
+    <view class="name">
+      团队名称
+    </view>
+    <view class="com">
+      <block wx:if="{{newUserTeamData.drp_level>1}}">
+        {{newUserTeamData.team_name}}
+      </block>
+      <block wx:else>
+        <input value="{{newUserTeamData.team_name?newUserTeamData.team_name:''}}" placeholder="请输入团队名" data-id="newUserTeamData.team_name" bindinput="additem"></input>
+      </block>
+    </view>
+  </view>
+</view>
+
+<view class="newList">
+  <view class="item">
+    <view class="item_tit">
+      团队成员别称
+    </view>
+    <view class="top">
+      <view class="item_top_tit">
+        直属成员
+      </view>
+      <view class="item_member">
+        <input placeholder="请输入成员别称" value="{{newUserTeamData.team_lable['直属成员']?newUserTeamData.team_lable['直属成员']:'直属成员'}}" data-id="newUserTeamData.team_lable[0]" bindinput="additem"></input> 
+        </view>
+    </view>
+    <view class="top">
+      <view class="item_top_tit">
+        下级成员
+      </view>
+      <view class="item_member">
+        <input placeholder="请输入成员别称" value="{{newUserTeamData.team_lable['下级成员']?newUserTeamData.team_lable['下级成员']:'下级成员'}}" data-id="newUserTeamData.team_lable[1]" bindinput="additem"></input>
+      </view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="item_tit">
+      店铺设置
+    </view>
+    <view class="top">
+      <view class="item_top_tit">
+        店铺名称
+      </view>
+      <view class="item_member">
+        <input placeholder="请输人店铺名称" value="{{newUserTeamData.store_name}}" data-id="newUserTeamData.store_name" bindinput="additem"></input>
+      </view>
+    </view>
+
+    <view class="bottom">
+      <view class="item_top_tit">
+        店铺描述
+      </view>
+      <view class="item_member">
+        <textarea placeholder="请输入店铺描述" placeholder-style="color:#ccc" value="{{newUserTeamData.intro}}" data-id="newUserTeamData.intro" bindinput="additem"></textarea>
+      </view>
+
+    </view>
+
+  </view>
+
+</view>
+
+<view class="foot">
+  <button bindtap="sub" style="background:{{navigateBarBgColor}}">提交</button>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

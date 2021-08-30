@@ -1,0 +1,57 @@
+<!-- 公共商品列表 -->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<template name="productList">
+  <view class="clearfix shopProductList {{pageTheme}} Zy {{content.product_list.length==0?'haspos':''}}" style="justify-content:{{content.product_list.length==1?'flex-start':'space-between'}}">
+    <view class="clearfix grouplist goods_box menu-style{{data.menu_style?data.menu_style:0}} box-radius{{data.pic_angle?data.pic_angle:0}}" wx:for="{{goodsData}}" wx:key="index">
+      <navigator url="{{item.special_product_type ? item.special_product_type == 99 ? '/pages/USERS/pages/travel/index?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id : '/pages/product/details?product_id=' + item.product_id }}"
+        class="navigator" hover-class="none" open-type="navigate">
+        <view class="productImg verticalCentering" style='position:relative'>
+          <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(!data.size)}}' src='{{BASE_IMG_URL}}images/component/ange{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+          <image wx:if='{{data.buy_ange==1&&data.goods_angle>0&&data.goods_angle<6&&(data.size)}}' src='{{BASE_IMG_URL}}images/component/ange_s_{{data.goods_angle}}.png' class='ange-pic ange{{data.goods_angle}}'></image>
+          <image wx:if='{{data.buy_ange==1&&data.goods_angle==6}}' src='{{data.angepic_url}}' class='ange-pic ange{{data.goods_angle}}' mode='scaleToFill'></image>
+          <image src="{{item.image}}" style="will-change:transform;border-radius:{{data.pic_angle==1?(data.size==3?10:20):0}}rpx" mode="{{data.pic_fill==1?'scaleToFill':'scaleToFill'}}"></image>
+          <!-- 售罄 -->
+          <view wx:if='{{item.show_sold_out}}' class='sold-out'>
+            <view class='txt'>售罄</view>
+          </view>
+          <!-- <view class='ziying theme-bg-color' wx:if="{{item.is_self_support==0&&(content.show_title==0||show_title==0)}}">自营</view> -->
+        </view>
+      </navigator>
+      <!-- 商品信息 -->
+      <view class='goods_bottom'>
+        <navigator class='goods_bottom_nav' url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+          <!-- 商品名称 -->
+          <view class="product-name textOmitted">
+            <text class="self-sale" style='background:{{themeColorValue}}' wx:if="{{item.is_self_support==0}}" id='ziying_text'>自营</text>
+            <text class="self-content">{{item.name}}</text>
+          </view>
+          <!-- 商品描述 -->
+          <view class='product-desc'>
+            {{item.intro}}
+          </view>
+          <!-- 商品价格信息 -->
+          <view class='product-msg'>
+            <!-- 价格 -->
+            <view class='left'>
+              <text class='price' style='color:{{themeColorValue}}'>
+                  <text style='font-size:24rpx;'>￥</text>
+              <text style='font-size:28rpx;'>{{filter.transBigNumber(item.price,1)}}</text>
+              <!-- 下划价格 -->
+              <text style='font-size:24rpx;color:#a0a0a0;padding-left:7rpx;text-decoration: line-through' wx:if='{{item.original_price*1>0}}'>￥{{filter.transBigNumber(item.original_price,1)}}</text>
+              </text>
+            </view>
+            <!-- 回放视频 -->
+            <view class="recordvideo" wx:if="{{item.recordvideo.length>0}}" style="background-color:{{themeColorValue}}" data-product="{{item.product_id}}" data-filesrc="{{item.recordvideo[0].filesrc}}" catchtap="goRecordvideo">
+            回放视频
+            </view>
+            <!-- 购物袋按钮 -->
+            <view class='right' wx:else>
+              <text class='iconfont icon-jiarugouwuche' style='color:{{themeColorValue}};font-size:{{data.buy_btn_type==1?48:40}}rpx;' catchtap="openShop" data-product="{{item.product_id}}" data-type="self_buy" data-baby="baby"></text>
+            </view>
+          </view>
+
+        </navigator>
+      </view>
+    </view>
+  </view>
+</template>

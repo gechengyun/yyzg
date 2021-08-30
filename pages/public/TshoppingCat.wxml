@@ -1,0 +1,46 @@
+<!--拼团--添加购物袋页面-->
+<template name="TshoppingCat">
+    <import src="../public/TshoppingProduct.wxml" />
+    <import src="../public/warning.wxml" />
+    <view class="layer" bindtap="closeShopping"></view>
+    <view class="shoppingLayer {{pageTheme}} {{isIpx}}__footer__btn-group" style="bottom:{{store_nav_list_show?'88rpx':'0'}};" animation="{{animation}}" data-page="page.public.TshoppingCat">
+        <view class="shoppingTitle">{{shoppingData.shoppingCatData.tuan.name}}
+            <text class="iconfont icon-chacha" bindtap="closeShopping"></text>
+        </view>
+        <view class="shoppingTxt" wx:if="{{shoppingData.shoppingCatData.tuan_config.grade_type==0}}">
+            <text>1、开团或参团，需预付起步价</text>
+            <text>2、真实参团价由最终参团人次确定</text>
+            <text>3、不限团团长 可随时结束拼团</text>
+            <text>4、拼团结束后，退还起步价和成团价差额</text>
+        </view>
+        <view class="shoppingTxt" wx:if="{{shoppingData.shoppingCatData.tuan_config.grade_type!=0}}">
+            <text>1、本团为限定人次拼团</text>
+            <text>2、人次达标即可拼团</text>
+            <text>3、拼团结束时人次未达标,即失败,退还金额</text>
+        </view>
+        <template is="TshoppingProduct" data="{{product:shoppingData.shoppingCatData.product}}" />
+        <view class="shoppingSpec">
+            <view class="shoppingCentent" wx:for="{{shoppingData.shoppingCatData.property_list}}" wx:for-index="id" wx:for-item="property"  wx:key="">
+                <view class="shoppingSpecName">{{property.name}}</view>
+                <view class="shoppingSpecList">
+                    <text wx:for="{{property.values}}" class="{{shoppingData.specList[id].vid==twodata.vid ? 'active' : ''}}" bindtap="shoppingVid" data-vid="{{twodata.vid}}" data-id="{{id}}" data-pid="{{property.pid}}" wx:for-item="twodata" wx:key="">{{twodata.value}}</text>
+                </view>
+            </view>
+        </view>
+        <view class="shoppingNum">
+            <text class="shoppingNumTxt">购买数量 <text wx:if="{{shoppingData.shoppingCatData.product.buyer_quota!=0}}">(限购<text class="red">{{shoppingData.shoppingCatData.product.buyer_quota}}</text>件)</text></text>
+            <view class="shoppingInput">
+                <text class="reduce" bindtap="reduce">-</text>
+                <input placeholder="1" bindtap="shoppingInput" value="{{shoppingData.shoppingNum}}" bindinput="shoppingBlur" bindblur="shoppingBlur" />
+                <text class="plus" bindtap="plus">+</text>
+            </view>
+        </view>
+        <view class="shoppingButton">
+            <form report-submit="true" bindsubmit="formSubmit">
+                <button form-type="submit" 
+                        bindtap="payment">下一步</button>
+            </form>
+        </view>
+    </view>
+<!--     <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+ --></template>

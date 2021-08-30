@@ -1,0 +1,175 @@
+<!-- 直播组件（关注/推荐/热门/热门2渲染模板）live_base-->
+
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="live_base">
+	<view class="live-player-main">
+
+		<!-- 页面内容为空 -->
+		<view wx:if='{{(live_list && live_list.length==0) || (!live_list)}}'>
+			<view class="data_null_block live-null-block">
+				<image class="pic" src="https://s.404.cn/applet/images/live-player/no-live-pic.png" mode="widthFix"></image>
+				<text class="tips">暂无直播信息哦～</text>
+			</view>
+		</view>
+
+		<!-- 直播list -->
+		<view class="live-main">
+			<view class="live-main-content {{config.rowType==1 ? 'show-type-1' : 'show-type-2'}}">
+				<!-- 小图模式-直播项 -->
+				<view class="live-item" wx:if="{{(config.rowType==1) && live_list && live_list.length>0}}" wx:for="{{live_list}}" wx:key="index" bindtap="goLiveDetail" data-liveid="{{item.id}}" data-imgsrc="{{item.cover_img}}" data-status="{{item.status}}" data-liveindex="{{index}}">
+					<view class="goods-up">
+						<image class="pic-cover" lazy-load="{{true}}" src="{{item.cover_img}}" mode="aspectFill"></image>
+						<view class="goods-up-cover">
+							<!-- 观看人数&&直播状态 -->
+							<view class="label-box">
+								<view class="hover-block hover-block-status" wx:if="{{item.status==1}}">
+									<image class="logo" src="{{BASE_IMG_URL+ 'images/live-player/logo.gif'}}" mode="aspectFill"></image>
+									<text class="txt" wx:if="{{config.showWatch=='true'}}">{{filter.transBigNumber2(item.view_num,1)}} 观看</text>
+									<text class="txt" wx:else>直播中</text>
+								</view>
+								<view class="hover-block-status-1" wx:else style="background-color:{{item.status==0 ? themeColorValue : '#ccc'}}">
+
+									<text class="txt btn-livestatus" wx:if="{{item.status==0}}"> 预告</text>
+									<text class="txt btn-livestatus" wx:if="{{item.status==2&&item.record_replay.length==0}}">已结束</text>
+									<text class="txt btn-livestatus" style="background-color:{{themeColorValue}};border-radius: 20rpx;"  wx:if="{{item.status==2&&item.record_replay.length>0}}">可回看</text>
+								</view>
+
+							</view>
+
+							<view class="user-info">
+								<view class="user-info-left">
+									<image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+									<view class="name">{{item.nickname}}</view>
+								</view>
+
+								<view class="user-info-right" wx:if="{{config.showLike=='true'}}">
+									<text class="iconfont icon-hert ic-like "></text>
+									<text class="num"> {{filter.transBigNumber2(item.like_num,1)}}</text>
+								</view>
+							</view>
+						</view>
+					</view>
+					<!-- 底部 -->
+					<view class="bottom" style="margin-left:-12rpx;width:102%;">
+						<!-- bottom  start -->
+						<view class="live-name" style="margin: 0 10rpx;">{{item.title}}</view>
+						<!-- 直播展示商品 -->
+						<view class="goods-list-box" wx:if="{{config.showGoods=='true'}}" style="margin-top:10rpx">
+							<view class="goods-scroll" style="width: 405rpx;">
+								<view class="base-block goods-left">
+									<text class="txt">{{item.show_products_count}}件</text>
+									<text class="txt">直播购</text>
+								</view>
+								<view class="base-block goods-item" wx:if="{{item.live_product&&item.live_product.length>0}}" wx:for="{{item.live_product}}" wx:for-item="child_item" wx:for-index="child_index" wx:key="child_index">
+									<image class="goods-pic" lazy-load="{{true}}" src="{{child_item.image}}" mode="aspectFill"></image>
+								</view>
+							</view>
+						</view>
+						<!-- 直播展示商品end -->
+						<view class="row" wx:if="{{subscribe_template_id&&subscribe_template_id.length>0&&item.record_replay.length==0}}">
+							<view class="txt txt-new-style">{{item.advance_total}}人已预约</view>
+							<view class="btn" wx:if="{{item.status == 2 || item.status == 1}}" catchtap="appointed" data-status="{{item.status}}" style="background-color:#ccc">
+								{{item.is_advance == 0 ? '预约':'已预约'}}</view>
+
+							<view class="btn" wx:else catchtap="appointClick" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" data-liveid="{{item.id}}" data-advancetotal="{{item.advance_total}}" data-is_advance="{{item.is_advance}}" style="background-color:{{item.is_advance == 0 ? themeColorValue:'#ccc'}}">
+								{{item.is_advance == 0 ? '预约':'已预约'}}</view>
+						</view>
+							<!-- 可回放 -->
+					<view class="row" wx:if="{{item.status == 2 && item.record_replay.length>0}}">
+						<view class="txt txt-new-style">{{item.record_replay_num}}次播放</view>
+						<view class="btn" catchtap="goRecordvideo"  data-product="{{item.live_product[0].product_id}}" data-filesrc="{{item.record_replay[0].filesrc}}" data-lived="{{item.id}}" data-allrecord="{{1}}" data-show_status="{{item.record_replay[0].is_record_show_product}}" style="background-color:{{item.is_advance == 0 ? themeColorValue:'#ccc'}}">
+							观看</view>
+					</view>
+
+	<!-- bottom  end -->
+					</view>
+				</view>
+
+
+
+				<!-- 列表模式	 -->
+				<block wx:if="{{(config.rowType==2) && live_list && live_list.length>0}}">
+					<view class="live-item-list" wx:for="{{live_list}}" wx:key="index" bindtap="goLiveDetail" data-liveid="{{item.id}}" data-imgsrc="{{item.cover_img}}" data-status="{{item.status}}" data-liveindex="{{index}}">
+						<view class="goods-up">
+							<image class="pic-cover" lazy-load="{{true}}" src="{{item.cover_img}}" mode="aspectFill"></image>
+							<view class="goods-up-cover">
+								<!-- 观看人数&&直播状态 -->
+								<view class="label-box">
+
+									<view class="hover-block hover-block-status" wx:if="{{item.status==1}}">
+										<image class="logo" src="{{BASE_IMG_URL+ 'images/live-player/logo.gif'}}" mode="aspectFill"></image>
+										<text class="txt" wx:if="{{config.showWatch=='true'}}">{{filter.transBigNumber2(item.view_num,1)}} 观看</text>
+										<text class="txt" wx:else>直播中</text>
+									</view>
+									<view class="hover-block-status-1" wx:else style="background-color:{{item.status==0 ? themeColorValue : '#ccc'}}">
+										<text class="txt btn-livestatus" wx:if="{{item.status==0}}"> 预告</text>
+										<text class="txt btn-livestatus" wx:if="{{item.status==2&&item.record_replay.length==0}}">已结束</text>
+										<text class="txt btn-livestatus" style="background-color:{{themeColorValue}};border-radius: 20rpx;"  wx:if="{{item.status==2&&item.record_replay.length>0}}">可回放</text>
+									</view>
+
+								</view>
+
+
+								<view class="user-info" wx:if="{{config.showLike=='true'}}">
+									<view class="user-info-right">
+										<text class="iconfont icon-hert ic-like"></text>
+										<text class="num"> {{filter.transBigNumber2(item.like_num,1)}}</text>
+									</view>
+								</view>
+							</view>
+						</view>
+						<!-- 底部 -->
+						<view class="bottom">
+							<view class="bottom-top">
+								<view class="live-name">{{item.title}}</view>
+								<!-- 用户信息 -->
+								<view class="user-info">
+									<view class="user-info-left">
+										<image class="avatar" src="{{item.avatar}}" mode="aspectFill"></image>
+										<view class="name">{{item.nickname}}</view>
+									</view>
+								</view>
+							</view>
+
+							<!-- 直播展示商品 -->
+
+							<view class="goods-list-box" wx:if="{{config.showGoods=='true'}}">
+								<view class="goods-scroll" style="width: 405rpx;">
+									<view class="base-block goods-left">
+										<text class="txt">{{item.show_products_count}}件</text>
+										<text class="txt">直播购</text>
+									</view>
+									<view class="base-block goods-item" wx:if="{{item.live_product && item.live_product.length>0}}" wx:for="{{item.live_product}}" wx:for-item="child_item" wx:for-index="child_index" wx:key="child_index">
+										<image class="goods-pic" lazy-load="{{true}}" src="{{child_item.image}}" mode="aspectFill"></image>
+									</view>
+
+								</view>
+							</view>
+							<!-- 预约(直播中已结束的预约置灰) -->
+							<view class="row" wx:if="{{subscribe_template_id&&subscribe_template_id.length>0&&item.record_replay.length==0}}">
+								<view class="txt">{{item.advance_total}}人已预约</view>
+								<view class="btn" wx:if="{{item.status == 2 || item.status == 1}}" 
+								catchtap="appointed" data-status="{{item.status}}" 
+								style="background-color:#ccc">
+									{{item.is_advance == 0 ? '预约':'已预约'}}</view>
+
+								<view class="btn" wx:else catchtap="appointClick" data-roomid="{{item.roomid}}" data-liveindex="{{index}}" data-liveid="{{item.id}}" data-advancetotal="{{item.advance_total}}" data-is_advance="{{item.is_advance}}" style="background-color:{{item.is_advance == 0 ? themeColorValue:'#ccc'}}">
+									{{item.is_advance == 0 ? '预约':'已预约'}}</view>
+							</view>
+							<!-- 可回放 -->
+							<view class="row" wx:if="{{item.status == 2 && item.record_replay.length>0}}">
+								<view class="txt">{{item.record_replay_num}}次播放</view>
+								<view class="btn" catchtap="goRecordvideo"  data-product="{{item.live_product[0].product_id}}" data-filesrc="{{item.record_replay[0].filesrc}}" data-lived="{{item.id}}" data-allrecord="{{1}}" data-show_status="{{item.record_replay[0].is_record_show_product}}" style="background-color:{{item.is_advance == 0 ? themeColorValue:'#ccc'}}">
+									观看</view>
+							</view>
+						</view>
+					</view>
+				</block>
+			</view>
+		</view>
+
+
+
+
+	</view>
+</template>

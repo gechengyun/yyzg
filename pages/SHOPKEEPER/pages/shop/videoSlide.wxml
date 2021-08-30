@@ -1,0 +1,184 @@
+<!--pages/SHOPKEEPER//pages/shop/videoSlide.wxml-->
+<import src="../../../public/warning.wxml"/>
+<!-- 商品列表 -->
+<import src="../component/goodsList.wxml"></import>
+<!-- 加入购物袋 -->
+<import src="../../../public/shoppingCat.wxml" />
+<!-- 聊天弹窗 -->
+<import src="../component/chatWindow.wxml"></import>
+
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="video-slide">
+  <view class="go-back" data-type="pre" bindtap="goBack" style="top:{{boundtop}}px;height:{{boundHeight}}px;width:{{boundHeight}}px;">
+    <text class="iconfont icon-shangyibu"></text>
+  </view>
+  <view class="go-back go-home" data-type="home" bindtap="goBack" style="top:{{boundtop}}px;width:{{boundHeight}}px;height:{{boundHeight}}px;">
+    <text class="iconfont icon-shouye"></text>
+  </view>
+  <swiper 
+    class="video-swiper" 
+    circular="{{circular}}" 
+    easing-function="{{easingFunction}}" 
+    vertical 
+    current="{{current}}"
+    duration="{{duration}}" 
+    bindanimationfinish="animationfinish">
+    <!-- curQueue 循环会导致video重新插入，objectFit 不可变更 -->
+    <swiper-item wx:for="{{curQueue}}" wx:key="index">
+      <video 
+        id="video_{{index}}" 
+        class="video_item" 
+        loop="{{loop}}" 
+        autoplay="{{false}}"
+        enable-play-gesture 
+        enable-progress-gesture 
+        show-center-play-btn="{{false}}"
+        controls="{{false}}"
+        src="{{item.files[0].file_path}}" 
+        data-id="{{item.id}}"
+        object-fit="{{item.objectFit || 'cover'}}"
+        data-index="{{index}}"
+        bindplay="onPlay"
+        bindpause="onPause"
+        bindended="onEnded"
+        binderror="onError"
+        bindtimeupdate="onTimeUpdate"
+        bindwaiting="onWaiting"
+        bindprogress="onProgress"
+        bindloadedmetadata="onLoadedMetaData"
+      >
+      </video>
+      <view class="video-bg"></view>
+      <view class="video-left-content">
+        <view class="video-goods-cloth" animation="{{tipanimation}}">          
+          <block wx:if="{{item.live&&item.live.length>0}}">
+            <!-- 订阅 -->
+            <view class="video-notice" wx:if="{{item.live[0].status == 0}}">
+              <view class="video-notice-l">
+                <view class="video-notice-t">
+                  <text class="iconfont icon-zhiboguankanliangbofangsheyingshexiangjimianxing"></text>
+                  <text class="video-notice-title">直播预告</text>
+                  <text>{{item.live[0].start_time}}</text>
+                </view>
+                <view class="video-notice-b">{{item.live[0].title}}</view>
+              </view>
+              <view class="video-notice-r {{item.live[0].is_preparetips*1==1?'video-notice-r2':''}}" bindtap="noTice">{{item.live[0].is_preparetips*1==1?'订阅成功':'立即订阅'}}</view>
+            </view>
+            <!-- 直播中 -->
+            <view class="living" wx:elif="{{item.live[0].status == 1}}">
+              <view class="living-l">
+                <image class="living-img" src="{{item.live[0].cover_img}}"></image>
+                <view class="living-content">
+                  <view class="living-t">
+                    <text class="living-tip">直播中</text>
+                    <text>{{filter.transBigNumber3(item.live[0].view_num,1,2,'W')}}看</text>
+                  </view>
+                  <view class="living-b">{{item.live[0].title}}</view>
+                </view>
+              </view>
+              <view class="living-r" data-liveid="{{item.live[0].id}}" data-imgsrc="{{item.live[0].cover_img}}" data-status="{{item.live[0].status}}" bindtap="goLiving">进入直播间</view>
+            </view>
+          </block>
+          <block wx:else>
+            <!-- 商品列表 -->
+            <view class="video-goods" wx:if="{{item.goods_list.length>0}}">
+              <block wx:for="{{filter.liveChat(item.goods_list,item.goods_list.length,3)}}" wx:for-item="goodslist" wx:for-index="goodsindex" wx:key="goodsindex">
+                <view class="video-goods-item1" data-product="{{goodslist.product_id}}" data-type="{{goodslist.point_exchange_num*1 != 0 && item.from_point_shop*1 == 1?'self_buy0':'self_buy1'}}" data-baby="baby" catchtap="openShop" wx:if="{{goodsindex==0}}">
+                  <image class="video-goods-img" src="{{goodslist.image}}"></image>
+                  <view class="video-goods-r {{item.goods_list.length==1?'video-goods-r1':item.goods_list.length==2?'video-goods-r2':''}}">
+                    <view class="video-goods-name">{{goodslist.name}}</view>
+                    <view>
+                      <text class="price-ico">￥</text>
+                      <text>{{goodslist.price}}</text>
+                    </view>
+                  </view>
+                </view>
+                <view class="video-goods-item" data-product="{{goodslist.product_id}}" data-type="{{goodslist.point_exchange_num*1 != 0 && item.from_point_shop*1 == 1?'self_buy0':'self_buy1'}}" data-baby="baby" catchtap="openShop" wx:if="{{goodsindex!=0}}">
+                  <image class="video-goods-img" src="{{goodslist.image}}"></image>
+                  <view class="video-goods-price">
+                    <text class="price-ico">￥</text>
+                    <text>{{goodslist.price}}</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </block>
+        </view>
+        <view class="video-left-cloth">
+          <view class="video-author" data-isanchor="{{item.is_anchor}}" data-uid="{{item.uid}}" bindtap="nameClick">@{{item.fbname}}</view>
+          <view class="video-title">{{item.title}}</view>
+          <view class="video-content">
+            <rich-text nodes='{{filter.richText(item.content)}}' class="video-content-text {{moreData == index?'video-content-text1':''}}"></rich-text>
+            <text class="show-more" data-idx="{{index}}" bindtap="showMore" wx:if="{{item.content.length>32}}">{{moreData == index?'收起':'展开'}}</text>
+          </view>
+          <view class="video-time">{{item.addtime}}</view>
+          <view class="video-topic" wx:if="{{item.talktag.length}}">
+            <view class="video-topic-item" data-tid="{{talklist.tid}}" bindtap="goTopic" wx:for="{{item.talktag}}" wx:for-item="talklist" wx:for-index="talkindex" wx:key="talkindex">
+              <text class="video-topic-icon">#</text>{{talklist.talkname}}
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="video-right-content">
+        <view class="video-avatar video-right-item {{item.live.length>0&&item.live[0].status == 1?'video-living':''}}" data-isanchor="{{item.is_anchor}}" data-uid="{{item.uid}}" data-liveid="{{item.live[0].id}}" data-imgsrc="{{item.live[0].cover_img}}" data-status="{{item.live[0].status}}" bindtap="avatarClick">
+          <image class="video-living_tip" src="https://s.404.cn/applet/images/grass/living_tip.png" mode="widthFix" wx:if="{{item.live.length>0&&item.live[0].status == 1}}"></image>
+          <image class="video-avatar-img" src="{{item.fbtximg}}"></image>
+          <text class="iconfont {{isAbout?'icon-xuanzhong':'icon-jiahao'}}" data-id="{{item.id}}" data-ismutual="{{item.is_subscribe}}" catchtap="aboutClick" wx:if="{{item.is_subscribe == 0 && item.myself*1 != 1}}"></text>
+        </view>
+        <view class="video-heart video-right-item {{item.liked?'video-hearted':''}}" data-id="{{item.id}}" data-liked="{{item.liked}}" bindtap="clickHeart">
+          <text class="iconfont icon-xihuan"></text>
+          <view>{{filter.transBigNumber3(item.like_num,1,1,'W')}}</view>
+        </view>
+        <view class="video-news video-right-item" data-id="{{item.id}}" bindtap="messageBtn">
+          <text class="iconfont icon-xiaoxi11"></text>
+          <view>{{filter.transBigNumber3(item.comment_total,1,1,'W')}}</view>
+        </view>
+        <view class="video-share video-right-item" data-idxs="{{index}}" bindtap="shareTap">
+          <text class="iconfont icon-share2"></text>
+          <view>{{filter.transBigNumber3(item.share_num,1,1,'W')}}</view>
+        </view>
+        <view class="video-goods-btn video-right-item" data-goodsdata="{{item.goods_list}}" bindtap="goodsBtn" wx:if="{{item.goods_list.length}}">
+          <image class="video-goods-btn-bg" src="https://s.404.cn/applet/images/grass/goods_btn.png" mode="widthFix"></image>
+          <view>商品</view>
+        </view>
+      </view>
+      <slider bindchange="sliderChange" bindchanging="sliderChanging" step="1" block-size='5' value="{{sliderValue}}" backgroundColor="#797979" activeColor="#fff" wx:if="{{0}}"/>
+    </swiper-item>
+  </swiper>
+  <!-- 商品列表 -->
+  <block wx:if="{{showGoods}}">
+    <template is="goodsList" data="{{goodsdata,themeColorValue}}" />
+  </block>
+  <!--加入购物袋弹窗-->
+  <block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,serviceval}}" />
+  </block>
+  <!-- 聊天弹窗 -->
+  <block wx:if="{{showChat}}">
+    <template is="chatWindow" data="{{sayList,sayList2,animation:animation,warning:warning,store_nav_list,store_nav_list_show,topicVal,videoData,videoList,current,curQueue}}" />
+  </block>
+  <!-- 分享组件 -->
+  <bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+  <!--海报画布-->
+  <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+  <!-- 海报预览 -->
+  <view wx:if="{{butshow}}" class="draw-canvas">
+    <text class="iconfont icon-iconfonticonfontclose dc-delete" bindtap="closeCanvas"></text>
+    <image src="{{myimgsrc}}" class="dc-img"></image>
+    <button type='primary' wx:if="{{saveImgBtnHidden}}" style="background-color:{{themeColorValue}}" class="dc-btn" bindtap="saveCanvas">保存到相册</button>
+    <button type='primary' wx:else open-type="openSetting" bindopensetting='handleSetting' style="background-color:{{themeColorValue}}" class="dc-btn">保存到相册</button>
+  </view>
+  <!-- 保存海报图弹窗成功 -->
+  <view class="gray" bindtap="closeModaled" wx:if='{{closeModal}}'>
+    <view class="modal-main">
+      <image class="img-top" src="https://s.404.cn/applet/images/save_complate.png" mode="aspectFill"></image>
+      <view class="modal-title">{{oneModaled?'素材下载成功':'保存海报成功'}}</view>
+      <view class="modal-text">{{oneModaled?'种草图片/二维码已保存到手机相册文字已复制':'名片海报已保存到手机相册，你可以分享了'}}</view>
+      <button class="btn-close" bindtap="closeModaled" style="background-color:{{themeColorValue}}">我知道了</button>
+    </view>
+  </view>
+</view>
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt,warningColor:warning.warningColor}}" />
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

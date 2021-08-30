@@ -1,0 +1,236 @@
+/* pages/LIVEVIDEO//pages/registerShop/registerShop.wxss */
+/* 头部 */
+.register-header{
+  width: 100%;
+  height: 507rpx;
+  position: relative;
+}
+.back-box{
+  position: absolute;
+  width: calc(100% - 64rpx);
+  left: 32rpx;
+  top: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.icon-shangyibu{
+  color:#fff;
+  width:70rpx;
+  text-align: left;
+}
+.title{
+  flex: 1;
+}
+/* tip */
+.team-tip {
+  background-color: rgba(216, 58, 43,.15);
+  color: #E15057;
+  font-size: 24rpx;
+  padding: 0 25rpx;
+  height: 40px;
+  display: flex;
+  align-items: center;  
+}
+  
+/* 注册区 */
+.register-content{
+  background-color: #fff;
+  margin-top: 26rpx;
+}
+.register-title{
+  height: 100rpx;
+  line-height: 100rpx;
+  padding-left: 24rpx;
+  color: #000000;
+  font-size: 26rpx;
+  font-weight: 600;
+  border-bottom: 1px solid #f9f9f9;
+  display: flex;
+  align-items: center;
+}
+.register-title-r{
+  width: 6rpx;
+  height: 30rpx;
+  background-color: #D83A2B;
+  margin-right: 16rpx;
+  vertical-align: sub;
+}
+.register-list{
+  padding: 0 24rpx;
+}
+.register-item{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  color: #333;
+  font-size: 26rpx;
+  height: 100rpx;
+  border-bottom: 1px solid #f9f9f9;
+}
+.register-star{
+  width: 12rpx;
+  color:#D83A2B;
+}
+.register-mes{
+  margin: 0 30rpx 0 6rpx;
+  width: 110rpx;
+  text-align: justify;
+  margin-top: 30rpx;
+}
+.register-mes::after{
+  width: 100%;
+  content: '';
+  display: inline-block;
+}
+.register-mes-id{
+  width: 140rpx;
+}
+.register-mes-pic{
+  width: 160rpx;
+}
+.register-item input{
+  flex: 1;
+}
+.gecode{
+  line-height: 56rpx;
+  font-size: 28rpx;
+  border-radius: 20rpx;
+  border: 1px solid #ccc;
+  margin: 0;
+  padding: 0 30rpx;
+}
+.gecode::after{
+  border: none;
+}
+.register-add{
+  height: unset;
+  padding-bottom: 32rpx;
+}
+.register-img{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+.register-img-add{
+  font-size: 100rpx;
+  width: 172rpx;
+  height: 172rpx;
+  color: #D5D5D5;
+  line-height: 172rpx;
+  text-align: center;
+  margin-left: 30rpx;
+  margin-bottom: 20rpx;
+  border: 1px dashed #E1E2E6;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.register-rule{
+  display: flex;
+  align-items: center;
+  font-size: 22rpx;
+  color: #333;
+  padding: 30rpx 28rpx;
+}
+.register-rule .icon-xuanzhong1{
+  color: #D23A3D;
+  margin-right: 12rpx;
+  margin-top: 4rpx;
+}
+.register-rule-content{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.register-rule-content navigator{
+  color: #D23A3D;
+}
+/* 选择礼包 */
+.choose-step{
+  background-color: #fff;
+}
+.grade{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 40rpx 86rpx;
+}
+.grade-item{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  color: #333;
+}
+.grade-item image{
+  width: 130rpx;
+  margin-bottom: 20rpx;
+}
+.grade-item .icon-xuanzhong2{
+  color: #E7E7E7;
+  font-size: 36rpx;
+  margin-top: 12rpx;
+}
+/* 提交按钮 */
+.now-apply-btn{
+  width: 700rpx;
+  margin: 0 auto;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  font-size: 36rpx;
+  color: #fff;
+  background-color: #D83A2B;
+  border-radius: 46rpx;
+}
+/* 三级联动 */
+.regionSelection {
+  width: 70%;
+  height: 40rpx;
+  padding: 0 10rpx;
+  font-size: 0;
+  color: #666;
+  line-height: 40rpx;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border: 0;
+}
+.regionSelection picker {
+  width: 33%;
+  height: 40rpx;
+  padding: 0 10rpx;
+  font-size: 26rpx;
+  color: #666;
+  line-height: 40rpx;
+  text-align: center;
+  display: inline-block;
+  vertical-align: top;
+  overflow: hidden;
+  border: 0;
+  box-sizing: border-box;
+}
+.register-category picker{
+  width: unset;
+  display: flex;
+  flex-direction: row;
+}
+.pick-child{
+  padding: 0 40rpx;
+}
+/* 审核中 */
+.examing{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30rpx;
+  color: #666;
+  padding-top: 10%;
+}
+.examing .icon-shenhezhong,.examing .icon-yitongguo{
+  font-size: 200rpx;
+  color: #ccc;
+}

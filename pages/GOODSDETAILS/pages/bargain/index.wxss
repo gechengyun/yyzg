@@ -1,0 +1,352 @@
+page{background-color: #f4f4f4}
+.fr{float: right;}
+.fl{float: left;}
+.b_banner{height: 750rpx;width: 100%;position: relative;}
+.b_banner image{height: 100%}
+.b_banner span{position: absolute;left: 0;bottom: 40rpx;background-color: #fe6b31;color: #fff;padding: 0 10rpx;font-size: 22rpx;border-radius: 0 5rpx 5rpx 0;height: 38rpx;line-height: 38rpx}
+
+.bargainIndex .list{position: absolute;top: 340rpx;width: 100%;bottom: 0}
+.bargainIndex .list .li{margin-bottom: 68rpx}
+.bargainIndex .list .li:last-child{margin-bottom: 34rpx}
+.bargainIndex .list .wrap{padding: 0 30rpx}
+.bargainIndex .list .pic{width: 265rpx;height: 265rpx;overflow: hidden;position: relative;border-radius: 5rpx;float: left;margin-right: 22rpx}
+.bargainIndex .list .pic image{width: 100%;height: 100%}
+.bargainIndex .list .pic span{position: absolute;left: 0;top: 10rpx;background-color: #fe6b31;color: #fff;padding: 10rpx 10rpx;font-size: 20rpx;line-height: 1;border-radius: 0 5rpx 5rpx 0}
+
+.bargainIndex .list .desc{height: 265rpx;position: relative;overflow: hidden;}
+.bargainIndex .list .desc .h3{font-size: 30rpx;color: #333;
+	word-break: break-all;
+    text-overflow: ellipsis;
+    display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
+    -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+    -webkit-line-clamp: 2; /** 显示的行数 **/
+    overflow: hidden;  /** 隐藏超出的内容 **/}
+.bargainIndex .list .desc p{display: block;}
+.bargainIndex .list .desc .price_o{font-size: 26rpx;color: #999;margin-top: 10rpx}
+.bargainIndex .list .desc .price_n{font-size: 36rpx;color: #ff3c32;margin-top: 10rpx}
+.bargainIndex .list .desc .price_n span{font-size: 26rpx}
+.bargainIndex .list .desc .btn{position: absolute;bottom: 0;width: 100%;background-color: #fe6b31;color: #fff;height: 55rpx;font-size: 28rpx;text-align: center;border-radius: 10rpx;line-height: 55rpx}
+
+
+
+.bargainDetails .name{font-size: 34rpx;color: #333;background-color: #fff}
+.bargainDetails .name .wrap{padding: 30rpx 24rpx}
+
+.bargainDetails .numData{background-color: #fff;padding-top:60rpx;}
+.bargainDetails .numData .wrap{padding: 30rpx 55rpx}
+.bargainDetails .numData .progressBar{height: 23rpx;border:1px solid #fe6b31;background-color: #ffdacb;border-radius: 20rpx;position: relative;}
+.bargainDetails .numData .progressBar .progressBar_inner{position: absolute;top: -1px;bottom: -1px;left: -1px;border-radius: 20rpx;}
+.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(248,192,68,1) 0%, rgba(254,107,49,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(248,192,68,1) 0%,rgba(254,107,49,1) 100%);
+    background: linear-gradient(to right, rgba(248,192,68,1) 0%,rgba(254,107,49,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#fe6b31',GradientType=1 );}
+.bargainDetails .numData .progressBar .slider{width: 30rpx;height: 30rpx;border-radius: 100%;box-sizing: border-box;border:10rpx solid #fe6b31;position: absolute;top: -1px;right: -15rpx;background-color: #fff}
+.bargainDetails .numData .progressBar p.current{position: absolute;top: -60rpx;left: 0%;font-size: 24rpx;color: #fe6b31;margin-left:-20rpx;white-space: nowrap;}
+.bargainDetails .numData .progressBar p.current:before{content: " ";position: absolute;left: 0;top: 40rpx;color: #E5000D;border-top: 14rpx solid #fe6b31;border-right: 14rpx solid transparent;border-bottom: 14rpx solid transparent;
+	border-left: 14rpx solid transparent;}
+.bargainDetails .numData .progressBar p.current.on_right{left: inherit;}
+.bargainDetails .numData .progressBar p.current.on_right:before{left: inherit;right: 0;}
+.bargainDetails .numData .progressBar p.current em{font-size: 26rpx}
+.bargainDetails .numData .price_p{font-size: 26rpx;color: #999;margin-top: 10rpx;display: block;}
+.bargainDetails .numData .price_p .leftNum{text-align: center;display: block;font-size: 26rpx;color: #333}
+.bargainDetails .numData .price_p .leftNum em{color: #ff3c32}
+
+.bargainDetails .countDown{background-color: #fff;border-bottom: 1px solid #f2f2f2}
+.bargainDetails .countDown .wrap{padding: 30rpx 24rpx;padding-top: 0}
+.bargainDetails .countDown span,.bargainDetails .countDown em{display: inline-block;vertical-align: middle;}
+.bargainDetails .countDown span{min-width: 45rpx;height: 45rpx;border-radius: 10rpx;line-height: 45rpx;text-align: center;background-color: #fe6b31;font-size: 30rpx;color: #fff}
+.bargainDetails .countDown em{font-size: 26rpx;color: #666;margin: 0 10rpx}
+.bargainDetails .countDown em.text{font-size: 28rpx}
+
+.bargainDetails .descBlock{background-color: #ffd6ad;padding-bottom: 98rpx}
+.bargainDetails .descBlock .wrap{padding: 46rpx 20rpx 20rpx}
+.bargainDetails .descBlock .thisBlock{background-color: #fff;border:1px solid #ffa348;position: relative;}
+.bargainDetails .descBlock .titBlock{text-align: center;top: -22rpx;display: block;padding: 0;margin: 0;position: absolute;left: 0;right: 0}
+.bargainDetails .descBlock .titBlock span{display: inline-block;height: 44rpx;line-height: 44rpx;width: 150rpx;border:1px solid #ffa348;background-color: #ffd6ad;font-size: 26rpx;color: #333;border-radius: 50rpx}
+
+.bargainDetails .richBlock {margin-top: 46rpx}
+.bargainDetails .richBlock .titBlock span{margin: 0 20rpx}
+.bargainDetails .richBlock .titBlock span.on{background-color: #ffa348;color: #fff}
+
+.bargainDetails .descBlock .desc{padding: 60rpx 20rpx 20rpx}
+.bargainDetails .richBlock .desc{font-size: 24rpx}
+.bargainDetails .richBlock .desc image:nth-of-type(1){
+  margin-top: 0;
+}
+.bargainDetails .richBlock .desc image{max-width: 100%;margin-top: -8rpx;}
+.bargainDetails .richBlock .desc p{display: block;}
+.bargainDetails .ruleBlock .desc p{display: block;font-size: 24rpx;color: #666;line-height: 1.5}
+.bargainDetails .ruleBlock p.time{font-size: 26rpx;color: #999;display: block;padding: 0 20rpx;padding-bottom: 30rpx}
+.bargainDetails .ruleBlock p.time i{color: #fe6b31;font-size: 26rpx;margin-right: 10rpx}
+
+.bargainDetails .ftBtn{background-color: #fe6b31;font-size: 36rpx;color: #fff;height: 98rpx;line-height: 98rpx;text-align: center;position: fixed;bottom: 0;left: 0;right: 0;border-radius: 0;}
+.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.bargainDetails .ftBtnGroup{background-color: #fff;position: fixed;bottom: 0;left: 0;right: 0}
+.bargainDetails .ftBtnGroup .span,.bargainDetails .ftBtnGroup button{display: block;float: left;width: 50%;height: 98rpx;text-align: center;background-color: #fe6b31;line-height: 98rpx;font-size: 36rpx;color: #fff;border-radius: 0;border:0;}
+.bargainDetails .ftBtnGroup button{background-color: #f39800;color: #fff}
+.bargainDetails .ftBtnGroup button::after {display: none}
+.bargainDetails .ftBtnGroup button.gray{background-color: #a6a6a6}
+
+.bargainDetails .teamBlock{margin-top: 46rpx}
+.bargainDetails .teamBlock .group .hd{padding:40rpx 20rpx}
+.bargainDetails .teamBlock .group .hd em{color: #999;font-size: 26rpx}
+.bargainDetails .teamBlock .group .hd p{color: #333;font-size: 26rpx;}
+.bargainDetails .teamBlock .group .bd{padding-bottom: 40rpx}
+.bargainDetails .teamBlock .group .bd .ul .li{float: left;width: 98rpx;height: 98rpx;position: relative;margin:0 21.8rpx;
+}
+.bargainDetails .teamBlock .group .bd .ul .li image{width: 98rpx;height: 98rpx;border-radius: 100%}
+.bargainDetails .teamBlock .group .bd .ul .li p{position: absolute;bottom: 0;border:1px solid #dbdbdb;border-radius: 20rpx;font-size: 20rpx;color: #fe6b31;display: block;left: 0;right: 0;background-color: #fff;text-align: center;}
+
+.bargainDetails .teamBlock .group .bd .more{float: left;width: 98rpx;height: 98rpx;margin:0 21.8rpx;}
+.bargainDetails .teamBlock .group .bd .more{background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGIAAABiCAYAAACrpQYOAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGQTk2NkZERUY1MDExMUU3OTZEN0UxRDFFQzVDRjAyMiIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGQTk2NkZERkY1MDExMUU3OTZEN0UxRDFFQzVDRjAyMiI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZBOTY2RkRDRjUwMTExRTc5NkQ3RTFEMUVDNUNGMDIyIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkZBOTY2RkRERjUwMTExRTc5NkQ3RTFEMUVDNUNGMDIyIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+9kNOUwAAC7pJREFUeNrsXQlsXEcZ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');background-size: cover;
+}
+
+.mask{z-index:20;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;background-color:#000;opacity:.7;filter:alpha(opacity=80);-moz-opacity:.8;-khtml-opacity:.8;}
+.bargainDetails .teamList {position: fixed;bottom: 0;left: 0;right: 0;z-index: 30;background-color: #fff;border-radius: 30rpx 30rpx 0 0;overflow: hidden;}
+.bargainDetails .teamList .h2{font-size: 32rpx;color: #333;text-align: center;display: block;background-color: #f4f4f4;height: 100rpx;line-height: 100rpx}
+.bargainDetails .teamList .wrap{padding: 0 30rpx}
+.bargainDetails .teamList span.iconfont{position:absolute;right:35rpx;font-size:36rpx;top:30rpx;}
+.bargainDetails .teamList .t_list{height: 670rpx;overflow: auto;}
+.bargainDetails .teamList .t_list .li{padding: 20rpx 0;border-bottom: 1px dashed #e6e6e6}
+.bargainDetails .teamList .t_list .li:last-child{border-bottom: 0}
+.bargainDetails .teamList .t_list image{width: 100rpx;height: 100rpx;border-radius: 100%;margin-right: 20rpx}
+.bargainDetails .teamList .t_list .name{font-size: 30rpx;color: #333;display: block;padding-top: 12rpx}
+.bargainDetails .teamList .t_list .time{font-size: 26rpx;color: #999;display: block;line-height: 2}
+.bargainDetails .teamList .t_list span.cut{color:#fe6b31;font-size: 28rpx;line-height: 100rpx}
+
+.bargainDetails .resultWindow {position: fixed;height: 720rpx;width: 610rpx;background-color: #fff;top: 50%;margin-top: -360rpx;left: 50%;margin-left: -305rpx;z-index: 21;text-align: center;border-radius: 10rpx}
+.bargainDetails .resultWindow .wrap{padding: 0 50rpx}
+.bargainDetails .resultWindow .h2{font-size: 38rpx;color: #333;text-align: center;line-height: 1;margin-top: 60rpx}
+.bargainDetails .resultWindow .h2 .price_span{color: #fa5e4f;margin-top: 8rpx;}
+.bargainDetails .resultWindow .h3{font-size: 26rpx;color: #5b667a;text-align: center;display: block;margin-top: 25rpx}
+.bargainDetails .resultWindow image{width: 393rpx;height: 336rpx;margin-top: 40rpx}
+
+.bargainDetails .resultWindow .shareBtn{width: 100%;height: 88rpx;text-align: center;background-color: #fe6b31;font-size: 34rpx;color:#fff;line-height: 88rpx;border-radius: 10rpx;margin-top: 20rpx}
+.bargainDetails .resultWindow .shareBtn::after {display: none;}
+
+/*砍价主题颜色调整为梅色*/
+/* fe6b31   ffdacb*/
+.b_banner span{background-color: #ff3867;}
+.bargainDetails .countDown span{background-color: #ff3867;}
+.bargainDetails .numData .progressBar{border:1px solid #ff3867;background-color: #FFE3EA;}
+.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(255,167,188,1) 0%, rgba(255,56,103,1) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,167,188,1) 0%,rgba(255,56,103,1) 100%);
+    background: linear-gradient(to right, rgba(255,167,188,1) 0%,rgba(255,56,103,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#ff3867',GradientType=1 );
+}
+.bargainDetails .numData .progressBar .slider{border:10rpx solid #ff3867;}
+.bargainDetails .numData .progressBar p.current{color: #ff3867;}
+.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #ff3867;}
+.bargainDetails .ruleBlock p.time i{color: #ff3867;font-size: 26rpx;margin-right: 10rpx}
+.bargainDetails .ftBtn{background-color: #ff3867;}
+.bargainDetails .ftBtnGroup span,.bargainDetails .ftBtnGroup button{background-color: #ff3867;}
+.bargainDetails .teamBlock .group .bd .ul .li p{color: #ff3867;}
+.bargainDetails .teamList .t_list span.cut{color:#ff3867;}
+.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #ff3867;}
+.bargainDetails .descBlock{background-color: #FFB2C4;}
+.bargainDetails .descBlock .titBlock span{border:1px solid #FF7495;background-color: #FFB2C4;}
+.bargainDetails .descBlock .thisBlock{border:1px solid #FFB2C4;}
+.bargainDetails .descBlock .titBlock span{color: #fff;}
+.bargainDetails .richBlock .titBlock span.on{background-color: #FFB2C4;}
+
+
+ /* #444452  左侧按钮  墨灰色 */
+/*主题色搭配*/
+.blackTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.redTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.orangeTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.blueTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.pinkDarkTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.purpleTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+.brownTheme.bargainDetails .ftBtnGroup button{background-color: #444452;}
+/* 主题色---blackTheme--- 黑色(000000/ (0,0,0)--- 浅色1(0,0,0,.1) --- 浅色2(0,0,0,.2) */
+.blackTheme .b_banner span{background-color: #000000;}
+.blackTheme.bargainDetails .countDown span{background-color: #000000;}
+.blackTheme.bargainDetails .numData .progressBar{border:1px solid #000000;background-color: rgba(0,0,0,.2);}
+.blackTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(0,0,0,.2) 0%, rgba(0,0,0,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,0,0,.2) 0%, rgba(0,0,0,.7) 100%);
+    background: linear-gradient(to right, rgba(0,0,0,.2) 0%, rgba(0,0,0,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#000000',GradientType=1 );
+}
+.blackTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #000000;}
+.blackTheme.bargainDetails .numData .progressBar p.current{color: #000000;}
+.blackTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #000000;}
+.blackTheme.bargainDetails .ruleBlock p.time i{color: #000000;font-size: 26rpx;margin-right: 10rpx}
+.blackTheme.bargainDetails .ftBtn{background-color: #000000;}
+.blackTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.blackTheme.bargainDetails .ftBtnGroup .span {background-color: #000000;}
+.blackTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #000000;}
+.blackTheme.bargainDetails .teamList .t_list span.cut{color:#000000;}
+.blackTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #000000;}
+.blackTheme.bargainDetails .descBlock {background-color: rgba(0,0,0,.1);}
+.blackTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(0,0,0,.3);background-color: rgba(0,0,0,.2);}
+.blackTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(0,0,0,.1);}
+.blackTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.blackTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(0,0,0,.4);}
+.blackTheme.bargainDetails .resultWindow .h2 .price_span {color: #000000;}
+.blackTheme.bargainDetails .resultWindow .shareBtn {background-color: #000000;}
+/* 主题色---redTheme--- 红色(FA0029/ (250,0,41)--- 浅色1(250,0,41,.1) --- 浅色2(250,0,41,.2) */
+.redTheme .b_banner span{background-color: #FA0029;}
+.redTheme.bargainDetails .countDown span{background-color: #FA0029;}
+.redTheme.bargainDetails .numData .progressBar{border:1px solid #FA0029;background-color: rgba(250,0,41,.2);}
+.redTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(250,0,41,.2) 0%, rgba(250,0,41,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(250,0,41,.2) 0%, rgba(250,0,41,.7) 100%);
+    background: linear-gradient(to right, rgba(250,0,41,.2) 0%, rgba(250,0,41,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#FA0029',GradientType=1 );
+}
+.redTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #FA0029;}
+.redTheme.bargainDetails .numData .progressBar p.current{color: #FA0029;}
+.redTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #FA0029;}
+.redTheme.bargainDetails .ruleBlock p.time i{color: #FA0029;font-size: 26rpx;margin-right: 10rpx}
+.redTheme.bargainDetails .ftBtn{background-color: #FA0029;}
+.redTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.redTheme.bargainDetails .ftBtnGroup .span {background-color: #FA0029;}
+.redTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #FA0029;}
+.redTheme.bargainDetails .teamList .t_list span.cut{color:#FA0029;}
+.redTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #FA0029;}
+.redTheme.bargainDetails .descBlock {background-color: rgba(250,0,41,.1);}
+.redTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(250,0,41,.3);background-color: rgba(250,0,41,.2);}
+.redTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(250,0,41,.1);}
+.redTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.redTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(250,0,41,.4);}
+.redTheme.bargainDetails .resultWindow .h2 .price_span {color: #FA0029;}
+.redTheme.bargainDetails .resultWindow .shareBtn {background-color: #FA0029;}
+/* 主题色---orangeTheme--- 橘色(FF5C1C/ (255,92,28)--- 浅色1(255,92,28,.1) --- 浅色2(255,92,28,.2) */
+.orangeTheme .b_banner span{background-color: #FF5C1C;}
+.orangeTheme.bargainDetails .countDown span{background-color: #FF5C1C;}
+.orangeTheme.bargainDetails .numData .progressBar{border:1px solid #FF5C1C;background-color: rgba(255,92,28,.2);}
+.orangeTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(255,92,28,.2) 0%, rgba(255,92,28,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,92,28,.2) 0%, rgba(255,92,28,.7) 100%);
+    background: linear-gradient(to right, rgba(255,92,28,.2) 0%, rgba(255,92,28,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#FF5C1C',GradientType=1 );
+}
+.orangeTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #FF5C1C;}
+.orangeTheme.bargainDetails .numData .progressBar p.current{color: #FF5C1C;}
+.orangeTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #FF5C1C;}
+.orangeTheme.bargainDetails .ruleBlock p.time i{color: #FF5C1C;font-size: 26rpx;margin-right: 10rpx}
+.orangeTheme.bargainDetails .ftBtn{background-color: #FF5C1C;}
+.orangeTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.orangeTheme.bargainDetails .ftBtnGroup .span {background-color: #FF5C1C;}
+.orangeTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #FF5C1C;}
+.orangeTheme.bargainDetails .teamList .t_list span.cut{color:#FF5C1C;}
+.orangeTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #FF5C1C;}
+.orangeTheme.bargainDetails .descBlock {background-color: rgba(255,92,28,.1);}
+.orangeTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(255,92,28,.3);background-color: rgba(255,92,28,.2);}
+.orangeTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(255,92,28,.1);}
+.orangeTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.orangeTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(255,92,28,.4);}
+.orangeTheme.bargainDetails .resultWindow .h2 .price_span {color: #FF5C1C;}
+.orangeTheme.bargainDetails .resultWindow .shareBtn {background-color: #FF5C1C;}
+/* 主题色---blueTheme--- 蓝色(0098F8/ (0,152,248)--- 浅色1(0,152,248,.1) --- 浅色2(0,152,248,.2) */
+.blueTheme .b_banner span{background-color: #0098F8;}
+.blueTheme.bargainDetails .countDown span{background-color: #0098F8;}
+.blueTheme.bargainDetails .numData .progressBar{border:1px solid #0098F8;background-color: rgba(0,152,248,.2);}
+.blueTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(0,152,248,.2) 0%, rgba(0,152,248,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(0,152,248,.2) 0%, rgba(0,152,248,.7) 100%);
+    background: linear-gradient(to right, rgba(0,152,248,.2) 0%, rgba(0,152,248,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#0098F8',GradientType=1 );
+}
+.blueTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #0098F8;}
+.blueTheme.bargainDetails .numData .progressBar p.current{color: #0098F8;}
+.blueTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #0098F8;}
+.blueTheme.bargainDetails .ruleBlock p.time i{color: #0098F8;font-size: 26rpx;margin-right: 10rpx}
+.blueTheme.bargainDetails .ftBtn{background-color: #0098F8;}
+.blueTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.blueTheme.bargainDetails .ftBtnGroup .span {background-color: #0098F8;}
+.blueTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #0098F8;}
+.blueTheme.bargainDetails .teamList .t_list span.cut{color:#0098F8;}
+.blueTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #0098F8;}
+.blueTheme.bargainDetails .descBlock {background-color: rgba(0,152,248,.1);}
+.blueTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(0,152,248,.3);background-color: rgba(0,152,248,.2);}
+.blueTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(0,152,248,.1);}
+.blueTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.blueTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(0,152,248,.4);}
+.blueTheme.bargainDetails .resultWindow .h2 .price_span {color: #0098F8;}
+.blueTheme.bargainDetails .resultWindow .shareBtn {background-color: #0098F8;}
+/* 主题色---pinkDarkTheme--- 桃紫色(FF007C/ (255,0,124)--- 浅色1(255,0,124,.1) --- 浅色2(255,0,124,.2) */
+.pinkDarkTheme .b_banner span{background-color: #FF007C;}
+.pinkDarkTheme.bargainDetails .countDown span{background-color: #FF007C;}
+.pinkDarkTheme.bargainDetails .numData .progressBar{border:1px solid #FF007C;background-color: rgba(255,0,124,.2);}
+.pinkDarkTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(255,0,124,.2) 0%, rgba(255,0,124,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(255,0,124,.2) 0%, rgba(255,0,124,.7) 100%);
+    background: linear-gradient(to right, rgba(255,0,124,.2) 0%, rgba(255,0,124,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#FF007C',GradientType=1 );
+}
+.pinkDarkTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #FF007C;}
+.pinkDarkTheme.bargainDetails .numData .progressBar p.current{color: #FF007C;}
+.pinkDarkTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #FF007C;}
+.pinkDarkTheme.bargainDetails .ruleBlock p.time i{color: #FF007C;font-size: 26rpx;margin-right: 10rpx}
+.pinkDarkTheme.bargainDetails .ftBtn{background-color: #FF007C;}
+.pinkDarkTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.pinkDarkTheme.bargainDetails .ftBtnGroup .span {background-color: #FF007C;}
+.pinkDarkTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #FF007C;}
+.pinkDarkTheme.bargainDetails .teamList .t_list span.cut{color:#FF007C;}
+.pinkDarkTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #FF007C;}
+.pinkDarkTheme.bargainDetails .descBlock {background-color: rgba(255,0,124,.1);}
+.pinkDarkTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(255,0,124,.3);background-color: rgba(255,0,124,.2);}
+.pinkDarkTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(255,0,124,.1);}
+.pinkDarkTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.pinkDarkTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(255,0,124,.4);}
+.pinkDarkTheme.bargainDetails .resultWindow .h2 .price_span {color: #FF007C;}
+.pinkDarkTheme.bargainDetails .resultWindow .shareBtn {background-color: #FF007C;}
+/* 主题色---purpleTheme--- 紫色(7948FD/ (121,72,253)--- 浅色1(121,72,253,.1) --- 浅色2(121,72,253,.2) */
+.purpleTheme .b_banner span{background-color: #7948FD;}
+.purpleTheme.bargainDetails .countDown span{background-color: #7948FD;}
+.purpleTheme.bargainDetails .numData .progressBar{border:1px solid #7948FD;background-color: rgba(121,72,253,.2);}
+.purpleTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(121,72,253,.2) 0%, rgba(121,72,253,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(121,72,253,.2) 0%, rgba(121,72,253,.7) 100%);
+    background: linear-gradient(to right, rgba(121,72,253,.2) 0%, rgba(121,72,253,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#7948FD',GradientType=1 );
+}
+.purpleTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #7948FD;}
+.purpleTheme.bargainDetails .numData .progressBar p.current{color: #7948FD;}
+.purpleTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #7948FD;}
+.purpleTheme.bargainDetails .ruleBlock p.time i{color: #7948FD;font-size: 26rpx;margin-right: 10rpx}
+.purpleTheme.bargainDetails .ftBtn{background-color: #7948FD;}
+.purpleTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.purpleTheme.bargainDetails .ftBtnGroup .span {background-color: #7948FD;}
+.purpleTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #7948FD;}
+.purpleTheme.bargainDetails .teamList .t_list span.cut{color:#7948FD;}
+.purpleTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #7948FD;}
+.purpleTheme.bargainDetails .descBlock {background-color: rgba(121,72,253,.1);}
+.purpleTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(121,72,253,.3);background-color: rgba(121,72,253,.2);}
+.purpleTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(121,72,253,.1);}
+.purpleTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.purpleTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(121,72,253,.4);}
+.purpleTheme.bargainDetails .resultWindow .h2 .price_span {color: #7948FD;}
+.purpleTheme.bargainDetails .resultWindow .shareBtn {background-color: #7948FD;}
+/* 主题色---brownTheme--- 棕色(B7A392/ (183,163,146)--- 浅色1(183,163,146,.1) --- 浅色2(183,163,146,.2) */
+.brownTheme .b_banner span{background-color: #B7A392;}
+.brownTheme.bargainDetails .countDown span{background-color: #B7A392;}
+.brownTheme.bargainDetails .numData .progressBar{border:1px solid #B7A392;background-color: rgba(183,163,146,.2);}
+.brownTheme.bargainDetails .numData .progressBar .progressBar_inner{
+    background: -moz-linear-gradient(left, rgba(183,163,146,.2) 0%, rgba(183,163,146,.7) 100%);
+    background: -webkit-linear-gradient(left, rgba(183,163,146,.2) 0%, rgba(183,163,146,.7) 100%);
+    background: linear-gradient(to right, rgba(183,163,146,.2) 0%, rgba(183,163,146,.7) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8c044', endColorstr='#B7A392',GradientType=1 );
+}
+.brownTheme.bargainDetails .numData .progressBar .slider{border:10rpx solid #B7A392;}
+.brownTheme.bargainDetails .numData .progressBar p.current{color: #B7A392;}
+.brownTheme.bargainDetails .numData .progressBar p.current:before{border-top: 14rpx solid #B7A392;}
+.brownTheme.bargainDetails .ruleBlock p.time i{color: #B7A392;font-size: 26rpx;margin-right: 10rpx}
+.brownTheme.bargainDetails .ftBtn{background-color: #B7A392;}
+.brownTheme.bargainDetails .ftBtn.gray{background-color: #a6a6a6}
+.brownTheme.bargainDetails .ftBtnGroup .span {background-color: #B7A392;}
+.brownTheme.bargainDetails .teamBlock .group .bd .ul .li p{color: #B7A392;}
+.brownTheme.bargainDetails .teamList .t_list span.cut{color:#B7A392;}
+.brownTheme.bargainDetails .bargainDetails .resultWindow .shareBtn{background-color: #B7A392;}
+.brownTheme.bargainDetails .descBlock {background-color: rgba(183,163,146,.1);}
+.brownTheme.bargainDetails .descBlock .titBlock span{border:1px solid rgba(183,163,146,.3);background-color: rgba(183,163,146,.2);}
+.brownTheme.bargainDetails .descBlock .thisBlock{border:1px solid rgba(183,163,146,.1);}
+.brownTheme.bargainDetails .descBlock .titBlock span{color: #fff;}
+.brownTheme.bargainDetails .descBlock .titBlock span.on{background-color: rgba(183,163,146,.4);}
+.brownTheme.bargainDetails .resultWindow .h2 .price_span {color: #B7A392;}
+.brownTheme.bargainDetails .resultWindow .shareBtn {background-color: #B7A392;}

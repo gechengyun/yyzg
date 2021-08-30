@@ -1,0 +1,2 @@
+/* pages/activityModule/index.wxss */
+@import "../../wxss/new_activity_module.wxss";

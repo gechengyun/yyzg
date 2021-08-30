@@ -1,0 +1,343 @@
+<import src="../public/textBox.wxml" />
+<!--文本（知道了）弹窗-->
+<import src="../../wxParse/wxParse.wxml" />
+<!--富文本-->
+<!-- <import src="../public/editText.wxml" /> -->
+<!--主页页面-->
+<import src="../public/swiper.wxml" />
+<!-- 图片广告 -->
+<import src="../public/editEnterShop.wxml" />
+<!-- 进入店铺  -->
+<import src="../public/editGuide.wxml" />
+<!-- 辅助线-->
+<import src="../public/editGuideBlank.wxml" />
+<!-- 辅助空白  -->
+<import src="../public/editImageNav.wxml" />
+<!--图片导航 -->
+<import src="../public/editProductGrouping.wxml" />
+<!-- 餐饮小食1 -->
+<import src="../public/editProductList.wxml" />
+<!-- 餐饮小食2 -->
+<import src="../public/editProductSearch.wxml" />
+<!--商品搜索 -->
+<import src="../public/editStoreCollection.wxml" />
+<!--店铺收藏和预览-->
+<import src="../public/editStoreTextNavigation.wxml" />
+<!--标题 -->
+<import src="../public/pageHeaderOne.wxml" />
+<!-- 网页抬头1 -->
+<import src="../public/pageHeaderTwo.wxml" />
+<!-- 网页抬头2 -->
+<import src="../public/shopCouponList.wxml" />
+<!-- 优惠券 -->
+<import src="../public/shopIndex.wxml" />
+<!-- 店铺动态 -->
+<import src="../public/shopNotice.wxml" />
+<!-- 店铺公告 -->
+<import src="../public/shopProduct.wxml" />
+<!-- 商品 -->
+<import src="../public/shoppingCat.wxml" />
+<!-- 购物袋 -->
+<import src="../public/warning.wxml" />
+<!--警告提示-->
+<import src="../public/orderLayer.wxml" />
+<!--活动模块-->
+<import src="../public/newActivityModule.wxml"></import>
+<import src="../public/cube.wxml"></import>
+<!--魔方模块-->
+<import src="../public/seckill_module.wxml"></import>
+<!--秒杀模块-->
+<import src="../public/bargain_module.wxml"></import>
+<!--砍价模块-->
+<import src="../public/presale_module.wxml"></import>
+<!--预售模块-->
+<import src="../public/tuan_module.wxml"></import>
+<!--拼团模块-->
+<import src="../public/store_map.wxml"></import>
+<!--联系店铺-->
+<import src="../public/image_ad2.wxml"></import>
+<!--新的广告组件-->
+<import src="../public/goodsTemp.wxml"></import>
+<!-- 商品模板 -->
+<import src="../public/groupProduct.wxml"></import>
+<!-- 商品分组3 -->
+<import src="../public/customNav.wxml"></import>
+<!--自定义导航模板-->
+<import src="../public/shopProductPoint.wxml"></import>
+<!-- 积分商品模块 tc 2019.10.21-->
+<import src="../public/contact.wxml"></import>
+<!-- 限时折扣模块 tc 2020.7.23 -->
+<import src="../public/timeLimitDiscount.wxml"></import>
+<!-- 直播组件 -->
+<import src="../public/livePlayer.wxml"></import>
+<!-- 表单组件 -->
+<import src="../public/inputModule.wxml"></import>
+<!-- 表单组件测试 -->
+<!-- <import src="../public/inputMouduleTest.wxml"></import> -->
+<!--悬浮按钮-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<wxs module="indexModule">
+  module.exports.getName = function(name, len) {
+    len = len || 10;
+    if (name.length > len) {
+      return name.slice(0, len) + "...";
+    }
+    return name;
+  }
+</wxs>
+<!--订单提醒-->
+<!-- 富文本 商品 标题 商品搜索 辅助线 辅助空白 进入店铺 公告 餐饮小食1 餐饮小食2 网页抬头1,2 店铺收藏和预览 图片导航 图片广告 店铺动态 优惠券 -->
+<!-- <scroll-view class="container" style="height: {{scrollHeight}}px; background:{{shopHomeData.bgcolor}} " scroll-y="true" scroll-top="{{scrollTop.scroll_top}}" scroll-with-animation = "false" scroll-into-view="{{toView}}" data="page.index.index">   -->
+<!-- 自定义标题 -->
+<!-- <view class='_navabar'> -->
+<template is="customNav" data="{{localName:localName,_unlogin,status,navHeight,themeColorValue,barType,_barTitle,user_pic:shopHomeData.user_avatar,is_gift:shopHomeData.is_gift,name:shopHomeData.store.name,logo:shopHomeData.store.logo}}" />
+<view class="container redTheme" data="page.index.index">
+  <view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+    <official-account binderror="officialAccountError"></official-account>
+  </view>
+  <include src="/pages/public/live_code_leading.wxml"></include>
+  <include src="/pages/public/order_notice.wxml"></include>
+  <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+  <view class="asideDetails ">
+    <text class="goTop iconfont icon-dingbu" bindtap="goTopFun" style="display:{{scrollTop.goTopShow ? 'block' : 'none'}};"></text>
+    <!--   <navigator url="/pages/innerShoppingCat/index" hover-class="none">
+            <text class="iconfont icon-gouwuche1 shoppingCatIcon" wx:if="{{shoppingCatNum}}"></text>
+        </navigator> -->
+  </view>
+  <block>
+    <template is="orderLayer" wx:if="{{businessShow}}" data="{{business:business}}" />
+  </block>
+  <!-- 门店 -->
+  <view class="shopHomeHeader" wx:if="{{shopHomeData.store.show_head*1 == 1 && shopHomeData.show_head_type*1 != 1}}">
+    <image src="{{shopHomeData.store.logo}}"></image>
+    <view class="span">
+      <view class="p">
+        <navigator href="#/shopHome/486">
+          <text>{{ indexModule.getName(shopHomeData.store.name, 14) }}</text>
+        </navigator>
+      </view>
+      <view class="p" wx:if="{{(shopHomeData.store.physical_count>0)&&(shopHomeData.store.physical_title!='')}}" style='display:flex;'>
+        <navigator class="textOmitted" bindtap="mapData" url="" data-physical="{{shopHomeData.store.physical_id}}">
+          <text class="iconfont icon-dizhi text"></text>门店:
+          <block wx:if="{{_unlogin&&shopName}}">{{shopName}}</block>
+          <block wx:else>{{shopHomeData.store.physical_title}}</block>
+        </navigator>
+
+        <navigator url="/pages/SHOPGOODS/pages/index/shopHomeList" wx:if='{{shopHomeData.store.physical_count>1}}' class='change-shop' style='background:{{themeColorValue}} ;border-radius:15rpx;width:160rpx;'>
+          <text class="iconfont icon-qiehuan" style='color:#fff;'></text>选择门店
+        </navigator>
+      </view>
+      <view class="p" wx:if="{{(shopHomeData.store.physical_count<=0)||(shopHomeData.store.physical_title=='')}}">
+        <navigator url="" bindtap="mapData" data-physical="">
+          <text class="iconfont icon-dizhi"></text>本店</navigator>
+      </view>
+    </view>
+    <view class="span">
+      <navigator url="/pages/user/index" hover-class="none" open-type="{{filter.getOpenType('/pages/user/index',store_nav_list)}}">会员中心</navigator>
+    </view>
+  </view>
+  <!-- 团长展示 -->
+  <view class='commander-content-wrap' wx:if="{{shopHomeData.show_head_type*1 == 1}}">
+    <view class='commander-card' wx:if="{{ _unlogin==false}}">
+      <!-- <navigator url='/pages/SHOPGOODS/pages/groupbuying/joinperson' hover-class='none' class='commander-card-top'> -->
+        <navigator url='/pages/SHOPGOODS/pages/groupbuying/community' hover-class='none' class='commander-card-top'>
+        <!-- <navigator url='/pages/SHOPGOODS/pages/groupbuying/joinperson' hover-class='none'> -->
+        <view class="commander-card-headImg">
+          <!-- <image class='commander-card-icon' src='{{nowGrouperData.leader.avatar}}'></image>
+          <view>{{nowGrouperData.leader.nickname}}</view> -->
+          <view class="commander-tips">
+            <view class="siteTips"wx:if="{{nowGrouperData.leader.name}}">自提点</view>
+            <view class="name" wx:if="{{nowGrouperData.leader.name}}" >{{nowGrouperData.leader.name}} </view>
+            <view class="selectName" wx:else >请选择团长<text></text></view>
+          </view>
+          <view class='commander-card-address'wx:if="{{nowGrouperData.leader.name}}">
+            <!-- <text>{{nowGrouperData.leader.name}}</text> -->
+            <text  data-lat="{{nowGrouperData.leader.lat}}" data-long="{{nowGrouperData.leader.lng}}" catchtap="oppeMap" >{{nowGrouperData.leader.address}}</text><icon class='iconfont icon-dizhi' data-lat="{{nowGrouperData.leader.lat}}" data-long="{{nowGrouperData.leader.lng}}" catchtap="oppeMap"  ></icon>
+          </view>
+        </view>
+        <!-- </navigator> -->
+
+        <view class='commander-card-opeartion'>
+          <view class='commander-card-item' wx:if="{{shopHomeData.custom_field_list[0].content.title != nowGrouperData.leader.user_name}}">
+              <image src="https://s.404.cn/applet/images/wxcopy/comman.png"></image>
+              <text>附近团长</text>
+          </view>
+          <view class='commander-card-item' bindtap="copyBtn" wx:if="{{false}}">
+            <image src="https://s.404.cn/applet/images/wxcopy/copy.png"></image>
+            <text>一键复制</text>
+          </view>
+        </view>
+      </navigator>
+      <!-- <navigator url='/pages/SHOPGOODS/pages/groupbuying/joinperson' hover-class='none' open-type='navigate' wx:if="{{nowGrouperData.buy_list.length>0}}"> -->
+      <!-- <view class='buying-preson-wrap'>
+          <view class='buying-preson-box' wx:for="{{nowGrouperData.buy_list}}" wx:for-item="buylist" wx:key="">
+            <image src='{{buylist.user_info.avatar}}'></image>
+            <text>{{buylist.user_info.nickname}}</text>
+          </view>
+          <view class='lookmore'>
+            购买了 >
+          </view>
+        </view> -->
+      <!-- </navigator> -->
+    </view>
+    <view class='commander-card' wx:else>
+      <view class='commander-card-top'>
+        <!-- <text class="iconfont icon-touxiang default_user" style="color:{{themeColorValue}}"></text> -->
+        <view class='commander-card-right'>
+          <text wx:if="{{positionName}}">当前位置：{{positionName}}</text>
+          <text>请点击登录，以同步您的团购信息或切换其他团长</text>
+        </view>
+        <button type='primary' class='btn-logins' style="background-color:{{themeColorValue}}" bindtap="isLogin">登录</button>
+      </view>
+    </view>
+  </view>
+  <bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+  <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+
+  <template wx:for="{{shopHomeData.custom_field_list}}" 
+   wx:key="index"
+   wx:if="{{item.field_type}}" 
+   is="{{item.field_type}}"
+   data="{{localName:localName,content:item,discount_showOrHide,cuwer,sendcodeStatus,codenum,resetValue,videoSrc,imgSrc,actionSheetHidden,actionSheetVideo,province_index,province_name_arr,city_index,city_name_arr,country_index,country_name_arr,currentTab:currentTab,productList:productList,keyword:keyword,winWidth:winWidth, searchWrapObj: searchWrapObj, t_index: index,store_nav_list,themeColorValue,BASE_IMG_URL,field_type:item.field_type,mode_tyle,load_txt,is_member:shopHomeData.is_member,show_index_img:shopHomeData.show_index_img,last_index,make_fiex,showSearch,field_id:item.field_id,_unlogin,canIUse,is_gift:shopHomeData.is_gift,live_list,currentChannel,tagid,live_fiex,status,navHeight,last_filed_type,live_next_page,swiperCurIndex,subscribe_template_id,tempIndex:index,tempLastIndex:shopHomeData.custom_field_list.length,nowImgH,storeData:shopHomeData.store,phoneModel,discount_fiex,shopHomeData}}"/>
+  <!-- <template is="inputModule" data="{{province_index,province_name_arr,city_index,city_name_arr,country_index,country_name_arr,select_index,videoSrc,imgSrc,actionSheetHidden,actionSheetItems,themeColorValue,content:contentuse}}"/> -->
+
+  <block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+  </block>
+  <!-- 加入购物车弹框 -->
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+  <template is="textBox" wx:if="{{textBoxShow}}" data="{{content:textBoxData}}" />
+  <open-screen-coupon wx:if="{{shopHomeData.open_screen && shopHomeData.open_screen.can_get != 0 && _unlogin==false}}" open-screen="{{shopHomeData.open_screen}}"></open-screen-coupon>
+  <!-- </scroll-view>  -->
+
+</view>
+<!--拉粉弹窗-->
+<block wx:if="{{lafenWindowsState}}">
+  <view class='windowmask' catchtouchmove='false' catchtap='closeLafenWindows'></view>
+  <view class="new_windows {{pageTheme}}" catchtap='closeLafenWindows' catchtouchmove='false' style='bottom:{{isIpx=="iphonex"?"240rpx":"100rpx"}}'>
+    <view class='message' wx:if="{{windowsData.dialogue1&&windowsData.dialogue1!=''}}">
+      <image class="headimg" src="{{userImages}}"></image>
+      <view class="content">
+        <view class='name'>{{windowsData.name}}</view>
+        <view class='text'>{{windowsData.dialogue1}}</view>
+      </view>
+    </view>
+    <view class='message' wx:if="{{windowsData.dialogue2&&windowsData.dialogue2!=''}}">
+      <image class="headimg" src="{{userImages}}"></image>
+      <view class="content">
+        <view class='name'>{{windowsData.name}}</view>
+        <view class='text'>{{windowsData.dialogue2}}</view>
+      </view>
+    </view>
+    <view wx:if="{{windowsData.show_entry!=0&&windowsData.type==1}}" class='windowscontent' catchtap='closeLafenWindows' style='margin-top:-40rpx;'>
+      <view class='bg_window theme-bg-color'>
+        <view class='membertitle'>{{windowsData.member_alias}}权益</view>
+      </view>
+      <image class='win_bg' src="{{BASE_IMG_URL}}images/lafen_window.png"></image>
+      <view class='windows_info'>
+        <view class='title'>
+          <view class='item'>
+            <view class='txt'>自购省钱</view>
+            <view class="num">
+              <view>1</view>
+              <view class='dec'>自己购买
+                <view>最高可省{{windowsData.ratio}}%</view>
+              </view>
+            </view>
+          </view>
+          <view class='item'>
+            <view class='txt'>分享赚钱</view>
+            <view class="num">
+              <view>2</view>
+              <view class='dec'>粉丝购买
+                <view>最高可赚{{windowsData.ratio}}%</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class='pronum'>
+          还差
+          <text>{{windowsData.num-windowsData.now_num}}粉丝</text>可永久享受{{windowsData.member_alias}}权益
+        </view>
+        <progress color="#e7e7e7" activeColor='{{themeColorValue}}' percent="{{windowsData.now_num*100/windowsData.num}}" border-radius="4rpx"></progress>
+        <view>
+          <button class='theme-bg-color' catchtap='showShareOperation'>立即邀请</button>
+        </view>
+
+      </view>
+    </view>
+    <view wx:if="{{windowsData.show_entry!=0&&windowsData.type==0}}" class='windowscontent'>
+      <image src='../../images/closeBtn.png' class='img-close' catchtap="closeLafenWindows"></image>
+      <view class='gopeople' catchtap='gotoNewPeople'></view>
+      <view class='win_bg win_bg1'>
+        <image src="{{BASE_IMG_URL}}images/xinrenwind.png"></image>
+      </view>
+
+      <view class='windows_info'>
+        <view class='shopcontent'>
+          <image wx:if="{{windowsData.product_image}}" class='shopimg' src='{{windowsData.product_image}}'></image>
+          <view class='content'>
+            <view class='title'>{{windowsData.product_name}}</view>
+            <view class='price' wx:if="{{windowsData.original_price&&windowsData.original_price!='0.00'}}">￥{{windowsData.original_price}}
+              <view class='line'></view>
+            </view>
+            <view class='nowprice'>
+              <view class="num">
+                <text>￥</text>{{windowsData.price}}</view>
+              <view class='you'>你的专属价</view>
+            </view>
+          </view>
+        </view>
+        <button style="height:72rpx;line-height: 72rpx;" class='theme-bg-color' catchtap='gotoNewPeople'>立即领取
+          <text style='font-size:20rpx'>(仅限一份)</text> </button>
+      </view>
+      <!-- <image class="myicon1" src="{{windowsData.my_avatar}}"></image> -->
+    </view>
+  </view>
+</block>
+<!--canvas-->
+<view wx:if="{{showOpertaion}}">
+  <view class='windowmask' catchtouchmove='false' catchtap='closeCanvas'></view>
+  <image class='haibaoimg' src='{{lafenImgurl}}' catchtouchmove='false' wx:if="{{haibaoCanvas}}"></image>
+  <view class='sharebutton' catchtouchmove='false'>
+    <button class='item' open-type='share' data-leader_id="{{nowGrouperData.leader.leader_id}}">
+      <image src='https://s.404.cn/applet/images/wxcopy/wxicon.png'></image>
+      分享好友
+    </button>
+    <!-- <button class='item' catchtap='downLoadHb' > -->
+    <button class='item' catchtap='showCanvasWind' data-leader_id="{{nowGrouperData.leader.leader_id}}">
+      <image src='https://s.404.cn/applet/images/wxcopy/xiazaiicon.png'></image>
+      分享海报图
+    </button>
+  </view>
+</view>
+<!-- 社区团购 -->
+<view wx:if="{{groupWindowsShow&&(!_unlogin)}}">
+  <view class='windowmask' catchtouchmove='false'></view>
+  <navigator open-type='reLaunch' url='/pages/SHOPGOODS/pages/groupbuying/community' class='group-buying-frist'>
+    <image src='{{groupbuyData.window_background_img}}'></image>
+    <navigator open-type='reLaunch' url='/pages/SHOPGOODS/pages/groupbuying/community'>
+      <image src='{{groupbuyData.button_background_img}}' class='group-buying-btn'></image>
+    </navigator>
+
+    <!-- <icon  class='img-close iconfont icon-cuowu_quan_001' catchtap="closeGroupWindows"></icon> -->
+  </navigator>
+</view>
+<!-- 悬浮图片 -->
+<view id="homePage" bindtouchstart='touchStart' catchtouchmove='touchMove' bindtouchend='touchEnd' class='xuanfu' style="{{Style}};color:{{themeColorValue}}" catchtap='xFshowWindows' wx:if="{{shopHomeData.show_index_img == 1 && _unlogin==false}}">
+  <image src='{{shopHomeData.index_img_src}}'></image>
+
+  <!-- 获取用户手机号 -->
+  <button class='getNumer' wx:if='{{(!has_phone) && (!no_user_phone)}}' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用微信手机号</button>
+</view>
+<!-- 礼包分享 -->
+<view id="homePage" bindtouchstart='touchStart' catchtouchmove='touchMove' bindtouchend='touchEnd' class='xuanfu' style="{{Style}};color:{{themeColorValue}}" catchtap='showNewgiftvip' wx:if="{{shopHomeData.index_xuanfu_img && _unlogin==false}}">
+  <image src='{{shopHomeData.index_xuanfu_img}}' mode='widthFix'></image>
+  <text>{{shopHomeData.is_member == 1?'立即邀请>':'开通会员>'}}</text>
+</view>
+<template is="contact" data="{{shoppingCatNum}}" />
+<include src="/pages/public/page_footer.wxml"></include>
+<canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" canvas-id="lafenCanvas"></canvas>
+	<!--海报画布-->
+	<canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+  <template is="warning" wx:if="{{shopHomeData.custom_field_list.length==0}}" data="{{warningTxt:'暂无装修内容'}}" />

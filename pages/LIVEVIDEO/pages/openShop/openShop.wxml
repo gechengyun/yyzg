@@ -1,0 +1,36 @@
+<!--pages/LIVEVIDEO//pages/openShop/openShop.wxml-->
+<view class="container {{pageTheme}}">
+  <view class="register-header">
+    <image src="{{pageData.page_image?pageData.page_image:'https://s.404.cn/applet/images/qudao/liveteam/open_shop_bg.png'}}" mode="aspectFill"></image>
+    <view class='back-box' style='top:{{boundtop?boundtop:26}}px;height:{{boundHeight?boundHeight:32}}px;'>
+      <view class='iconfont icon-shangyibu' style='height:100%;line-height:{{boundHeight?boundHeight:32}}px' bindtap='goback'></view>
+      <text style='color:#fff;font-size:32rpx;box-size:border-box;padding-right:60rpx;' class='title'>开通店铺</text>
+    </view>
+  </view>
+  <view class="shop-content">
+    <view class="shop-mes">
+      <view class="shop-top">
+        <view class="shop-user">
+          <image class="shop-avatar" src="https://s.404.cn/applet/images/qudao/zhibo/charavatar.png"></image>
+          <input placeholder="请输入店铺名称" bindblur="disEdit" value="主播昵称" placeholder-style="color:#c0c0c0;" disabled="{{isEdit}}" focus="{{!isEdit}}" maxlength="-1" adjust-position="{{true}}"></input>
+        </view>
+        <view class="iconfont icon-icon-pen" bindtap="editName"></view>
+      </view>
+      <view class="shop-middle">
+        <view>升级成为店铺</view>
+        <view>￥999/年</view>
+      </view>
+      <view class="shop-bottom">
+        <text class="iconfont icon-xuanzhong1" bindtap="chooseRule" style="color:{{isRule?'':'#999'}};"></text>
+        <view class="register-rule-content">
+          <text>提交视为同意</text>
+          <view wx:for="{{ruleData}}" wx:key="goindex" wx:for-index="goindex">
+            <navigator url="/pages/LIVEVIDEO/pages/userLive/ruleSystem?stype={{goindex}}" open-type="navigate">《{{item.name}}》</navigator>
+            <text wx:if="{{goindex < ruleData.length - 1}}">和</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <button class="now-apply-btn" style="background-color:{{themeColorValue}}" bindtap="orderFun">立即开通</button>
+  </view>
+</view>

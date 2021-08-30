@@ -1,0 +1,9 @@
+<!--浮窗提醒通知 在首页和商品详情页include引入-->
+<view class="notice--container" wx:if="{{__store_notice_config&&__store_notice_config.show}}">
+    <view class="notice__avatar"><image src="{{__store_notice_config.avatar}}" class="notice__avatar_img"></image></view>
+    <view class="notice__details">
+        <view class="notice__name">{{__store_notice_config.nickname}}</view>
+        <view class="notice__type">{{__store_notice_config.type}}</view>
+        <view class="notice__time">{{__store_notice_config.time}}</view>
+    </view>
+</view>

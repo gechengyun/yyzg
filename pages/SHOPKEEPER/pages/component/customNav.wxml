@@ -1,0 +1,19 @@
+<template name="customNav">
+  <block>
+    <!-- 导航 -->
+    <view class="nav-block" style="background-color:{{barType==1?'#fff':themeColorValue}};height:{{status + navHeight}}px" >
+      <view class="status-colum" style="height:{{status}}px"></view>
+      <view class="contents" style="height:{{navHeight}}px">
+        <view class="nav-left">
+          <!-- 返回 -->
+          <navigator class="goBack" url="{{isScene?'/pages/SHOPKEEPER/pages/shop/index':''}}" hover-class='none' open-type="{{isScene?'navigate':'navigateBack'}}"  style='top:{{boundtop}}px;width:{{boundHeight}}px;height:{{boundHeight}}px;line-height:{{boundHeight}}px;'>
+             <view class="iconfont icon-shangyibu"   style="color:{{barType==1?'#000':'#fff'}}"></view>
+          </navigator>
+        </view>
+        <view class="nav-title _centet" style="color:{{barType==1?'#000':'#fff'}}"><text>{{_barTitle}}</text></view>
+      </view>
+    </view>
+    <!-- 占位 -->
+    <view class='nav-position' style="background-color:‘#fff’; height:{{status+navHeight}}px;">占位</view>
+  </block>
+</template>

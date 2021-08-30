@@ -1,0 +1,130 @@
+/* pages/CLIST//pages/group/groupLeft.wxss */
+page{
+  padding-bottom: 0;
+}
+.posi-box{
+  width: 100%;
+  height: 115rpx;
+  background: transparent;
+  color: transparent;
+}
+.group-page{
+  width: 100vw;
+  box-sizing: border-box;
+  display: flex;
+  background: #ececec;
+  justify-content: space-between;
+  height: 82vh;
+  flex-wrap: wrap;
+}
+.group-page .goods-menu{
+  background: #ffffff;
+  max-height: 82vh;
+  overflow: scroll;
+}
+.group-page .goods-menu>view{
+  width: 200rpx;
+  padding:16rpx 10rpx;
+  font-size: 28rpx;
+  color: #353535;
+  border-bottom: 1rpx dashed #e7e6e6;
+  text-align: center;
+}
+.group-page .goods-menu>view.active{
+  background:#f9f9f9;/* #fcc;*/ 
+}
+
+
+.goods-block{
+  background: #fff;
+  margin-left: 10rpx;
+  flex: 1;
+  height: 82vh;
+  overflow: hidden;
+}
+.goods-block .goods-box{
+  box-sizing: border-box;
+  padding: 10rpx 15rpx 10rpx 10rpx;
+  border-bottom: 1rpx dashed #e7e6e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.goods-block .goods-box .img-box {
+  position: relative;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+.goods-block .goods-box .img-goods{
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+}
+.goods-block .goods-box .goods-info{
+  flex: 1;
+  box-sizing: border-box;
+  padding-left: 10rpx;
+  /* position: relative; */
+
+}
+.goods-block .goods-box .goods-info .name{
+  font-size: 28rpx;
+  color: #353535;
+ 
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.goods-block .goods-box .goods-info .opra{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 60rpx;
+  /* background: #ffc; */
+  /* position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%; */
+}
+.goods-block .goods-box .goods-info .opra .price-desc{
+  font-size: 24rpx;
+}
+.goods-block .goods-box .goods-info .opra .price-text{
+  font-size: 28rpx;
+}
+.goods-block .goods-box .goods-info .opra .originalPrice{
+  font-size: 20rpx !important;
+  color: #666 !important;
+  margin-left: 10rpx;
+  text-decoration: line-through;
+}
+.icon-jiahao{
+  font-size: 36rpx;
+}
+.sold-out{
+  font-size: 32rpx;
+  background: rgba(0, 0, 0, 0.5);
+  letter-spacing: 5rpx;
+}
+.no-data {
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  padding-bottom:10rpx;
+  padding-top:10rpx;
+  margin-top: 100px;
+}
+.load-over{
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  padding-bottom:10rpx;
+  padding-top:10rpx;
+}

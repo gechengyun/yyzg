@@ -1,0 +1,30 @@
+.get-user-container {
+    height: 100%;
+    width: 100%;
+}
+
+.get-user-img {
+    margin-top: 60rpx;
+    height: 286rpx;
+    width: 100%;
+}
+.get-user-text-title{
+    font-size: 20px;
+    line-height: 60rpx;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+.get-user-text {
+    margin-top: 20rpx;
+    font-size: 15px;
+    line-height: 80rpx;
+    text-align: center;
+}
+
+.get-user-btn {
+    margin-top: 200rpx;
+    height: 90rpx;
+    width: 490rpx;
+}

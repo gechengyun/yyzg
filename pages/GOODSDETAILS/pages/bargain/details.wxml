@@ -1,0 +1,185 @@
+<import src="../../../../wxParse/wxParse.wxml" />
+<view class="bargainDetails {{pageTheme}} {{maskShow ? 'noscroll' : ''}}">
+  <view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+    <official-account binderror="officialAccountError"></official-account>
+  </view>
+  <block wx:if="{{ProductImages.length>1}}">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" indicator-active-color="{{themeColorValue}}" interval="{{interval}}" duration="{{duration}}" class="b_banner">
+      <block wx:for="{{ProductImages}}" wx:key="">
+        <swiper-item>
+          <image class="slide-image" src="{{item.image}}" style="{{item.load == 1 ? 'will-change:transform' : ''}}" data-src="{{item.image}}" mode="aspectFit" bindload="imgLoad" />
+        </swiper-item>
+      </block>
+      <span>仅剩 {{bargain.inventory ? bargain.inventory : 0}} 件</span>
+    </swiper>
+  </block>
+  <block wx:else>
+    <view class="b_banner" style="background:url({{ProductImages[0].image}})  center/ 100% 100%; background-size:percentage">
+
+      <!-- <image wx:for="{{ProductImages}}" wx:key="" src="{{item.image}}" mode="aspectFill"></image> -->
+      <span>仅剩{{bargain.inventory}}件</span>
+    </view>
+  </block>
+  <view class="name">
+    <view class="wrap">
+      <view class='ziying theme-bg-color' wx:if="{{allInfo.is_self_support==0}}">自营</view>
+      <view>{{bargain.name}}</view>
+      
+    </view>
+  </view>
+  <view class="countDown" wx:if="{{allInfo.isStar == 4 && allInfo.is_over != 4}}">
+    <view class="wrap">
+      <span>{{total_show}}</span>
+      <em>天</em>
+      <span>{{hours_show}}</span>
+      <em>时</em>
+      <span>{{minutes_show}}</span>
+      <em>分</em>
+      <span>{{seconds_show}}</span>
+      <em>秒</em>
+      <em class="text">后结束</em>
+    </view>
+  </view>
+  <view class="numData">
+    <view class="wrap">
+      <view class="progressBar">
+        <p class="current {{cur<50?'on_right':''}}" style="right:{{cur-2}}%" wx:if="{{cur<50}}">
+          <em>当前价</em>￥{{current_price}}</p>
+        <p class="current {{cur>50?'on_left':''}}" style="left:{{101-cur}}%" wx:if="{{cur>50}}">
+          <em>当前价</em>￥{{current_price}}</p>
+        <view class="progressBar_inner" style="width:{{100-cur}}%">
+          <span class="slider"></span>
+        </view>
+      </view>
+      <p class="clearfix price_p">
+        <span class="e fr">原价￥{{bargain.original}}</span>
+        <span class="s fl">最底价￥{{bargain.minimum}}</span>
+      </p>
+    </view>
+  </view>
+
+  <view class="descBlock">
+    <view class="wrap">
+      <view class="ruleBlock thisBlock">
+        <view class="titBlock">
+          <span class="on">玩法说明</span>
+        </view>
+        <view class="desc">
+          <p>1.自己砍下第一刀即发起砍价活动；</p>
+          <p>2.分享给朋友可以帮忙砍价；</p>
+          <p>3.未砍至最底价时，用户可在当前满意的价格进行购买下单。</p>
+        </view>
+        <p class="time">
+          <i class="iconfont icon-shijian"></i>活动时间：
+          <span>{{s_time}} ~ {{e_time}}</span>
+        </p>
+      </view>
+
+      <view class="teamBlock thisBlock" wx:if="{{kanuser_list.length>0}}">
+        <view class="titBlock">
+          <span>砍价亲友团</span>
+        </view>
+        <view class="group">
+          <view class="hd clearfix">
+            <em class="fr" bindtap="checkTeamAll">查看全部</em>
+            <p class="fl">砍价亲友团（{{kanuser_list.length}}）</p>
+          </view>
+          <view class="bd clearfix">
+            <view class="ul">
+              <block wx:if="{{kanuser_list.length>5}}">
+                <view class="li" wx:for="{{kanuser_list}}" wx:if="{{index<5}}" wx:key="index">
+                  <image src="{{item.wecha_id}}"></image>
+                  <p>￥{{item.dao/100}}</p>
+                </view>
+              </block>
+              <block wx:else>
+                <view class="li" wx:for="{{kanuser_list}}" wx:key="index">
+                  <image src="{{item.wecha_id}}"></image>
+                  <p>￥{{item.dao/100}}</p>
+                </view>
+              </block>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class="richBlock thisBlock" wx:if="{{allInfo.bargain.info != '' || allInfo.bargain.guize != ''}}">
+        <view class="titBlock">
+          <span class="{{t_index==0?'on':'w'}}" bindtap="tabClick" data-index="0">商品详情</span>
+          <span wx:if="{{allInfo.bargain.guize != ''}}" class="{{t_index==1?'on':'w'}}" bindtap="tabClick" data-index="1">活动规则</span>
+        </view>
+        <view class="desc">
+          <view class="row" wx:if="{{t_index==0}}">
+            <template is="wxParse" data="{{wxParseData:infoHtml.nodes}}" />
+          </view>
+          <view class="row" wx:if="{{t_index==1}}">
+            <!-- <text>{{allInfo.bargain.guize}}</text> -->
+            <template is="wxParse" data="{{wxParseData:guizeHtml.nodes}}" />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--底部购买按钮-->
+  <form report-submit="true" bindsubmit="formSubmit">
+    <view>
+      <button wx:if="{{buttonArr.length == 1}}" form-type="submit" style="bottom:{{store_nav_list_show?'88rpx':0}}" class="ftBtn {{buttonArr[0].color}}" data-bindtap="{{buttonArr[0].bind}}">{{buttonArr[0].text}}
+      </button>
+
+      <view class="ftBtnGroup" wx:if="{{buttonArr.length == 2}}" style="bottom:{{store_nav_list_show?'88rpx':0}}">
+        <!--open-type='{{buttonArr[0].bind == "shareTap" ? "share" : ""}}'-->
+        <button data-bindtap="{{buttonArr[0].bind}}" bindtap="{{buttonArr[0].bind}}" open-type='{{buttonArr[0].open ? buttonArr[0].open : ""}}'>{{buttonArr[0].text}}
+        </button>
+        <button wx:if="{{buttonArr[1].bind != 'shareTap'}}" form-type="submit" class="span" data-bindtap="{{buttonArr[1].bind}}">{{buttonArr[1].text}}
+        </button>
+      </view>
+    </view>
+  </form>
+
+
+  <!--砍价亲友团弹窗-->
+  <view class="mask" wx:if="{{maskShow}}" bindtap="maskClick"></view>
+  <view class="teamList" wx:if="{{teamShow}}">
+    <span class="iconfont icon-cuowu_quan_001" bindtap="maskClick"></span>
+    <view class="h2">砍价亲友团</view>
+    <view class="wrap">
+      <view class="t_list">
+        <view class="ul">
+          <view class="li clearfix" wx:for="{{kanuser_list}}" wx:key="index">
+            <span class="fr cut">砍下￥{{item.dao /100}}</span>
+            <view class="desc">
+              <image src="{{item.wecha_id}}" class="fl"></image>
+              <p class="name">{{item.name}}</p>
+              <p class="time">{{item.addtime_str}}</p>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--砍价成功弹窗-->
+  <view class="resultWindow" wx:if="{{result.resultShow}}">
+    <view class="wrap">
+      <view class="h2">
+        <view>{{result.title}}</view>
+        <view class="price_span">￥{{result.price}}</view>
+      </view>
+      <p class="h3">{{result.text}}</p>
+      <image src="{{BASE_IMG_URL}}images/b_money.png"></image>
+      <button class="shareBtn" data-bind_tap="{{result.btnTap}}" bindtap="{{result.btnTap}}" open-type="{{result.btnType}}">{{result.btnText}}</button>
+    </view>
+  </view>
+  <!--海报画布-->
+  <canvas canvas-id='bargainPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000px;"></canvas>
+</view>
+<!-- <shareModal id='shareModal' 
+            title='我是标题' 
+            content="content" 
+            cancelText='取消' 
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+</shareModal> -->
+<bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+<include src="/pages/public/page_footer.wxml"></include>

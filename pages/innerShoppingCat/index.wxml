@@ -1,0 +1,64 @@
+<!--购物袋页面-->
+<import src="../public/warning.wxml" />
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<view class="container {{pageTheme}}  editProduct" data-page="pages.shoppingCat.index">
+       <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+    <view class="shoppingCatTitle">
+        <view>
+            <text class="iconfont icon-gouwuche"></text>购物袋
+            <block wx:if="{{shoppingCatTotalNum}}">({{shoppingCatTotalNum}})</block>
+        </view>
+    </view>
+    <view class="size_3 shoppingCatSize">
+        <view class="clearfix shopProductList  shoppingCat">
+            <view class="clearfix" wx:for="{{shoppingCatData.cart_list}}" wx:if="{{item}}">
+                <view class="shoppingChoice">
+                    <text class="iconfont {{item.isActive==1?'active':''}}" data-index="{{index}}" data-shoppingMoney="{{item.shoppingMoney}}" bindtap="choiceShopping"></text>
+                </view>
+                <navigator url="/pages/product/details?product_id={{item.product_id}}" class="navigator" hover-class="none" open-type="navigate">
+                    <view class="productImg verticalCentering">
+                        <image src="{{item.image}}"></image>
+                    </view>
+                </navigator>
+                <view class="productInfo clearfix ">
+                    <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+                        <text class="productName textOmitted">{{item.name}}</text>
+                        <view>
+                            <block wx:for="{{item.sku_data}}" wx:for-item="list">{{list.name}}:{{list.value}} </block>
+                        </view>
+                        <text class="productPrice">￥{{item.pro_price}}</text>
+                    </navigator>
+                    <view class="shoppingInput">
+                        <text class="reduce" bindtap="reduce" data-index="{{index}}" data-num="{{item.pro_num}}" data-cartId="{{item.pigcms_id}}" data-skuId="{{item.sku_id}}" data-productId="{{item.product_id}}">-</text>
+                        <input placeholder="1" bindtap="shoppingInput" value="{{item.pro_num}}" bindblur="shoppingBlur" data-index="{{index}}" data-num="{{item.pro_num}}" data-cartId="{{item.pigcms_id}}" data-skuId="{{item.sku_id}}" data-productId="{{item.product_id}}"> </input>
+                        <text class="plus" bindtap="plus" data-index="{{index}}" data-num="{{item.pro_num}}" data-cartId="{{item.pigcms_id}}" data-skuId="{{item.sku_id}}" data-productId="{{item.product_id}}">+</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="promptMsg" wx:if="{{shoppingCatData.cart_list==''}}">
+        <text class="iconfont icon-konggouwuche"></text>
+        <text>购物袋内无商品</text>
+        <navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">
+            <text>去逛逛</text>
+        </navigator>
+    </view>
+    <view class="shoppingCatFooter">
+        <view class="shoppingCatFooterCentent">
+            <view class="shoppingChoice">
+                <text class="iconfont {{isActive}}" bindtap="choiceShopping" data-check="check"></text>
+                全选
+            </view>
+            <view class="total">合计：￥{{shoppingCatMoney}}</view>
+            <form report-submit="true" bindsubmit="formSubmit">
+                <button form-type="submit" 
+                        class="settlement"
+                        bindtap="settlement">去结算x{{shoppingCatNum}}</button>
+            </form>
+        </view>
+    </view>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

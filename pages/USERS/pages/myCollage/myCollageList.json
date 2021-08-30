@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "我的拼团",
+    "usingComponents": {
+        "bottom-modal": "../../../../components/bottomModal/index"
+    }
+}

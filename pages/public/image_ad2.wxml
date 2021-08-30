@@ -1,0 +1,40 @@
+<!--首页轮播图-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="image_ad2">
+  <view class="banner-view">
+    <view wx:if="{{content.content.nav_list && content.content.nav_list.length>0}}">
+      <image class="banner-bgi" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/hx.png" />
+    </view>
+    <view wx:if="{{content.content.nav_list && content.content.nav_list.length>1}}" class="banner-list banner-list{{content.content.displayStyle}}">     
+      <block>
+        <swiper class="banner-swiper" indicator-dots="{{content.content.nav_list&&content.content.nav_list.length>1?true:false}}" 
+        circular indicator-color="rgba(255,255,255,0.5)" indicator-active-color="#ffffff" 
+        autoplay
+        >
+          <block wx:for-items="{{content.content.nav_list}}" wx:key="index">
+            <swiper-item class="banner-item" bindtap="{{item.url=='ad_scan'?'ad_scan':''}}">
+              <navigator open-type="{{item.type=='switchTab'?'reLaunch':'navigate'}}" url="{{filter.urlTransform(item.url)}}" hover-class="none">
+                <image
+                mode="{{content.content.fillType==1 && index==0?'widthFix':content.content.fillType==1?'aspectFill':'aspectFit'}}" 
+                src="{{item.image}}" data-sindex="{{tempIndex}}" bindload="{{content.content.fillType==1 && index==0?'imgHeight':'imgHeight'}}"></image>
+              </navigator>
+              <view class="banner-text">{{item.title}}</view>
+            </swiper-item>
+          </block>
+        </swiper>
+      </block>
+    </view>
+    <!-- 图片导航为一张图时 -->
+    <view class="pic-one-box" wx:elif="{{content.content.nav_list && content.content.nav_list.length==1}}">
+      <navigator wx:for="{{content.content.nav_list}}" wx:key="index"
+      url="{{filter.urlTransform(item.url)}}" 
+      open-type="{{item.type=='switchTab'?'reLaunch':'navigate'}}" 
+      catchtap="{{item.url=='ad_scan'?'ad_scan':''}}">
+        <image 
+        mode="widthFix" 
+        src="{{item.image}}">
+        </image>
+      </navigator>
+    </view>
+  </view>
+</template>

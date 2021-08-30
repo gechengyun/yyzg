@@ -1,0 +1,266 @@
+<!--pages/presale/index.wxml-->
+<import src="../../../../wxParse/wxParse.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="presale {{pageTheme}}">
+    <view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+        <official-account binderror="officialAccountError"></official-account>
+    </view>
+    <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+    <block wx:if="{{allInfo.ProductImages.length>1}}">
+        <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="b_banner" indicator-active-color="{{themeColorValue}}">
+            <block wx:for="{{allInfo.ProductImages}}" wx:key="">
+                <swiper-item>
+                    <image src="{{item.image}}" data-src="{{item.image}}" class="slide-image" mode="aspectFill" />
+                </swiper-item>
+            </block>
+        </swiper>
+    </block>
+    <block wx:else>
+        <view class="b_banner">
+            <image wx:for="{{allInfo.ProductImages}}" wx:key="{{index}}" src="{{item.image}}" mode="aspectFill"></image>
+        </view>
+    </block>
+    <view class="status clearfix">
+        <view class="statusRow fr {{(presale_info.a_open==2 || presale_info.sold_out_pre) ?'stopRow':''}}">
+            <view class="row {{presale_info.sold_out_pre ? 'stopdiv':''}}" wx:if="{{presale_info.a_open!=2}}">
+                <!--判断商品是否售罄-->
+                <block wx:if="{{presale_info.sold_out_pre}}">
+                    <p>商品已售罄</p>
+                </block>
+                <block wx:else>
+                    <p class="h2 red" wx:if="{{presale_info.a_open==0}}">开启倒计时：</p>
+                    <p class="h2 red" wx:if="{{presale_info.a_open==1}}">预定截止：</p>
+                    <view class="countDown">
+                        <span>{{total_show}}</span>
+                        <em>天</em>
+                        <span>{{hours_show}}</span>
+                        <em>时</em>
+                        <span>{{minutes_show}}</span>
+                        <em>分</em>
+                        <span>{{seconds_show}}</span>
+                        <em>秒</em>
+                    </view>
+                </block>
+            </view>
+            <view class="row stopdiv" wx:else>
+                <p>已结束</p>
+            </view>
+        </view>
+        <view class="priceRow {{presale_info.a_open==2?'stopRow':''}}">
+            <view class="wrap">
+                预售定金：
+                <em>￥{{presale_info.dingjin}}</em>
+            </view>
+        </view>
+    </view>
+
+    <view class="shareBlock clearfix">
+        <!-- <button class="fr shareBtn" open-type="share" bindtap="shareClick"> -->
+        <button class="fr shareBtn" bindtap="showModal">
+            <i class="iconfont icon-share1"></i>
+            <p>分享</p>
+        </button>
+        <view class="name">
+            <view class="table">
+                <view class="t_cell">
+                   <text class='ziying theme-bg-color' wx:if="{{allInfo.productInfo.is_self_support==0}}">自营</text> {{presale_info.product_name}}
+                </view>
+                
+            </view>
+        </view>
+        <view class="proData">
+            <view class="wrap clearfix">
+                <span>已定：{{presale_info.presale_person*1 + presale_info.pre_buyer_count*1}}</span>
+                <span>库存：{{current_quantity}}</span>
+            </view>
+        </view>
+    </view>
+    <block wx:if="{{isAttr}}">
+        <view class="attrBlock" data-bindtap="showItemWindow" bindtap="showItemWindow" wx:if="{{presale_info.a_open==1 && !presale_info.sold_out_pre}}">
+            <view class="wrap clearfix">
+                <span class="fr selectValue">{{(attrText=='' || attrText == undefined) ? '属性选择' : attrText}}
+                    <i class="iconfont icon-xiayibu"></i>
+                </span>
+                <span class="fl tit">
+                    <i class="iconfont icon-label"></i>请选择规格</span>
+            </view>
+        </view>
+    </block>
+
+    <view class="d_desc">
+        <view class="hdTit">
+            <view class="h3">—
+                <text style="font-weight:600;"> 预售规则 </text>—</view>
+        </view>
+
+        <view class="labelBlock">
+            <view class="wrap clearfix">
+
+                <view class="fl iden iden_1">
+                    <p>交定金</p>
+                </view>
+                <view class="ofh d_detail">
+                    <p class="h3 red">注意：定金不退</p>
+                    <p class="h2">预定截止：{{endTime}}</p>
+                </view>
+
+            </view>
+        </view>
+        <view class="labelBlock">
+            <view class="wrap clearfix">
+                <view class="fl iden iden_2">
+                    <p>付尾款</p>
+                </view>
+                <view class="ofh d_detail">
+                    <view class="gift">
+                        <span class="span1" wx:if="{{power.cash && power.cash * 1 != 0}}">减{{power.cash}}元</span>
+                        <span class="span2" wx:if="{{power.coupon}}">赠优惠券</span>
+                        <span class="span3" wx:if="{{power.present}}">送赠品</span>
+                    </view>
+                     <p class="h2" >尾款开始：{{start_paytime}}
+                        <i wx:if="{{power.cash && power.cash * 1 != 0}}" class="thisArrow iconfont {{textDescShow?'icon-shang':'icon-xia'}}" bindtap="thisArrowClcik"></i>
+                    </p>
+                    <p class="h2" >尾款截止：{{finalPaytime}}
+                        <i wx:if="{{power.cash && power.cash * 1 != 0}}" class="thisArrow iconfont {{textDescShow?'icon-shang':'icon-xia'}}" bindtap="thisArrowClcik"></i>
+                    </p>
+                </view>
+            </view>
+        </view>
+        <view class="textDesc" wx:if="{{textDescShow}}">
+            <view class="wrap">
+                <view class="thisText">
+                    <p wx:if="{{power.cash && power.cash * 1 != 0}}">
+                        <span>【减现金】：尾款可减免
+                            <em>￥{{power.cash}}</em>
+                        </span>
+                    </p>
+                    <p wx:if="{{power.coupon}}">
+                        <span>【赠优惠券】：{{power.coupon.name}}，赠完即止~
+                        </span>
+                    </p>
+                    <p wx:if="{{power.present}}">
+                        <span>【赠品】：{{power.present.name}}
+                        </span>
+                    </p>
+                </view>
+            </view>
+        </view>
+        <view class="labelBlock">
+            <view class="wrap clearfix">
+                <view class="fl iden iden_3">
+                    <p>发货</p>
+                </view>
+                <view class="ofh d_detail">
+                    <p class="h3">商家发货</p>
+                    <p class="h2">尾款支付完毕即可发货</p>
+                </view>
+            </view>
+        </view>
+        <view class="textDesc" wx:if="{{presale_info.description!=''}}">
+            <view class="wrap">
+                <view class="thisText">
+                    <p>
+                        {{presale_info.description}}
+                    </p>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="d_desc" style="padding-bottom:20rpx;">
+        <view class="hdTit">
+            <view class="h3">—
+                <text style="font-weight:600;"> 商品详情 </text>—</view>
+        </view>
+        <view class="thisDesc">
+            <view class='wrap' wx:if="{{presale_info.info != ''}}">
+                <template is="wxParse" data="{{wxParseData:infoHtml.nodes}}" />
+            </view>
+            <view class="showTxt" wx:if="{{presale_info.info == ''}}">
+                <image style="display: inline-block;" src="{{BASE_IMG_URL}}images/imgTxtCommon.png"></image>
+                <view>暂无商品图文详情哦！</view>
+            </view>
+        </view>
+    </view>
+
+    <view class="divLine"></view>
+
+    <!--底部购买按钮-->
+    <form bindsubmit="formSubmit">
+        <view>
+            <button style="bottom:{{store_nav_list_show?'88rpx':0}}" wx:if="{{buttonArr.length == 1}}" form-type="submit" class="ftBtn {{buttonArr[0].color}} {{isIpx}}__footer__btn-group" data-bindtap="{{buttonArr[0].bind}}">{{buttonArr[0].text}}
+            </button>
+            <view style="bottom:{{store_nav_list_show?'88rpx':0}}" class="btnGroup {{isIpx}}__footer__btn-group" wx:if="{{buttonArr.length == 2}}">
+                <button open-type='{{buttonArr[0].bind == "shareClick" ? "share" : ""}}' class="ftBtnChild {{buttonArr[0].class}}" bindtap="{{buttonArr[0].bind}}" data-bindtap="{{buttonArr[0].bind}}">
+                {{buttonArr[0].text}}
+                </button>
+                <button wx:if="{{buttonArr[1].bind != 'shareClick'}}" form-type="submit" class="ftBtnChild {{buttonArr[1].class}}" data-bindtap="{{buttonArr[1].bind}}">
+                {{buttonArr[1].text}}
+                </button>
+            </view>
+        </view>
+    </form>
+    <view class="mask" wx:if="{{maskShow}}" bindtap="maskClick"></view>
+</view>
+<view class="thisItemWindow {{pageTheme}} {{isIpx}}__footer__btn-group" style="bottom:{{store_nav_list_show?'88rpx':'0'}};" wx:if="{{itemWindowShow}}">
+    <view class="itemDetails">
+        <view class="wrap">
+            <view class="hd">
+                <text class="xClosed iconfont icon-cuowu_quan_001" bindtap="maskClick"></text>
+                <view class="pic">
+                    <image src="{{allInfo.ProductImages[0].image}}"></image>
+                </view>
+                <view class="itemDesc">
+                    <p class="h2">
+                        {{presale_info.product_name}}
+                    </p>
+                    <p class="thisPrice">
+                        定金
+                        <em>￥{{total}}</em>
+                    </p>
+                </view>
+            </view>
+            <view class="itemAttrDesc">
+                <span wx:if="{{isAttr}}">
+                    <em>已选：</em>{{attrText}}</span>
+                <span>
+                    <em>总价：</em>￥{{originTotal}}</span>
+                <span wx:if="{{power && power.cash}}">
+               
+                    <block wx:if="{{shoppingData.sku_id}}"><em>到手价：</em>￥{{filter.getFixedPrice((originTotal*1 - power.cash*num))}}</block>
+                    <block wx:else><em>到手价：</em>￥{{filter.getFixedPrice((originTotal*1 - power.cash))}}</block>
+                </span>
+            </view>
+            <view class="itemAttrSet" wx:if="{{isAttr}}">
+                <view class="attrSetBlock" wx:for="{{propertyList}}" wx:key="{{index}}" wx:for-index="id">
+                    <p class="h3">{{item.name}}</p>
+                    <view class="attrBtn">
+                        <span class="{{(shoppingData.specList[id].vid==itemName.vid) ? 'on' : ''}}" wx:for="{{item.values}}" wx:for-item="itemName" wx:key="" data-name="{{itemName.value}}" data-id="{{id}}" data-pid="{{item.pid}}" data-vid="{{itemName.vid}}" wx:if="{{item.values.length>1}}"
+                            bindtap="setMyAttr">
+                            {{itemName.value}}
+                        </span>
+                        <span class="on" wx:for="{{item.values}}" wx:for-item="itemName" wx:key="" data-name="{{itemName.value}}" data-pid="{{item.pid}}" data-vid="{{itemName.vid}}" wx:if="{{item.values.length<2}}">
+                            {{itemName.value}}
+                        </span>
+                    </view>
+                </view>
+            </view>
+            <view class="itemNumSet">
+                <span>购买数量</span>
+                <view class="numCtrl">
+                    <em class="reduce" bindtap="reduceNum"></em>
+                    <input type="" name="" type="number" bindinput="bindKeyInput" disabled maxlength="3" value="{{num}}" />
+                    <em class="add" bindtap="addNum"></em>
+                </view>
+            </view>
+        </view>
+    </view>
+    <form bindsubmit="formSubmit" class="thisWindowBtn">
+        <button form-type="submit" class="ftBtnChild" data-bindtap="gopay">立即预定</button>
+    </form>
+
+</view>
+
+<bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+
+<include src="/pages/public/page_footer.wxml"></include>

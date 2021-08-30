@@ -1,0 +1,6 @@
+<!--pages/SHOPKEEPER//pages/chat/chatList.wxml-->
+<import src="../component/chatList.wxml" />
+<view class="chat-page">
+  <template is="chatList" data="{{sayList,animation:animation,warning:warning,store_nav_list,store_nav_list_show,isOver}}" />
+</view>
+

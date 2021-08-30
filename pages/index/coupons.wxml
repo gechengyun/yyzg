@@ -1,0 +1,62 @@
+<!-- 优惠券页面 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<import src="../public/warning.wxml" />
+<view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+<scroll-view scroll-top="{{scrollTop}}" class="couponsList container {{pageTheme}}" scroll-y="true" bindscrolltolower="bindDownLoad"  data-page="pages.index.couponts">
+		<view class="couponsList" style="height:calc(100vh - 10px);">
+				<view class="iconfont icon-youhuiquan_big shopCoupons" wx:for="{{coupontsData.coupon_list}}" bindtap="receiveCoupons" data-index="{{index}}">
+						<view class="face_money">
+							¥{{filter.transBigNumber(item.face_money, 1)}}
+						</view>
+						<view class="coupon-content">
+						<view data-index="{{index}}" class="coupon-name">
+                <view>{{item.name}}</view>
+						</view>
+						<view class="coupon-tips" data-index="{{index}}" wx:if="{{item.limit_money>0}}">满 {{item.limit_money}}可以使用</view>
+						<view class="coupon-tips" data-index="{{index}}" wx:if="{{item.limit_money==0}}">不限金额使用</view>
+            <!-- <block>
+                <view wx:if="{{item.is_all_product == 0}}">全部商品</view>
+                <view wx:if="{{item.is_all_product == 1}}">指定商品</view>
+            </block> -->
+						<view class="coupon-time" data-index="{{index}}" wx:if="{{item.value_type == 1}}">
+								有效期 {{item.start_time}} 至 {{item.end_time_str}}
+						</view>
+						<view class="coupon-time" data-index="{{index}}" wx:if="{{item.value_type == 0}}">
+								领取后{{item.late_begin==0?'当':item.late_begin}}天生效，有效期{{item.late_value}}天
+						</view>
+					</view>
+					<view class="coupon-status"> 
+            <view class="coupon-status-icon">领取</view>
+            <view class="coupon-status-icon nouser" wx:if="{{item.is_use==1}}">已使用</view>
+					</view>
+						<!-- <view data-index="{{index}}" class="coupon-name">
+								<view>{{item.name}}</view>
+								<view data-index="{{index}}" wx:if="{{item.limit_money>0}}">
+										满 {{item.limit_money}}可以使用
+								</view>
+								<view data-index="{{index}}" wx:if="{{item.limit_money==0}}">不限金额使用</view>
+						</view>
+						<block>
+								<view wx:if="{{item.is_all_product == 0}}">全部商品</view>
+								<view wx:if="{{item.is_all_product == 1}}">指定商品</view>
+						</block>
+						<view data-index="{{index}}" wx:if="{{item.value_type == 1}}">
+								有效期 {{item.start_time}} 至 {{item.end_time_str}}
+						</view>
+						<view data-index="{{index}}" wx:if="{{item.value_type == 0}}">
+								领取后{{item.late_begin==0?'当':item.late_begin}}天生效，有效期{{item.late_value}}天
+						</view>
+						<text data-index="{{index}}">领取</text>
+						<i>{{item.face_money}}</i> -->
+				</view>
+		</view>
+		<view class="promptMsg" wx:if="{{coupontsData.coupon_list==''}}">
+				<text class="iconfont icon-gouwuquanweikong01"></text>
+				<text>暂无购物券</text>
+				<navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">
+						<text>去逛逛</text>
+				</navigator>
+		</view>
+		<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</scroll-view>
+<include src="/pages/public/page_footer.wxml"></include>

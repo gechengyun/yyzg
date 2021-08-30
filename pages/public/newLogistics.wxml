@@ -1,0 +1,59 @@
+
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<!--产品信息通用模板-->
+<template name="newLogistics">
+    <view class="paymentInfo" data-page="page.public.logistics">
+        <view class="open logisticsTitle"  data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}" bindtap="logistics">
+            <text class="iconfont icon-yifahuo"></text>
+            <text data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}" wx:if='{{order.shipping_method=="express"}}'>{{package_list.express_company?package_list.express_company:'快递物流'}}</text>
+            <text data-code="{{package_list.express_code}}" wx:if='{{order.shipping_method!="express" && order.shipping_method!="local" && order.shipping_method!="dangmian"}}'>同城配送</text>
+            
+            <text data-code="{{package_list.express_code}}" data-express="{{package_list.express_no}}">{{package_list.express_no}}</text>
+        </view>
+    </view>
+
+    <block wx:if='{{logisticsShow && order.shipping_method=="express"}}'>
+        <view class="layer" bindtap="logistics"></view>
+        <view class="logisticsLayer" style='background:transparent;'>
+            <view class="logisticsLayerTitle" style='font-weight:bold;background:#f4f4f4;border-radius:20rpx 20rpx 0 0'>物流信息</view>
+            <view class="logisticsList" style='background:#fff;border-radius:0 0 20rpx 20rpx;'>
+                <view wx:if='{{logistics}}' wx:for="{{logistics}}" wx:key="index">
+                    <view class='delivery-view'>
+                      <text>{{item.status}}</text>
+                    </view>
+                    <text>{{item.time}}</text>
+                </view>
+                <view wx:if='{{!logistics}}'>
+                   <view class='delivery-view'>
+                      <text>暂无快递信息</text>
+                    </view>
+                </view>
+
+            </view>
+        </view>
+    </block>
+
+    <block wx:if="{{logisticsShow && order.shipping_method!='express'}}">
+        <view class="layer" bindtap="logistics"></view>
+        <view class="logisticsLayer" style='background:transparent;'>
+            <view class="logisticsLayerTitle" style='font-weight:bold;background:#f4f4f4;border-radius:20rpx 20rpx 0 0'>物流信息</view>
+            <view class="logisticsList" style='background:#fff;border-radius:0 0 20rpx 20rpx;'>
+                <view wx:if='{{package_list.o2odeliveryinfo}}' wx:for="{{package_list.o2odeliveryinfo}}" wx:key="">
+                    <view class='delivery-view'>
+                      <text>{{item.phone}}</text>
+                      <text>{{item.name}}</text>
+                      <text>{{item.time}}</text>
+                    </view>
+                    <text>{{item.msg}}</text>
+                </view>
+                <view wx:if='{{!package_list.o2odeliveryinfo}}' class='logistics-box'>
+                  <text wx:if='{{package_list.sign_name}}'>签收人：{{package_list.sign_name}}</text>
+                  <text wx:if='{{package_list.sign_timestr}}'>签收时间：{{package_list.sign_timestr}}</text>
+                  <text wx:if='{{package_list.arrive_timestr}}'>送达时间:{{package_list.arrive_timestr}}</text>
+                  <text wx:if='{{package_list.send_timestr}}'>正在配送中:{{package_list.send_timestr}}</text>
+                  <text wx:if='{{package_list.fetch_timestr}}'>配送员店取货:{{package_list.fetch_timestr}}</text>
+                </view>
+            </view>
+        </view>
+    </block>
+</template>

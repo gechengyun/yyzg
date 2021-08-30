@@ -1,0 +1,61 @@
+<!--pages/activityModule/index.wxml-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<view class="activity_module_page {{pageTheme}}">
+    <view class="activity_header" wx:if="{{tabs.length !== 1}}">
+        <block wx:for="{{tabs}}" wx:key="{{item.index}}">
+            <view class="{{item.active?'active ':''}}activity_header_item" bindtap="clickTab"
+                  data-t_index="{{item.index}}">
+                {{item.name}}
+            </view>
+        </block>
+    </view>
+    <scroll-view scroll-y class="activity_list" bindscrolltolower="scrollToLower" style="{{listStyle}}" lower-threshold="{{tabs.length !== 1?80:158}}">
+        <block wx:for="{{filterActivitiesList}}" wx:key="{{item.pigcms_id}}">
+            <view class="activity_list_item">
+                <navigator class="activity_list_item_wrap"
+                           hover-class="none"
+                           url="{{filter.getPageUrl(item.type,item.pigcms_id)}}"
+                           open-type="navigate">
+                    <view class="item_image">
+                        <image src="{{item.image}}"></image>
+                    </view>
+                    <view class="item_description">
+                        <view class="activity_time" style="{{item.activity_time_style || ''}}">
+                            <time-count-down endTime="{{item.endTime}}"
+                                             startTime="{{item.startTime}}"
+                                             activityType="{{item.type}}"
+                                             activityId="{{item.pigcms_id}}"
+                                             bind:_onActivityStatusChange="_onActivityStatusChange"
+                            ></time-count-down>
+                        </view>
+                        <view class="activity_name"><text class="theme-bg-color"id="ziying_text" wx:if="{{item.is_self_support == 0}}">自营</text>{{item.product_name}}</view>
+                        <view class="price_content">
+                            <view class="activity_tip activity_tip_{{item.type}}">{{item.tips}}</view>
+                            <view class="price_detail">
+                                <block wx:if="{{item.type==1 && item.dingjin}}">
+                                    <text class="activity_price_rmb">定金:￥</text>
+                                    <text class="activity_min_price">{{item.dingjin}}</text>
+                                </block>
+                                <block wx:elif="{{item.type==2 && item.start_price}}">
+                                    <text class="activity_price_rmb">￥</text>
+                                    <text class="activity_min_price">{{item.start_price}}</text>
+                                </block>
+                                <block wx:elif="{{item.type==4 && item.min_price}}">
+                                    <text class="activity_price_rmb">底价:￥</text>
+                                    <text class="activity_min_price">{{filter.getFixedPrice(item.min_price)}}</text>
+                                </block>
+                                <block wx:elif="{{item.type==5 && item.seckill_price}}">
+                                    <text class="activity_price_rmb">￥</text>
+                                    <text class="activity_min_price">{{item.seckill_price}}</text>
+                                </block>
+                                <text wx:if="{{item.price}}" class="activity_price">￥{{item.price}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </navigator>
+            </view>
+        </block>
+    </scroll-view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

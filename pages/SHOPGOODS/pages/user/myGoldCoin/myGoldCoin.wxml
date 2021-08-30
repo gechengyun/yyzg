@@ -1,0 +1,147 @@
+<!--pages/SHOPGOODS//pages/user/myGoldCoin/myGoldCoin.wxml-->
+<import src="../../../../public/warning.wxml" />
+<wxs src="../../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="gold {{pageTheme}}">
+  <view class='gold-header'>
+		<view class='item  {{btn_index==0?"theme-color":""}}' data-index='0' catchtap='switchTab'>
+			{{cashConfig.coin_name}}<view class='line {{btn_index==0?"theme-bg-color":""}}'></view>
+		</view>
+		<view class='item  {{btn_index==1?"theme-color":""}}' data-index='1' catchtap='switchTab'>
+			充值记录<view class='line {{btn_index==1? "theme-bg-color": ""}} '></view>
+		</view>
+    <view class='item  {{btn_index==2?"theme-color":""}}' data-index='2' catchtap='switchTab'>
+			{{cashConfig.coin_name}}明细<view class='line {{btn_index==2? "theme-bg-color": ""}} '></view>
+		</view>
+	</view>
+	<view style="height: 100rpx;"></view>
+  <block wx:if="{{btn_index==0}}">
+		<!-- 普通用户 -->
+		<view class="cash-type" wx:if="{{!cashConfig.is_anchor}}">
+      <view class="cash-title">
+        <view>我的{{cashConfig.coin_name}}<text class="cash-title-num">{{cashConfig.coin_total}}</text></view>
+				<navigator class="theme-color" url="/pages/SHOPGOODS/pages/user/recharge/recharge">充值>></navigator>
+      </view>
+    </view>
+		<!-- 主播 -->
+    <view class="cash-type" wx:if="{{cashConfig.is_anchor}}">
+      <view class="cash-title">
+        <view>
+					<view>我的{{cashConfig.coin_name}}<text class="cash-title-num">{{cashConfig.coin_total}}</text></view>
+        	<!-- <view class="cash-title-unnum">不可提现{{cashConfig.coin_name}}  {{cashConfig.no_withdraw}}</view> -->
+				</view>
+				<navigator class="theme-color" url="/pages/SHOPGOODS/pages/user/recharge/recharge">充值>></navigator>
+      </view>
+			<!-- <view class="balance-tip">请输入提取{{cashConfig.coin_name}}</view>
+			<view class="cashmoney">
+				<view class='money'>
+					<input placeholder='请输入{{cashConfig.coin_name}}数' bindinput="changeMoneyNum" placeholder-style='color:#333;' type='number' value='{{amount}}'></input>
+				</view>
+				<view class="give-money">
+					<text>兑换金额：</text>
+					<input placeholder='兑换金额' placeholder-style='color:#bbb;' value="{{giveAmount}}" disabled="{{true}}"></input>
+				</view>
+				<view class="balance-tips" style="color: {{themeColorValue}}">
+					<text>*</text>
+					<text>{{cashConfig.coin_name}}兑换比例为：{{cashConfig.use_gold_coin}}{{cashConfig.coin_name}}={{cashConfig.get_money}}元人民币，{{cashConfig.coin_name}}兑换金额直接进入直播收益，可在直播收益中提现至账户</text>
+				</view>
+			</view>
+			<view class="cash-des">
+				<view class="cash-des-content" wx:if="{{0}}">
+					<view class="cash-des-title">提现说明</view>
+					<view class="cash-des-list">
+						<view class="cash-des-item">1、支付宝账户绑定，指您指定的银行卡账户（以下简称“银行卡”）和支付宝账户关联并绑定</view>
+					</view>
+				</view>
+				<view class="cash-des-content">
+					<view class="cash-des-title">提现规则</view>
+					<view class="cash-des-list">
+						<view class="cash-des-item">1、收到打赏的金币可提现</view>
+						<view class="cash-des-item">2、{{cashConfig.use_gold_coin}}{{cashConfig.coin_name}}可提现{{cashConfig.get_money}}元人民币</view>
+						<view class="cash-des-item">3、提现将直接提现至微信零钱</view>
+					</view>
+				</view>
+			</view>
+			<view class="submit-btn">
+				<view class='txbtn theme-bg-color' style="background:{{amount!=0?'':'#e1e1e1'}}" catchtap='{{amount!=0?"getMycash":""}}'>立即兑换</view>
+				<view class='txbtn theme-bg-color go-live-money' catchtap='goLiveMoney' wx:if="{{teamType != 2}}">查看直播收益</view>
+			</view> -->
+    </view>
+		<!-- 兑换明细 -->
+		<!-- <view class="cash-list" wx:if="{{cashConfig.is_anchor}}">
+			<view class="cash-list-title"><view class='line-left theme-bg-color}}'></view>兑换明细</view>
+			<view class="cash-box" wx:if="{{cashList.list.length>0}}">
+				<view class="list-item" wx:for="{{cashList.list}}" wx:key="index">
+          <view class="li-left">
+            <view class="li-time">
+              <text>兑换时间：{{item.complete_time}}</text>
+							<text class="exam-status" style="background-color:#{{1?'f88192':'70baff'}}" wx:if="{{0}}">{{1?'审核中':'交易完成'}}</text>
+            </view>
+            <view class="li-order">
+              <text>兑换金币数：{{item.total}}</text>
+              <text class="order-copy" data-ordernum="{{item.trade_no}}" bindtap="orderCopy" wx:if="{{0}}">复制</text>
+            </view>
+						<view>兑换金额：{{item.profit}}</view>
+          </view>
+          <view class="li-right" style="color:{{item.money*1>0?'green':''}}" wx:if="{{0}}">{{item.money*1>0?'+':''}}{{item.money}}￥190</view>
+        </view>
+				<view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+					<text>没有更多数据</text>
+				</view>
+			</view>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+		</view> -->
+	</block>
+  <!--充值记录-->
+	<block wx:if="{{btn_index==1}}">
+		<view class="cash-box" wx:if="{{rechargeList.list.length>0}}">
+			<view class="list-item" wx:for="{{rechargeList.list}}" wx:key="index">
+				<view class="li-left">
+					<view class="li-time">
+						<text class="pay-type">{{item.pay_type}}</text>
+						<text class="exam-status trade-status">交易完成</text>
+					</view>
+					<view class="li-order">
+						<text>订单号：{{item.trade_no}}</text>
+						<text class="order-copy" data-ordernum="{{item.trade_no}}" bindtap="orderCopy">复制</text>
+					</view>
+				</view>
+				<view class="li-right">
+					<view class="lr-time">{{item.paid_time}}</view>
+					<view>￥{{item.recharge_money}}</view>
+				</view>
+			</view>
+			<view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+				<text>没有更多数据</text>
+			</view>
+		</view>
+		<view wx:else class='pages_no_data'>
+			<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+			<view style='color:{{themeColorValue}}'>暂无数据</view>
+		</view>
+	</block>
+	<!--打赏记录-->
+	<block wx:if="{{btn_index==2}}">
+		<view class="cash-box reward-box" wx:if="{{rewardList.list.length>0}}">
+				<view class="reward-list-item" wx:for="{{rewardList.list}}" wx:key="index">
+					<view class="reward-time">使用时间：{{item.add_time}}</view>
+					<view class="reward-live-title">{{item.live_title}}</view>
+					<view class="reward-live-mes">
+						<view class="reward-name reward-live-mes-item">主播：{{item.anchor_name}}</view>
+						<view class="reward-gold reward-live-mes-item">{{item.type_code==2?'打赏':item.type_code==3?'获得':''}}{{rewardList.coin_name}}数：{{item.reward_coin}}</view>
+					</view>
+        </view>
+        <view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+					<text>没有更多数据</text>
+				</view>
+			</view>
+			<view wx:else class='pages_no_data'>
+				<image src='{{BASE_IMG_URL}}images/imgTxtCommon.png' mode='aspectFill' style='width:200rpx;height:200rpx'> </image>
+				<view style='color:{{themeColorValue}}'>暂无数据</view>
+			</view>
+	</block>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

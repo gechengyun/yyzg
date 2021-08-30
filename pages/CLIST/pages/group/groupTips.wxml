@@ -1,0 +1,22 @@
+<!--pages/CLIST//pages/group/groupList.wxml-->
+<!-- productList:productList, -->
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/shoppingCat.wxml" />
+<!-- 购物袋 -->
+<import src="../../../public/editProductSearch.wxml" />
+<import src="../component/groupProductTpl.wxml"></import>
+<!-- 商品分组3 -->
+<import src="../../../public/productList.wxml" />
+<view class="groupTipsCom {{}}">
+  <view class=" editProduct ">
+    <template is="search" data="{{themeColorValue,BASE_IMG_URL,showSearch,fiexdTop:true}}" />
+    <template is="productList" wx:if='{{shopHomeData.product_list&&shopHomeData.product_list.length>0}}' data="{{content:shopHomeData,themeColorValue}}" />
+    <block wx:if="{{shoppingData.shoppingShow}}">
+      <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show}}" />
+    </block>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+    <!-- 数据加载状态 -->
+    <view class='no-data'>{{load_txt}}</view>
+  </view>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

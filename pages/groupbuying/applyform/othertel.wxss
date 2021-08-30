@@ -1,0 +1,33 @@
+.apply-form-input text{
+  flex: 1;
+  font-size: 28rpx;
+  color: #333;
+}
+.swith-btn-wrap{
+  position: relative;
+  width: 120rpx;
+	height: 58rpx;
+	background-color: #ffffff;
+	border-radius: 29rpx;
+	border: solid 1rpx #d6d6d6;
+}
+.swith-btn{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 52rpx;
+	height: 52rpx;
+	background-color: #ffffff;
+	box-shadow: 0px 0px 16rpx 0px 
+		rgba(6, 6, 6, 0.18);
+    border-radius: 50%;
+	border: solid 1rpx #f0f0f0;
+}
+.other-getcode{
+ border:solid 1rpx #ff6030!important;
+	color: #ff6030;
+  background: none;
+}
+.other-getcode::after{
+  border: none;
+}

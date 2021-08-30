@@ -1,0 +1,43 @@
+<view class="bargainIndex">
+<block wx:if="{{imgUrls.length>1}}">
+	<swiper indicator-dots="{{indicatorDots}}"
+	  autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" class="b_banner">
+	  <block wx:for="{{imgUrls}}">
+	    <swiper-item>
+	      <image src="{{item}}" class="slide-image"  mode="aspectFill" />
+	    </swiper-item>
+	  </block>
+	</swiper>
+</block>
+<block wx:else>
+	<view class="b_banner">
+		<image wx:for="{{imgUrls}}" src="{{item}}" mode="aspectFill"></image>
+	</view>
+</block>
+ <scroll-view scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" class="list">
+ 	<view class="ul">
+ 		<view class="li" wx:for="{{list}}">
+			 <view class="wrap">
+			 	<view class="pic fl">
+			 		<span>仅剩{{item.inventory}}件</span>
+			 		<image src="{{item.pic}}"></image>
+			 	</view>
+			 	<view class="desc">
+			 		<view class="h3">{{item.title}}</view>
+			 		<p class="price_o">￥{{item.original_price}}</p>
+			 		<p class="price_n"><span>底价</span>￥{{item.price}}</p>
+
+			 		<view class="btn" bindtap="goDetails" data-id="{{item.id}}">立即砍价</view>
+			 	</view>
+			 </view>
+ 		</view>
+ 	</view>
+
+</scroll-view>
+
+
+
+
+
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

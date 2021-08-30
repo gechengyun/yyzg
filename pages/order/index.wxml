@@ -1,0 +1,36 @@
+<!--我的订单详情页面-->
+<import src="../public/payment.wxml" />
+<import src="../public/logistics.wxml" />
+<view class="container payment" data-page="page.order.index">
+    <template is="payment" data="{{paymentData:orderData,postage:postage,orderAddress:orderAddress,store_nav_list}}" />
+    <template is="logistics" wx:for="{{orderData.t}}" data="{{package_list:item,logistics:logistics,logisticsShow:logisticsShow}}" />
+    <view class="paymentButton  two" wx:if='{{orderData.order.status==1}}'>
+        <view bindtap="cancelOrder">取消订单</view>
+        <view bindtap="paymentGo">去支付</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==0}}'>
+        <view bindtap="paymentGo">去支付</view>
+    </view>
+    <view class="paymentButton  {{(orderData.product_list[0].has_return==true)&&(orderData.product_list[0].is_return==true)?'two':''}}" wx:if='{{orderData.order.status==2}}'>
+        <view bindtap="cancelOrder" wx:if="{{orderData.product_list[0].is_return==true}}" bindtap="applyRefundGo" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">申请退货</view>
+        <view bindtap="cancelOrder" wx:if="{{orderData.product_list[0].has_return==true}}" bindtap="returnGo" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">查看退货</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==6}}'>
+        <view bindtap="returnGo" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">查看退货</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==3}}'>
+        <view bindtap="completeReceipt">确认收货</view>
+    </view>
+    <view class="paymentButton {{orderData.product_list[0].is_return==true?'two':''}}" wx:if='{{orderData.order.status==7}}'>
+        <view bindtap="applyRefundGo" wx:if="{{(orderData.product_list[0].is_return==true)}}" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">申请退货</view>
+        <view bindtap="cancelOrder" bindtap="completeOrder" data-order="{{orderData.order.order_no_txt}}">交易完成</view>
+    </view>
+    <view class="paymentButton" wx:if='{{orderData.order.status==7}}'>
+        <view bindtap="returnGo" wx:if="{{(orderData.product_list[0].has_return==true)}}" data-order="{{orderData.order.order_no_txt}}" data-id="{{orderData.product_list[0].pigcms_id}}">查看退货</view>
+    </view>
+    <!--     <view class="paymentButton">
+        <view bindtap="cancelOrder" bindtap="joinGo" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">查看团详情</view>
+    </view> -->
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

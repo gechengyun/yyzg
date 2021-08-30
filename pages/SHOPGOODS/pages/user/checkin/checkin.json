@@ -1,0 +1,10 @@
+{
+  "usingComponents": {
+    "bottom-modal": "../../../../../components/bottomModal/index",
+    "dialog-modal": "../../../../../components/dialog/index"
+  },
+  "navigationBarTitleText": "签到中心",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark",
+  "onReachBottomDistance": 0
+}

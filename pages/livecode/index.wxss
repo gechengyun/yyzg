@@ -1,0 +1,127 @@
+/* pages/livecode/qrcode.wxss */
+
+page{
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    overflow: hidden;
+}
+.live-code-page{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden；
+}
+
+.live-code-main-content{
+    position: relative;
+    margin: 20rpx auto 20rpx auto;
+    width: 690rpx;
+    height: 859rpx;
+    background-color: transparent;
+    border-radius: 15rpx;
+    box-shadow: 0 0 30rpx #ededed;
+    overflow: hidden;
+}
+.live-code-main-title{
+    height: 42rpx;
+    font-size: 44rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 60px;
+    color: #333333;
+    margin-top: 67rpx;
+    margin-left: 59rpx;
+}
+.live-code-underline{
+    width: 41rpx;
+    height: 9rpx;
+    background-color: #2ece6f;
+    margin-left: 62rpx;
+    margin-top: 55rpx;
+}
+.live-code-header{
+    display: flex;
+    margin-top: 55rpx;
+    width: 100%;
+}
+.live-code-logo{
+    width: 98rpx;
+    height: 98rpx;
+    margin-left: 58rpx;
+}
+.live-code-logo image{
+    border-radius: 50%;
+}
+.live-code-shop{
+    background: transparent;
+    margin-left: 15rpx;
+}
+.live-code-shop-name{
+    height: 25rpx;
+    font-size: 26rpx;
+    line-height: 60rpx;
+    color: #333333;
+    opacity: 0.8;
+}
+.live-code-desc{
+    height: 68rpx;
+    font-size: 34rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 90rpx;
+    color: #333333;
+    width: 500rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.live-code-qrcode{
+    width: 444rpx;
+    height: 439rpx;
+    margin: 0 auto;
+    margin-top: 80rpx;
+}
+.live-code-tips{
+    margin: 0 auto;
+    height: 27rpx;
+    width: 90%;
+    text-align: center;
+    font-size: 26rpx;
+    line-height: 26rpx;
+    color: #333333;
+    opacity: 0.5;
+}
+.live-code-btns button{
+    width: 253rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    border-radius: 10rpx;
+    text-align: center;
+    margin-left: 81rpx;
+    display: inline-block;
+    color: #ffffff;
+    float: left;
+    margin-top: 50rpx;
+}
+.live-code-bg-1{
+    top: -80rpx;
+    right: -150rpx;
+    position: absolute;
+    width: 550rpx;
+    height: 391rpx;
+    z-index: -1;
+}
+.live-code-bg-2{
+    left: -120rpx;
+    bottom: 80rpx;
+    position: absolute;
+    width: 300rpx;
+    height: 213rpx;
+    opacity: 0.62;
+    z-index: -1;
+    transform: rotate(110deg);
+}

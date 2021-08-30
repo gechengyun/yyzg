@@ -1,0 +1,13 @@
+<template name="confirm">
+  <view class="confirm">
+    <view class="confirm-content">
+      <view class="confirm-top">
+        {{content}}
+      </view>
+      <view class="confirm-bottom">
+        <view class="noconfirm-btn" bindtap="cancelhandle" data-type="{{type}}">{{cancelText}}</view>
+        <view class="confirm-btn" bindtap="confirmhandle" data-type="{{type}}">{{confirmText}}</view>
+      </view>
+    </view>
+  </view>
+</template>

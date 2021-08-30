@@ -1,0 +1,71 @@
+<!--商品列表模板-支付页面-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="shoppingProductPay">
+    <!-- <import src="../public/shoppingProduct2.wxml" /> -->
+
+    <view class="shoppingProduct shoppingPayment clearfix" wx:if='{{index<(NUM?NUM:1000)}}' style='background:#fff;' data-page="page.public.shoppingProduct2">
+
+            <view class="shoppingImg">
+                <navigator url="{{filter.toTruePage(paymentData.order.is_travel_drp,paymentData.order,product.product_id,paymentData.order.data_id,paymentData.order.activity_id)}}" hover-class="none" open-type="navigate">
+                    <image src="{{product.image}}" mode="aspectFill"></image>
+                </navigator>
+            </view>
+            <view class="shoppingInfo clearfix">
+                <navigator url="{{filter.toTruePage(paymentData.order.is_travel_drp,paymentData.order,product.product_id,paymentData.order.data_id,paymentData.order.activity_id)}}" hover-class="none" open-type="navigate">
+                    <view class="shoppingName textOmitted2" style="margin-bottom:5rpx;">{{product.name}}
+                    </view>
+                </navigator>
+                <view class="infoContent clearfix">
+                    <text wx:if="{{product.pro_num}}">×{{product.pro_num}}</text>
+                    <view class="isChannel" wx:if="{{product.is_can_channel_pay && product.is_can_channel_pay==1}}" style="color:{{themeColorValue}};border-color:{{themeColorValue}};">{{paymentData.channel.privilege_name}}</view>
+                    <view style="font-size:12px" style='font-weight:bold;color:#ff5c1c;margin-bottom:5rpx;'>{{paymentData.order.homeservicetime}}</view> 
+                    <view class='service_btn' wx:if='{{product.special_product_type==95}}'>上门服务</view>
+                   
+                    <text class="price" wx:if="{{product.price}}" style='font-size:24rpx;'>¥{{product.price}}</text>
+                    <text class="price" wx:if="{{product.pro_price}}" decode="{{true}}" style='font-size:24rpx;'>
+                        <block  wx:if="{{paymentData.order.is_point_exchange==1}}"><text class="iconfont icon-jifen"></text>{{product.point_exchange_num}} + </block>
+                        <block>¥{{product.pro_price}}</block>
+                        <block wx:if="{{product.is_present*1}}"> &nbsp;&nbsp;赠送</block>
+                        <block wx:if="{{(product.discount)&&(product.is_present=='0')&&(paymentData.hide_discount != 1)&&(paymentData.order.is_point_exchange!=1)}}"> &nbsp;&nbsp;{{product.discount!=10?product.discount+'折':''}}</block>
+                    </text>
+                    <text class="shoppingSole" wx:if="{{product.quantity}}">库存:{{product.quantity}}</text>
+                    <text class="shoppingSole" wx:if="{{product.sku_data_arr}}">
+                        <block wx:for="{{product.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="index">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                    </text>
+                    <text class="shoppingSole" wx:if="{{product.sku_arr}}">
+                        <block wx:for="{{product.sku_arr}}" wx:for-item="sku_data_arr" wx:key="index">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                    </text>
+                </view>
+                <view class="showMessage clearfix" wx:if="{{product.comment_arr != '' && product.comment_arr != undefined && type != 10}}" bindtap="showMessage">
+                    <text>查看留言</text>
+                </view>
+            </view>
+
+        <view class="orderButton" wx:if="{{(status*1!=0)&&(status*1!=1)&&(status*1!=3)&&(status*1!=4)&&status&&type*1!=10}}">
+            <view wx:if="{{product.is_return==true&&status*1!=5&&product.is_present*1 != 1&&(!(paymentData.order.ishomeservice==1 && status==7)) && paymentData.order.payment_method == 'channel'}}" bindtap="goldRefund" class="gold-refund">申请退货1</view>
+            <view wx:if="{{product.is_return==true&&status*1!=5&&product.is_present*1 != 1&&(!(paymentData.order.ishomeservice==1 && status==7)) && paymentData.order.payment_method != 'channel'}}" bindtap="applyRefundGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}" data-status="{{status}}" data-type="{{type}}">申请退货</view>
+            <view wx:if="{{product.has_return==true}}" bindtap="returnGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">查看退货</view>
+            <!--<view wx:if="{{product.is_rights==true}}" bindtap="applyRightsGo" data-order="{{order_no_txt}}" data-id="{{product.pigcms_id}}">申请维权</view>-->
+            <view wx:if="{{product.has_rights==true}}" bindtap="rightsGo" data-pid="{{product.pigcms_id}}" data-order_no="{{order_no_txt}}">查看维权</view>
+        </view>
+        <view class="circle-buy-deliver-info" wx:if="{{paymentData.deliver_data.deliver_list.length > 0}}">
+            {{filter.parseDeliverOrderInfo(paymentData.deliver_data.deliver_list[0])}}配送 共{{paymentData.deliver_data.deliver_num}}期 {{filter.parseProLong(paymentData.deliver_data.prolong_num)}}
+        </view>
+        <block wx:if="{{product.comment_arr}}">
+            <view class="layer" bindtap="showPayment" style="display:{{showMessage ? 'block' : 'none'}};"></view>
+            <scroll-view class="showMessageLayer" scroll-top="0" height="900rpx;" scroll-y="true" style="display:{{showMessage ? 'block' : 'none'}};">
+                <view class="showMessageLayerTitle">查看留言</view>
+                <view class="messageUlList">
+                    <view class="listItem {{item.type=='image' ? 'imageItem' : ''}}" wx:for="{{product.comment_arr}}" wx:key="index">
+                        <view class="itemLabel">{{item.name}}</view>
+                        <view class="itemBox"  wx:if="{{item.type != 'image'}}">{{item.value}}</view>
+                        <view class="itemBox"  wx:if="{{item.type == 'image'}}">
+                            <image wx:for="{{item.value}}" wx:for-item="itemImage" wx:key="index" src="{{itemImage}}"></image>
+                        </view>
+                    </view>
+                </view>
+                <!-- <view class="showMessageLayerTitle showPayment" bindtap="showPayment">查看订单</view> -->
+            </scroll-view>
+        </block>
+    </view>
+</template>

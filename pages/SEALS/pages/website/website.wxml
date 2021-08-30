@@ -1,0 +1,28 @@
+<!--pages/SEALS//pages/website/website.wxml-->
+<import src="../../component/contact.wxml"></import>
+<import src="../../component/showVideo.wxml"></import>
+<view class="container {{pageTheme}}">
+  <view>
+    <swiper class="bannerSwiper" autoplay="true" interval="5000" indicator-dots="true" indicator-active-color="{{themeColorValue}}">
+      <swiper-item wx:for-items="{{3}}" wx:key="menuId">
+        <!-- <image src="{{item.image}}" mode="scaleToFill"></image> -->
+        <image src="../../../../images/white_bg.png" mode="scaleToFill"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+  <view class="culture content">
+    <view class="title">企业文化</view>
+    <view class="c-content">叮叮咚是海南智造慧科技有限公司（智造慧）旗下针对企业销售人员推出的一款销售管理APP软件。叮叮咚从2017年年中正式立项，产品主要分为三个模块：公司介绍、营销传播、运营管理，其旨在帮助企业解决销售管理问题。</view>
+    <image src="https://s.404.cn/applet/images/wxcopy/shop_08.png" mode="widthFix"></image>
+  </view>
+  <view class="company-video content">
+    <view class="title">公司视频</view>
+    <template is="video" data="{{videoData:webDatas}}"/>
+    <view class="video-title">
+      <text wx:for="{{7}}">MARKANT 电话亭</text>
+    </view>
+  </view>
+  <template is="contact"/>
+</view>
+
+

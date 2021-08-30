@@ -1,0 +1,74 @@
+<view class='{{pageTheme}}'>
+  <view>
+    <view class='input-title producetype'>身份信息(必填)</view>
+    <view class='input-wrap'>
+      <view class='input-box'>
+        <input placeholder='请输入您的真实姓名' value='{{formArr.realname}}' bindfocus='showDelete' bindinput='setValue' data-value='realname' ></input>
+        <view class="clickIcon"  wx:if="{{formArr.realnameError}}" bindtap='clearData' data-value='realname'>
+          <icon class='iconfont icon-cuowu_quan_001'></icon>
+        </view>
+      </view>
+      <view class='input-box'>
+        <input placeholder='请输入您的身份证号码（将加密处理）' value='{{formArr.code}}' bindfocus='showDelete' bindinput='setValue' data-value='code' ></input>
+        <view class="clickIcon" wx:if="{{formArr.codeError}}" bindtap='clearData' data-value='code'>
+          <icon class='iconfont icon-cuowu_quan_001' ></icon>
+        </view>
+       </view>
+    </view>
+  </view>
+  <view>
+    <view class='input-title producetype'>手机号码(必填)</view>
+    <view class='input-wrap'>
+      <view class='input-box'>
+        <input placeholder='与上述实名一致的手机号' value='{{formArr.phone}}' bindfocus='showDelete' bindinput='setValue' data-value='phone' ></input>
+        <view  class="clickIcon" wx:if="{{formArr.phoneError}}" data-value='phone' bindtap='clearData'>
+          <icon class='iconfont icon-cuowu_quan_001' ></icon>
+        </view>
+      
+      </view>
+    </view>
+  </view>
+  <view>
+    <!-- <view class='input-title producetype'>身份证正反面照片(选填)</view>
+    <view class='input-wrap'>
+      <view class='tip-text'>
+        <icon class="iconfont icon-zizhutuiguang"></icon>
+        <text>温馨提示：请上传原始比例的身份证正反面，请勿裁剪图改，保证身份证信息清晰显示，否则无法通过审核</text> </view>
+      <view class='uploadImg-wrap'>
+        <view class='uploadImg-btn' bindtap='upImg' wx:if="{{upImgSrc1}}">
+          <image src='{{upImgSrc1}}'></image>
+          <icon class='iconfont icon-cuowu_quan_001' catchtap='clearData' data-value='upImgSrc1'></icon>
+
+        </view>
+
+        <view class='uploadImg-btn' bindtap='upImg' data-imgtype='upImgSrc1' wx:else>
+          <text>+</text> 上传照片
+        </view>
+        <view class='uploadImg-btn' bindtap='upImg' wx:if="{{upImgSrc2}}">
+          <image src='{{upImgSrc2}}'></image>
+          <icon class='iconfont icon-cuowu_quan_001' catchtap='clearData' data-value='upImgSrc2'></icon>
+        </view>
+        <view class='uploadImg-btn' bindtap='upImg' data-imgtype='upImgSrc2' wx:else>
+          <text>+</text> 上传照片
+        </view>
+      </view>
+      <view class='explameImg-wrap'>
+        <view>
+          <text>示例</text>
+          <image></image>
+        </view>
+        <view>
+          <text>示例</text>
+          <image></image>
+        </view>
+      </view>
+    </view> -->
+    <view class='question-tip'>
+      <text>为什么要实名认证？</text>
+      <view>根据海关规定，购买跨境商品需要办理清关手续，请您配合进行实名认证，以确保您购买的商品顺利通过海关检查。（店铺承诺所传身份证只用于办理跨境商品的清关手续，不作他途使用，其他任何人均无法查看）</view>
+      <view>实名认证规则：购买跨境商品需要填写该账号注册人的真实姓名以及身份证号码，部分商品下单需要提供实名账号（含身份证照片），具体请以下单时的提示为准。
+      </view>
+    </view>
+    <button class='save-realname producetype' bindtap='saveRealName'>保存</button>
+  </view>
+</view>

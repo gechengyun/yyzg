@@ -1,0 +1,351 @@
+@charset "UTF-8";
+/** 请勿直接修改activities.wxss文件 */
+.al-container .al-title { width: 750rpx; height: 35rpx; font-size: 36rpx; margin: 25rpx 0 32rpx 32rpx; color: #333333; }
+
+.al-container .al-title .al-indicate { float: right; margin-right: 72rpx; }
+
+.al-container .al-title .al-indicate-current { font-size: 32rpx; }
+
+.al-container .al-title .al-indicate-all { font-size: 20rpx; color: #9c9c9c; }
+
+.al-container .al-item { background-color: #fff; display: block; width: 686rpx; margin-left: 32rpx; border-radius: 10rpx; }
+
+.al-container .al-main-img { width: 686rpx; height: 385rpx; border-top-left-radius: 10rpx; border-top-right-radius: 10rpx; }
+
+.al-container .al-buy-btn { float: right; margin-right: 15rpx; }
+
+.al-container .al-board { color: #ffffff; display: flex; width: 686rpx; height: 80rpx; line-height: 80rpx; text-align: center; border-bottom-left-radius: 3rpx; border-bottom-right-radius: 3rpx; }
+
+.al-container .al-board.activity-end { background-image: none !important; background-color: #AEAEAE; }
+
+.al-container .al-board.activity-unstart { background-image: none !important; background-color: #F2B967; }
+
+.al-container .al-type-name { flex: 1; width: 67rpx; height: 32rpx; margin-top: 28rpx; font-size: 34rpx; line-height: 27rpx; letter-spacing: 0px; color: #ffffff; }
+
+.al-container .al-type-name text { font-weight: bold; }
+
+.al-container .al-time-count { flex: 3; line-height: 74rpx; }
+
+.al-container .al-time-count text { font-size: 24rpx; }
+
+.al-container .al-remain-sku { flex: 1; width: 142rpx; height: 30rpx; line-height: 30rpx; margin-top: 25rpx; border-radius: 15rpx; font-size: 18rpx; text-align: center; }
+
+.al-container .al-remain-sku view { width: 135rpx;border-radius: 15rpx; font-size: 18rpx; text-align: center; }
+
+.al-container .al-presale-tail { flex: 2; line-height: 74rpx; }
+
+.al-container .al-presale-tail text { font-size: 24rpx; }
+
+.al-container .al-presale-tail image { width: 20rpx; height: 20rpx; margin-top: 0rpx; margin-right: 5rpx; }
+
+.al-container .al-presale-price { flex: 2; text-align: center; }
+
+.al-container .al-presale-price view { margin: 0 auto; width: 168rpx; height: 38rpx; line-height: 38rpx; margin-top: 25rpx; background-color: #ffffff; border-radius: 19rpx; font-size: 20rpx; text-align: center; }
+
+.al-container .al-action-list { height: 64rpx; margin-top: 10rpx; }
+
+.al-container .al-buy-btn { display: inline-block; width: 124rpx; height: 52rpx; border-radius: 8rpx; font-size: 24rpx; line-height: 52rpx; text-align: center; }
+
+.al-container .al-good-name { margin-left: 20rpx; margin-right: 50rpx; font-size: 30rpx; font-weight: normal; font-stretch: normal; height: 60rpx; line-height: 60rpx; color: #333333; }
+
+.al-container .al-price { display: inline-block; height: 52rpx; line-height: 52rpx; margin-left: 20rpx; }
+
+.al-container .al-price-prefix { font-size: 24rpx; }
+
+.al-container .al-current-price { font-size: 36rpx; }
+
+.al-container .al-original-price { color: #6d6d6d; font-size: 24rpx; text-decoration: line-through; }
+
+.al-container .al-btn-buy-lg { width: 358rpx; }
+
+.al-container .al-btn-buy-md { width: 250rpx; }
+
+.al-container.al-display-style-1 .al-item { margin-bottom: 20rpx; }
+
+.al-container.al-display-style-1 .al-main-image-size-style-2.al-main-img { height: 686rpx; }
+
+.al-container.al-display-style-2 { white-space: nowrap; }
+
+.al-container.al-display-style-2 .al-item { display: inline-block; width: 606rpx; }
+
+.al-container.al-display-style-2 .al-board { width: 606rpx; }
+
+.al-container.al-display-style-2 .al-main-img { width: 606rpx; }
+
+.al-container.al-display-style-2 .al-main-image-size-style-2.al-main-img { height: 606rpx; }
+
+.al-container.al-display-style-4 { white-space: nowrap; }
+
+.al-container.al-display-style-4 .al-item { display: inline-block; float: left; width: 330rpx; margin-left: 30rpx; padding-bottom: 15rpx; margin-bottom: 25rpx; }
+
+.al-container.al-display-style-4 .al-action-list { margin-top: 0; }
+
+.al-container.al-display-style-4 .al-type-name { width: 72rpx; height: 22rpx; font-size: 24rpx; margin-top: 22rpx; font-weight: normal; line-height: 16rpx; }
+
+.al-container.al-display-style-4 .al-time-count { line-height: 48rpx; }
+
+.al-container.al-display-style-4 .al-time-count text { font-size: 17rpx; }
+
+.al-container.al-display-style-4 .al-presale-price > view { margin-top: 10rpx; }
+
+.al-container.al-display-style-4 .al-remain-sku { display: inline-block; margin-top: 0; margin-left: 10rpx; }
+
+.al-container.al-display-style-4 .al-main-img { width: 330rpx; height: 200rpx; }
+
+.al-container.al-display-style-4 .al-board { width: 330rpx; height: 60rpx; line-height: 60rpx; }
+
+.al-container.al-display-style-4 .al-good-name { font-size: 28rpx; line-height: 39rpx; width: 320rpx; margin-left: 10rpx; height: 75rpx; margin-top: 10rpx; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; white-space: normal; }
+
+.al-container.al-display-style-4 .al-price { margin-left: 10rpx; }
+
+.al-container.al-display-style-4 .al-price-prefix, .al-container.al-display-style-4 .al-original-price { font-size: 20rpx; }
+
+.al-container.al-display-style-4 .al-current-price { font-size: 30rpx; }
+
+.al-container.al-display-style-5 .al-item { width: 689rpx; height: 220rpx; margin: 0; margin-left: 31rpx; margin-bottom: 25rpx; }
+
+.al-container.al-display-style-5 .al-left, .al-container.al-display-style-5 .al-right { display: inline-block; height: 220rpx; float: left; width: 240rpx; }
+
+.al-container.al-display-style-5 .al-right { width: 419rpx; margin-left: 20rpx; margin-top: 10rpx; }
+
+.al-container.al-display-style-5 .al-time-count { line-height: 33rpx; }
+
+.al-container.al-display-style-5 .al-time-count text { font-size: 15rpx; }
+
+.al-container.al-display-style-5 .al-presale-tail { line-height: 46rpx; }
+
+.al-container.al-display-style-5 .al-presale-price { border-radius: 19rpx; display: inline-block; margin: 0 auto; width: 168rpx; margin-top: 20rpx; background-color: #ffffff; font-size: 20rpx; }
+
+.al-container.al-display-style-5 .al-presale-price > view { margin-top: 0; line-height: 38rpx; }
+
+.al-container.al-display-style-5 .al-remain-sku { display: inline-block; margin-top: 0; }
+
+.al-container.al-display-style-5 .al-main-img { width: 240rpx; height: 170rpx; }
+
+.al-container.al-display-style-5 .al-board { width: 240rpx; height: 50rpx; line-height: 50rpx; }
+
+.al-container.al-display-style-5 .al-good-name { font-size: 28rpx; line-height: 39rpx; width: 400rpx; height: 70rpx; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; white-space: normal; }
+
+.al-container.al-display-style-5 .al-price-prefix, .al-container.al-display-style-5 .al-original-price { font-size: 22rpx; }
+
+.al-container.al-display-style-5 .al-current-price { font-size: 34rpx; }
+
+.al-container.al-display-style-5 .al-buy-btn { margin-top: 15rpx; }
+
+.blackTheme .al-container { color: #000000; }
+
+.blackTheme .al-container .al-board { background-image: linear-gradient(-90deg, #595959 0%, #000000 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.blackTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.blackTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(0, 0, 0, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.blackTheme .al-container .al-remain-sku { color: #000000; }
+
+.blackTheme .al-container .al-presale-price { color: #000000; }
+
+.blackTheme .al-container.al-display-style-4 .al-remain-sku, .blackTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #000000; }
+
+.blackTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #000000; }
+
+.blackTheme .al-container .al-buy-btn-style-1, .blackTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #000000; height: 50rpx; border: 2rpx solid #000000; }
+
+.blackTheme .al-container .al-buy-btn-style-1.activity-end, .blackTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.blackTheme .al-container .al-buy-btn-style-2, .blackTheme .al-container .al-buy-btn-style-4 { background-color: #000000; color: #ffffff; }
+
+.blackTheme .al-container .al-buy-btn-style-2.activity-end, .blackTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.blackTheme .al-container .al-buy-btn-style-3, .blackTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.blackTheme .al-container .al-price { color: #595959; }
+
+.blackTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.redTheme .al-container { color: #FA0029; }
+
+.redTheme .al-container .al-board { background-image: linear-gradient(-90deg, #F45C43 0%, #FA0029 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.redTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(250, 0, 41, 0.1) 25%, transparent 25%, transparent 50%, rgba(250, 0, 41, 0.1) 50%, rgba(250, 0, 41, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.redTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(250, 0, 41, 0.1) 25%, transparent 25%, transparent 50%, rgba(250, 0, 41, 0.1) 50%, rgba(250, 0, 41, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.redTheme .al-container .al-remain-sku { color: #FA0029; }
+
+.redTheme .al-container .al-presale-price { color: #FA0029; }
+
+.redTheme .al-container.al-display-style-4 .al-remain-sku, .redTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #FA0029; }
+
+.redTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #FA0029; }
+
+.redTheme .al-container .al-buy-btn-style-1, .redTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #FA0029; height: 50rpx; border: 2rpx solid #FA0029; }
+
+.redTheme .al-container .al-buy-btn-style-1.activity-end, .redTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.redTheme .al-container .al-buy-btn-style-2, .redTheme .al-container .al-buy-btn-style-4 { background-color: #FA0029; color: #ffffff; }
+
+.redTheme .al-container .al-buy-btn-style-2.activity-end, .redTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+.redTheme .al-container .al-buy-btn-style-2.activity-end, .redTheme .al-container .al-buy-btn-style-4.activity-unstart { background-color: #6D6D6D; }
+
+.redTheme .al-container .al-buy-btn-style-3, .redTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.redTheme .al-container .al-price { color: #F45C43; }
+
+.redTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.orangeTheme .al-container { color: #FF5C1C; }
+
+.orangeTheme .al-container .al-board { background-image: linear-gradient(-90deg, #F06A0B 0%, #FF5C1C 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.orangeTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(255, 92, 28, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 92, 28, 0.1) 50%, rgba(255, 92, 28, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.orangeTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(255, 92, 28, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 92, 28, 0.1) 50%, rgba(255, 92, 28, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.orangeTheme .al-container .al-remain-sku { color: #FF5C1C; }
+
+.orangeTheme .al-container .al-presale-price { color: #FF5C1C; }
+
+.orangeTheme .al-container.al-display-style-4 .al-remain-sku, .orangeTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #FF5C1C; }
+
+.orangeTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #FF5C1C; }
+
+.orangeTheme .al-container .al-buy-btn-style-1, .orangeTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #FF5C1C; height: 50rpx; border: 2rpx solid #FF5C1C; }
+
+.orangeTheme .al-container .al-buy-btn-style-1.activity-end, .orangeTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.orangeTheme .al-container .al-buy-btn-style-2, .orangeTheme .al-container .al-buy-btn-style-4 { background-color: #FF5C1C; color: #ffffff; }
+
+.orangeTheme .al-container .al-buy-btn-style-2.activity-end, .orangeTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.orangeTheme .al-container .al-buy-btn-style-3, .orangeTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.orangeTheme .al-container .al-price { color: #F06A0B; }
+
+.orangeTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.blueTheme .al-container { color: #0098F8; }
+
+.blueTheme .al-container .al-board { background-image: linear-gradient(-90deg, #50dbfc 0%, #0098F8 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.blueTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(0, 152, 248, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 152, 248, 0.1) 50%, rgba(0, 152, 248, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.blueTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(0, 152, 248, 0.1) 25%, transparent 25%, transparent 50%, rgba(0, 152, 248, 0.1) 50%, rgba(0, 152, 248, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.blueTheme .al-container .al-remain-sku { color: #0098F8; }
+
+.blueTheme .al-container .al-presale-price { color: #0098F8; }
+
+.blueTheme .al-container.al-display-style-4 .al-remain-sku, .blueTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #0098F8; }
+
+.blueTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #0098F8; }
+
+.blueTheme .al-container .al-buy-btn-style-1, .blueTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #0098F8; height: 50rpx; border: 2rpx solid #0098F8; }
+
+.blueTheme .al-container .al-buy-btn-style-1.activity-end, .blueTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.blueTheme .al-container .al-buy-btn-style-2, .blueTheme .al-container .al-buy-btn-style-4 { background-color: #0098F8; color: #ffffff; }
+
+.blueTheme .al-container .al-buy-btn-style-2.activity-end, .blueTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.blueTheme .al-container .al-buy-btn-style-3, .blueTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.blueTheme .al-container .al-price { color: #50dbfc; }
+
+.blueTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.pinkDarkTheme .al-container { color: #FF007C; }
+
+.pinkDarkTheme .al-container .al-board { background-image: linear-gradient(-90deg, #FC6767 0%, #FF007C 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.pinkDarkTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(255, 0, 124, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 0, 124, 0.1) 50%, rgba(255, 0, 124, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.pinkDarkTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(255, 0, 124, 0.1) 25%, transparent 25%, transparent 50%, rgba(255, 0, 124, 0.1) 50%, rgba(255, 0, 124, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.pinkDarkTheme .al-container .al-remain-sku { color: #FF007C; }
+
+.pinkDarkTheme .al-container .al-presale-price { color: #FF007C; }
+
+.pinkDarkTheme .al-container.al-display-style-4 .al-remain-sku, .pinkDarkTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #FF007C; }
+
+.pinkDarkTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #FF007C; }
+
+.pinkDarkTheme .al-container .al-buy-btn-style-1, .pinkDarkTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #FF007C; height: 50rpx; border: 2rpx solid #FF007C; }
+
+.pinkDarkTheme .al-container .al-buy-btn-style-1.activity-end, .pinkDarkTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.pinkDarkTheme .al-container .al-buy-btn-style-2, .pinkDarkTheme .al-container .al-buy-btn-style-4 { background-color: #FF007C; color: #ffffff; }
+
+.pinkDarkTheme .al-container .al-buy-btn-style-2.activity-end, .pinkDarkTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.pinkDarkTheme .al-container .al-buy-btn-style-3, .pinkDarkTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.pinkDarkTheme .al-container .al-price { color: #FC6767; }
+
+.pinkDarkTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.purpleTheme .al-container { color: #7948FD; }
+
+.purpleTheme .al-container .al-board { background-image: linear-gradient(-90deg, #E100FF 0%, #7948FD 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.purpleTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(121, 72, 253, 0.1) 25%, transparent 25%, transparent 50%, rgba(121, 72, 253, 0.1) 50%, rgba(121, 72, 253, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.purpleTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(121, 72, 253, 0.1) 25%, transparent 25%, transparent 50%, rgba(121, 72, 253, 0.1) 50%, rgba(121, 72, 253, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.purpleTheme .al-container .al-remain-sku { color: #7948FD; }
+
+.purpleTheme .al-container .al-presale-price { color: #7948FD; }
+
+.purpleTheme .al-container.al-display-style-4 .al-remain-sku, .purpleTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #7948FD; }
+
+.purpleTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #7948FD; }
+
+.purpleTheme .al-container .al-buy-btn-style-1, .purpleTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #7948FD; height: 50rpx; border: 2rpx solid #7948FD; }
+
+.purpleTheme .al-container .al-buy-btn-style-1.activity-end, .purpleTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.purpleTheme .al-container .al-buy-btn-style-2, .purpleTheme .al-container .al-buy-btn-style-4 { background-color: #7948FD; color: #ffffff; }
+
+.purpleTheme .al-container .al-buy-btn-style-2.activity-end, .purpleTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.purpleTheme .al-container .al-buy-btn-style-3, .purpleTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.purpleTheme .al-container .al-price { color: #E100FF; }
+
+.purpleTheme .al-container .al-price.activity-end { color: #6D6D6D; }
+
+.brownTheme .al-container { color: #B7A392; }
+
+.brownTheme .al-container .al-board { background-image: linear-gradient(-90deg, #CBBCAF 0%, #B7A392 71%), linear-gradient(#da3c3f, #da3c3f); background-blend-mode: normal,
+ normal; }
+
+.brownTheme .al-container .al-presale-price > view { background-image: linear-gradient(-45deg, rgba(183, 163, 146, 0.1) 25%, transparent 25%, transparent 50%, rgba(183, 163, 146, 0.1) 50%, rgba(183, 163, 146, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.brownTheme .al-container .al-remain-sku > view { background-image: linear-gradient(-45deg, rgba(183, 163, 146, 0.1) 25%, transparent 25%, transparent 50%, rgba(183, 163, 146, 0.1) 50%, rgba(183, 163, 146, 0.1) 75%, transparent 75%, transparent); background-size: 30rpx 30rpx; }
+
+.brownTheme .al-container .al-remain-sku { color: #B7A392; }
+
+.brownTheme .al-container .al-presale-price { color: #B7A392; }
+
+.brownTheme .al-container.al-display-style-4 .al-remain-sku, .brownTheme .al-container.al-display-style-5 .al-remain-sku { border: 1rpx solid #B7A392; }
+
+.brownTheme .al-container.al-display-style-5 .al-presale-price { border: 1rpx solid #B7A392; }
+
+.brownTheme .al-container .al-buy-btn-style-1, .brownTheme .al-container .al-buy-btn-style-3 { background-color: #fff; color: #B7A392; height: 50rpx; border: 2rpx solid #B7A392; }
+
+.brownTheme .al-container .al-buy-btn-style-1.activity-end, .brownTheme .al-container .al-buy-btn-style-3.activity-end { color: #6D6D6D; border: 2rpx solid #6D6D6D; }
+
+.brownTheme .al-container .al-buy-btn-style-2, .brownTheme .al-container .al-buy-btn-style-4 { background-color: #B7A392; color: #ffffff; }
+
+.brownTheme .al-container .al-buy-btn-style-2.activity-end, .brownTheme .al-container .al-buy-btn-style-4.activity-end { background-color: #6D6D6D; }
+
+.brownTheme .al-container .al-buy-btn-style-3, .brownTheme .al-container .al-buy-btn-style-4 { border-radius: 26rpx; }
+
+.brownTheme .al-container .al-price { color: #CBBCAF; }
+
+.brownTheme .al-container .al-price.activity-end { color: #6D6D6D; }

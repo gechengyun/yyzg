@@ -1,0 +1,20 @@
+<!--pages/CLIST//pages/group/groupList.wxml-->
+<!-- productList:productList, -->
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/productListPoint.wxml" />
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+<view class="shopProduct editProduct ">
+
+  <import src="../../../public/editProductSearch.wxml" />
+  <!--商品搜索 -->
+
+  <template is="search" data="{{themeColorValue,BASE_IMG_URL,showSearch,fiexdTop:true}}" />
+  <view class="list integral_com">
+    <template is="productListPoint" data="{{content:product_list,navigateBarBgColor:navigateBarBgColor}}" />
+  </view>
+
+</view>
+<view class="tips" wx:if="{{dxShow}}">
+  暂无更多数据
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

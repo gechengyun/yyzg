@@ -1,0 +1,4 @@
+<!-- 辅助空白 -->
+<template name="white">
+    <view class="editGuideBlank" style="height:{{content.height}}px;background-color: {{content.bgcolor}};" data-page="page.public.editGuideBlank"></view>
+</template>

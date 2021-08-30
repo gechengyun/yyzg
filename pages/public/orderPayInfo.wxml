@@ -1,0 +1,189 @@
+<!--拼团相关 产品信息以及支付订单模板-->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<import src="../public/shoppingProductPay.wxml" />
+<wxs module="filter" src="../../utils/filter.wxs"></wxs>
+<template name="orderPayInfo">
+    <!-- 订单状态 -->
+    <!-- 2019.10.23 tc bug55266 扬州市易企营销策划 yzfqb123 密码：m123456 订单是上门自提的，能否把物流信息给去掉 -->
+  <!-- <block wx:if="{{paymentData.order.shipping_method!='selffetch' && paymentData.order.virtual_goods_order*1 != 1}}">
+    <view class='order-status' wx:if='{{paymentData.order.status}}'>
+      <view class='title'>{{filter.orderStatus(paymentData.order.status).title}}</view>
+      <view class='desc'>{{filter.orderStatus(paymentData.order.status).desc}}</view>
+    </view>
+  </block> -->
+  <block wx:if="{{paymentData.order.virtual_goods_order*1 == 1 && paymentData.virtual_order_status != 0}}">
+    <view class='order-status'>
+      <block wx:if="{{paymentData.virtual_order_status == 2}}">
+        <view class='title'>退款中</view>
+        <view class='desc'>请耐心等待商家审核</view>
+      </block>
+      <block wx:elif="{{paymentData.virtual_order_status == 1 || paymentData.virtual_order_status == 3}}">
+        <view class='title'>交易完成</view>
+        <view class='desc' wx:if="{{paymentData.virtual_order_status == 1}}">您已成功退款，金额已返回到您的账户，注意查收~</view>
+      </block>
+    </view>
+  </block>
+    <!-- 收件人地址 -->
+  <view class="address {{(paymentPostage=='express'||paymentPostage=='local') ? 'active' : ''}} {{paymentData.order.shipping_method=='express'?'active':''}} {{(paymentData.order.status==0)&&(orderAddress!=true)?'notPaid':''}} {{paymentData.wxapp_address.list_count==0 ? 'emptyAddress' : ''}}"
+    wx:if="{{paymentData.wxapp_address.address_user && (paymentData.order.shipping_method!='selffetch') && paymentData.order.virtual_goods_order*1 != 1}}" data-payment="payment" data-page="page.public.payment_0" style='height:160rpx;padding-top:20rpx;'>
+    <view class="addressInfo {{paymentData.wxapp_address.list_count==0 ? 'emptyInfo' : ''}}">
+      <block>
+        <view class="detailRow" bindtap="{{(paymentData.order.status==0)&&(orderAddress!=true)&&(!forbidChangeAddress)?'addressGo':''}}">
+
+          <view class='user-info' style='font-weight:bold;margin-bottom:10rpx;'>
+            <text>{{paymentData.wxapp_address.address_tel}}</text>
+            <text>{{paymentData.wxapp_address.address_user}}</text>
+          </view>
+          <view class="textOmitted" style="max-width: 600rpx;font-size: 28rpx;">
+            {{paymentData.wxapp_address.province}} {{paymentData.wxapp_address.city}} {{paymentData.wxapp_address.area}} {{paymentData.wxapp_address.address}} {{paymentData.wxapp_address.address_detail}}
+          </view>
+          <view wx:if="{{paymentData.order.status==0&&(!forbidChangeAddress)}}" class="arrowRight iconfont icon-xiayibu"></view>
+        </view>
+      </block>
+      <!--彩色线条-->
+      <view class="colorLine"></view>
+    </view>
+  </view>
+
+  <view wx:if="{{(paymentData.order.shipping_method=='selffetch')&&(paymentData.order.status!='1') && paymentData.order.virtual_goods_order*1 != 1}}" data-page="page.public.payment_2">
+
+    <view class="address" wx:if="{{open_community_group!=1}}">
+      <text class="iconfont icon-receipt-address-address"></text>
+      <view class="addressInfo" style="width: 80%;">
+        <view class='user-info'>
+          <text>{{paymentData.address.name}}</text>
+          <!-- <text bindtap="calling" data-num="{{paymentData.address.tel}}">{{paymentData.address.tel}}<text class="iconfont icon-telephone telephone" data-num="{{paymentData.address.tel}}"> </text>
+          </text> -->
+        </view>
+        <view class="textOmitted" style="max-width: 600rpx;">
+          {{paymentData.address.province}} {{paymentData.address.city}} {{paymentData.address.area}} {{paymentData.address.address}}
+        </view>
+        <view>
+        </view>
+      </view>
+    </view>
+   <!-- 社区团购模式订单头部 -->
+  <view class="community_store" wx:if="{{open_community_group==1}}">
+    <view class="head">
+      <view class="head_img">
+        <image src="{{paymentData.store.logo}}" mode='aspectFill'></image>
+      </view>
+      <!-- <view class="head_name">
+       {{paymentData.address.weixin_name}}
+      </view> -->
+    </view>
+    <view class="address_store">
+      <view class="address_name">
+      <text>自提点 </text> {{paymentData.address.address}}<icon bindtap="oppeMap" class="iconfont icon-dizhi" data-lat="{{paymentData.address.lat}}" data-long="{{paymentData.address.long}}" role="img">
+</icon>
+      </view>
+      <view class="store_name">
+        {{paymentData.address.name}}
+      </view>
+      <view class="store_time">
+       <block wx:if="{{paymentData.address.business_hours}}">
+          营业时间：{{paymentData.address.business_hours}}
+        </block>
+        <block wx:if="{{!paymentData.address.business_hours}}">营业时间：全天</block>
+        <text class="iconfont icon-phone" style='color:{{themeColorValue}};' bindtap="calling" data-num="{{paymentData.address.address_tel}}"></text>
+      </view>
+    </view>
+  </view>
+  <!-- 社区团购模式头部 -->
+
+    
+  </view>
+  <view class="paymentInfo" wx:if="{{paymentData.order.type=='10'}}" data-page="page.public.payment_3">
+    <view class="customMessage" wx:for="{{paymentData.product_list[0].comment_arr}}" wx:key="index">
+      <text>{{item.name}}</text>
+      <view class="input">
+        <block wx:if="{{item.value!='' && item.value!='undefined undefined'}}">{{item.value}}</block>
+        <block wx:if="{{item.value=='' || item.value=='undefined undefined'}}">无</block>
+      </view>
+    </view>
+  </view>
+
+  <view class="paymentProduct" data-page="page.public.payment_5">
+    <!-- 门店信息 -->
+    <view class="address" style='height:80rpx;padding-top:20rpx;margin-top:0;' wx:if="{{open_community_group!=1 && paymentData.order.virtual_goods_order*1 != 1}}">
+      <view class="addressInfo" style="width: 80%;">
+        <view class='user-info' style='margin-bottom:10rpx;color:#444;font-size:28rpx;' >
+          <image style='width:50rpx;height:50rpx;margin-right:10rpx;' src='{{paymentData.store.logo}}'></image>
+          <text style='font-weight:bold;margin-right:20rpx;line-height:45rpx;'>{{paymentData.store.name}}</text>
+          <!-- <text bindtap="calling" data-num="{{paymentData.address.tel}}">{{paymentData.address.tel}}<text class="iconfont icon-telephone telephone" data-num="{{paymentData.address.tel}}"></text>
+          </text> -->
+        </view>
+        <view>
+        </view>
+      </view>
+    </view>
+    <template is="shoppingProductPay" wx:for="{{paymentData.product_list}}" wx:key="index" data="{{product:item, paymentData: paymentData,  status:paymentData.order.status, order_no_txt:paymentData.order.order_no_txt, type:paymentData.order.type, showMessage:showMessage,NUM,index}}"
+    />
+
+    <!-- 展开全部 -->
+    <view class='list-slide-down' wx:if='{{paymentData.product_list.length>5}}'>
+      <view class='slid-txt' bindtap='showList'>{{slide_txt}}
+        <text class='iconfont {{slide=="up"?"icon-dingbu-copy":"icon-dingbu-up"}}'></text> 
+      </view>
+    </view>
+     
+  </view>
+
+  <view class="paymentInfo" style='margin-top:20rpx;' wx:if="{{!paymentData.orderInfo&&order_no}}" data-page="page.public.payment_6">
+    <view class="shopName customMessage">
+      <text>买家留言</text>
+      <view class="input" wx:if="{{paymentData.order.status*1 || paymentData.order.status*1==0}}">
+        {{paymentData.order.comment}}
+        <block wx:if="{{!paymentData.order.comment}}">无</block>
+      </view>
+      <!-- <view class="input msg" wx:if="{{paymentData.order.status*1==0}}" style="background:#f9f9f9;text-align:left;padding-left:24rpx;">
+        <input type="text" disabled="{{paymentData.order.status==0 || paymentData.order.status==1}}" placeholder="填写对本次交易的说明" bindblur="customMessage" wx-if="{{!oppenShopList&&!addressEdit&&!open_local_physical_list}}"></input>
+      </view> -->
+    </view>
+    <view wx:if="{{postage && paymentData.order.product_coupon != 1}}">运费：{{(paymentData.order.postage==0)||(paymentData.order.postage==undefined)?'免运费':'¥'+paymentData.order.postage}}</view>
+    <view wx:if="{{!postage}}">{{no_postage_text}}</view>
+    <!--订单支付页面--总价显示为总价-->
+    <view wx:if="{{pay_page == 'pay_page' && paymentData.order.status*1 >0}}">总价：
+      <text>¥{{paymentData.order.sub_total}}</text>
+      <text class="isChannel" wx:if="{{paymentData.order.payment_method == 'channel'}}">{{paymentData.order.privilege_name}}</text>
+    </view>
+    <!--订单支付页面--总价显示打折或优惠后的价格-->
+    <view wx:if="{{pay_page != 'pay_page' && paymentData.order.status*1 >0}}">总价：
+      <text>¥{{paymentData.order.total}}</text>
+      <text class="isChannel" wx:if="{{paymentData.order.payment_method == 'channel'}}">{{paymentData.order.privilege_name}}</text>
+    </view>
+    <view wx:if="{{paymentData.order.type=='10'}}">{{paymentData.order.custom_reservation_name ? paymentData.order.custom_reservation_name : '预约'}}定金：
+      <text>¥{{paymentData.order.reservation_deposit}}</text>
+    </view>
+    <view wx:if="{{paymentData.order.order_no}}">订单编号：{{paymentData.order.order_no}}</view>
+     <view wx:if="{{paymentData.order_coupon_list[0]}}">优惠券：¥{{paymentData.order_coupon_list[0].money}}</view>
+    <view wx:if="{{paymentData.order.add_time_txt}}">下单时间：{{paymentData.order.add_time_txt}}</view>
+    <view wx:if="{{paymentData.order.status > 1 && paymentData.order.status!=5}}">支付时间：{{paymentData.order.pay_time_txt}}</view>
+
+    <view wx:if="{{paymentData.order.shipping_method=='selffetch'}}">
+      <view>预约人：{{paymentData.address.address_user}} {{paymentData.address.address_tel}}</view>
+      <view>预约时间：{{paymentData.address.date}} {{paymentData.address.time}}</view>
+    </view>
+    <!-- 核销码列表 -->
+    <view class="write-code" wx:if="{{paymentData.show_virtual_code}}">
+      <view class="write-code-title">
+        <view style="color:{{themeColorValue}}">核销码查看</view>
+        <view class="show-more" bindtap="showMore" style="color:{{themeColorValue}}" wx:if="{{paymentData.write_off_code.length>5}}">{{showMoreTxt}}</view>
+      </view>
+      <block wx:for="{{paymentData.write_off_code}}" wx:key="index">
+        <view class="write-code-list" wx:if="{{index < writeLen}}">
+          <view class="write-code-l">
+            <view>卡号：{{item.card_no}}_1 <text class="card-copy" data-cardnum="{{item.card_no}}_1" bindtap="cardCopy" style="color:{{themeColorValue}};">复制</text></view>
+            <view wx:if="{{item.card_pwd != ''}}">密码：{{item.card_pwd}}</view>
+            <view wx:if="{{item.operate_physical_id*1 != 0}}">使用门店：{{item.physical_name}}</view>
+          </view>
+          <block wx:if="{{paymentData.order.virtual_used_type*1 == 1}}">
+            <view class="write-code-r" data-cardno="{{item.card_no}}" data-order_no="{{paymentData.order.order_no}}" data-idx="{{index}}" data-writetype="{{1}}" bindtap="writeCode" style="border-color:{{themeColorValue}};color:{{themeColorValue}};" wx:if="{{paymentData.write_off_code.length > 1 && item.status*1 == 1}}">二维码</view>
+            <view class="iconfont icon-yihexiao" wx:elif="{{item.status*1 == 2}}"></view>
+          </block>
+        </view>
+      </block>      
+    </view>
+    
+  </view>
+</template>

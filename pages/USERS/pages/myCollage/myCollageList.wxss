@@ -1,0 +1,3 @@
+.orderStateList .orderList .orderContent { margin-bottom: 0rpx; }
+.orderStateList .orderFooter { padding-top: 20rpx; }
+.orderButton .btnText{margin:0 10rpx}

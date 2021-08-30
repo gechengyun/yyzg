@@ -1,0 +1,11 @@
+<!--售罄弹窗-->
+<template name="soldOutBox">
+	<view class="soldOutWrap" data-page="page.public.soldOutBox">
+		<view class="soldOutContent" decode="{{true}}">
+			<view class="textCaption">
+				<view class="msg view_text_msg_boot">{{content.msg}}</view>
+				<navigator class="changeShopBtn" delta='{{content.delta}}' url="{{content.url}}" open-type='{{content.open_type}}' hover-class="none"><text>{{content.btn_txt}}</text></navigator>
+			</view>
+		</view>
+	</view>
+</template>

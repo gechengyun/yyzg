@@ -1,0 +1,81 @@
+<!--我的拼团列表-->
+<import src="../../../public/soldOutBox.wxml" /><!--售罄弹窗-->
+<import src="../../../../wxParse/wxParse.wxml" />
+<import src="../../../public/shear.wxml" />
+<import src="../../../public/shoppingCat.wxml" />
+<import src="../../../public/orderLayer.wxml" />
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/showBigPic.wxml" />
+<view class="container {{pageTheme}}">
+    <block>
+        <template is="shear" wx:if="{{shear}}" />
+    </block>
+    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="page.myCollage.myCollageList">
+        <view class="orderState">
+            <view class="clearfix orderStateHeader myCollageTitle">
+                <view class="fixedHeader">
+                    <view class="{{currentTab==0 ? 'active' : ''}}" bindtap="swichNav" data-current="0">
+                        <text data-current="0">全部</text>
+                    </view>
+                    <view class="{{currentTab==1 ? 'active' : ''}}" bindtap="swichNav" data-current="1">
+                        <text data-current="1">拼团中</text>
+                    </view>
+                    <view class="{{currentTab==2 ? 'active' : ''}}" bindtap="swichNav" data-current="2">
+                        <text data-current="2">拼团成功</text>
+                    </view>
+                    <view class="{{currentTab==3 ? 'active' : ''}}" bindtap="swichNav" data-current="3">
+                        <text data-current="3">拼团失败</text>
+                    </view>
+                </view>
+            </view>
+            <view class="orderStateList">
+              
+                <view class="orderList" wx:for="{{orderlistData.order_list}}" wx:key="index" wx:for-item="order">
+                    <view class="orderContent" bindtap="joinGo">
+                        <view class="orderContentList" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">
+                            <view class="productImg" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">
+                                <image src="{{order.image}}" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}"></image>
+                            </view>
+                            <view class="productInfo" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">
+                                <view class="productName" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">
+                                    <text class="t1 textOmitted" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">{{order.name}}</text>
+                                    <text class="t2" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">{{order.type_txt}}</text>
+                                    <text class="t3" wx:if="{{order.is_leader}}" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">团长</text>
+                                </view>
+                                <view class="productPrice" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">¥{{order.total}}
+                                    <text data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">x{{order.pro_num}}</text>
+                                </view>
+                                <view class="orderInfo" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">
+                                    <text class="t1" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">{{order.status_txt}}</text>
+                                </view>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="orderFooter clearfix">
+                        <view class="orderButton">
+                            <text data-item_id="{{order.item_id}}"
+                                    data-team_id="{{order.team_id}}"
+                                    data-tuan_id="{{order.tuan_id}}"
+                                    data-image="{{order.image}}"
+                                    data-name="{{order.name}}"
+                                    class="btnText" style="width: 160rpx;"  wx:if="{{ order.status_txt=='进行中' }}" bindtap='shareTap'>
+                                邀小伙伴凑单
+                            </text>
+                            <text class="btnText" bindtap="joinGo" data-tuan="{{order.tuan_id}}" data-type="{{order.type}}" data-item="{{order.item_id}}" data-team="{{order.team_id}}">查看团详情</text>
+                            <text class="btnText orderGo" wx:if="{{order.tuan_over}}" bindtap="completeCollage" data-tuan="{{order.tuan_id}}" data-index="{{index}}" data-team="{{order.team_id}}">立即完成</text>
+                            <text class="btnText orderGo" bindtap="orderGo" data-order="{{order.order_no}}">查看订单</text>
+                        </view>
+                    </view>
+                </view>
+                <view class="productdDefault" wx:if="{{orderlistData.order_list==''}}">
+                    <image src="https://s.404.cn/applet/images/wxcopy/que_03.png"> </image>
+                    <text>您还没有参加任何团购，点击下方去开团哦!</text>
+                    <text class="goButton" bindtap="goButton">去开团</text>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>
+<bottom-modal showFriendCircle="0" id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>

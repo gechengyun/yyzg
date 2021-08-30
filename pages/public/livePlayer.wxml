@@ -1,0 +1,113 @@
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+
+<!-- 模板-关注频道 -->
+<import src="./livePlayerSubscribe.wxml"></import>
+
+<!-- 模板-推荐热门频道 -->
+<import src="./livePlayerBase.wxml"></import>
+
+<!-- 模板-直播间标签 频道 -->
+<!-- <import src="./livePlayerLabel.wxml"></import> -->
+
+<!-- 模板-直播间标签 频道 -->
+<import src="./livePlayerLabelMinipro.wxml"></import>
+
+
+
+<import src="../public/editGuideBlank.wxml" />
+<!-- 直播组件 -->
+<template name="live_player">
+  <!-- 重新更换直播组件 -->
+  <view class="live-cotent">
+    <view class="live-more" bindtap="gomoreLive"> 
+      <text>更多直播</text>
+      <image class="moreicon" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/home/moreicon.png" />
+    </view>
+    <scroll-view scroll-x="true" class="live-scroll">
+      <view class="live-ul">
+        <block wx:for="{{live_list}}" wx:key="index">
+          <view class="live-li" bindtap="goLiveDetail" data-liveid="{{item.id}}">
+            <view class="live-img" >
+              <image src="{{item.avatar}}" class="image"/>
+            </view>
+            <view class="live-tips" wx:if="{{item.status==1}}">直播中</view>
+            <view class="live-untips" wx:if="{{item.status==0}}">未开始</view>
+            <view class="live-untips" wx:if="{{item.status==2}}">已结束</view>
+            <view class="live-name">{{item.nickname? item.nickname :''}}</view>
+          </view>
+        </block>  
+      </view>
+    </scroll-view>
+  </view>
+  <!-- 重新更换直播组件end -->
+  <view class="live-player-main" style="display:none"
+  >
+    <!-- 标题部分 -->
+    <view class="live-title {{live_fiex ? 'fixedToTop' :''}}" style="top:{{status+navHeight}}px" wx:if="{{content.content.arrChannel}}">
+      <scroll-view scroll-x="{{true}}" scroll-into-view="{{currentChannel=='livetag' ? (currentChannel+tagid) : currentChannel}}"           enable-flex="{{true}}" 
+      class="live-title-content live-tags-{{filter.channelType(content.content.arrChannel)}}"
+      scroll-with-animation="{{true}}"
+      >
+     <!-- data-label_list="{{item.label_list}}" 
+        data-vedio_list="{{item.vedio_list}}"  -->
+        <view class="title-block {{((currentChannel=='livetag' && tagid==item.tagid) || (currentChannel==item.channel && currentChannel!='livetag'))  ? 'active' : ''}} " 
+        id="{{item.channel=='livetag' ? (item.channel+item.tagid) : item.channel}}"
+        wx:if="{{item.is_checked==1}}" 
+        wx:for="{{content.content.arrChannel}}" 
+        wx:key="index" 
+        data-channel="{{item.channel}}"
+        data-sort_type="{{item.sort_type}}" 
+        data-tagid="{{item.tagid}}" 
+        data-tabindex="{{index}}"
+        bindtap="changeChannel">
+
+          <text class="txt" 
+          style="border-bottom: {{((currentChannel=='livetag' && tagid==item.tagid) || (currentChannel==item.channel && currentChannel!='livetag'))  ?  '6px  solid '+ themeColorValue : 'none'}};">{{item.channel_rename}}</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 推荐，关注，热门，热门2模板 -->
+    <!-- <block wx:if="{{currentChannel == 'subscribe' || currentChannel == 'recommaned' || currentChannel == 'hot1' || currentChannel == 'hot2' ||  (currentChannel == 'livetag' && tagid!='applet')}}">
+      <template is="live_base" data="{{config:content.content,live_list,BASE_IMG_URL,themeColorValue,channel:config.currentChannel}}" />
+    </block> -->
+
+    <!-- 直播间标签 -小程序官方 -->
+    <!-- <block wx:if="{{currentChannel == 'livetag' && tagid=='applet'}}">
+
+      <template is="live_label_minipro" data="{{config:content.content,live_list,BASE_IMG_URL,themeColorValue,channel:config.currentChannel}}" />
+    </block> -->
+
+
+    <!-- 视频频道切换 -->
+    <swiper style="height:{{filter.swiperHeight(live_list.length,content.content.rowType,content.content.showGoods,subscribe_template_id)}}rpx"          bindchange="swiperChangeChannel" 
+    current="{{swiperCurIndex}}"
+    easing-function="easeInOutCubic"
+    class="fiex-top-live"
+    >
+      <block wx:for="{{content.content.arrChannel}}" wx:if="{{item.is_checked==1}}" wx:key="index">
+        <swiper-item>
+          <!-- 推荐，关注，热门，热门2模板 -->
+          <block wx:if="{{currentChannel == 'subscribe' || currentChannel == 'recommaned' || currentChannel == 'hot1' || currentChannel == 'hot2' ||  (currentChannel == 'livetag' && tagid!='applet')}}">
+            <template is="live_base" data="{{config:content.content,live_list,BASE_IMG_URL,themeColorValue,channel:config.currentChannel,subscribe_template_id}}" />
+          </block>
+
+    <!-- 直播间标签 -小程序官方 -->
+          <block wx:if="{{currentChannel == 'livetag' && tagid=='applet'}}">
+
+            <template is="live_label_minipro" data="{{config:content.content,live_list,BASE_IMG_URL,themeColorValue,channel:config.currentChannel,subscribe_template_id}}" />
+          </block>
+          
+        </swiper-item>
+      </block>
+    </swiper>
+
+
+    
+    <view class="live-end" style="margin:80rpx 0;" wx:if="{{live_list && live_list.length>0 &&last_filed_type=='live_player' &&live_next_page==false}}">
+        <text class="end-block">THE  END</text>
+    </view>
+
+  </view>
+
+</template>

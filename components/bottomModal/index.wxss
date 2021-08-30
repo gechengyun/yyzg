@@ -1,0 +1,177 @@
+.bottom-modal-wrap button {
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    line-height: inherit;
+    font-size: 16px;
+    background: transparent;
+}
+
+button::after {
+    display: none;
+}
+
+.bottom-modal-cover {
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.3s;
+}
+
+.bottom-modal-content {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+
+.bottom-modal-show {
+    animation: show 0.3s ease-out;
+    -webkit-animation: show 0.3s ease-out;
+}
+
+.bottom-modal-hide {
+    animation: hide 0.3s ease-out;
+    -webkit-animation: hide 0.3s ease-out;
+}
+
+@keyframes show {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@-webkit-keyframes show {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@keyframes hide {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+@-webkit-keyframes hide {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(100%);
+    }
+}
+
+.bottom-modal-title {
+    padding: 24rpx 30rpx;
+    font-size: 14px;
+    text-align: center;
+}
+
+.bottom-modal-title + .bottom-modal-wrap::before {
+    content: "\a0";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1rpx;
+    background-color: #eee;
+}
+
+.bottom-modal-wrap {
+    position: relative;
+    padding: 10rpx;
+    min-height: 200rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.bottom-modal-wrap-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom-modal-wrap-item image {
+    width: 100rpx;
+    height: 100rpx;
+}
+
+.bottom-modal-wrap-item .text {
+    margin-top: 10rpx;
+    color: #333;
+    font-size: 14px;
+}
+
+.bottom-modal-wrap-item .icon {
+    position: absolute;
+    top: 0;
+    right: -60rpx;
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background: #b4282d;
+    padding: 4rpx 8rpx;
+    border-radius: 18rpx 0 18rpx 0;
+}
+
+.bottom-modal-wrap + .bottom-modal-action::before {
+    content: "\a0";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1rpx;
+    background-color: #eee;
+}
+
+.bottom-modal-action {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 90rpx;
+    line-height: 90rpx;
+    font-size: 16px;
+    text-align: center;
+}
+
+.bottom-modal-action view {
+    flex: 1;
+    position: relative;
+    color: #333;
+}
+
+.bottom-modal-action view + view::after {
+    content: "\a0";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 1rpx;
+    background-color: #eee;
+}

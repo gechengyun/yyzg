@@ -1,0 +1,29 @@
+<!--引导关注公众号组件-->
+<view wx:if="{{live_code_config && live_code_config.open_index_show == 1}}"  class='{{pageTheme}}' style="height: 105rpx;margin: 15rpx;padding:10rpx;display: flex;box-shadow:0 0 20rpx #e8e8e2;background-color: #ffffff;border-radius: 5rpx">
+    <view style="width: 98rpx;height: 98rpx;margin-top: 5rpx;">
+        <image src="{{live_code_config.live_code_logo}}" style="border-radius: 12rpx;"></image>
+    </view>
+    <view style="width: 450rpx;margin-left: 25rpx;color: #333333;">
+        <view class="textOmitted" style="font-size: 30rpx;font-weight: bold;line-height: 70rpx;height:70rpx;width:450rpx;overflow:hidden;">{{live_code_config.live_code_title}}</view>
+        <view style="font-size: 22rpx;width: 450rpx;overflow: hidden;height: 30rpx;" class="textOmitted">{{live_code_config.live_code_description}}</view>
+    </view>
+    <!-- <navigator  class='buttonStyle' url="/pages/livecode/index{{live_code_config.product_id?'?product_id='+live_code_config.product_id:''}}"
+               style="font-size: 28rpx;line-height: 60rpx;color: #ffffff;width: 139rpx;height: 60rpx;background-color: #2ece6f;border-radius: 10rpx;text-align: center;margin-top:25rpx;">
+        立即加入
+    </navigator> -->
+    <view class='buttonStyle' bindtap='showgroupModal' 
+               style="font-size: 28rpx;line-height: 60rpx;color: #ffffff;width: 139rpx;height: 60rpx;background-color: #2ece6f;border-radius: 10rpx;text-align: center;margin-top:25rpx;">
+        立即加入
+    </view>
+    <block wx:if="{{groupmodalStatus}}">
+      <view class='alap_box alap_box_group' bindtap='hidegroupModal'>
+        <view class='get-user-container  {{pageTheme}}'>
+          <view class="get-user-text-title">{{ group_title}}</view>
+          <image src='{{live_code_config.live_code_logo}}' mode="widthFix" class='get-user-img-group'></image>
+          <view class='get-user-text'>点击按钮进入小程序对话窗口，回复入群暗号<text class='code_color'>{{group_black_code}}</text>，获取群二维码，可爱的群主在等客官您哟~</view>
+          <button type='primary' class='get-user-btn buttonStyle' bindtap='goinGroupnew'  binderror="errCall" open-type="contact" >进入客服消息
+          </button>
+        </view>
+      </view>
+    </block>
+</view>

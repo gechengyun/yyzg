@@ -1,0 +1,84 @@
+/* create_distribution.wxss */
+.section {margin:0;padding:0;border:none;}
+.section .title {font-size:24rpx;color:#999;padding:20rpx 30rpx;border-bottom: 1px solid #e6e6e6;background:#f6f6f6;}
+.section .infoItem {display:flex;flex-wrap:nowrap;align-content:space-between;font-size:28rpx;color:#666;background:#fff;border-bottom: 1px solid #e6e6e6;padding:30rpx;}
+.section .infoItem .leftLabel {width:35%;}
+.section .infoItem .rightBox {width:65%;text-align: right;}
+.agreementBox {width:100%;padding:15rpx 30rpx;font-size:28rpx;}
+.agreementBox text.iconfont {font-size:32rpx;margin-right:10rpx;}
+.agreementBox text.iconfont.active {color:#FF6634;}
+.agreementBox text.agreement {color: #ff6634;margin-left:10rpx;}
+.agreementBox text.agreement.disabled {color: #999;}
+.createDistribution .button {width: 80%;margin: 0rem auto;margin-top: 20rpx;font-size: 32rpx;color: #fff;text-align: center;background: #ff6634;border-radius: 3px;padding:20rpx 0;}
+.createDistribution .button.disabled {background:#d9d9d9;}
+.layer {display:none;bottom:0;}
+.agreementPop {display:none;z-index:7;position:fixed;top:10%;left:5%;width:90%;background:#fff;bottom:10%;overflow-y:scroll;color:#555;padding:20rpx 30rpx 40rpx 30rpx;box-sizing:border-box;box-shadow: 0px 0px 5px #ffffff;}
+.agreementPop .title {padding:10rpx 0;text-align:center;color:#333;}
+.agreementPop .content {text-align:justify;line-height:46rpx;font-size:32rpx;text-indent:36px;}
+
+/* 主题色 --- 黑色(000000/ (0,152,248)--- 浅色1(E5F5FF) --- 浅色2(67C4FF) */
+/*FF6634*/
+.blackTheme .agreementBox text.iconfont.active {color:#000000;}
+.blackTheme .agreementBox text.agreement {color: #000000;}
+.blackTheme.createDistribution .button {background: #000000;}
+
+
+
+/* 主题色 --- 红色(FA0029/ (250,0,41)--- 浅色1(250,0,41, 1) --- 浅色2(250,0,41, 2) */
+/*FF6634*/
+.redTheme .agreementBox text.iconfont.active {color:#FA0029;}
+.redTheme .agreementBox text.agreement {color: #FA0029;}
+.redTheme.createDistribution .button {background: #FA0029;}
+
+
+
+/* 主题色 --- 橘色(FF5C1C/ (255,92,28)--- 浅色1(255,92,28, 1) --- 浅色2(255,92,28, 2) */
+/*FF6634*/
+.orangeTheme .agreementBox text.iconfont.active {color:#FF5C1C;}
+.orangeTheme .agreementBox text.agreement {color: #FF5C1C;}
+.orangeTheme.createDistribution .button {background: #FF5C1C;}
+
+
+
+/* 主题色 --- 蓝色(0098F8/ (0,152,248)--- 浅色1(E5F5FF) --- 浅色2(67C4FF) */
+/*FF6634*/
+.blueTheme .agreementBox text.iconfont.active {color:#0098F8;}
+.blueTheme .agreementBox text.agreement {color: #0098F8;}
+.blueTheme.createDistribution .button {background: #0098F8;}
+
+
+
+/* 主题色 --- 桃紫色(FF007C/ (255,0,124)--- 浅色1(255,0,124,1) --- 浅色2(255,0,124, 2) */
+/*FF6634*/
+.pinkDarkTheme .agreementBox text.iconfont.active {color:#FF007C;}
+.pinkDarkTheme .agreementBox text.agreement {color: #FF007C;}
+.pinkDarkTheme.createDistribution .button {background: #FF007C;}
+
+
+
+/* 主题色 --- 紫色(7948FD/ (121,72,253)--- 浅色1(121,72,253, 1) --- 浅色2(121,72,253, 2) */
+/*FF6634*/
+.purpleTheme .agreementBox text.iconfont.active {color:#7948FD;}
+.purpleTheme .agreementBox text.agreement {color: #7948FD;}
+.purpleTheme.createDistribution .button {background: #7948FD;}
+
+
+
+/* 主题色 --- 棕色(B7A392/ (183,163,146)--- 浅色1(183,163,146, 1) --- 浅色2(183,163,146, 2) */
+/*FF6634*/
+.brownTheme .agreementBox text.iconfont.active {color:#B7A392;}
+.brownTheme .agreementBox text.agreement {color: #B7A392;}
+.brownTheme.createDistribution .button {background: #B7A392;}
+
+.btn-yzm{
+  margin: 0;
+  width: 200rpx;
+  font-size: 26rpx;
+}
+.txt-verificate{
+  width: 750rpx;
+  height: 60rpx;
+  text-align: right;
+  margin-top: 25rpx;
+}
+

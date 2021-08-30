@@ -1,0 +1,77 @@
+<!--pages/LIVEVIDEO//pages/myActive/myActive.wxml-->
+<view class="container {{pageTheme}}">
+  <view class="ac-header">
+    <view class="ac-tip">请在24小时添加地址，过时失效；暂不支持修改地址</view>
+    <!-- 搜索 -->
+    <!-- <view class="search-cloth">
+      <view class="topicSearch">
+        <view class="search-ipt">
+          <input bindconfirm="wxSearchFn" bindinput="wxSearchInput" placeholder="请输入活动名称" type="text" value="{{topicVal}}" confirm-type="search"></input>
+          <view class="iconfont icon-chazhao search-pic" bindtap="searchBtn" style="color:{{themeColorValue}}"></view>
+        </view>
+      </view>
+    </view> -->
+  </view>
+  <view style="height: 48px;"></view>
+  <view class="ac-content">
+    <block wx:if="{{myActiveData.list.length>0}}">
+      <view class="ac-list" wx:for="{{myActiveData.list}}" wx:key="index">
+        <!-- <navigator class="live-name" url="/pages/LIVEVIDEO/pages/liveVideo/liveVideoDetail?isShare=1&live_id={{item.live_id}}&imgsrc={{item.live_cover_img}}&status={{item.live_status}}" hover-class="none" open-type="navigate">
+          <view>{{item.title}}</view>
+          <view class="iconfont icon-xiayibu"></view>
+        </navigator> -->
+        <view>{{item.title}}</view>
+        <view class="ac-time">
+          <text>中奖时间：</text>
+          <text>{{item.dateline}}</text>
+        </view>
+        <view class="ac-time">
+          <text>奖品名称：</text>
+          <text>{{item.product_name}}</text>
+        </view>
+        <view class="ac-time" wx:if="{{item.lxname && item.lxname != ''}}">
+          <text>姓名：</text>
+          <text>{{item.lxname}}</text>
+        </view>
+        <view class="ac-time" wx:if="{{item.phone && item.phone != ''}}">
+          <text>电话：</text>
+          <text>{{item.phone}}</text>
+        </view>
+        <view class="ac-time" wx:if="{{item.address && item.address != ''}}">
+          <text>地址：</text>
+          <text>{{item.address}}</text>
+        </view>
+        <!-- <view class="ac-time" wx:if="{{item.express_info.length>0}}">
+          <text>物流单号：</text>
+          <text>{{item.express_info[0].exp_no}}</text>
+          <text class="is-copy" data-ordernum="{{item.express_info[0].exp_no}}" bindtap="orderCopy" style="color:{{themeColorValue}};">复制</text>
+        </view> -->
+         <view class="ac-time">
+          <text>状态：</text>
+          <text>{{item.status === '0' ? '未兑奖' : '已兑奖'}}</text>
+        </view>
+        <view class="ac-btn-cloth" wx:if="{{item.prize === '1' && item.status === '0'}}">
+           <view class="ac-btn" style="background-color: {{themeColorValue}};" data-addressid="{{item.address_id}}" data-liveid="{{item.live_id}}" data-prizeid="{{item.id}}" bindtap="addressGo">添加地址</view>
+          <!-- <block wx:if="{{item.prizestatus == 0}}">
+            <view>原因：未在有效时间填写地址</view>
+            <view class="ac-btn">已失效</view>
+          </block> -->
+        </view> 
+        <view class="ac-btn-cloth" wx:if="{{item.prize === '2' && item.status === '0'}}">
+          <view class="ac-btn" style="background-color: {{themeColorValue}};" data-addressid="{{item.address_id}}" data-liveid="{{item.live_id}}" data-prizeid="{{item.id}}" bindtap="getPrize">领取优惠券</view>
+          <!-- <block wx:if="{{item.prizestatus == 0}}">
+            <view>原因：未在有效时间填写地址</view>
+            <view class="ac-btn">已失效</view>
+          </block> -->
+        </view>         
+      </view>
+      <view class="end" style="margin:80rpx 0;" wx:if='{{isOver}}'>
+        <text>THE  END</text>
+      </view>
+    </block>
+    <view class="anchor-list-empy" wx:else>
+      <image src="{{BASE_IMG_URL}}images/imgTxtCommon.png" mode="widthFix"></image>
+      <view>暂无中奖记录~</view>
+    </view>
+  </view>
+</view>

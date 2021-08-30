@@ -1,0 +1,34 @@
+<template name="goodsList">
+  <!-- 商品列表 -->
+  <view class="layer" bindtap="closeShopping1" catchtouchmove="ture"></view>
+  <view class="shoppingLayer1" style="bottom:{{store_nav_list_show?'88rpx':'0'}};z-index:99999;">
+    <view class="goods-list-header">
+      <view>共{{goodsdata.length}}件商品</view>
+      <view class="iconfont icon-iconfonticonfontclose" bindtap="closeShopping1"></view>
+    </view>
+    <!-- <view class="goods-list-header1"></view> -->
+    <block wx:for="{{goodsdata}}" wx:key="index">
+      <view class="goods-list" data-protype="{{item.special_product_type}}" data-proid="{{item.product_id}}" data-frompointshop="{{item.from_point_shop}}" bindtap="goodsDetail">
+        <view class="goods-list-item">
+          <image class="goods-list-img" src="{{item.image}}"></image>
+          <view class="goods-list-content">
+            <view class="goods-list-name">{{item.name}}</view>
+            <view class="goods-list-price" wx:if="{{item.point_exchange_num*1 != 0 && item.from_point_shop*1 == 1}}">
+              <text class="new-price"><text class="iconfont icon-jifen"></text>{{item.point_exchange_num}}</text>
+              <text class="new-price">+</text>
+              <text class="new-price"><text>￥</text>{{item.price}}</text>
+            </view>
+            <view class="goods-list-price" wx:else>
+              <view class="new-price"><text>￥</text>{{item.price}}</view>
+              <view class="old-price" wx:if="{{item.original_price*1}}"><text>￥</text>{{item.original_price}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="goods-list-b">
+          <view class="goods-list-say" wx:if="{{0}}">看讲解</view>
+          <view class="go-shopping" data-product="{{item.product_id}}" data-type="{{item.point_exchange_num*1 != 0 && item.from_point_shop*1 == 1?'self_buy0':'self_buy1'}}" data-baby="baby" catchtap="openShop">马上抢</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</template>

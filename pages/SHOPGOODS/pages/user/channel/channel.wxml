@@ -1,0 +1,28 @@
+<!--pages/SHOPGOODS//pages/user/channel/channel.wxml-->
+<import src="../../../../public/warning.wxml" />
+<view class="container" style="height:{{scrollHeight}}px;" wx:if="{{isEmpty == 0}}">
+  <view class="channel-top">
+    <view class="channel-detail">
+      <image class="shop-logo" src="{{channelData.logo}}"></image>
+      <view class="channel-title">{{channelData.one_level_channel}}</view>
+      <view class="channel-list">
+        <image src="https://s.404.cn/applet/images/qudao/channel.png"></image>
+        <view class="list-right">
+          <view class="title-two">{{channelData.second_level_channel}}</view>
+          <text>价值{{channelData.coupon_value}}元</text>
+        </view>
+      </view>
+    </view>
+    <image class="channel-bg" mode="widthFix" src="https://s.404.cn/applet/images/qudao/channel-bg.png"></image>
+  </view>
+  <view class="gain">
+    <input class="inp-pas" bindinput="bindPas" placeholder="输入密码" placeholder-style="color: #999;"></input>
+    <button size="default" disabled="{{againbtn}}" class="sub-btn" hover-class="sub-btn-hover" bindtap="gainCoupon">立即领取</button>
+  </view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+<!-- 页面内容为空 -->
+<view class="data_null_block" style="height:{{scrollHeight}}px;" wx:if="{{isEmpty != 0}}">
+  <image src="https://s.404.cn/applet/images/qudao/empty_tip.png" style="width:520rpx;" mode="widthFix"></image>
+  <text class="tips">{{channelData}}</text>
+</view>

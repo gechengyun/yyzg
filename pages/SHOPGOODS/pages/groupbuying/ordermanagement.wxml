@@ -1,0 +1,86 @@
+<view>
+  <view class='order-searchtap-wrap'>
+    <view class='order-search-box'>
+      <view class='order-search-content'>
+        <icon class='iconfont icon-sousuo1'></icon>
+        <input placeholder='请输入订单号' value='{{order_no}}' bindblur='savaOrder'></input>
+        <icon class='iconfont icon-saoma' bindtap='grouperScancode'></icon>
+      </view>
+      <view class='order-search-btn' bindtap='getOrderlist' data-type='button' style='background-color:{{themeColorValue}};'>搜索</view>
+    </view>
+    <view class='order-tap-box'>
+      <text class='{{navName.name == nav.name?"active":""}}' wx:for="{{orderlistNav}}" wx:key="index" wx:for-item="nav" data-value='{{nav}}' bindtap='swithNav'>{{nav.name}}</text>
+      <!-- <text >待付款</text> -->
+    </view>
+  </view>
+   <scroll-view class="orderState" scroll-y="{{order_list!=''}}" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="page.order.index">
+    <view class='order-list' wx:for="{{orderlist}}" wx:for-item="list" wx:key="index">
+      <view class='order-list-title'>
+        <image src='{{list.avatar}}' mode='widthFix'></image>
+        <view class='list-title-content'>
+          <view class='list-title-name '  data-num="{{list.address_tel}}" catchtap="calling">
+            <text>{{list.address_user}} {{list.address_tel}}   <text class="iconfont icon-phone" style='color:{{themeColorValue}};'></text>
+            </text>
+            <text wx:if="{{list.status == 0}}"> 临时订单</text>
+            <text wx:elif="{{list.status == 1}}"> 等待买家付款</text>
+            <text wx:elif="{{list.status == 2}}"> 等待卖家发货</text>
+            <text wx:elif="{{list.status == 3}}"> 卖家已发货</text>
+            <text wx:elif="{{list.status == 4}}"> 交易完成</text>
+            <text wx:elif="{{list.status == 5}}"> 订单关闭</text>
+            <text wx:elif="{{list.status == 6}}"> 退货中</text>
+            <text wx:else> 确认收货</text>
+          </view>
+          <view class='list-title-time'>
+            <text>{{list.paid_time}}</text>
+            <text bindtap='copyOrderNo' longpress='copyOrderNo' data-value='{{list.order_no_txt}}'>{{list.order_no_txt}}</text>
+          </view>
+        </view>
+
+      </view>
+      <view class='order-list-content' wx:for="{{list.order_product_list}}" wx:key='{{index}}' wx:for-item="product">
+        <image src='{{product.image}}'></image>
+        <view class='list-content-detail'>
+          <text>{{product.name}}</text>
+          <!-- <text>规格：{{product.weight}}*{{product.pro_num}}</text> -->
+          <text class="rule"> 
+            <block wx:for="{{product.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}}     </block>
+          </text>
+          <text class="rule" wx:if="{{product.return_quantity>0}}">买{{product.pro_num}}件退{{product.return_quantity}}件</text>
+        </view>
+        <view class='list-content-style'>
+          <text>￥{{product.pro_price}}</text>
+          <text>x{{product.pro_num}}</text>
+        </view>
+      </view>
+      <view class='order-list-money'>共{{list.pro_num}}件，合计：
+        <text> ￥{{list.total}} </text>
+        <text class='postage' wx:if="{{list.postage*1>0}}">(含运费￥{{list.postage}})</text>
+        <text class='profit'  style='color:{{themeColorValue}};'>利润：￥{{list.profit}}</text>
+      </view>
+      <view class="draw">
+        <button wx:if="{{list.community_status==1}}" type="default" size="mini" bindtap="MyDraw" data-orderno="{{list.order_no}}" style='background-color:{{themeColorValue}};color:#fff;'>到货</button>
+        <!-- <button wx:if="{{list.community_status==1}}" type="default" size="mini" disabled="true" style='color:{{themeColorValue}};'>待发货</button> -->
+        <button wx:if="{{list.community_status==2}}" type="default" size="mini" disabled="true" style='color:{{themeColorValue}};'>已到货</button>
+        <button wx:if="{{list.community_status==3}}" type="default" size="mini" disabled="true" style='color:{{themeColorValue}};'>已自提</button>
+      </view>
+      <view class='order-list-operation' wx:if="{{navName.type == 'send'}}">
+        <view bindtap='logistics' data-code='{{list.order_product_list[0].code}}' data-express='{{navName.type}}' wx:if="{{navName.type == 'send' || navName.type == 'complete'}}">
+          <text class='iconfont icon-wuliuxinxi' style='margin-right:10rpx;'></text> 查看物流
+        </view>
+        <!-- <view bindtap='grouperScancode'>
+          <text class='iconfont icon-saoma' style='margin-right:10rpx;'></text>
+          扫码
+        </view>
+        <view>
+          <text class='iconfont icon-dingdan' style='margin-right:10rpx;'></text>
+          备注
+        </view> -->
+      </view>
+    </view>
+    <view class='order-list-none' wx:if="{{orderlist == ''}}">
+      <image></image>
+      <view>暂无更多数据</view>
+    </view>
+    <view hidden="{{!no_more}}" wx:if="{{orderlist != ''}}" class="no-more">暂无更多数据</view>
+  </scroll-view>  
+</view>

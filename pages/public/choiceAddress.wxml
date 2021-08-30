@@ -1,0 +1,38 @@
+<!--选择默认地址通用模板-->
+<template name="choiceAddress">
+	<view class="addressPages" data-page="{{page.public.choiceAddress}}" style="margin-bottom: 120rpx;">
+		<view class="addressList" wx:for="{{addressData}}" wx:key="index" wx:if="{{item}}">
+			<view  bindtap="{{orderData.address ? 'useThisAddress' : ''}}" 
+				data-bindtap="{{orderData.address ? 'useThisAddress' : ''}}"
+				data-addId="{{item.address_id}}" style="position:relative;">
+				<view class="addressTop">
+					<text>{{item.name}}, </text>
+					<text> {{item.tel}}</text>
+				</view>
+				<view class="addressDec" data-id="{{orderData.address_id}}">{{item.province_txt}}{{item.city_txt}}{{item.area_txt}}{{item.address}}{{item.address_detail}}</view>
+				<view class="addressChecked iconfont icon-correct"  data-order="{{orderData}}" wx:if="{{orderData && orderData.address == item.address_id}}"></view>
+			</view>
+			<view class="addressChoic clearfix">
+				<view class="addressIcon {{currentTab==index ? 'active' : ''}}" data-current="{{index}}" data-addId="{{item.address_id}}" bindtap="defaultAddress">
+					<view class="iconBox">
+						<text class="iconfont {{currentTab==index ? 'icon-dui' : ''}}"></text>
+					</view>默认
+				</view>
+				<view class="addressEdit">
+					<view class="editButton" bindtap="addressEditGO" data-addId="{{item.address_id}}">
+						<text class="iconfont icon-bianji" data-addId="{{item.address_id}}"></text>编辑</view>
+					<view class="delButton" bindtap="delAddress" data-addId="{{item.address_id}}" data-index="{{index}}">
+						<text class="iconfont icon-shanchu" data-addId="{{item.address_id}}" data-index="{{index}}"></text>删除</view>
+				</view>
+			</view>
+		</view>
+		<view class="productdDefault" wx:if="{{addressData==''}}">
+			<image src="https://s.404.cn/applet/images/wxcopy/shop_08.png"> </image>
+			<text>还没有收货地址呢,快来添加吧!</text>
+		</view>
+	</view>
+	<view class="buttonGroup flex flex-center">
+		<button class="childBtn wxBtn" type="" bindtap="chooseWXAddress">使用微信地址</button>
+		<button class="childBtn" type="" bindtap="addressEditGO" data-addId="0">添加地址</button>
+	</view>
+</template>

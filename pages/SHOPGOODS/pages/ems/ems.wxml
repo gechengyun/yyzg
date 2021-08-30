@@ -1,0 +1,27 @@
+<view class="ems">
+   <block wx:if="{{logistics.deliverystatus}}">
+    <view class="status" wx:if="{{deliverystatus[logistics.deliverystatus]}}">
+      <text class="text">{{deliverystatus[logistics.deliverystatus]}}</text>
+    </view>
+    <view class="deliver">
+      <view class="info">
+        <text class="merchants">{{logistics.typename}}：{{logistics.number}}</text>
+        <text class="copy" data-ordernum="{{id}}" bindtap="orderCopy">复制</text>
+      </view>
+      <view class="tree" wx:if="{{logistics.list.length > 0}}">
+        <view class="item" wx:for="{{logistics.list}}" wx:key="index">
+          <view class="datetime">
+            <text class="date">{{item.date}}</text>
+            <text class="time">{{item.timex}}</text>
+          </view>
+          <view class="information">
+            <text class="detail">{{item.status}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="noDate" wx:else>暂无物流信息</view>
+    </view>
+  </block>
+  <view class="noDate" wx:else>暂无物流信息</view>
+ 
+</view>

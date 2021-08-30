@@ -1,0 +1,665 @@
+<!--产品详情页面-->
+<import src="../../../public/soldOutBox.wxml" />
+<!--售罄弹窗-->
+<import src="../../../../wxParse/wxParse.wxml" />
+<import src="../../../public/shear.wxml" />
+<import src="../../../public/shoppingCat.wxml" />
+<import src="../../../public/orderLayer.wxml" />
+<import src="../../../public/warning.wxml" />
+<import src="../../../public/showBigPic.wxml" />
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<wxs module="indexModule">
+  module.exports.getName = function(name, starlen, endlen) {
+    return name.slice(starlen, endlen);
+  }
+</wxs>
+<view style="padding: 5px 5px;" wx:if="{{applet_guide_subscribe}}">
+  <official-account binderror="officialAccountError"></official-account>
+</view>
+<!-- background:{{shopHomeData.bgcolor}} -->
+<scroll-view class="container {{pageTheme}}" style="height: {{scrollHeight}}px; background:#f7f3f3 " scroll-y="true"
+scroll-into-view="{{scrollTopView}}" scroll-top="" data-page="pages.product.details">
+  <include src="/pages/public/order_notice.wxml"></include>
+  <view id="scrollTopView"></view>
+  <!--空的view用来做回到顶部-->
+  <view class="containerLayer" wx:if="{{!containerLayer}}"></view>
+  <block>
+    <template is="shear" wx:if="{{shear}}" />
+  </block>
+  <view class="asideDetails" style="bottom:{{store_nav_list_show?'14%':'7%'}}">
+    <text class="goTop iconfont icon-dingbu" bindtap="goTopFun" style="display:{{scrollTop.goTopShow ? 'block' : 'none'}};"></text>
+    <navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}">
+      <text class="iconfont icon-store "></text>
+    </navigator>
+    <button open-type='contact' class="iconfont icon-weixin_icon"></button>
+    <navigator url="/pages/shoppingCat/index" hover-class="none">
+      <text class="iconfont icon-gouwuche1 shoppingCatIcon" wx:if="{{shoppingCatNum}}"></text>
+    </navigator>
+  </view>
+  <block>
+    <template is="orderLayer" wx:if="{{businessShow}}" data="{{business:business}}" />
+  </block>
+  <!-- 门店展示 -->
+  <block wx:if='{{productData.physical_info && productData.physical_info.physical_count==1 && comman != 1}}'>
+
+    <view class='current-store {{applet_guide_subscribe ? "" :"fixed-store"}}'>
+      <image src='{{productData.physical_info.images}}' mode='widthFix' class='store-logo'></image>
+      <text class='store-txt'>{{productData.physical_info.name}}</text>
+    </view>
+    <view class='post_fiex' wx:if='{{!applet_guide_subscribe}}'>占位</view>
+  </block>
+  <block wx:else>
+    <navigator url="/pages/SHOPGOODS/pages/index/shopHomeList?pid={{productData.product.product_id}}" class='{{applet_guide_subscribe ? "" :"fixed-store"}}' wx:if='{{productData.physical_info && productData.physical_info.physical_count>1 && comman != 1}}'>
+      <view class='current-store'>
+        <image src='{{productData.physical_info.images}}' mode='widthFix' class='store-logo'></image>
+        <text class='store-txt'>{{productData.physical_info.name}}</text>
+        <view class='store-change'>[切换]</view>
+      </view>
+    </navigator>
+    <view class='post_fiex' wx:if='{{productData.physical_info && productData.physical_info.physical_count>1 &&(!applet_guide_subscribe) && comman != 1}}'>占位</view>
+  </block>
+  <!-- 商品详情的滑动框 -->
+  <!--  -->
+  <view id='navTop1'>
+    <view wx:if='{{ productData.product.video==null || productData.product.video=="" }}'>
+      <!-- 轮播图 -->
+      <swiper class="detailsSwiper bgF" wx:if="{{productData.product.images.length > 1}}" autoplay="true" interval="5000" indicator-dots="true" indicator-active-color="{{themeColorValue}}" style="height:{{imageHeight}}px;">
+        <swiper-item wx:for-items="{{productData.product.images}}" wx:key="menuId">
+          <image src="{{item.image}}" mode="scaleToFill"></image>
+        </swiper-item>
+      </swiper>
+      <view class="detailsSwiper bgF" wx:if="{{productData.product.images.length == 1}}" style="height:{{imageHeight}}px;">
+        <image src="{{productData.product.images[0].image}}" mode="scaleToFill"></image>
+      </view>
+      <!-- 轮播图 end -->
+    </view>
+    <view wx:else>
+      <!-- 轮播 视频切换 -->
+      <view class='scroll_slide'>
+        <view class="nav bc_white z-index-detail">
+          <view class="{{selected?'red':'default'}}" bindtap="selected">
+            <image src="../../images/icon_video.png" class='default_icon' style='width:13rpx; height:15rpx'></image>
+            <image src="../../images/icon_videoCur.png" class='cur_red' style='width:13rpx; height:15rpx'></image>
+            视频
+          </view>
+          <view class="{{selected1?'red':'default'}}" bindtap="selected1">图片</view>
+        </view>
+        <view class="{{selected?'show':'hidden'}}">
+          <!-- 视频 -->
+          <view>
+            <video src="{{ productData.product.video }}" controls autoplay class='slide_video' poster='{{ productData.product.video_cover }}'></video>
+          </view>
+          <!-- 视频 end -->
+        </view>
+        <view class="{{selected1?'show':'hidden'}}">
+          <!-- 轮播图 -->
+          <swiper class="detailsSwiper bgF" wx:if="{{productData.product.images.length > 1}}" autoplay="true" interval="5000" indicator-dots="true" indicator-active-color="{{themeColorValue}}" style="height:{{imageHeight}}px;">
+            <swiper-item wx:for-items="{{productData.product.images}}" wx:key="menuId">
+              <image src="{{item.image}}" mode="scaleToFill"></image>
+            </swiper-item>
+          </swiper>
+          <view class="detailsSwiper bgF" wx:if="{{productData.product.images.length == 1}}" style="height:{{imageHeight}}px;">
+            <image src="{{productData.product.images[0].image}}" mode="scaleToFill"></image>
+          </view>
+          <!-- 轮播图 end -->
+        </view>
+      </view>
+    </view>
+    <view class='group-activity-box' wx:if="{{productData.community_activity}}">
+      <view class='group-activity-left'>
+        <view class='group-activity-price'>
+          <text>￥{{activity_price}}</text>
+          <text>￥{{productData.product.price}}</text>
+        </view>
+        <text>已团{{productData.product.sales}}件，仅剩{{productData.product.quantity}}份</text>
+      </view>
+      <view class='group-activity-right'>
+        <text>距结束仅剩</text>
+        <view class="time-wrap">
+          <span>{{total_show}}</span>
+          <em>天</em>
+          <span>{{hours_show}}</span>
+          <em>时</em>
+          <span>{{minutes_show}}</span>
+          <em>分</em>
+          <span>{{seconds_show}}</span>
+          <em>秒</em>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="detailsCentent  section" style='margin-top:0;'>
+    <view class="productInfo clearfix " wx:if='{{productData.product.name}}'>
+      <view class="productPrice" style="margin-top:18rpx">
+        <view style="margin:0;">
+          <block wx:if="{{filter.transBigNumber(productData.product.point_exchange_num,1)!=0}}">
+          <!-- 积分 {{filter.transBigNumber(productData.product.point_exchange_num,1)}} -->
+          
+            <block wx:if="{{(productData.product.point_exchange_num!=0&&productData.product.max_point_exchange_num==productData.product.min_point_exchange_num)}}">
+              <text class="price">  <text class="iconfont icon-jifen"></text>{{productData.product.point_exchange_num}}</text>
+              <!-- 积分商品多规格 -->
+            </block>
+            <block wx:else>
+              <text class="price"><text class="iconfont icon-jifen"></text>{{productData.product.min_point_exchange_num}}~{{productData.product.max_point_exchange_num}}</text>
+              <!-- 积分商品多规格 -->
+            </block>
+
+          </block>
+          <block wx:if="{{filter.transBigNumber(productData.product.point_price,1)!=0||filter.transBigNumber(productData.product.max_price,1)!=0}}">
+          <!-- + ￥{{filter.transBigNumber(productData.product.point_price,1)}} -->
+            <block wx:if="{{productData.product.price&&productData.product.min_price==productData.product.max_price}}">
+              <text class="price"> + ¥{{productData.product.price}} </text>
+            </block>
+            <block wx:else>
+              <text class="price"> + ¥{{productData.product.min_price}}~{{productData.product.max_price}} </text>
+            </block>
+
+
+
+          </block>
+          <!-- <text>￥{{product_price}}</text> -->
+          <text class="originalPrice" wx:if="{{productData.product.original_price && productData.product.original_price * 1 != 0}}">¥{{productData.product.original_price}}</text>
+        </view>
+        <view class="insideShow" wx:if="{{productData.product.drp_internal_price != 0}}" bindtap="insideShow">
+          <text>内部价</text>
+          <text class="insideShowContent {{insideShow == true ? '' : 'hide'}}">供货商给分销商的购物价，此价购物无法获得交易分润</text>
+        </view>
+        <view class="" wx:if="{{productData.product.is_reservation != 0}}">
+          <text style="color:#999">{{productData.product.custom_reservation_name ? productData.product.custom_reservation_name : '预约'}}定金：</text>￥{{productData.product.reservation_deposit}}
+        </view>
+      </view>
+      <view class="produtButton clearfix" wx:if="{{productData.product.is_reservation*1!=0}}">
+        <text class="shoppingCatButton" data-type="make" bindtap="oppenShopping" data-product="{{productData.product.product_id}}">{{productData.product.custom_reservation_name ? productData.product.custom_reservation_name : '预约'}}</text>
+      </view>
+      <!-- 收藏分享 -->
+      <view class="collect-box" style="justify-content:initial;float:right" wx:if='{{productData.product.name}}'>
+        <view class='collect-con'>
+          <text class="iconfont {{productData.product.is_collect==1?'icon-xihuan':'icon-hert'}}" bindtap="collect" data-dataid="{{productData.product.product_id}}" data-type="1" data-frompointshop="{{1}}" style='color:{{productData.product.is_collect==1?themeColorValue:"#909090"}};'></text>
+          <view>收藏</view>
+        </view>
+        <view class='collect-con' bindtap='shareTap'>
+          <text class="iconfont icon-share" style='color:#8d8d8d;'></text>
+          <view>分享</view>
+        </view>
+      </view>
+    </view>
+    <view class="productName clearfix" style='display:flex;justify-content:space-between;'>
+      <view class="productH2">
+        <view class="circle-buy-tag" wx:if="{{productData.product.special_product_type == 98}}">周期购</view>
+        <view class="circle-buy-tag" wx:if="{{productData.product.is_self_support == 0}}">自营</view>
+        {{productData.product.name}}</view>
+    </view>
+    <view class="gift-members-price" wx:if="{{productData.product.is_fx == 1&&productData.show_gift == 1}}">
+      <text>分享赚{{productData.self_by_get_money}}元</text>
+      <text wx:if="{{productData.self_by_get_money*1 > 0}}">自购省{{productData.self_by_get_money}}元</text>
+      <icon class='iconfont icon-qest1' bindtap='showbackMoney'></icon>
+    </view>
+    <view wx:if="{{productData.product.postage_show != 0 || productData.product.sales_show != 0 || productData.product.quantity_show != 0 || productData.product.collect_show != 0}}" class="productInfoState">
+      <view wx:if="{{productData.product.postage_show == 1}}">运费:
+        <text>{{productData.product.postage}}</text>
+      </view>
+      <view wx:if="{{productData.product.sales_show == 1}}">
+        {{productData.community_leader?'已团':'销量'}}:
+        <text>{{productData.product.sales}}</text>
+      </view>
+      <view wx:if="{{productData.product.quantity_show == 1}}">{{productData.community_leader?'剩':'库存'}}:
+        <text>{{productData.product.quantity}}</text>
+      </view>
+      <view wx:if="{{productData.product.collect_show == 1}}">喜欢:
+        <text>{{productData.product.collect}}</text>
+      </view>
+    </view>
+  </view>
+  <view class='join-members-box' wx:if="{{productData.community_user.length>0}}">
+    <view class='join-members-title'>
+      <text></text>
+      <text>参团成员</text>
+      <text></text>
+    </view>
+    <view class='join-members-icon'>
+      <view class="{{more_show?'':'hide-member'}}">
+        <image wx:for="{{productData.community_user}}" wx:if='{{productData.community_user&&productData.community_user.length>0}}' wx:key='{{index}}' wx:for-item="person" src='{{person.avatar}}'></image>
+      </view>
+      <view class='more' bindtap="showMore" wx:if='{{productData.community_user&&productData.community_user.length>6}}'>
+        <text></text>
+        <text></text>
+        <text></text>
+      </view>
+      <text class='tuan-tips' wx:if='{{!productData.community_user || productData.community_user.length==0}}'>当前无参团人员</text>
+    </view>
+  </view>
+
+  <!-- show_detail_info======1开启  0隐藏 -->
+  <view class='join-members-box' wx:if="{{productData.community_leader && productData.community_leader.show_detail_info==1 && productData.community_leader.name}}">
+    <view class='join-members-title'>
+      <text></text>
+      <text>取货地址</text>
+      <text>{{productData.community_leader.name}}</text>
+    </view>
+    <view class='join-grouper-detail'>
+      <view class='join-grouper-person'>
+        <image src='{{productData.community_leader.avatar}}'></image>
+        <view class='join-grouper-text'>
+          <text>{{productData.community_leader.nickname}}</text>
+          <text wx:if="{{!productData.community_leader.buy_status}}">{{indexModule.getName(productData.community_leader.phone, 0, 3)}}****{{indexModule.getName(productData.community_leader.phone, 7, 11)}}</text>
+          <text wx:else>{{productData.community_leader.phone}}</text>
+        </view>
+      </view>
+      <view class='join-grouper-address'>
+        <icon class='iconfont icon-dizhi'></icon>{{productData.community_leader.province}}{{productData.community_leader.city}}{{productData.community_leader.county}}{{productData.community_leader.address}}</view>
+    </view>
+  </view>
+  <view class="propaganda  section" wx:if="{{productData.product.recommend_title != undefine && productData.product.recommend_title != ''}}">
+    <text class="iconfont icon-laba"></text>
+    <text>{{productData.product.recommend_title}}</text>
+  </view>
+  <include src="/pages/public/live_code_leading.wxml"></include>
+
+  <!-- 礼包分销 -->
+  <view class='productInfo1 pull-loal' catchtap='gotoMemberGift' wx:if="{{productData.show_gift}}">
+    <image src='{{BASE_IMG_URL}}images/lafen.jpg' class='lafen'></image>
+    <view class='lafen-info'>{{productData.show_gift == 1?'已':''}}开通会员，享更多的会员权益</view>
+    <view style='color:#deb985;' class='lafen-level'>{{productData.show_gift == 1?'会员权益':'开通会员'}}
+      <text class='arrow iconfont icon-xiayibu' style='font-size:26rpx;'></text>
+    </view>
+  </view>
+  <!-- 拉粉模块 -->
+  <view class='productInfo1 pull-loal' catchtap='gotoMember' wx:if="{{productData.store_config_show.show_share==1}}">
+    <image src='{{BASE_IMG_URL}}images/lafen.jpg' class='lafen'></image>
+    <view class='lafen-info'>拉{{productData.store_config_show.fans_num}}粉升级为{{productData.store_config_show.member_alias}}后尊享更多优惠</view>
+    <view style='color:#deb985;' class='lafen-level'>立即升级
+      <text class='arrow iconfont icon-xiayibu' style='font-size:26rpx;'></text>
+    </view>
+  </view>
+
+  <view class="discountInfo section newDiscount" wx:if="{{productData.discount_arr!=''&& productData.store_config_show.promotion_info_show*1 == 1}}">
+    <view class="title">优惠信息</view>
+    <view class="ulList">
+      <view wx:for="{{productData.discount_arr}}" wx:key="">
+        <text style='background:{{themeColorValue}};border:1rpx solid {{themeColorValue}}'>{{item.name}}</text> {{item.msg}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 七天无理由退换货 -->
+  <view class='real-box' wx:if="{{productData.credit_arr && productData.credit_arr.length > 0}}">
+    <view class='real-flex' wx:for="{{productData.credit_arr}}" wx:key="index">
+      <text class="iconfont icon-zhengpin" style='color:{{themeColorValue}};margin-right:6rpx;'></text>
+      <view>{{item.name}}</view>
+    </view>
+  </view>
+  <view class="couponGoodInfo section" wx:if="{{productData.product.special_product_type == 97}}">
+    <view class="title">使用须知</view>
+    <view class="ulList">
+      <view class="info-item-title">
+        <text>{{filter.parseProductCouponTypeTitle(productData.product_coupon).title}}</text>
+      </view>
+      <view class="info-item-content">
+        <text class="info-item-title-dot">●</text> {{filter.parseProductCouponTypeTitle(productData.product_coupon).content}}</view>
+      <view class="info-item-title">
+        <text>有效期</text>
+      </view>
+      <view class="info-item-content">
+        <block wx:if="{{productData.product_coupon.value_type==1}}">
+          <view>
+            <text class="info-item-title-dot">●</text> {{productData.product_coupon.start_time}}~{{productData.product_coupon.end_time}}</view>
+        </block>
+        <block wx:else>
+          <view>
+            <text class="info-item-title-dot">●</text> 领取后{{productData.product_coupon.late_begin==0?"当":productData.product_coupon.late_begin}}天生效，{{productData.product_coupon.late_value}}天后失效</view>
+        </block>
+      </view>
+      <view class="info-item-title">
+        <text>可用时段</text>
+      </view>
+      <view class="info-item-content">
+        <text wx:if="{{filter.JSON.parse(productData.product_coupon.weeklimit).length==8}}">
+                    <text class="info-item-title-dot">●</text> 每天</text>
+        <text wx:else>
+                    <text class="info-item-title-dot">●</text>
+        <block wx:for="{{filter.JSON.parse(productData.product_coupon.weeklimit)}}">
+          <block wx:if="{{index!=filter.JSON.parse(productData.product_coupon.weeklimit).length-1}}"> {{filter.parseDeliverDate(item*1,2)}}、</block>
+          <block wx:else> {{filter.parseDeliverDate(item*1,2)}}</block>
+        </block>
+        </text>
+      </view>
+      <view class="info-item-title">
+        <text>使用说明</text>
+      </view>
+      <view class="info-item-content">
+        <view wx:for="{{filter.parseCouponDescription(productData.product_coupon.description)}}">
+          <text class="info-item-title-dot">●</text>
+          <text>{{item}}</text>
+        </view>
+      </view>
+      <block wx:if="{{productData.product_coupon.type !=7}}">
+        <view class="info-item-title">
+          <text>使用条件</text>
+        </view>
+        <view class="info-item-content">
+          <text class="info-item-title-dot">●</text> {{productData.product_coupon.limit_money*1==0?"满任意金额可用":"满"+productData.product_coupon.limit_money+"元可用"}}
+        </view>
+        <view class="info-item-content" wx:if="{{productData.product_coupon.no_share}}">
+          <text class="info-item-title-dot">●</text> 不与店铺其它优惠共享
+        </view>
+      </block>
+      <view class="info-item-title">
+        <text>适用门店</text>
+      </view>
+      <view class="info-item-content">
+        <text class="info-item-title-dot">●</text>
+        <block wx:if="{{!productData.product_coupon.physical_list}}"> 所有门店</block>
+        <block wx:else>
+          <text wx:for="{{productData.product_coupon.physical_list}}">{{index!=productData.product_coupon.physical_list.length-1?item.name+"、":item.name}}</text>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class="section activityInfo newActivityInfo" wx:if="{{productData.activites != undefined && productData.activites.length > 0}}">
+    <view class="title">活动信息</view>
+    <view class="infoSection ulList">
+      <view class="activityItem" wx:for="{{productData.activites}}" wx:key="unique">
+        <navigator url="{{item.path.url}}" hover-class="none">
+          <text class="itemName" style='background:{{themeColorValue}}'>{{item.label}}</text>
+          <text>{{item.name}}</text>
+          <text class="arrow iconfont icon-xiayibu"></text>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class='product-box' wx:if="{{productData.product.special_product_type != 97}}">
+    <view class='new-product' wx:if="{{productData.store.specification_show >0}}">
+      <view class='detail-content'>宝贝规格</view>
+      <view class='detail-content' bindtap="oppenShopping" data-baby="baby" data-type="self_buy" data-product="{{productData.product.product_id}}">
+        <text>显示宝贝规格</text>
+        <text class='arrow iconfont icon-xiayibu' style='font-size:26rpx;'></text>
+      </view>
+    </view>
+    <!-- 平台小程序的情况下这里不需要展示平台店铺 -->
+    <navigator url="/pages/index/index" hover-class="none" open-type="{{filter.getOpenType('/pages/index/index',store_nav_list)}}" wx:if="{{ productData.product.is_self_support !== 1&&productData.store.enter_show > 0}}">
+      <view class='new-product'>
+        <view class='detail-content'>{{productData.store.name}}</view>
+        <view class='detail-content'>
+          <text>进入店铺</text>
+          <text class='arrow iconfont icon-xiayibu' style='font-size:26rpx;'></text>
+        </view>
+      </view>
+    </navigator>
+
+    <view class='new-product' bindtap="calling" wx:if="{{productData.store.contact_show > 0 && productData.store.tel}}">
+      <view class='detail-content'>{{productData.store.tel}}</view>
+      <view class='detail-content' bindtap="calling">
+        <text>联系店铺</text>
+        <text class='arrow iconfont icon-xiayibu' style='font-size:26rpx;'></text>
+      </view>
+    </view>
+  </view>
+
+  <view class='enter-business' wx:if="{{productData.product.supplier_id > 0 && productData.product.is_self_support == 1 && productData.product.wholesale_product_id>0}}">
+    <view class="open-bus">
+      <navigator url="/pages/details/businesslist?store_id={{productData.store.store_id}}&wholesale_store_id={{productData.product.supplier_id}}" hover-class="none">
+        <image src='{{productData.wholesale_store_logo}}' class='bus_logo'></image>
+        <text class="textOmitted">{{productData.wholesale_store_name}}</text>
+        <view class='btn-enter' style='background: {{themeColorValue}};'>进店</view>
+      </navigator>
+    </view>
+  </view>
+  <block wx:if="{{productData.product.special_product_type == 98}}">
+    <view class="circle-buy">
+      <view class="circle-buy-title">
+        配送说明
+      </view>
+      <view class="circle-buy-item">
+        <view class="circle-buy-item-title">配送频次
+        </view>
+        <view class="circle-buy-item-desc">{{filter.parseFrequency(productData.product.deliver_frequency)}}</view>
+      </view>
+      <view class="circle-buy-item">
+        <view class="circle-buy-item-title">配送顺延限制
+        </view>
+        <view class="circle-buy-item-desc">{{filter.parseProLong(productData.product.prolong_num)}}
+        </view>
+      </view>
+      <view class="circle-buy-item">
+        <view class="circle-buy-item-title">最近配送期
+        </view>
+        <view class="circle-buy-item-desc">需在最近配送期前{{productData.product.deliver_config[0]}}天，{{productData.product.deliver_config[1]}}点之前下单
+        </view>
+      </view>
+      <view class="circle-buy-item">
+        <view class="circle-buy-item-title">其他说明
+        </view>
+        <view class="circle-buy-item-desc">不支持退货
+        </view>
+      </view>
+    </view>
+  </block>
+  <view class="productInfoList section newProductInfoList">
+    <view class="title ulList">
+      <view class="{{currentTab==0 ? 'active' : ''}}" data-current="0" bindtap="swichNav" wx:if="{{productData.store_config_show.product_info_show*1 == 1}}">商品图文</view>
+      <view class="{{currentTab==1 ? 'active' : ''}}" data-current="1" bindtap="swichNav" wx:if="{{productData.store_config_show.buy_record_show*1 == 1}}" data-type="record">购买记录</view>
+      <view class="{{currentTab==2 ? 'active' : ''}}" data-current="2" bindtap="swichNav" wx:if="{{productData.store_config_show.comment_show*1 == 1}}">交易评价</view>
+      <view class="{{currentTab==3 ? 'active' : ''}}" data-current="3" bindtap="swichNav" wx:if="{{productData.store_config_show.relation_product_show*1 == 1}}">同店宝贝</view>
+    </view>
+    <view class="productInfo">
+      <view class="productImgTxt {{currentTab==0 && productData.store_config_show.product_info_show*1 == 1 ? 'active' : ''}}">
+        <view class="showTxt" wx:if="{{productData.product.info==''}}">
+          <image src="{{BASE_IMG_URL}}images/imgTxtCommon.png"></image>
+          <view>暂时还没有商品介绍哦!</view>
+        </view>
+        <view class="productTxt">
+          <template is="wxParse" data="{{wxParseData:info.nodes}}" />
+        </view>
+      </view>
+      <view class="shopHistory {{currentTab==1 ? 'active' : ''}}">
+        <view class="showTxt smallImg" wx:if="{{recordData.order_list ==''}}">
+          <image src="https://s.404.cn/applet/images/shop_03.png" alt=""></image>
+          <view>该商品还没有人购买呢!</view>
+        </view>
+        <view wx:if="{{recordData.order_list !=''}}">
+          <view class="title">
+            <text class="span">用户名称</text>
+            <text class="span">件数</text>
+            <text class="span">时间</text>
+          </view>
+          <view class="ulList">
+            <view wx:for="{{recordData.order_list}}" wx:key="">
+              <view class="span">
+                <image src="{{item.avatar}}"></image>
+                <text class="">{{item.nickname}}</text>
+              </view>
+              <view class="span">{{item.pro_num}}</view>
+              <view class="span">{{item.add_time}}</view>
+            </view>
+          </view>
+          <view class="showTxt showTxtMore recordTxt">{{recordData.next_page ? '只显示最新20条数据!' : '只显示最新20条数据!'}}</view>
+        </view>
+      </view>
+      <view class="productEvaluate {{currentTab==2 ? 'active' : ''}}">
+        <view wx:if="{{productData.comment_data.total*1!=0}}">
+          <view class="title">
+            <text class="span">评价({{productData.comment_data.total}})</text>
+            <view class="span">好评
+              <text>{{perfect_rate}}</text>
+            </view>
+          </view>
+          <view class="evaluateTitle clearfix ulList">
+            <view class="{{tab=='HAO' ? 'active' : ''}}" data-productList="0" data-tab="HAO" bindtap="productListSwichNav">好评
+              <text data-productList="0" data-tab="HAO">{{productData.comment_data.t3}}</text>
+            </view>
+            <view class="{{tab=='ZHONG' ? 'active' : ''}}" data-productList="1" data-tab="ZHONG" bindtap="productListSwichNav">中评
+              <text data-productList="1" data-tab="ZHONG">{{productData.comment_data.t2}}</text>
+            </view>
+            <view class="{{tab=='CHA' ? 'active' : ''}}" data-productList="2" data-tab="CHA" bindtap="productListSwichNav">差评
+              <text data-productList="2" data-tab="CHA">{{productData.comment_data.t1}}</text>
+            </view>
+            <view class="{{tab=='IMAGE' ? 'active' : ''}}" data-productList="3" data-tab="IMAGE" bindtap="productListSwichNav">有图
+              <text data-productList="3" data-tab="IMAGE">{{productData.comment_data.t4}}</text>
+            </view>
+          </view>
+          <view class="commentList">
+            <view>
+              <view class="showTxt smallImg" wx:if="{{commentData.comment_list==''}}">
+                <image src="https://s.404.cn/applet/images/shop_06.png" alt=""></image>
+                <view>暂无评价!快来抢沙发吧!</view>
+              </view>
+              <view class="evaluateTitleList">
+                <view wx:for="{{commentData.comment_list}}" wx:for-item="list" wx:for-index="list_index" wx:key="">
+                  <view class="p">
+                    <view>
+                      <image src="{{list.avatar}}"></image>
+                      <text>{{list.nickname}}</text>
+                      <text>{{list.score}}分</text>
+                    </view>
+                    <view>{{list.date}}</view>
+                  </view>
+                  <view class="p">{{list.content}}</view>
+                  <view class="evaluateImg clearfix">
+                    <view wx:for="{{list.attachment_list}}" wx:for-index="img_index" wx:key="">
+                      <image src="{{item.file}}" bindtap="showBigPic" data-src="{{item.file}}" data-index="{{img_index}}"></image>
+                    </view>
+                  </view>
+                </view>
+              </view>
+              <view class="showTxt showTxtMore recordTxt" wx:if="{{(commentData.comment_list!='')&&(!commentData.next_page)}}">
+                <text>没有更多记录啦!</text>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view class="showTxt smallImg" wx:if="{{productData.comment_data.total*1==0}}">
+          <image src="https://s.404.cn/applet/images/shop_06.png" alt=""></image>
+          <view>该商品还没有人发表评价!</view>
+        </view>
+      </view>
+      <view class="shopProduct {{currentTab==3 ? 'active' : ''}}">
+        <view class="showTxt smallImg" wx:if="{{productData.product_relation_list==''}}">
+          <image src="https://s.404.cn/applet/images/wxcopy/shop_08.png" alt=""></image>
+          <view>该店铺暂无其他商品!</view>
+        </view>
+        <view class="clearfix ulList">
+          <view wx:for="{{productData.product_relation_list}}" wx:key="">
+            <navigator url="/pages/product/details?product_id={{item.product_id}}" hover-class="none" open-type="navigate">
+              <view class="productImg verticalCentering">
+                <image src="{{item.image}}" alt=""></image>
+                <text>{{item.name}}</text>
+              </view>
+              <view class="p">
+                <text>¥{{item.price}}
+                </text>
+                <text wx:if="{{item.original_price*1 != 0}}">¥{{item.original_price}}</text>
+              </view>
+              <view class="p">销量:{{item.sales}}</view>
+            </navigator>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <form report-submit="true" bindsubmit="formSubmit">
+    <view class="shoppingCatFooter">
+      <!-- 已售罄，切换门店 -->
+      <block wx:if="{{productData.product.quantity==0 && productData.product.all_physical_quantity==0}}">
+        <view style="bottom:{{store_nav_list_show?'88rpx':0}}" class="timeLimit {{isIpx}}__footer__btn-group">已售罄</view>
+      </block>
+      <block wx:elif="{{productData.product.quantity==0 && productData.product.all_physical_quantity!=0 }}">
+        <view style="bottom:{{store_nav_list_show?'88rpx':0}}" class="timeLimit {{isIpx}}__footer__btn-group" wx:if="{{productData.product.quantity==0}}" bindtap="soldOutProduct">切换门店</view>
+      </block>
+      <!-- 预约 -->
+      <view style="bottom:{{store_nav_list_show?'88rpx':0}}" class="clearfix ulList {{isIpx}}__footer__btn-group" wx:if="{{productData.product.is_reservation*1==1}}">
+        <button form-type="submit" class="shoppingCatButton" bindtap="oppenShopping" data-type="make" data-product="{{productData.product.product_id}}">{{productData.product.custom_reservation_name ? productData.product.custom_reservation_name : '预约'}}
+        </button>
+      </view>
+      <view class="clearfix ulList {{isIpx}}__footer__btn-group" wx:if="{{productData.product.status*1==0}}" style="bottom:{{store_nav_list_show?'88rpx':0}}">
+        <button form-type="submit" class="shoppingCatButton no-buy" data-type="no-buy" data-product="{{productData.product.product_id}}">
+          该商品已下架</button>
+      </view>
+      <!-- 加入购物袋/立即购买 -->
+      <view class="clearfix ulList {{isIpx}}__footer__btn-group" wx:elif="{{productData.product.is_reservation*1!=1}}" style="bottom:{{store_nav_list_show?'88rpx':0}}">
+        <!-- <button form-type="submit" class="shoppingCatButton add_cart" bindtap="oppenShopping" wx:if="{{productData.product.special_product_type != 98 && productData.product.special_product_type != 97 &&productData.product.special_product_type != 95}}" data-type="add_cart"
+          data-product="{{productData.product.product_id}}">
+          <text class="iconfont icon-gouwuche1" data-type="add_cart" data-product="{{productData.product.product_id}}"></text>加入购物袋</button> -->
+        <block wx:if="{{productData.pay_btn_arr[0].type=='no_buy'}}">
+          <button class="shoppingCatButton self_buy"> {{productData.pay_btn_arr[0].name}}</button>
+        </block>
+        <block wx:else>
+          <button form-type="submit" class="shoppingCatButton self_buy" bindtap="oppenShopping" data-type="self_buy" data-product="{{productData.product.product_id}}">
+            立即兑换</button>
+        </block>
+      </view>
+    </view>
+  </form>
+  <!--加入购物袋弹窗-->
+  <block wx:if="{{shoppingData.shoppingShow}}">
+    <template is="shoppingCat" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,serviceval}}" />
+  </block>
+
+  <!--加载弹窗-->
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+
+  <!--查看大图弹窗-->
+  <block wx:if="{{showBigPic}}">
+    <template is="showBigPic" data="{{content: commentData.comment_list[common_list_index].attachment_list, index: common_list_index, showBigPic: showBigPic}}" />
+  </block>
+
+  <!--售罄弹窗-->
+  <template is="soldOutBox" wx:if="{{soldOutBoxShow}}" data="{{content:soldOutBoxData}}" />
+  <!--海报画布-->
+  <canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;"></canvas>
+
+</scroll-view>
+<!-- <shareModal id='shareModal'
+            title='我是标题'
+            content="content"
+            cancelText='取消'
+            bind:_cancelEvent="_cancelEvent"
+            bind:_shareGroup="_shareGroup"
+            bind:_shareFriendsCircle="_shareFriendsCircle">
+</shareModal>  -->
+
+<!--切换门店-->
+<block wx:if="{{oppenShopList}}">
+  <view class="layer" bindtap="oppenShopList"></view>
+  <view class="shoppingLayer {{pageTheme}}" style='margin-bottom:{{isIpx?110:88}}rpx'>
+    <view class="shoppingTitle black">当前门店缺货，请切换有货门店
+      <text class="iconfont icon-chacha" bindtap="oppenShopList"></text>
+    </view>
+    <view class="shopHomeList">
+      <view class="listItem" wx:for="{{substoreList}}" wx:key="">
+        <image src="{{item.logo}}"></image>
+        <view class="addressInfo">
+          <view class="infoName">
+            <text>{{item.name}}</text>
+          </view>
+          <view class="infoAddress">
+            <text>{{item.address}}</text>
+            <text class="iconfont icon-telephone" bindtap="calling" data-num="{{item.tel}}"></text>
+          </view>
+          <view class="infoTime">
+            <text>{{item.distance}} </text>
+            <text wx:if="{{!item.business_hours}}">营业时间：全天</text>
+            <text wx:if="{{item.business_hours}}"> 营业时间：{{item.business_hours}}</text>
+          </view>
+        </view>
+        <text wx:if="{{item.is_valid==1 && item.status == 1}}" class="choice" data-productList="{{index}}" data-physicalid="{{item.pigcms_id}}" bindtap="productListSwichSubStore" data-index="{{index}}">选择</text>
+        <text wx:if="{{item.is_valid==0 || item.status == 2}}" class="choice gray">不可选</text>
+      </view>
+    </view>
+  </view>
+</block>
+<view wx:if="{{backMoneyStatus}}">
+  <view class='windowmask' catchtouchmove='false' bindtap='hidebackMoney' style='opacity:0.4'></view>
+  <view class='backMoney-modal'>
+    <view class='backMoney-title'>返佣说明</view>
+    <view class='backMoney-content'>
+      <text>本次分享成交，会员奖励{{productData.self_by_get_money}}元。</text>
+      <text>页面显示为此规格原价对应返佣金额，</text>
+      <text>最终以实际支付金额对应返佣为准。</text>
+    </view>
+    <view class='backMoney-know' bindtap='hidebackMoney'>我知道了</view>
+  </view>
+</view>
+<bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+<dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+
+<include src="/pages/public/page_footer.wxml"></include>

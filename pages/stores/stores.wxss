@@ -1,0 +1,66 @@
+/* stores.wxss */
+.store-list{
+  border-bottom:1rpx solid #e6e6e6;
+  position: relative;
+  height:100%;
+}
+.store-img{
+  display: inline-block;
+  width:100rpx;
+  height: 100rpx;
+  margin: 20rpx 0;
+  -webkit-background-size: cover;
+  background-size: cover;
+}
+.store-detail{
+
+  vertical-align:top;
+  margin: 0rpx 0 0rpx 20rpx;
+  overflow:hidden;
+
+height:140rpx;
+display: table;
+}
+.store-detail .wrap{display: table-cell;vertical-align:middle;}
+.store-distance{
+  float:right;
+  margin-right:20rpx;
+  font-size:30rpx;
+  height:140rpx;
+  line-height: 140rpx;
+}
+.store-distance .arrow{
+  width:26rpx;
+  margin-left:5rpx;
+}
+.store-distance .arrow:after{
+  position:relative;
+  font-size:25rpx;
+  font-family: "iconfont" !important;
+  content: "\e600";
+  color:#f0f0f0;
+}
+.store-title{
+  font-size: 33rpx; 
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  min-width:500rpx;
+  max-width:550rpx;
+  display:inline-block;
+
+}
+.store-address{
+  display:inline-block;
+  font-size: 25rpx; 
+  width:500rpx;
+  color:#A7A7A7;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  line-height:1;
+
+}
+.store-distance .distance{
+  color: #ED5641;
+}

@@ -1,0 +1,7 @@
+<view class='get-user-container'>
+    <image src='{{BASE_IMG_URL}}images/get-user.png' mode="widthFix" class='get-user-img'></image>
+    <view class="get-user-text-title">Hi，请登录~</view>
+    <view class='get-user-text'>授权后，可以更好的体验我们哦~</view>
+    <button type='primary' class='get-user-btn' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">微信用户登录</button>
+</view>
+<include src="/pages/public/page_footer.wxml"></include>

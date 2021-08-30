@@ -1,0 +1,590 @@
+
+.fr{float: right;}
+.fl{float: left;}
+
+.seckill .b_banner{height: 750rpx;width: 100%;position: relative;}
+.seckill .b_banner image{height: 100%}
+.seckill .b_banner span{position: absolute;left: 0;bottom: 50rpx;background-color: #fe6b31;color: #fff;padding: 0 10rpx;font-size: 20rpx;border-radius: 0 5rpx 5rpx 0;height: 38rpx;line-height: 38rpx}
+.seckill {background: #fff;}
+.seckill .seckillStatus {height: 104rpx;background-color: #2aab54}
+.seckill .seckillStatus .statusRow{height: 100%;min-width: 80rpx;padding:0 8rpx;width: 220rpx;
+position: relative;}
+/* .seckill .seckillStatus .statusRow:before{content: " ";position: absolute;left: -24rpx;top: 0;bottom: 0;border-top: 52rpx solid transparent;border-right: 26rpx solid #fff;border-bottom: 52rpx solid transparent;border-left: 0rpx solid transparent;opacity: 0.1;} */
+.seckill .seckillStatus .statusRow .h2,.seckill .seckillStatus .statusRow .h3{font-size: 24rpx;color: #2aab54;display: block;text-align: center;}
+.seckill .seckillStatus .statusRow .h2{margin-top: 14rpx}
+.seckill .seckillStatus .statusRow .h3{font-size: 28rpx;margin-top: 10rpx}
+.seckill .seckillStatus .statusRow .h4{font-size: 28rpx;line-height: 104rpx;color: #ff3867;display: block;text-align: center;}
+.seckill .seckillStatus .statusRow .red{color: #ff3867}
+.seckill .seckillStatus .seckillInfo .price{color: #fff;font-size: 60rpx;vertical-align: middle;line-height: 104rpx;margin:0 10rpx}
+.seckill .seckillStatus .seckillInfo .price em{font-size: 46rpx;line-height: 1}
+.seckill .seckillStatus .seckillInfo .o_price{vertical-align: middle;display: inline-block;}
+.seckill .seckillStatus .seckillInfo .o_price p{font-size: 26rpx;color: #fff;float: left;clear: both;text-decoration: line-through;}
+.seckill .seckillStatus .seckillInfo .o_price em{font-size: 24rpx;color: #fff;padding: 5rpx 10rpx;background-color: rgba(0,0,0,.1);border-radius: 10rpx;float: left;clear: both;margin-top: 10rpx}
+.seckill .seckillStatus.on{background-color: #ff3867}
+.seckill .seckillStatus.gray{background-color: #bab9b9}
+.seckill .seckillStatus.gray .statusRow{background-color: #a6a6a6}
+.seckill .seckillStatus.gray .statusRow .h2,.seckill .seckillStatus.gray .statusRow .h3,.seckill .seckillStatus.gray .statusRow .h4{color: #fff}
+.seckill .seckillStatus.gray .statusRow:before{border-right-color: #a6a6a6}
+.seckill .seckillStatus .statusRow.gray{background-color: #a6a6a6}
+.seckill .seckillStatus .statusRow.gray .h2,.seckill .seckillStatus .statusRow.gray .h3,.seckill .seckillStatus .statusRow.gray .h4{color: #fff}
+.seckill .seckillStatus .statusRow.gray:before{border-right-color: #a6a6a6}
+.seckill .seckillStatus .statusRow.gray .countDown em {color: #fff;}
+.seckill .seckillStatus .statusRow.gray .countDown span {background-color: #fff;color: #666;}
+.countDown .wrap{padding: 30rpx 24rpx;padding-top: 0}
+.countDown span,.countDown em{display: inline-block;vertical-align: middle;}
+.countDown span{min-width: 38rpx;height: 43rpx;border-radius: 10rpx;line-height: 43rpx;text-align: center;background-color: #ff3867;font-size: 22rpx;color: #fff}
+.countDown em{font-size: 22rpx;color: #ff3867;margin: 0 4rpx}
+.countDown em.text{font-size: 22rpx}
+.countDown{
+text-align: center;
+margin-right: 5rpx;
+}
+.seckill .shareBlock{height: 140rpx}
+.shareBtn::after,.shareBtn::before {display: none;}
+.seckill .shareBlock .shareBtn{
+  padding: 0;
+  margin: 0;
+  /* height: 50rpx; */
+  width: 114rpx;
+  text-align: center;
+  margin-left: 10rpx;
+  line-height: 50rpx;
+  border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
+  top: 30%;
+  right: -8rpx;
+}
+.seckill .shareBlock .shareBtn:before{display: none;}
+.seckill .shareBlock .shareBtn i{color: #fff;}
+.seckill .shareBlock .shareBtn p{font-size: 24rpx;color: #fff;display: block;margin-top: 40rpx}
+.seckill .shareBlock .seckillName{height: 100%}
+.seckill .shareBlock .seckillName .table{display: flex;height: 100%;padding-left: 20rpx;overflow: hidden;align-items: center}
+.seckill .shareBlock .seckillName .t_cell{vertical-align: middle;font-size: 34rpx;color: #222;-webkit-line-clamp: 3;}
+.seckill .shareBlock .seckillName .t_cell em{color: #888;font-size: 28rpx;margin-left: 10rpx}
+.seckill .share_p{background:#fff;}
+.seckill .share_p .wrap{background:#FFCEDB;font-size: 26rpx;color: #ff3867;text-align: center;padding: 20rpx 0;}
+
+.seckill .team {padding-bottom:20rpx;}
+.seckill .team .hd{padding: 15rpx 20rpx}
+.seckill .team .hd i{font-size: 40rpx;color: #ff3867;margin-right: 10rpx}
+.seckill .team .hd span{font-size: 30rpx;color: #666}
+.seckill .team .bd .li{text-align: center;padding: 30rpx 0;margin: 0 14rpx;}
+.seckill .team .bd .li image{width: 100rpx;height: 100rpx;border-radius: 100%}
+.seckill .team .ft{text-align: center;}
+.seckill .team .ft span{display: inline-block;padding: 10rpx 20rpx;font-size: 30rpx;color: #ff3867;border-radius: 20rpx;border:1px solid #ff3867;line-height: 1}
+
+.seckill .d_desc {margin-bottom: 100rpx;}
+.seckill .d_desc .secTit{padding: 0 20rpx;border-top:20rpx solid #eff4f4;}
+.seckill .d_desc .secTit .h3{font-size: 32rpx;text-align: center;line-height: 95rpx;}
+
+.seckill .d_desc .pureText .wrap{padding:  20rpx;padding-top:0;}
+.seckill .d_desc .pureText{font-size: 26rpx;color: #222;}
+.seckill .d_desc .thisDesc{font-size: 24rpx;padding: 12rpx;padding-bottom: 30rpx;}
+.seckill .d_desc .thisDesc image:nth-of-type(1){
+  margin-top: 0;
+}
+.seckill .d_desc .thisDesc image{max-width: 100%;margin-top: -8rpx;}
+.seckill .d_desc .thisDesc p{display: block;}
+
+
+
+.seckill .ftBtn{height: 100rpx;text-align: center;line-height: 100rpx;color: #fff;position: fixed;bottom: 0;left: 0;right: 0;z-index: 5;border-radius:0;}
+/* .seckill .ftBtn.redBtn{background-color: #ff3867} */
+.seckill .ftBtn.grayBtn{background-color: #a6a6a6}
+
+.seckill{padding-bottom: 20rpx}
+.showTxt image {display:inline-block;width:400rpx;height:400rpx;}
+
+.mask{z-index:20;position:fixed;top:0;right:0;bottom:0;left:0;width:100%;background-color:#000;opacity:.7;filter:alpha(opacity=80);-moz-opacity:.8;-khtml-opacity:.8;}
+.seckill .teamList  {position: fixed;bottom: 0;left: 0;right: 0;z-index: 30;background-color: #F3F3F3;overflow: hidden;border-radius:20rpx 20rpx 0 0;}
+.seckill .teamList  .h2{font-size: 34rpx;color: #222;text-align: center;display: block;height: 90rpx;line-height: 90rpx}
+.seckill .teamList  .wrap{padding: 0 30rpx;background: #fff;}
+.seckill .teamList  span.iconfont{position:absolute;right:35rpx;font-size:36rpx;top:30rpx;}
+.seckill .teamList  .t_list{height: 670rpx;overflow: auto;}
+.seckill .teamList  .t_list .li{padding: 20rpx 0;}
+.seckill .teamList  .t_list .li:last-child{border-bottom: 0}
+.seckill .teamList  .t_list image{width: 100rpx;height: 100rpx;border-radius: 100%;margin-right: 20rpx}
+.seckill .teamList  .t_list .name{font-size: 30rpx;color: #333;display: block;padding-top: 12rpx}
+.seckill .teamList  .t_list .time{font-size: 24rpx;color: #999;display: block;line-height: 2}
+.seckill .teamList  .t_list span.cut{color:#222;font-size: 30rpx;line-height: 100rpx}
+.seckill .teamList  .t_list span.cut em{color: #f9295a;font-size: 30rpx}
+.seckill .teamList  .t_list .desc{overflow: hidden;border-bottom: 1px solid #dfdfdf;height: 100rpx}
+
+
+/*主题色搭配*/
+/* 主题色---blackTheme--- 黑色(000000/ (0,0,0)--- 浅色1(0,0,0,.1) --- 浅色2(0,0,0,.2) */
+.blackTheme.seckill .seckillStatus.on{background-color: #000000;}
+.blackTheme.seckill .shareBlock .shareBtn {background-color: #000000;}
+.blackTheme.seckill .d_desc .secTit .h3 {color: #000000;}
+.blackTheme.seckill .share_p .wrap {background-color: rgba(0,0,0,.1);color: #000000;}
+.blackTheme.seckill .team .hd i {color: #000000;}
+.blackTheme.seckill .team .ft span {color: #000000;border-color:#000000;}
+.blackTheme.seckill .ftBtn.redBtn {background-color: #000000;}
+.blackTheme.seckill .teamList .t_list span.cut em {color: #000000;}
+/* 主题色---redTheme--- 红色(FA0029/ (250,0,41)--- 浅色1(250,0,41,.1) --- 浅色2(250,0,41,.2) */
+.redTheme.seckill .seckillStatus.on{background-color: #FA0029;}
+.redTheme.seckill .shareBlock .shareBtn {background-color: #FA0029;}
+.redTheme.seckill .d_desc .secTit .h3 {color: #FA0029;}
+.redTheme.seckill .share_p .wrap {background-color: rgba(250,0,41,.1);color: #FA0029;}
+.redTheme.seckill .team .hd i {color: #FA0029;}
+.redTheme.seckill .team .ft span {color: #FA0029;border-color:#FA0029;}
+.redTheme.seckill .ftBtn.redBtn {background-color: #FA0029;}
+.redTheme.seckill .teamList .t_list span.cut em {color: #FA0029;}
+/* 主题色---orangeTheme--- 橘色(FF5C1C/ (255,92,28)--- 浅色1(255,92,28,.1) --- 浅色2(255,92,28,.2) */
+.orangeTheme.seckill .seckillStatus.on{background-color: #FF5C1C;}
+.orangeTheme.seckill .shareBlock .shareBtn {background-color: #FF5C1C;}
+.orangeTheme.seckill .d_desc .secTit .h3 {color: #FF5C1C;}
+.orangeTheme.seckill .share_p .wrap {background-color: rgba(255,92,28,.1);color: #FF5C1C;}
+.orangeTheme.seckill .team .hd i {color: #FF5C1C;}
+.orangeTheme.seckill .team .ft span {color: #FF5C1C;border-color:#FF5C1C;}
+.orangeTheme.seckill .ftBtn.redBtn {background-color: #FF5C1C;}
+.orangeTheme.seckill .teamList .t_list span.cut em {color: #FF5C1C;}
+/* 主题色---blueTheme--- 蓝色(0098F8/ (0,152,248)--- 浅色1(0,152,248,.1) --- 浅色2(0,152,248,.2) */
+.blueTheme.seckill .seckillStatus.on{background-color: #0098F8;}
+.blueTheme.seckill .shareBlock .shareBtn {background-color: #0098F8;}
+.blueTheme.seckill .d_desc .secTit .h3 {color: #0098F8;}
+.blueTheme.seckill .share_p .wrap {background-color: rgba(0,152,248,.1);color: #0098F8;}
+.blueTheme.seckill .team .hd i {color: #0098F8;}
+.blueTheme.seckill .team .ft span {color: #0098F8;border-color:#0098F8;}
+.blueTheme.seckill .ftBtn.redBtn {background-color: #0098F8;}
+.blueTheme.seckill .teamList .t_list span.cut em {color: #0098F8;}
+/* 主题色---pinkDarkTheme--- 桃紫色(FF007C/ (255,0,124)--- 浅色1(255,0,124,.1) --- 浅色2(255,0,124,.2) */
+.pinkDarkTheme.seckill .seckillStatus.on{background-color: #FF007C;}
+.pinkDarkTheme.seckill .shareBlock .shareBtn {background-color: #FF007C;}
+.pinkDarkTheme.seckill .d_desc .secTit .h3 {color: #FF007C;}
+.pinkDarkTheme.seckill .share_p .wrap {background-color: rgba(255,0,124,.1);color: #FF007C;}
+.pinkDarkTheme.seckill .team .hd i {color: #FF007C;}
+.pinkDarkTheme.seckill .team .ft span {color: #FF007C;border-color:#FF007C;}
+.pinkDarkTheme.seckill .ftBtn.redBtn {background-color: #FF007C;}
+.pinkDarkTheme.seckill .teamList .t_list span.cut em {color: #FF007C;}
+/* 主题色---purpleTheme--- 紫色(7948FD/ (121,72,253)--- 浅色1(121,72,253,.1) --- 浅色2(121,72,253,.2) */
+.purpleTheme.seckill .seckillStatus.on{background-color: #7948FD;}
+.purpleTheme.seckill .shareBlock .shareBtn {background-color: #7948FD;}
+.purpleTheme.seckill .d_desc .secTit .h3 {color: #7948FD;}
+.purpleTheme.seckill .share_p .wrap {background-color: rgba(121,72,253,.1);color: #7948FD;}
+.purpleTheme.seckill .team .hd i {color: #7948FD;}
+.purpleTheme.seckill .team .ft span {color: #7948FD;border-color:#7948FD;}
+.purpleTheme.seckill .ftBtn.redBtn {background-color: #7948FD;}
+.purpleTheme.seckill .teamList .t_list span.cut em {color: #7948FD;}
+/* 主题色---brownTheme--- 棕色(B7A392/ (183,163,146)--- 浅色1(183,163,146,.1) --- 浅色2(183,163,146,.2) */
+.brownTheme.seckill .seckillStatus.on{background-color: #B7A392;}
+.brownTheme.seckill .shareBlock .shareBtn {background-color: #B7A392;}
+.brownTheme.seckill .d_desc .secTit .h3 {color: #B7A392;}
+.brownTheme.seckill .share_p .wrap {background-color: rgba(183,163,146,.1);color: #B7A392;}
+.brownTheme.seckill .team .hd i {color: #B7A392;}
+.brownTheme.seckill .team .ft span {color: #B7A392;border-color:#B7A392;}
+.brownTheme.seckill .ftBtn.redBtn {background-color: #B7A392;}
+.brownTheme.seckill .teamList .t_list span.cut em {color: #B7A392;}
+.circle-buy-tag {
+  float:left;
+  display:block;
+  color:white;
+  font-size:24rpx;
+  padding:3rpx;
+  border-radius:3rpx 5rpx;
+  margin-left:5rpx;
+  margin-top: 4rpx;
+  margin-right: 4rpx;
+}
+
+.thisItemWindow {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  z-index: 21;
+}
+
+.thisItemWindow .itemDetails {
+  padding-bottom: 100rpx;
+}
+
+.thisItemWindow .itemDetails .wrap {
+  padding: 0 20rpx;
+}
+
+.thisItemWindow .itemDetails .hd {
+  position: relative;
+}
+
+.thisItemWindow .itemDetails .hd .xClosed {
+  position: absolute;
+  right: 0;
+  font-size: 40rpx;
+  top: 8rpx;
+  z-index: 9;
+}
+
+.thisItemWindow .itemDetails .hd .pic {
+  position: absolute;
+  top: -75rpx;
+  height: 240rpx;
+  width: 240rpx;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.thisItemWindow .itemDetails .hd .pic image {
+  width: 100%;
+  height: 100%;
+}
+
+.thisItemWindow .itemDetails .hd .itemDesc {
+  position: relative;
+  height: 165rpx;
+  margin-left: 260rpx;
+  padding-right: 60rpx;
+}
+
+.thisItemWindow .itemDetails .hd .itemDesc .h2 {
+  font-size: 28rpx;
+  color: rgb(51, 51, 51);
+  line-height: 1.5;
+  margin-top: 10rpx;
+}
+
+.thisItemWindow .itemDetails .hd .itemDesc .h2 {
+  display: -webkit-box;
+  display: -moz-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.thisItemWindow .itemDetails .hd .itemDesc .thisPrice {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 24rpx;
+  color: rgb(51, 51, 51);
+}
+
+.thisItemWindow .itemDetails .hd .itemDesc .thisPrice em {
+  color: rgb(255, 56, 103);
+  font-size: 36rpx;
+}
+
+.thisItemWindow .itemDetails .itemAttrDesc {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 10rpx 0;
+}
+
+.thisItemWindow .itemDetails .itemAttrDesc span {
+  font-size: 24rpx;
+  color: rgb(51, 51, 51);
+  margin-right: 20rpx;
+}
+
+.thisItemWindow .itemDetails .itemAttrDesc span em {
+  color: rgb(136, 136, 136);
+}
+
+.thisItemWindow .itemAttrSet {
+  margin-top: 55rpx;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.thisItemWindow .itemAttrSet .attrSetBlock {
+  margin-top: 30rpx;
+}
+
+.thisItemWindow .itemAttrSet .attrSetBlock .h3 {
+  font-size: 30rpx;
+  color: rgb(51, 51, 51);
+  line-height: 1;
+  margin-bottom: 25rpx;
+  display: block;
+}
+
+.thisItemWindow .itemAttrSet .attrSetBlock .attrBtn {
+  overflow: hidden;
+  margin-right: -25rpx;
+}
+
+.thisItemWindow .itemAttrSet .attrSetBlock .attrBtn span {
+  float: left;
+  min-width: 152rpx;
+  height: 53rpx;
+  text-align: center;
+  font-size: 26rpx;
+  color: rgb(51, 51, 51);
+  background: rgb(238, 238, 238);
+  line-height: 53rpx;
+  margin-right: 25rpx;
+  margin-bottom: 25rpx;
+  border-radius: 6rpx;
+}
+
+.thisItemWindow .itemAttrSet .attrSetBlock .attrBtn span.on {
+  background: rgb(255, 56, 103);
+  color: #fff;
+}
+
+.showTxt {
+  color: #333;
+}
+
+.showTxt image {
+  display: inline-block;
+  width: 400rpx;
+  height: 400rpx;
+}
+
+.thisItemWindow .itemNumSet {
+  display: -moz-box;
+  display: -webkit-box;
+  display: box;
+  padding: 30rpx 0;
+}
+
+.thisItemWindow .itemNumSet span {
+  font-size: 30rpx;
+  color: rgb(51, 51, 51);
+}
+
+.thisItemWindow .itemNumSet span, .thisItemWindow .itemNumSet .numCtrl {
+  -moz-box-flex: 1;
+  -webkit-box-flex: 1;
+  box-flex: 1;
+}
+
+.thisItemWindow .itemNumSet .numCtrl {
+  text-align: right;
+}
+
+.thisItemWindow .itemNumSet .numCtrl em {
+  display: inline-block;
+  width: 53rpx;
+  height: 53rpx;
+  vertical-align: middle;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-color: #f0f0f1;
+}
+
+.thisItemWindow .itemNumSet .numCtrl input {
+  vertical-align: middle;
+  height: 53rpx;
+  border: 0;
+  background: #f0f0f1;
+  color: #000;
+  display: inline-block;
+  width: 72rpx;
+  text-align: center;
+  margin: 0 10rpx;
+  font-size: 24rpx;
+}
+
+.thisItemWindow .itemNumSet .numCtrl em.reduce {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABcAAAAECAYAAABlaKSVAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5MEE4MEMzRTA1NUQxMUU4OTJBMURDNzFCRjI5MjlGOSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5MEE4MEMzRjA1NUQxMUU4OTJBMURDNzFCRjI5MjlGOSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjkwQTgwQzNDMDU1RDExRTg5MkExREM3MUJGMjkyOUY5IiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjkwQTgwQzNEMDU1RDExRTg5MkExREM3MUJGMjkyOUY5Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+GKHAPwAAAC5JREFUeNpi3L9/vyEDA4MbA/XBCRYgYQHEHTQwvIOJgYYA5PITQFxBi2ABCDAAaQgG2Jc0CEMAAAAASUVORK5CYII=');
+  background-size: 23rpx 4rpx;
+}
+
+.thisItemWindow .itemNumSet .numCtrl em.add {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAZCAYAAAArK+5dAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyFpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo5MUU5NTIxQTA1NUQxMUU4QkQwRjg3MzhCNUJCRkZERSIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo5MUU5NTIxQjA1NUQxMUU4QkQwRjg3MzhCNUJCRkZERSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjkxRTk1MjE4MDU1RDExRThCRDBGODczOEI1QkJGRkRFIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjkxRTk1MjE5MDU1RDExRThCRDBGODczOEI1QkJGRkRFIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+UhF+2wAAAHpJREFUeNpi/P//PwMhsHDhQhBlAsQCUKETQPwlPj6eoF4WBuJBPxDbQNl6QHyZGE1MDDQGoxaMWjAELGCB5lKyADF6QTn5AxDzk2j2JSLVZQ2DOEAqIQmBw+QUdowkFNcYFhBTXI9mtFELRi0grdlSiJTr7xOrCSDAAPmkG3IurfQ3AAAAAElFTkSuQmCC');
+  background-size: 24rpx 25rpx;
+}
+
+.presale .divLine {
+  height: 96rpx;
+}
+
+.presale .ftBtn {
+  position: fixed;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  color: #fff;
+  font-size: 40rpx;
+  text-align: center;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: #ff3866;
+  border-radius: 0;
+}
+
+.presale .ftBtn.gray {
+  background-color: #a6a6a6;
+}
+
+.presale .btnGroup {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.presale .btnGroup .ftBtnChild {
+  float: left;
+  width: 50%;
+  background-color: #f90;
+  color: #fff;
+  font-size: 40rpx;
+  height: 96rpx;
+  line-height: 96rpx;
+  text-align: center;
+  border-radius: 0;
+}
+
+.presale .btnGroup .ftBtnChild:first-child {
+  background-color: #ff3866;
+}
+
+.presale .btnGroup .ftBtnChild.gray {
+  background-color: #a6a6a6;
+}
+
+.thisItemWindow .thisWindowBtn .ftBtnChild {
+  display: block;
+  width: 100%;
+  height: 96rpx;
+  line-height: 96rpx;
+  color: #fff;
+  font-size: 40rpx;
+  text-align: center;
+  border-radius: 0;
+}
+
+.thisItemWindow .thisWindowBtn .ftBtnChild {
+  background-color: #ff3866;
+}
+
+.ftBtn {
+  height: 100rpx;
+  text-align: center;
+  line-height: 100rpx;
+  color: #fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  border-radius: 0;
+}
+
+/* .ftBtn.redBtn {
+  background-color: #ff3867;
+} */
+
+.ftBtn.grayBtn {
+  background-color: #a6a6a6;
+}
+
+.itemAttrDesc {
+  font-size: 28rpx;
+}
+
+.itemAttrDesc .ies {
+  display: flex;
+  justify-content: space-between;
+}
+.seckillLeft{
+  background: #fff;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.priceRow {
+  text-align: left;
+  font-size: 32rpx;
+  color: #fff;
+  justify-content: space-around;
+  align-items: center;
+  width: 543rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+.seckillpic1 {
+  width: 78rpx;
+  height: 78rpx;
+  position: absolute;
+  top: 16rpx;
+  left: 16rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12rpx;
+}
+.seckillpic1 image{
+  width: 52rpx;
+  height: 52rpx;
+}
+.discountPrice{
+  position: absolute;
+  top: 16rpx;
+  left: 108rpx;
+}
+.discountPrice text{
+  text-align: center;
+  width: 100%;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 24rpx;
+}
+.surplus{
+  width: 125rpx;
+  height: 32rpx;
+  background-color: #fff;
+  border-radius: 16px;
+  font-size: 18rpx;
+  text-align: center;
+  color: #fff;
+  line-height: 32rpx;
+}
+.sign{
+  position: absolute;
+  top: 40rpx;
+  left: 440rpx;
+  width: 98rpx;
+  height: 111rpx;
+  z-index: 2;
+  transform: rotate(-8deg);
+}
+.triangle-top {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-right: 37rpx solid transparent;
+}
+.priceMiddle{
+  width: 37rpx;
+  height: 110rpx;
+  box-sizing: border-box;
+  position: relative;
+  float: right;
+}
+.triangle-bottom {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-right: 37rpx solid transparent;
+}
+
+.triangle-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 55rpx solid transparent;
+  border-top: 55rpx solid transparent;
+  opacity: 0.1;
+}
+.statusRight{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.row{
+  width:100% ;
+}

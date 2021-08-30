@@ -1,0 +1,142 @@
+@import "/iconfont/iconfont.wxss";
+.apply-status-top{
+  position: relative;
+  width: 100%;
+	height: 498rpx;
+	background-color: #ff6030;
+}
+.apply-status-top text{
+  color: #fff;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  left: 0
+}
+.apply-status-top image{
+  position: absolute;
+  top: 136rpx;
+  left: 200rpx;
+}
+.apply-status-top text:nth-of-type(1){
+  font-size: 34rpx;
+  bottom: 132rpx;
+}
+.apply-status-top text:nth-of-type(2){
+  font-size: 30rpx;
+	opacity: 0.8;
+  bottom: 73rpx;
+}
+.apply-detail-list{
+  padding: 0 30rpx;
+  height: 330rpx;
+  margin: 18rpx 0 80rpx;
+  background: #fff;
+}
+.apply-detail-item{
+  display: flex;
+  align-items: center;
+  height: 82rpx;
+  border-bottom: 1rpx solid #f1f1f1;
+}
+.apply-detail-item label{
+  flex: 1;
+  text-align: left;
+  font-size: 32rpx;
+	color: #333333
+}
+.apply-detail-item text{
+  flex: 1;
+  text-align: right;
+  font-size: 32rpx;
+	color: #888;
+}
+.modal-black{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+}
+.Withdrawal-apply-box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 516rpx;
+	height: 570rpx;
+  text-align: center;
+	background-color: #ffffff;
+	border-radius: 20rpx;
+  z-index: 901;
+}
+.windowmask-opacity{
+  background: rgba(0, 0, 0, .5)!important;
+}
+.Withdrawal-apply-box image{
+  display: block;
+  width: 121rpx;
+	height: 151rpx;
+  margin: 58rpx auto 33rpx;
+  background: #000;
+}
+.Withdrawal-apply-box text{
+  display: block;
+}
+.Withdrawal-apply-box text:nth-of-type(1){
+  font-size: 40rpx;
+	color: #333333;
+}
+.Withdrawal-apply-box text:nth-of-type(2){
+  margin:20rpx auto 50rpx ;
+  width: 392rpx;
+	font-size: 28rpx;
+	line-height: 45rpx;
+	color: #999999;
+}
+.Withdrawal-apply-button{
+  margin: 0 38rpx;
+  display: flex;
+}
+.Withdrawal-apply-box icon{
+  position: absolute;
+  bottom: -114rpx;
+  margin-left: -28rpx;
+  width: 56rpx;
+	height: 56rpx;
+  color:#fff;
+  font-size:56rpx;
+
+}
+.Withdrawal-apply-button view{
+  width: 210rpx;
+	height: 74rpx;
+  line-height: 74rpx;
+  text-align: center;
+	font-size: 28rpx;
+	border-radius: 37rpx;
+	
+}
+.Withdrawal-apply-button view.cancel{
+  margin-right: 20rpx;
+}
+.cancel{
+  color: #333;
+  border: solid 2rpx #ededed;
+  background-color: #ededed;
+}
+.confirm{
+  color: #fff;
+  background-color: #ff6030;
+}
+.btn-resubmit{
+  width: 690rpx;
+  margin: 50rpx auto 34rpx;
+  height: 92rpx;
+  line-height: 92rpx;
+  text-align: center;
+  font-size: 32rpx;
+  color: #fff;
+  background-color: #ff6030;
+  border-radius: 46rpx;
+}

@@ -1,0 +1,32 @@
+/* pages/product/productList.wxss */
+.productTop .productTopFiexd{
+  position: absolute;
+}
+.editProduct .shopProductList>view .productInfo text{
+  padding: 0;
+  margin: 0;
+}
+.editProduct .shopProductList > view .productInfo text:nth-child(2){
+  min-width: 45rpx;
+  width: unset;
+  bottom: 0rpx;
+}
+.shopProductList .personalStyle {
+  padding-bottom: 40rpx;
+}
+.editProduct .shopProductList>view .productInfo text.productPrice {
+  margin-top: 10rpx;
+}
+.shopProductList .personalStyle .income {
+  display: inline-block;
+  width: 200rpx;
+  height: 100% ;
+  font-size: 24rpx;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10rpx;
+  border-radius: 10rpx;
+}
+.editProduct .shopProductList>view .productInfo .productName {
+  margin-top: 20rpx;
+}

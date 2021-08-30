@@ -1,0 +1,78 @@
+<!--我的订单-退货详情页面 -->
+<import src="../public/payment.wxml" />
+<import src="../public/warning.wxml" />
+<import src="../public/logistics.wxml" />
+<view class="container payment" data-page="page.order.returnCompletion">
+    <template is="payment" data="{{paymentData:returnData,postage:postage,store_nav_list}}" />
+    <view class="paymentTitle">申请退货信息</view>
+    <view class="paymentInfo">
+        <view>退货数量：{{returnData.return_detail.pro_num}}</view>
+        <view>退货原因：{{returnData.return_detail.type_txt}}</view>
+        <view>手机号码：{{returnData.return_detail.phone}}</view>
+        <view>退货说明：{{returnData.return_detail.content}}</view>
+        <view>退货时间：{{returnData.return_detail.dateline_txt}}</view>
+        <view wx:if="{{returnData.return_detail.images}}">退货图片</view>
+        <view wx:if="{{returnData.return_detail.images}}" class="returnArticle addImgCentent">
+            <view class="addImgList">
+                <view wx:for="{{returnData.return_detail.images}}">
+                    <image src="{{item}}"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="paymentTitle">商家审核信息</view>
+    <view class="paymentInfo">
+        <view>申请状态：
+            <text class="red">{{returnData.return_detail.status_txt}}</text>
+        </view>
+        <view>退货总费用：
+            <text class="red">¥{{returnData.return_detail.pro_price*1+returnData.return_detail.postage_money*1}}</text> =产品金额 ¥{{returnData.return_detail.pro_price}} + 物流费用 ¥{{returnData.return_detail.postage_money}}</view>
+        <view wx:if="{{(returnData.return_detail.status==2)}}">
+            <view>商家审核时间：{{returnData.return_detail.cancel_dateline_txt}}</view>
+            <view>商家审核理由：{{returnData.return_detail.store_content}}</view>
+        </view>
+        <view wx:if="{{(returnData.return_detail.status!=1)&&(returnData.return_detail.status!=2)&&(returnData.return_detail.status!=6)&&(returnData.return_detail.address_user)}}">
+            <view>收货人姓名：{{returnData.return_detail.address_user}}</view>
+            <view>收货人电话：{{returnData.return_detail.address_tel}}</view>
+            <view>收货人地址：{{returnData.return_detail.province_txt}}{{returnData.return_detail.city_txt}}{{returnData.return_detail.area_txt}}{{returnData.return_detail.address_txt}}</view>
+        </view>
+    </view>
+    <template is="logistics" data="{{package_list:returnData.return_detail,logistics:logistics,logisticsShow:logisticsShow}}" wx:if="{{returnData.return_detail.status==4}}" />
+    <view class="paymentTitle" wx:if="{{returnData.return_detail.status==3}}">填写订单信息</view>
+    <view class="returnList" wx:if="{{returnData.return_detail.status==3}}">
+        <view class="returnArticle">
+            <view>快递公司</view>
+            <view class="open">
+                <picker bindchange="bindPickerlogistics" value="{{index}}" range="{{express_lit}}" mode="selector">
+                    <view class="picker">
+                        {{express_lit[index]}}
+                    </view>
+                </picker>
+            </view>
+        </view>
+        <view class="returnArticle">
+            <view>快递单号</view>
+            <view>
+                <input type="text" placeholder="输入快递单号" bindblur="logisticsCode" />
+            </view>
+        </view>
+    </view>
+    <view class="paymentButton" wx:if="{{(returnData.return_detail.status!=2)&&(returnData.return_detail.status!=4)&&(returnData.return_detail.status!=5)&&(returnData.return_detail.status!=6)}}" bindtap="cancelReturn" data-returnid="{{returnData.return_detail.return_id}}">
+        <view>取消退货</view>
+    </view>
+    <view class="paymentButton" wx:if="{{returnData.return_detail.status==3}}" bindtap="submitLogistics" data-returnid="{{returnData.return_detail.return_id}}">
+        <view>提交物流信息</view>
+    </view>
+    <view class="paymentTitle" wx:if="{{returnData.return_list!=''}}">其他商品退货信息</view>
+    <view class="returnList">
+        <view wx:for="{{returnData.return_list}}" class="returnListView" bindtap="returnGo" data-order="0" data-id="0" data-returnid="{{item.return_id}}">
+            <text>{{index+1}}</text>
+            <text data-order="0" data-id="0" data-returnid="{{item.return_id}}">退货时间：{{item.dateline}}</text>
+            <text data-order="0" data-id="0" data-returnid="{{item.return_id}}">退货状态：<text class="red" data-order="0" data-id="0" data-returnid="{{item.return_id}}">{{item.status_txt}}</text>
+            </text>
+        </view>
+    </view>
+    <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>

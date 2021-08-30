@@ -1,0 +1,26 @@
+/* pages/CLIST/pages/group/groupTips.wxss */
+
+.no-data {
+  text-align:center;
+  font-size:24rpx;
+  color:#999;
+  padding-bottom:10rpx;
+  padding-top:10rpx;
+}
+.groupTipsCom{
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 160rpx;
+}
+.clearfix:nth-child(even) {
+  margin-right: 0;
+}
+.editProduct .shopProductList>view .productInfo text:nth-child(2) text:before {
+  font-family: 'iconfont' !important;
+  font-size: 50rpx;
+  font-style: normal;
+color: inherit !important;
+  line-height: 16rpx;
+  text-align: center;
+  content: '\e623';
+}

@@ -1,0 +1,17 @@
+<!--stores.wxml-->
+<view class="{{pageTheme}}">
+  <view wx:for="{{stores}}" style="height:140rpx">
+    <view class="store-list" bindtap="goTo" data-index="{{index}}">
+      <view class="store-distance" data-index="{{index}}">
+        <text class="distance" wx:if="{{item.text}}" data-index="{{index}}">{{item.text}}</text>
+      </view>      
+      <view class="store-detail" data-index="{{index}}" >
+          <view class="wrap" data-index="{{index}}">
+              <text class="store-title" data-index="{{index}}">{{item.name}}</text>
+              <text class="store-address" data-index="{{index}}">{{item.address}}</text>
+          </view>
+      </view>
+    </view>
+  </view>
+  
+</view>

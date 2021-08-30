@@ -1,0 +1,4 @@
+<!--弹出警告框提示模板-->
+<template name="warning">
+  <cover-view class="wartning" style="color:{{warningColor?warningColor:''}}" data-page="page.public.warning">{{warningTxt}}</cover-view>
+</template>

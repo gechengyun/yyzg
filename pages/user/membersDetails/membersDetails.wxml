@@ -1,0 +1,101 @@
+<!--pages/user/membersDetails/membersDetails.wxml-->
+<view class='menber {{pageTheme}}'>
+  <view class='header theme-bg-color'>
+    <view class='user'>
+      <image src='{{pageData.avatar}}'></image>
+      <view class='info'>
+        <view class='name'>
+          <view class='txt'>{{pageData.nickname}}</view>
+          
+        </view>
+        <view class='type'>{{pageData.user_type}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='my_project'>
+    <view class='title'>
+      <view class='txt'>粉丝任务</view>
+      <view class='more' catchtap='goToMyFans'>查看全部
+        <image src='/images/go_rg.png'></image>
+      </view>
+    </view>
+    <view class='num'>已邀请{{pageData.now_num?pageData.now_num:0}}人，还差
+      <text>{{pageData.num&&pageData.now_num?pageData.num-pageData.now_num:0}}粉丝</text> 成为{{pageData.member_alias}}</view>
+
+    <progress color="#e7e7e7" activeColor='{{themeColorValue}}' percent="{{progress}}" border-radius="4rpx" stroke-width='5px'></progress>
+    <view class='conut'>
+      <view>0粉</view>
+      <view>{{pageData.num?pageData.num:0}}粉</view>
+    </view>
+    <button class='yao_btn theme-bg-color' catchtap='showCanvasWind'>立即邀请</button>
+  </view>
+
+  <view class='qus_title theme-bg-color'>什么是{{pageData.member_alias}}</view>
+  <view class='anser theme-bg-color'>
+    <view class='content' wx:if="{{!pageData.description&&pageData.description==''}}">
+      暂无内容
+    </view>
+    <view class='content' wx:else>
+      <block wx:for="{{description}}" wx:key="index">
+        <text>{{item}}</text>
+      </block>
+    </view>
+  </view>
+  <view class='qus_title theme-bg-color'>{{pageData.member_alias}}有哪些权益</view>
+  <view class='anser theme-bg-color anser1'>
+    <view class='content content1'>
+      <view class='shopdetails'>
+        <image wx:if="{{pageData.product.image}}" src='{{imgUrl+"upload/"+pageData.product.image}}'></image>
+        <image wx:else src='' style='background:gainsboro'></image>
+        <view class='details'>
+          <view class='shoptitle'>
+            {{pageData.product.name?pageData.product.name:"暂未设置商品"}}
+          </view>
+          <view class='price {{price.length<5?"price1":""}}'>
+            <view class='num'>
+              <text>￥</text>{{pageData.product.price?pageData.product.price:"0.00"}}</view>
+            <view class='zhuan'>赚{{pageData.product.ratio_money?pageData.product.ratio_money:0}}</view>
+          </view>
+          <view class="old_price" wx:if="{{pageData.product.original_price&&pageData.product.original_price!=0}}">￥{{pageData.product.original_price}}
+            <view class='line'></view>
+          </view>
+        </view>
+      </view>
+      <view class='h_line'></view>
+      <view class='item'>
+         <image src='{{BASE_IMG_URL}}images/menoy.png'></image>
+         <view class='title'>
+           自购返钱
+           <view class='notice'>自己购买可返{{pageData.product.ratio_money}}元现金，金额可提现</view>
+         </view>
+      </view>
+      <view class='item'>
+         <view class='title'>
+           分享赚钱
+           <view class='notice'>粉丝购买可赚{{pageData.product.ratio_money}}元现金，金额可提现</view>
+         </view>
+         <image src='/images/menoy1.png'></image>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--canvas-->
+<block wx:if="{{haibaoCanvas}}">
+  <view class='windowmask' catchtouchmove='false' catchtap='closeCanvas'></view>
+  <image class='haibaoimg' src='{{lafenImgurl}}' catchtouchmove='false'></image>
+  <view class='sharebutton' catchtouchmove='false'>
+    <button class='item' open-type='share'>
+      <image src='https://s.404.cn/applet/images/wxcopy/wxicon.png'></image>
+      分享好友
+    </button>
+    <button class='item' catchtap='downLoadHb'>
+     <image src='https://s.404.cn/applet/images/wxcopy/xiazaiicon.png'></image>
+     保存图片
+    </button>
+  </view>
+</block>
+
+<canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;" canvas-id="lafenCanvas"></canvas>
+
+<include src="/pages/public/page_footer.wxml"></include>

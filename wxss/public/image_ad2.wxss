@@ -1,0 +1,95 @@
+page { margin: 0; padding: 0; }
+
+.banner-list.bordered .banner-swiper { width: 690rpx; margin-left: 30rpx; }
+
+.banner-list.banner-list4.bordered .banner-swiper { width: 750rpx; margin-left: 0rpx; }
+
+.banner-swiper { width: 702rpx; height: 280rpx; border-radius:20rpx; margin-left:24rpx;}
+.banner-swiper image {
+  border-radius:20rpx;
+  height: 280rpx!important;
+}
+
+.banner-name { display: inline-block; float: left; margin-left: 30rpx; width: 534rpx; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+.banner-title { width: 100%; height: 60rpx; line-height: 60rpx; }
+
+.banner-indicator { display: inline-block; float: right; margin-right: 30rpx; }
+
+.banner-indicator view { display: inline-block; }
+
+.banner-indicator .banner-indicator-current { font-size: 40rpx; }
+
+.banner-indicator .banner-indicator-count { font-size: 26rpx; color: #999999; }
+
+.banner-list1 { font-size: 36rpx; color: #333333; }
+
+.banner-list2 .banner-title { position: absolute; bottom: 16rpx; color: #ffffff; font-size: 30rpx; text-align: center; }
+
+.banner-list2 .banner-title .banner-indicator { margin-right: 30rpx; margin-top: 10rpx; height: 40rpx; line-height: 40rpx; padding: 0 15rpx; border-radius: 15rpx; background-color: rgba(88, 88, 88, 0.5); }
+
+.banner-list2 .banner-title .banner-indicator view { display: inline-block; }
+
+.banner-list2 .banner-title .banner-indicator .banner-indicator-current { font-size: 30rpx; }
+
+.banner-list2 .banner-title .banner-indicator .banner-indicator-count { font-size: 30rpx; color: #ffffff; }
+
+.banner-list3 .banner-text { position: absolute; bottom: 40rpx; color: #ffffff; font-size: 30rpx; width: 90%; margin-left: 5%; text-align: center; }
+
+.banner-list4 .banner-nav-image { width: 624rpx; margin-left: 13rpx; height: 269rpx; margin-top: 26rpx; }
+
+.banner-list4 .current .banner-nav-image { height: 320rpx; margin-top: 0; }
+
+.banner-list4 .banner-text { position: absolute; bottom: 15rpx; color: #ffffff; font-size: 28rpx; width: 90%; margin-left: 5%; text-align: center; overflow: hidden; text-overflow: ellipsis; }
+
+.banner-scroll { height: 100%; width: 100%; white-space: nowrap; }
+
+.banner-scroll-item { display: inline-block; margin-left: 20rpx; }
+
+.banner-scroll-item:first-child { margin-left: 30rpx; }
+
+.banner-scroll-item:last-child { margin-right: 30rpx; }
+
+.banner-scroll-text { width: 98%; color: #333333; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.banner-list5 { padding: 0; height: 375rpx; }
+
+.banner-list5 image { width: 554rpx; height: 320rpx; }
+
+.banner-list5 .banner-scroll-item { width: 554rpx; }
+
+.banner-list5 .banner-scroll-text { font-size: 30rpx; text-align: center; }
+
+.banner-list6 { padding: 0; height: 230rpx; }
+
+.banner-list6 image { width: 315rpx; height: 182rpx; }
+
+.banner-list6 .banner-scroll-item { width: 315rpx; }
+
+.banner-list6 .banner-scroll-text { font-size: 28rpx; text-align: center; }
+
+.banner-list7 { padding: 0; height: 245rpx; }
+
+.banner-list7 image { width: 197rpx; height: 197rpx; }
+
+.banner-list7 .banner-scroll-item { width: 197rpx; }
+
+.banner-list7 .banner-scroll-text { font-size: 26rpx; text-align: center; }
+
+.banner-list8 { padding: 0; height: 197rpx; }
+
+.banner-list8 image { width: 152rpx; height: 152rpx; }
+
+.banner-list8 .banner-scroll-item { width: 152rpx; }
+
+.banner-list8 .banner-scroll-text { font-size: 24rpx; text-align: center; }
+.banner-view {
+  position: relative;
+  margin-top: 79rpx;
+}
+.banner-bgi{
+  position: absolute;
+  top:0;
+  width: 100%;
+  height: 154rpx;
+}

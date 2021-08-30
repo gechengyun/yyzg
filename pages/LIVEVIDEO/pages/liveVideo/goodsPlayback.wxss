@@ -1,0 +1,148 @@
+/* pages/LIVEVIDEO/pages/liveVideo/goodsPlayback.wxss */
+@import "./liveVideoDetail.wxss";
+page {
+  font-family: Microsoft YaHei, Arial, Helvetica, '\534E\6587\9ED1\4F53', sans-serif;
+  width: 100%;
+  height:  100%;
+  overflow: hidden;
+  background: #f9f9f9;
+}
+
+video {
+  width: 100%;
+  height:  100%;
+}
+
+/* 商品按钮 */
+
+.goods-btn {
+  overflow: visible;
+  z-index: 9;
+  width: 120rpx;
+  font-size: 30rpx;
+  color: #fff;
+  position: absolute;
+  left: 610rpx;
+  bottom: 100rpx;
+  text-align: center;
+  padding-top: 10rpx;
+}
+
+.goods-img {
+  width: 80rpx;
+  vertical-align: middle;
+}
+
+.goods-num {
+  position: absolute;
+  left: 64rpx;
+  top: 0;
+  margin-left: -6rpx;
+  color: #fff;
+  font-size: 22rpx;
+  background-color: #ec3a44;
+  border-radius: 25rpx;
+  padding: 5rpx 16rpx;
+}
+
+/* 直播者信息 */
+.user-mes{
+  position: absolute;
+  left: 110rpx;
+  top: 69rpx;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.38);
+  color: #fff;
+  font-size: 26rpx;
+  margin-top: -3rpx;
+  padding: 3rpx 14rpx 3rpx 3rpx;
+  border-radius: 66rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+.user-avatar{
+  width: 66rpx;
+  height: 66rpx;
+  border-radius: 50%;
+  vertical-align: middle;
+  margin-right: 8rpx;
+}
+.user-content{
+  margin-right: 12rpx;
+  max-width: 200rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.user-content view:first-child{
+   max-width: 120rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+} 
+
+.follow{
+  color: #fff;
+  font-size: 24rpx;
+  border-radius: 26rpx;
+  position: relative;
+  width: 84rpx;
+  height: 52rpx;
+  line-height: 52rpx;
+  margin-top: -4rpx;
+}
+.followed{
+  background-color: rgb(195,195,195);
+  width: 110rpx;
+}
+.follow-img{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.follow-contnet{
+  position: absolute;
+  left: 18rpx;
+  top: 0rpx;
+}
+.getPhoneNum{
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  width: 130rpx;
+  height: 70rpx;
+  opacity: 0;
+}
+/* //关闭回放 */
+
+.closePlay {
+  position: absolute;
+  top: 50rpx;
+  right: 50rpx;
+  font-size: 30rpx;
+  z-index: 1;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.38);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.layer {
+  z-index: 15;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.2);
+
+}

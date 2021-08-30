@@ -1,0 +1,161 @@
+/* pages/SHOPGOODS//pages/user/checkin/checkin.wxss */
+.check-btn{
+  margin: 30rpx auto;
+  width: 200rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #ffc207;
+  border-radius: 30rpx;
+  box-shadow: 0 4px 0 -1px #c79600;
+}
+.get-num{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 5;
+  text-align: center;
+  color: #3bc3e5;
+  font-size: 120rpx;
+  opacity: 0;
+  animation: scale 1s linear;
+}
+@keyframes scale{
+  0%{
+    opacity: .3;
+    -webkit-transform: scale(0.3) translate(-50%,-50%);
+    transform: scale(0.3) translate(-50%,-50%);
+  }
+  70%{
+    opacity: 1;
+    -webkit-transform: scale(1.2) translate(-50%,-50%);
+    transform: scale(1.2) translate(-50%,-50%);
+  }
+  100%{
+    opacity: .3;
+    -webkit-transform: scale(1) translate(-50%,-50%);
+    transform: scale(1) translate(-50%,-50%);
+  }
+}
+/* 2 */
+.check-content{
+  padding: 24rpx;
+}
+.check-tip{
+  text-align: center;
+  background-color: #faf5de;
+  padding: 40rpx 0;
+  color: #fff;
+  margin-bottom: 40rpx;
+}
+.check-name{
+  color: rgb(128, 128, 128);
+}
+.check-name text{
+  color: rgb(13, 13, 13);
+}
+.check-num{
+  color: rgb(234, 88, 75);
+  margin: 16rpx 0;
+}
+.check-tips{
+  background-color: rgb(234, 88, 75);
+  display: inline-block;
+  font-size: 28rpx;
+  padding: 14rpx 20rpx;
+}
+/* 任务区 */
+.check-task-title{
+  text-align: center;
+  font-size: 36rpx;
+  color: #fff;
+  margin-bottom: 24rpx;
+  position: relative;
+  z-index: 1;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+.ct-title-bg{
+  width: 330rpx;
+  height: 60rpx;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 186rpx;
+}
+.check-task{
+  margin-top: 24rpx;
+}
+.ct-title{
+  color: rgb(13, 13, 13);
+  display: flex;
+  align-items: center;
+}
+.ct-title::before{
+  content: '';
+  display: inline-block;
+  width: 14rpx;
+  height: 14rpx;
+  background-color: rgb(251, 144, 4);
+  border-radius: 50%;
+  margin-right: 10rpx;
+}
+.ct-des{
+  font-size: 28rpx;
+  color: rgb(128, 128, 128);
+  margin-top: 10rpx;
+}
+.ct-link-cloth{
+  margin-top: 28rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ct-link{
+  background-color: rgb(255, 246, 208);
+  flex: 1;
+  padding: 10rpx 20rpx;
+  margin-right: 30rpx;
+  font-size: 28rpx;
+}
+.ct-share-link{
+  background-color: rgb(255, 194, 7);
+  color: #fff;
+  font-size: 24rpx;
+  padding: 16rpx 116rpx;
+  border-radius: 12rpx;
+  line-height: unset;
+  position: unset;
+}
+.ct-share-link::after{
+  display: none;
+}
+/* 任务二 */
+.ct-link-cloth2{
+  border: 1px solid rgb(207, 241, 234);
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-top: 40rpx;
+}
+.shop-name{
+  font-size: 36rpx;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 24rpx;
+}
+.shop-name text{
+  color: rgb(25, 189, 155);
+}
+.ct-code{
+  display: flex;
+  align-items: center;
+}
+.ct-share-code{
+  width: 220rpx;
+}
+.ct-code text{
+  font-size: 24rpx;
+  color: rgb(102, 102, 102);
+  margin-left: 5rpx;
+}

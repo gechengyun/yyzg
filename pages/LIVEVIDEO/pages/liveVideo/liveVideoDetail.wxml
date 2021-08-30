@@ -1,0 +1,790 @@
+<!--pages/LIVEVIDEO//pages/liveVideo/liveVideoDetail.wxml-->
+<!-- 优惠券列表 -->
+<import src="../component/coupon.wxml" />
+<!-- 聊天弹幕列表 -->
+<import src="../component/chatList.wxml" />
+<!-- 购物袋列表 -->
+<import src="../component/goodsList.wxml" />
+<!-- 加入购物袋 -->
+<import src="../component/shoppingCatLive.wxml" />
+<!-- 商品列表 -->
+<import src="../component/productList.wxml" />
+<!-- 本场榜列表 -->
+<import src="../component/nowRank.wxml" />
+<!-- 粉丝弹窗 -->
+<import src="../component/fans.wxml" />
+<!-- 充值弹窗 -->
+<import src="../component/recharge.wxml" />
+<!-- 大转盘弹窗 -->
+<import src="../component/luckyZp.wxml" />
+<!-- 打赏弹窗 -->
+<import src="../component/reward.wxml" />
+<!-- 提示弹窗 -->
+<import src="../../../public/warning.wxml" />
+<!-- 购物袋 -->
+<!-- <import src="../../../public/shoppingCat.wxml" /> -->
+<!-- 弹幕最多显示8条 -->
+<wxs src="../../../../utils/filter.wxs" module="filter"></wxs>
+<view class="container redTheme">
+  <live-player id="player" class="live-player"
+  style="z-index:-1;width:100%;height:100%vh;position:fixed" 
+  picture-in-picture-mode="{{['pop','push']}}" src="{{liveVideoData.pull_url_arr.rtmp_url}}" mode="live" autoplay='true' bindstatechange="statechange" binderror="error" wx:if="{{liveVideoData.status == 1}}" object-fit="fillCrop">
+    <!-- //异常断流打开直播背景图 -->
+    <image class="img-cover" src="{{liveVideoDataimg.cover_img}}" wx:if="{{liveVideoData.cutoff_status==0}}" mode="aspectFill"></image>
+    <!-- //异常断流打开直播背景图 -->
+    <!-- 主播ID -->
+    <cover-view class="anchor-id" style='top:{{boundtop}}px;' wx:if="{{isClearScreen && liveVideoData.anchor_idprefix}}">
+      <cover-view class="anchor-id-name">{{liveVideoData.anchor_idprefix}}</cover-view>
+      <cover-view class="anchor-id-code">{{liveVideoData.anchor_idcode}}</cover-view>
+    </cover-view>
+  </live-player>
+  <view class="live-playered" wx:elif="{{liveVideoData.status == 0 || liveVideoData.status == 2}}">
+    <view class="live-top">
+      <image mode="aspectFill" class="img-cover" src="{{liveVideoDataimg.cover_img}}"></image>
+      <view class="live-top-content">
+        <navigator url="{{isScene?'/pages/index/index':''}}" hover-class='none' open-type="{{isScene?'navigate':'navigateBack'}}" class="lt-goback" style='top:{{boundtop}}px;width:{{boundHeight}}px;height:{{boundHeight}}px;line-height:{{boundHeight}}px;'>
+          <view class="iconfont icon-shangyibu"></view>
+        </navigator>
+        <block wx:if="{{liveVideoData.status == 0}}">
+          <view class="live-title">{{liveVideoData.title}}</view>
+          <view class="live-des">{{liveVideoData.description}}</view>
+          <view class="live-time" wx:if="{{isShowDownTime}}">
+            <view>距离开播还剩</view>
+            <view class="live-time-num" style="color: {{themeColorValue}};">
+              <text>{{timeDownVal.time}}</text>:
+              <text>{{timeDownVal.minute}}</text>:
+              <text>{{timeDownVal.second}}</text>
+            </view>
+          </view>
+          <view class="live-tip">
+            <text>敬请期待</text>
+          </view>
+          <view class="live-appoint" style="padding-top:{{isShowDownTime?'40':'88'}}rpx">
+            <block wx:if="{{isShowDownTime}}">
+              <button bindtap="appointClick" size="default" class="go-back-btn appointment" style="background-color:{{liveVideoData.is_preparetips==0?themeColorValue:'#999'}}" hover-class="sub-btn-hover" wx:if="{{liveVideoData.subscribe_template_id && liveVideoData.subscribe_template_id.length>0}}">{{liveVideoData.is_preparetips==0?'点击预约':'已预约'}}</button>
+            </block>
+            <block wx:else>
+              <button bindtap="goLiving" size="default" class="go-back-btn appointment" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">进入直播间</button>
+            </block>
+            <navigator url="/pages/LIVEVIDEO/pages/anchorPage/anchorPage?anchor_id={{liveVideoData.anchor_id}}&live_id={{live_id}}" hover-class='none' open-type="navigate" wx:if="{{1}}" style="flex: 1;">
+              <button size="default" class="go-back-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">主播主页</button>
+            </navigator>
+          </view>
+          <view class="share">
+            <view class="share-friend-cloth">
+              <button class="item share-friend" open-type='share' catchtap='_shareGroup'>
+                <image mode="aspectFit" src="https://s.404.cn/applet/images/haoyou.png"></image>
+                <text class="text">分享给好友</text>
+              </button>
+              <view class="share-friend-unlogin" bindtap="shareFriendUnlogin" wx:if="{{_unlogin}}"></view>
+            </view>
+            <view class="item share-poster" catchtap='_shareFriendsCircle'>
+              <image mode="aspectFit" src="https://s.404.cn/applet/images/pengyouquan.png"></image>
+              <text class="text">分享海报图</text>
+            </view>
+          </view>
+        </block>
+        <block wx:if="{{liveVideoData.status == 2}}">
+          <view class="live-ended">直播已结束</view>
+          <view class="live-appoint">
+            <navigator url='/pages/index/index' hover-class='none' open-type='navigate'>
+              <button size="default" class="go-back-btn iconfont icon-shouye-F" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">回首页</button>
+            </navigator>
+            <navigator url='/pages/LIVEVIDEO/pages/liveVideo/liveVideoList' hover-class='none' open-type="{{isScene?'navigate':'navigateBack'}}">
+              <button size="default" class="go-back-btn" style="background-color:{{themeColorValue}}" hover-class="sub-btn-hover">去主页</button>
+            </navigator>
+          </view>
+          <navigator url="/pages/LIVEVIDEO/pages/anchorPage/anchorPage?anchor_id={{liveVideoData.anchor_id}}&live_id={{live_id}}" class="anchor-page" hover-class='none' open-type="navigate" wx:if="{{1}}">
+            <button size="default" class="go-back-btn" style="color:{{themeColorValue}}" hover-class="sub-btn-hover">主播主页</button>
+          </navigator>
+        </block>
+      </view>
+    </view>
+    <view class="live-middle">
+      <view wx:if="{{liveVideoData.status == 2}}" class="lived-share">
+        <view class="lived-title">{{liveVideoData.title}}</view>
+        <view class="lived-share-btn" bindtap="shareTap" wx:if="{{false}}">
+          <text class="iconfont icon-share"></text>
+          <view>分享</view>
+        </view>
+      </view>
+      <view class="live-anchor">
+        <image class="user-avatar" src="{{liveVideoData.avatar}}"></image>
+        <view class="live-anchor-name">{{liveVideoData.nickname}}</view>
+        <block wx:if="{{liveVideoData.is_mysef*1 != 1}}">
+          <view bindtap="followClick" class="following iconfont icon-jia1" style="background-color:{{themeColorValue}}" wx:if="{{liveVideoData.subscribe*1 == 0}}">关注</view>
+          <view bindtap="followClick" class="following followed iconfont icon-correct" wx:else>已关注</view>
+        </block>
+      </view>
+      <view class="live-anchor-des" wx:if="{{liveVideoData.anchorintro}}">{{liveVideoData.anchorintro}}</view>
+    </view>
+    <view class="live-bottom">
+      <view class="live-goods-title" wx:if="{{livingGoods.products.length>0}}">
+        <text class="live-goods-title-l" style="background-color:{{themeColorValue}}"></text>本场直播商品</view>
+      <template is="productList" data="{{goodsData:livingGoods.products,warning:warning,themeColorValue}}" />
+    </view>
+    <view class="end" style="margin:80rpx 0;" wx:if='{{no_more}}'>
+      <text>THE  END</text>
+    </view>
+    <!-- 加入购物袋选规格 -->
+    <block wx:if="{{shoppingData.shoppingShow}}">
+      <template is="shoppingCatLive" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,liveStatus:liveVideoData.status}}" />
+    </block>
+    <!-- 分享组件 -->
+    <bottom-modal id='shareModal' cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+    <dialog-modal dialogHidden="{{dialog.dialogHidden}}" titleMsg="{{dialog.titleMsg}}" auth-btn="{{true}}" determineBtnTxt="{{dialog.determineBtnTxt}}"></dialog-modal>
+  </view>
+  <view wx:else class="live-loding">
+    <view class="live-loding loding-bg">
+      <view class="iconfont icon-loading"></view>
+      <view>加载中...</view>
+    </view>
+  </view>
+</view>
+<!-- 直播间详情 -->
+<!-- 关闭直播 -->
+<block wx:if="{{liveVideoData.status == 1}}">
+  <cover-view class="live-close" style='z-index:60;top:{{boundtop}}px;width:{{boundHeight}}px;height:{{boundHeight}}px;line-height:{{boundHeight}}px;'>
+    <navigator url="{{isScene?'/pages/index/index':''}}" hover-class='none' open-type="{{isScene?'navigate':'navigateBack'}}">
+      <cover-image class="close-live-img" src="https://s.404.cn/applet/images/qudao/left.png" mode="widthFix"></cover-image>
+    </navigator>
+  </cover-view>
+  <!-- 清屏按钮 -->
+  <cover-view class="clear-screen" bindtap="clearScreen" wx:if="{{screenBtnShow}}">
+    <cover-image class="clear-screen-img" src="https://s.404.cn/applet/images/qudao/{{isClearScreen?'clearScreenBack':'clearScreen'}}.png"></cover-image>
+  </cover-view>
+  <cover-view class="live-playered" animation="{{clearanimation}}" hidden="{{!hidden}}">
+    <!-- 主播信息 -->
+    <cover-view class="user-mes" style='top:{{boundtop}}px;'>
+      <cover-image class="user-avatar" src="{{liveVideoData.avatar}}" bindtap="aboutOpen"></cover-image>
+      <cover-view class="user-content" bindtap="aboutOpen">
+        <cover-view>{{liveVideoData.nickname}}</cover-view>
+        <cover-view class="look-num">
+          <cover-view class="look-nums">{{filter.transBigNumber2(liveVideoData.view_num,1)}}</cover-view>
+          <cover-view>观看</cover-view>
+        </cover-view>
+      </cover-view>
+      <cover-view class="follow" bindtap="followClick" wx:if="{{liveVideoData.subscribe*1 == 0 && liveVideoData.is_mysef*1 != 1}}">
+        <cover-image class="follow-img" src="https://s.404.cn/applet/images/qudao/zhibo/follow.png"></cover-image>
+        <cover-view class="follow-contnet">关注</cover-view>
+      </cover-view>
+      <!-- 粉丝按钮 -->
+      <!-- <cover-view class="follow fans-btn" bindtap="fansBtn" wx:if="{{liveVideoData.subscribe*1 == 1 && liveVideoData.live_reward.group_open}}">
+        <cover-image class="follow-img" src="https://s.404.cn/applet/images/qudao/zhibo/fans_bg.png"></cover-image>
+        <cover-image class="follow-img fans-heart" src="https://s.404.cn/applet/images/qudao/zhibo/fans_btn.png"></cover-image>
+      </cover-view> -->
+      <!-- <cover-view class="follow followed" bindtap="followClick" wx:else>
+        <cover-view class="follow-contnet">已关注</cover-view>  
+      </cover-view> -->
+      <button class="getPhoneNum" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:if="{{liveVideoData.is_exist_phone == 0}}"></button>
+    </cover-view>
+    <!-- 本场榜 -->
+    <cover-view class="rank-btn" style='top:{{boundtop + 8}}px;right:{{bound.width + 20}}px;' bindtap="isNowRank" wx:if="{{0}}">
+      <cover-image class="follow-img" src="https://s.404.cn/applet/images/qudao/zhibo/follow.png"></cover-image>
+      <cover-view class="rank-go">本场榜></cover-view>
+    </cover-view>
+    <!-- 亲密度 -->
+    <cover-view class="intimacy" style='top:{{boundtop + 8}}px;right:{{bound.width + 20}}px;' wx:if="{{liveVideoData.live_reward.group_open && liveVideoData.live_reward.is_add_group}}">{{liveVideoData.live_reward.group_name}} {{filter.transBigNumber3(liveVideoData.live_reward.intimacy,1,1,'W')}}</cover-view>
+    <cover-view class="liveing-right" style='top:{{boundtop + 50}}px;'>
+      <!-- 主播ID -->
+      <cover-view class="anchor-id anchor-id-r" wx:if="{{liveVideoData.anchor_idprefix}}">
+        <cover-view class="anchor-id-name">{{liveVideoData.anchor_idprefix}}</cover-view>
+        <cover-view class="anchor-id-code">{{liveVideoData.anchor_idcode}}</cover-view>
+      </cover-view>
+      <!-- 抽奖按钮 -->
+      <cover-view class="prize-btn" wx:if="{{prizeBtn}}" bindtap="showPrize">
+        <cover-view class="peize-box">
+          <cover-image class="prize-btn-bg" src="https://s.404.cn/applet/images/qudao/prize/prize_btn.png"></cover-image>
+          <cover-view class="prize-open-time">{{prizeTime.minute}}{{prizeTime.minuteBit}}:{{prizeTime.second}}{{prizeTime.secondBit}}</cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+    <cover-view class="liveing-left" style='top:{{boundtop + 45}}px'>
+      <!-- 打赏排行榜 -->
+      <cover-view class="rank" wx:if="{{liveVideoData.live_reward.reward_open&&liveVideoData.live_reward.reward_list.length>0}}">
+        <cover-view class="rank-item" wx:for="{{liveVideoData.live_reward.reward_list}}" wx:key="index" data-idx="{{index}}" bindtap="isMareRank">
+          <cover-image class="rank-crown" src="https://s.404.cn/applet/images/qudao/zhibo/crown.png" wx:if="{{index==0}}"></cover-image>
+          <cover-image class="rank-avatar rank-border{{index}}" src="{{item.avatar}}"></cover-image>
+          <cover-view class="rank-number rank-number{{index}}">{{filter.transBigNumber3(item.coin_total,0,0,'w')}}</cover-view>            
+        </cover-view>
+        <cover-view class="rank-more" bindtap="isMareRank" wx:if="{{liveVideoData.live_reward.reward_list.length>5}}">更多</cover-view>
+      </cover-view>
+      <!-- 优惠券按钮 -->
+      <cover-view class="coupon-btn" bindtap="couponList" wx:if="{{couponData.list.length>0}}">
+        <cover-image class="coupon-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgbuy.png"></cover-image>
+        <cover-image class="coupon-img" src="https://s.404.cn/applet/images/qudao/coupon.png" mode="widthFix"></cover-image>
+        <cover-view>领取优惠券</cover-view>
+      </cover-view>
+      <!-- 正在直播的商品 -->
+      <cover-view class="liveing-goods">
+        <!-- 讲解中商品 -->
+        <cover-view class="liveing-goods-list" data-product="{{liveVideoData.teach_product.product_id}}" data-type="self_buy" data-baby="baby" bindtap="openShop" wx:if="{{liveVideoData.is_take && liveVideoData.teach_product.teach_status != -1}}">
+          <cover-image src="{{liveVideoData.teach_product.image?liveVideoData.teach_product.image:liveVideoDataimg.cover_img}}"></cover-image>
+          <cover-view class="liveing-content">
+            <cover-view class="liveing-sort">{{liveVideoData.teach_product.sort}}</cover-view>
+            <cover-view class="liveing-text" wx:if="{{liveVideoData.teach_product.teach_status*1==0}}"> · 未开始 </cover-view>
+            <cover-view class="liveing-text" wx:if="{{liveVideoData.teach_product.teach_status*1==1}}"> · 正在讲解 </cover-view>
+            <cover-view class="liveing-text" wx:if="{{liveVideoData.teach_product.teach_status*1==-1}}"> · 讲解结束 </cover-view>
+          </cover-view>
+        </cover-view>
+        <!-- 秒杀中商品 -->
+        <cover-view class="liveing-goods-list" wx:for="{{filter.liveChat(liveVideoData.seckill_product,liveVideoData.seckill_product.length,1)}}" wx:key="index" data-product="{{item.product_id}}" data-type="self_buy" data-baby="baby" bindtap="openShop" wx:if="{{liveVideoData.seckill_product.length>0 && item.price_status == 1}}">
+          <cover-image src="{{item.image?item.image:liveVideoDataimg.cover_img}}"></cover-image>
+          <cover-view class="liveing-content">
+            <cover-view class="liveing-sort">{{item.sort}}</cover-view>
+            <cover-view class="liveing-text">
+              · 秒杀中/￥{{item.price}}
+            </cover-view>
+          </cover-view>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+    <!-- 打赏 提示信息 -->
+    <cover-view class="reward-tip" style="bottom: 310px;">
+      <cover-view class="reward-tip-item" wx:for="{{rewardTip}}" animation="{{item.rewardTipAnimate}}">
+        <cover-view class="reward-tip-left-cloth">
+          <cover-view class="reward-tip-content">
+            <cover-image class="reward-tip-bg" src="{{item.avatar}}"></cover-image>
+            <cover-view class="reward-tip-left">
+              <cover-view class="reward-tip-name">{{item.nickname}}</cover-view>
+              <cover-view class="reward-tip-gift">{{item.gift_name}}</cover-view>
+            </cover-view>
+          </cover-view>
+          <cover-image class="reward-tip-gift-img" src="{{item.gift_image}}"></cover-image>
+        </cover-view>
+        <cover-view class="reward-tip-num">x<cover-view class="reward-tip-nums after-box">{{item.reward_num}}</cover-view></cover-view>
+      </cover-view>
+    </cover-view>
+    <!-- 进入/购买/升级/关注/分享 提示信息 -->
+    <block wx:if="{{!loginFail}}">
+      <!-- 进入 -->
+      <block wx:if="{{liveVideoData.live_reward.reward_open && liveVideoData.live_reward.group_open && tip.level>liveVideoData.live_reward.level_tips_come}}">
+        <cover-view class="status-tips status-tips2 {{tip.level>0?'status-tips-level':''}}" wx:if="{{statusTips==1}}" animation="{{tipanimation}}">
+          <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgcoming.png"></cover-image>
+          <cover-view class="status-level">
+            <cover-image class="status-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{tip.level}}.png'></cover-image>
+            <cover-view class="status-level-name">{{tip.level_name}}</cover-view>
+          </cover-view>
+          <cover-view>{{filter.getName(tip.joinName,7)}}来到直播间</cover-view>
+        </cover-view>
+      </block>
+      <!-- 购买 -->
+      <block wx:if="{{liveVideoData.live_reward.reward_open && liveVideoData.live_reward.group_open}}">
+        <cover-view class="status-tips status-tips4 {{tip.level>0?'status-tips-level':''}}" wx:if="{{statusTips==2}}" animation="{{tipanimation}}">
+          <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgbuy.png"></cover-image>
+          <cover-view class="status-level" wx:if="{{tip.level>0}}">
+            <cover-image class="status-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{tip.level}}.png'></cover-image>
+            <cover-view class="status-level-name">{{tip.level_name}}</cover-view>
+          </cover-view>
+          <cover-view>{{filter.getName(tip.buyName,7)}}{{filter.getName(tip.buyProduct,13)}}</cover-view>
+        </cover-view>
+      </block>
+      <block wx:else>
+        <cover-view class="status-tips status-tips4" wx:if="{{statusTips==2}}" animation="{{tipanimation}}">
+          <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgbuy.png"></cover-image>
+          <cover-view>{{filter.getName(tip.buyName,7)}}{{filter.getName(tip.buyProduct,13)}}</cover-view>
+        </cover-view>
+      </block>
+      <!-- 升级提示 -->
+      <block wx:if="{{liveVideoData.live_reward.reward_open && liveVideoData.live_reward.group_open && tip.level>liveVideoData.live_reward.level_tips_come}}">
+        <cover-view class="status-tips status-tips2 {{tip.level>0?'status-tips-level':''}}" wx:if="{{statusTips==3}}" animation="{{tipanimation}}">
+          <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgabout.png"></cover-image>
+          <cover-view class="status-level">
+            <cover-image class="status-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{tip.level}}.png'></cover-image>
+            <cover-view class="status-level-name">{{tip.level_name}}</cover-view>
+          </cover-view>
+          <cover-view>恭喜{{filter.getName(tip.upName,7)}}升级到{{tip.level}}级！</cover-view>
+        </cover-view>
+      </block>
+      <!-- <cover-view class="status-tips status-tips1 {{tip.level>0?'status-tips-level':''}}" wx:if="{{statusTips==3}}" animation="{{tipanimation}}">
+        <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgabout.png"></cover-image>
+        <cover-view class="status-level" wx:if="{{tip.level>0}}">
+          <cover-image class="status-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{tip.level}}.png'></cover-image>
+          <cover-view class="status-level-name">{{tip.level_name}}</cover-view>
+        </cover-view>
+        <cover-view>{{filter.getName(tip.followName,7)}}关注了主播</cover-view>
+      </cover-view> -->
+      <cover-view class="status-tips status-tips3 {{tip.level>0?'status-tips-level':''}}" wx:if="{{statusTips==4}}" animation="{{tipanimation}}">
+        <cover-image class="status-bg" src="https://s.404.cn/applet/images/qudao/zhibo/bgshare.png"></cover-image>
+        <cover-view class="status-level" wx:if="{{tip.level>0}}">
+          <cover-image class="status-level-bg" src='https://s.404.cn/applet/images/degreebg/degree_bg{{tip.level}}.png'></cover-image>
+          <cover-view class="status-level-name">{{tip.level_name}}</cover-view>
+        </cover-view>
+        <cover-view>{{filter.getName(tip.shareName,7)}}分享了直播间</cover-view>
+      </cover-view>
+    </block>
+    <!-- 未读消息按钮 -->
+    <cover-view class="news-tips" wx:if="{{msg_count>0 && inputBottom>0}}" 
+    catchtap="showNewsList" 
+    style="bottom:{{inputBottom+44}}px">{{msg_count>99 ? '99+' : msg_count}}条消息
+    </cover-view>
+    <!-- 底部按钮 -->
+    <!-- 输入框按钮 -->
+    <!-- <cover-view class="cover-input new-input" style="bottom: {{inputFocus?inputBottom>0?inputBottom:303:303}}px;" wx:if="{{inputFocus}}">
+      <input type="text" class='cover-input-text cover-input-in' value="{{inputInfo}}" focus='{{inputFocus}}' bindfocus="focusInput" bindblur='blurInput' bindinput='inputChange' maxlength="-1" adjust-position="{{false}}" confirm-type="send" bindconfirm="sendInput" placeholder="跟主播聊点什么..." placeholder-style="color: #fff;"></input>
+      <cover-view catchtap="sendInputBtn" class="send-btn">发送</cover-view>
+    </cover-view> -->
+    <cover-view class="bot-btn">
+      <!-- 输入框按钮 -->
+      <cover-view class="cover-input old-input" catchtap='tapInput'>
+        <cover-view class='cover-input-text'>{{inputBottom?'':inputInfo}}</cover-view>
+      </cover-view>
+      <!-- 商品列表按钮 -->
+      <cover-view class="goods-btn" bindtap="goodsListShow" data-goodslength="{{goodsData.list.length}}">
+        <cover-view class="goods-btn-position">
+          <cover-image class="goods-img-bg" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/liveDetail/gouwudai.png" mode="widthFix"></cover-image>
+          <cover-view class="goods-num">{{goodsData.totalcount}}</cover-view>
+        </cover-view>
+      </cover-view>
+      <!-- 分享按钮 修改生成海报-->
+      <cover-view class='live-share' bindtap='shareTap'>
+        <cover-image class="share-img" mode="aspectFit" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/liveDetail/share.png"></cover-image>
+      </cover-view>
+      <!-- 打赏按钮 -->
+      <cover-view class='live-reward' bindtap='rewardBtn' wx:if="{{liveVideoData.live_reward.reward_open}}">
+        <cover-image class="reward-img-btn" mode="aspectFit" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/liveDetail/gift.png"></cover-image>
+      </cover-view>
+      <!-- 点赞 -->
+      <cover-view class="live-like" bindtap="clickHeart">
+        <cover-view class="like-num">{{filter.transBigNumber2(liveVideoData.like_num,1)}}</cover-view>
+        <cover-image class="like-img" mode="aspectFit" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/liveDetail/dianzan.png"></cover-image>
+      </cover-view>
+    </cover-view>
+    <!-- 点赞动画 -->
+    <canvas canvas-id="bubble" class="live-like-animate" style="width:90px;height:400px;" wx:if="{{liveVideoData.status == 1 &&canvasShow}}"></canvas>
+    <cover-view wx:if="{{loginFail}}" class="login-fail">当前直播间太火爆，点赞和评论功能暂不可用，可以退出重试</cover-view>
+    <!-- 商品上架 -->
+    <block wx:if="{{isAddProduct && addProduct.list.length>0}}">
+    <!-- <block wx:if="{{0}}"> -->
+      <cover-view class="add-product">
+        <block wx:if="{{addProduct.list.length>1}}">
+          <cover-view class="add-product-content" bindtap="goodsListShow">
+            <cover-image class="add-product-img" src="{{addProduct.list[0].image}}" wx:key="index"></cover-image>
+            <cover-view class="add-product-num" wx:if="{{addProduct.list.length>1}}">
+              <cover-view>+{{addProduct.totalcount}}More</cover-view>
+            </cover-view>
+          </cover-view>
+        </block>
+        <block wx:else>
+          <cover-view class="add-product-detail" bindtap="openShop" data-product="{{addProduct.list[0].product_id}}" data-type="self_buy" data-baby="baby">
+            <cover-image class="add-product-img2" src="{{addProduct.list[0].image}}"></cover-image>
+            <!-- <cover-view class="add-product-d-l">
+              <cover-view class="add-product-name">{{addProduct.list[0].name}}</cover-view>
+              <cover-view class="add-product-bot">
+                <cover-view class="add-product-prize">￥{{addProduct.list[0].price}}</cover-view>
+                <cover-view class="add-product-del">
+                  <cover-image class="add-product-bg2" src="https://s.404.cn/applet/images/qudao/zhibo/add_product_del.png"></cover-image>
+                </cover-view>
+              </cover-view>
+            </cover-view> -->
+          </cover-view>
+        </block>
+        <cover-view class="add-product-title">
+          <!-- <cover-image class="add-product-bg" src="https://s.404.cn/applet/images/qudao/zhibo/add_product.png"></cover-image> -->
+          <cover-view>宝贝上架了，快来抢~</cover-view>
+        </cover-view>
+      </cover-view>
+    </block>
+    <!-- 粉丝弹窗 -->
+    <block wx:if="{{showFans}}">
+    <!-- <block wx:if="{{1}}"> -->
+      <template is="fans" data="{{animation:animation,themeColorValue,fansStatus,fansData,liveVideoData}}" />
+    </block>
+    <!-- 红包 -->
+    <block wx:if="{{liveVideoData.luckyhb}}">
+      <cover-view class="bh" bindtap="clickhb">
+        <cover-image class="image" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/hb.gif" />
+      </cover-view>
+    </block>
+    <!-- 小转盘-->
+    <block wx:if="{{liveVideoData.lucky}}">
+      <cover-view class="smain" hidden="{{!hidden}}" bindtap="showLottery"> 
+        <cover-image class="image" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/szp.png" />
+      </cover-view>
+    </block>
+  </cover-view>
+  <!-- 输入框按钮 -->
+  <view class="cover-input new-input" style="bottom: {{inputFocus?inputBottom>0?inputBottom:303:303}}px;" wx:if="{{inputFocus}}">
+    <input type="text" class='cover-input-text cover-input-in' value="{{inputInfo}}" focus='{{inputFocus}}' bindfocus="focusInput" bindblur='blurInput' bindinput='inputChange' maxlength="-1" adjust-position="{{false}}" confirm-type="send" bindconfirm="sendInput" placeholder="跟主播聊点什么..." placeholder-style="color: #fff;"></input>
+    <!-- <view catchtap="sendInputBtn" class="send-btn">发送</view> -->
+  </view>
+  <!-- 本场榜列表 -->
+  <block wx:if="{{showNowRank}}">
+    <template is="nowRank" data="{{animation:animation,themeColorValue,rankStatus,rewardList,liveVideoData}}" />
+  </block>
+  <!-- 商品列表 -->
+  <block>
+    <template is="goodsList" data="{{goodsListShow:goodsListShow, goodsData:goodsData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,themeColorValue,status:liveVideoData.status}}" />
+  </block>
+  <!-- 加入购物袋选规格 -->
+  <block wx:if="{{liveVideoData.shoppingShow}}">
+    <template is="shoppingCatLive" data="{{shoppingData:shoppingData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,liveStatus:liveVideoData.status}}" />
+  </block>
+  <!-- 充值弹窗 -->
+  <block wx:if="{{showRecharge}}">
+  <!-- <block wx:if="{{1}}"> -->
+    <template is="recharge" data="{{animation:animation,themeColorValue,modeIdx,goldLevel,modeAmount}}" />
+  </block>
+  <!-- 打赏弹窗 -->
+  <block>
+    <template is="reward" data="{{showReward: showReward, aniR,themeColorValue,rewardIdx,reNumIdx,sendTxt,giftData,pager,rinputFocus,rinputBottom,rinputInfo}}" />
+  </block>
+  <!-- 优惠券列表 -->
+  <block wx:if="{{liveVideoData.couponShow}}">
+    <template is="coupon" data="{{couponData:couponData,animation:animation,warning:warning,store_nav_list,store_nav_list_show,themeColorValue}}" />
+  </block>
+  <!-- 聊天内容 -->
+  <template is="chatList" animation="{{clearanimation}}" data="{{liveVideoData,barrageArr,scrollTop,nameColor}}" wx:if="{{!isClearScreen && hidden}}"/>
+  <!-- 大转盘 -->
+  <!-- 大转盘弹框 -->
+  <block wx:if="{{!hidden}}">
+    <template is="luckyZp" data="{{animationData:animationData,awardsList: awardsList}}" />
+  </block>
+  <!-- 中奖者填写地址引导 -->
+  <block wx:if="{{prizeGuide}}">
+    <cover-view class="prize-cloth">
+      <cover-view class="layer" bindtap="prizeActiveClose1" catchtouchmove="ture"></cover-view>
+      <cover-view class="prize-position">
+        <!-- 中奖者填写地址引导 -->
+        <cover-view class="prize-guide" style="height:600rpx">
+          <cover-image class="prize-guide-bg" src="https://s.404.cn/applet/images/qudao/prize/prize_guide_bg.png"></cover-image>
+          <cover-view class="prize-guide-content">
+            <cover-view class="prize-guide-title">
+              <cover-view class="prize-guide-titl-content" style="font-size:40rpx;">中奖提示</cover-view>
+            </cover-view>
+            <!-- <cover-image class="prize-guide-avatar" src="{{myPrize.avatar}}"></cover-image> -->
+            <cover-view class="prize-guide-mes">
+              <cover-view class="prize-guide-box">
+                <cover-view class="prize-guide-user" style="font-size:34rpx;">抽中{{awarded}}</cover-view>
+                <cover-view class="prize-go-adress" bindtap="showAdress">
+                  <cover-image class="prize-btn1" src="https://s.404.cn/applet/images/qudao/prize/prize_btn1.png"></cover-image>
+                  <cover-view class="prize-go-edit">我的活动</cover-view>
+                </cover-view>
+                <cover-view class="prize-tip-adress">请前往【我的活动】填写地址</cover-view>
+                <cover-view class="prize-tip-adress prize-des-adress">若24小时内未填写地址将视为自动放弃</cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class="prize-open-close" bindtap="prizeActiveClose1">
+          <cover-image class="prize-close-img" src="https://s.404.cn/applet/images/qudao/prize/prize_close.png"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </block>
+  <!-- 大转盘end -->
+  <!-- 红包 -->
+  <block wx:if="{{prizeHb}}">
+    <cover-view class="prize-cloth">
+      <cover-view class="layer" bindtap="hbActiveClose" catchtouchmove="ture"></cover-view>
+      <cover-view class="prize-position">
+        <!-- 中奖者填写地址引导 -->
+        <cover-view class="prize-guide-hb" style="height:600rpx">
+          <cover-view  class="prize-guide-open-hb" wx:if="{{hb.msg}}">
+            <cover-image src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/openhb.png"></cover-image>
+            <cover-view class="hb-view"> 
+              <cover-view wx:if="{{hb.code === '500'}}">很遗憾</cover-view>
+              <cover-view wx:if="{{hb.code === '200'}}">恭喜您抽中</cover-view>
+              <cover-view>{{hb.msg}}</cover-view>
+            </cover-view>  
+          </cover-view>
+          <cover-image wx:else bindtap="openHb" class="prize-guide-bg-hb" src="https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/hongbao%403x.png"></cover-image>
+        </cover-view>
+        <cover-view class="prize-open-close" bindtap="hbActiveClose">
+          <cover-image class="prize-close-img" src="https://s.404.cn/applet/images/qudao/prize/prize_close.png"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </block>
+  <!-- 红包end -->
+  <!-- 关注/限时优惠券 -->
+  <block wx:if="{{couponActive}}">
+    <cover-view class="special-coupon-cloth">
+      <cover-view class="layer" bindtap="couponActiveClose" catchtouchmove="ture"></cover-view>
+      <cover-view class="special-coupon" wx:if="{{couponType == 0}}">
+        <cover-image src="https://s.404.cn/applet/images/qudao/about/{{couponStatus?'abouted':'abouting'}}.png" mode="widthFix" class="bg-coupon"></cover-image>
+        <cover-view class="special-coupon-text">
+          <cover-view class="special-coupon-val">
+            <cover-view class="special-coupon-l-cloth">
+              <cover-view class="special-coupon-l">
+                <cover-view>￥</cover-view>
+                <cover-view class="special-coupon-l-val">{{aboutCouponData.face_money}}</cover-view>
+              </cover-view>
+              <cover-view wx:if="{{aboutCouponData.limit_money > 0}}">满{{aboutCouponData.limit_money}}元可以使用</cover-view>
+              <cover-view wx:if="{{aboutCouponData.limit_money == 0}}">不限金额使用</cover-view>
+            </cover-view>
+            <cover-view class="special-coupon-r-cloth">
+              <cover-view class="special-coupon-name">{{aboutCouponData.name}}</cover-view>
+              <cover-view wx:if="{{aboutCouponData.is_all_product == 0}}">全部商品</cover-view>
+              <cover-view wx:if="{{aboutCouponData.is_all_product == 1}}">指定商品</cover-view>
+            </cover-view>
+          </cover-view>
+          <block wx:if="{{aboutCouponData.value_type*1 == 1}}">
+            <cover-view class="special-coupon-time special-coupon-time-len">有效期:{{aboutCouponData.start_time}}-{{aboutCouponData.end_time}}</cover-view>
+          </block>
+          <block wx:else>
+            <block wx:if="{{aboutCouponData.late_time_type*1 == 3}}">
+              <cover-view class="special-coupon-time">有效期至本场直播结束后失效</cover-view>
+            </block>
+            <block wx:if="{{aboutCouponData.late_time_type*1 != 3}}">
+              <cover-view class="special-coupon-time">领取后{{aboutCouponData.late_begin==0?'当':aboutCouponData.late_begin}}天生效，有效期{{aboutCouponData.late_value}}{{aboutCouponData.late_time_type*1 == 0?'天':aboutCouponData.late_time_type*1 == 1?'小时':''}}</cover-view>
+            </block>
+          </block>
+        </cover-view>
+        <cover-view class="about-btn" bindtap="rightUsrAbout">
+          <cover-image src="https://s.404.cn/applet/images/qudao/about/about_btn.png" mode="widthFix" class="bg-coupon"></cover-image>
+          <cover-view class="about-btn-content">{{couponStatus?'立即使用':'立即关注'}}</cover-view>
+        </cover-view>
+        <cover-view class="close-coupon-btn" bindtap="couponActiveClose"></cover-view>
+      </cover-view>
+      <cover-view class="time-coupon-position" wx:else>
+        <cover-view class="time-coupon">
+          <cover-image src="https://s.404.cn/applet/images/qudao/about/{{couponTime?'coupon_get_bg':'coupon_open'}}.png" mode="widthFix" class="bg-coupon"></cover-image>
+          <block wx:if="{{couponTime==0}}">
+            <cover-view class="coupon-downtime" bindtap="{{couponNum==0?'openTimeCoupon':''}}">
+              <cover-image src="https://s.404.cn/applet/images/qudao/about/coupon_time.png" mode="widthFix" class="bg-coupon"></cover-image>
+              <cover-view class="coupon-downtime-num">{{couponNum==0?'开':'0'+couponNum}}</cover-view>
+            </cover-view>
+          </block>
+          <block wx:if="{{couponTime==1}}">
+            <cover-view class="coupon-get-success">
+              <cover-image src="https://s.404.cn/applet/images/qudao/about/coupon_get.png" mode="widthFix" class="bg-coupon"></cover-image>
+              <cover-view class="special-coupon-val">
+                <cover-view class="special-coupon-l-cloth">
+                  <cover-view class="special-coupon-l time-coupon-l">
+                    <cover-view>￥</cover-view>
+                    <cover-view class="special-coupon-l-val">{{limitCoupon.face_money}}</cover-view>
+                  </cover-view>
+                  <cover-view wx:if="{{limitCoupon.limit_money > 0}}">满{{limitCoupon.limit_money}}元可以使用</cover-view>
+                <cover-view wx:if="{{limitCoupon.limit_money == 0}}">不限金额使用</cover-view>
+                </cover-view>
+                <cover-view class="special-coupon-r-cloth">
+                  <cover-view class="special-coupon-name">{{limitCoupon.name}}</cover-view>
+                  <cover-view wx:if="{{limitCoupon.is_all_product == 0}}">全部商品</cover-view>
+                  <cover-view wx:if="{{limitCoupon.is_all_product == 1}}">指定商品</cover-view>
+                </cover-view>
+              </cover-view>
+              <block wx:if="{{limitCoupon.value_type*1 == 1}}">
+                <cover-view class="special-coupon-time">
+                  <cover-view>有效期:</cover-view>
+                  <cover-view style="font-size: 18rpx;">{{limitCoupon.start_time}}-{{limitCoupon.end_time}}</cover-view>
+                </cover-view>
+              </block>
+              <block wx:else>
+                <block wx:if="{{limitCoupon.late_time_type*1 == 3}}">
+                  <cover-view class="special-coupon-time">有效期至本场直播结束后失效</cover-view>
+                </block>
+                <block wx:if="{{limitCoupon.late_time_type*1 != 3}}">
+                  <cover-view class="special-coupon-time">领取后{{limitCoupon.late_begin==0?'当':limitCoupon.late_begin}}天生效，有效期{{limitCoupon.late_value}}{{limitCoupon.late_time_type*1 == 0?'天':limitCoupon.late_time_type*1 == 1?'小时':''}}</cover-view>
+                </block>
+              </block>
+            </cover-view>
+          </block>
+          <block wx:if="{{couponTime==2}}">
+            <cover-image src="https://s.404.cn/applet/images/qudao/about/coupon_uget.png" mode="widthFix" class="coupon-get-fail-img"></cover-image>
+            <cover-view class="coupon-get-fail-text">对不起，抢完了!</cover-view>
+          </block>
+          <block wx:if="{{couponTime!=0}}">
+            <cover-view class="time-coupon-btn" bindtap="rightUserClose">
+              <cover-image src="https://s.404.cn/applet/images/qudao/about/coupon_btn.png" mode="widthFix" class="bg-coupon"></cover-image>
+              <cover-view>{{couponTime==1?'立即使用':'关闭'}}</cover-view>
+            </cover-view>
+          </block>           
+        </cover-view>
+        <cover-view class="time-close-btn" bindtap="couponActiveClose" wx:if="{{couponTime==1 && couponType != 0}}">
+          <cover-image src="https://s.404.cn/applet/images/qudao/prize/prize_close.png" mode="widthFix" class="time-close-img"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </block>
+
+  <!-- 直播间抽奖弹窗 -->
+  <block wx:if="{{prizeActive}}">
+    <cover-view class="prize-cloth">
+      <cover-view class="layer" bindtap="prizeActiveClose" catchtouchmove="ture"></cover-view>
+      <cover-view class="prize-position">
+        <!-- 抽奖倒计时弹窗 -->
+        <cover-view class="prize-open" wx:if="{{prizeType == 0}}">
+          <cover-image class="prize-open-bg" src="https://s.404.cn/applet/images/qudao/prize/prize_open_bg.png"></cover-image>
+          <cover-view class="prize-open-time-cloth">
+            <cover-view class="prize-open-num">{{prizeTime.minute}}</cover-view>
+            <cover-view class="prize-open-num">{{prizeTime.minuteBit}}</cover-view>
+            <cover-view class="prize-open-dot">:</cover-view>
+            <cover-view class="prize-open-num">{{prizeTime.second}}</cover-view>
+            <cover-view class="prize-open-num">{{prizeTime.secondBit}}</cover-view>
+          </cover-view>
+          <cover-view class="prize-open-btn" bindtap="goSay">
+            <cover-image class="prize-btn1" src="https://s.404.cn/applet/images/qudao/prize/prize_btn1.png"></cover-image>
+            <cover-view class="prize-open-say">{{liveVideoData.enrollCode?'已评论':'去评论'}}</cover-view>
+          </cover-view>
+          <cover-view class="prize-open-des">发表评论即可参加抽奖</cover-view>
+        </cover-view>
+        <!-- 获奖名单 -->
+        <cover-view class="winning-name" wx:if="{{prizeType == 1}}">
+          <cover-view class="winning-top"></cover-view>
+          <cover-view class="winning-title">获奖名单</cover-view>
+          <cover-view class="winning-list-cloth">
+            <cover-view class="winning-list-box">
+              <cover-view class="winning-list" wx:for="{{prizeName.member_list}}" wx:key="index">
+                <cover-image class="winning-avatar" src="{{item.avatar}}"></cover-image>
+                <cover-view>{{item.nickname}}</cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+        <!-- 中奖者填写地址引导 -->
+        <cover-view class="prize-guide" wx:if="{{prizeType == 2}}">
+          <cover-image class="prize-guide-bg" src="https://s.404.cn/applet/images/qudao/prize/prize_guide_bg.png"></cover-image>
+          <cover-view class="prize-guide-content">
+            <cover-view class="prize-guide-title">
+              <cover-view class="prize-guide-titl-content">{{prizeName.name}}</cover-view>
+            </cover-view>
+            <cover-image class="prize-guide-avatar" src="{{myPrize.avatar}}"></cover-image>
+            <cover-view class="prize-guide-mes">
+              <cover-view class="prize-guide-box">
+                <cover-view class="prize-guide-user">{{filter.getName(myPrize.nickname,7)}}恭喜您中奖!</cover-view>
+                <cover-view class="prize-go-adress" bindtap="showAdress">
+                  <cover-image class="prize-btn1" src="https://s.404.cn/applet/images/qudao/prize/prize_btn1.png"></cover-image>
+                  <cover-view class="prize-go-edit">填写地址</cover-view>
+                </cover-view>
+                <cover-view class="prize-tip-adress">请前往【我的活动】填写地址</cover-view>
+                <cover-view class="prize-tip-adress prize-des-adress">若24小时内未填写地址将视为自动放弃</cover-view>
+                <cover-view class="prize-word">
+                  <cover-view class="prize-word-pas">兑奖口令  {{myPrize.code}}</cover-view>
+                  <cover-view>保存此口令作为最终依据</cover-view>
+                </cover-view>
+                <cover-view class="prize-user-title">
+                  <cover-view>获奖名单</cover-view>
+                  <cover-view class="prize-unline"></cover-view>
+                </cover-view>
+                <cover-view class="prize-user-list" wx:for="{{prizeName.member_list}}" wx:key="index">
+                  <cover-image class="prize-user-avatar" src="{{item.avatar}}"></cover-image>
+                  <cover-view>{{item.nickname}}</cover-view>
+                </cover-view>
+              </cover-view>
+            </cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class="prize-open-close" bindtap="prizeActiveClose">
+          <cover-image class="prize-close-img" src="https://s.404.cn/applet/images/qudao/prize/prize_close.png"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </block>
+  <!-- 关注弹窗主播主页 -->
+  <block wx:if="{{isAbout}}">
+    <cover-view class="prize-cloth">
+      <cover-view class="layer" bindtap="aboutClose" catchtouchmove="ture"></cover-view>
+      <cover-view class="prize-position">
+        <cover-view class="about-content">
+          <cover-view class="winning-top about-top"></cover-view>
+          <cover-image class="user-avatar about-avatar" src="{{liveVideoData.avatar}}" bindtap="aboutOpen"></cover-image>
+          <cover-view class="about-name">{{liveVideoData.nickname}}</cover-view>
+          <cover-view>粉丝 {{liveVideoData.subscribe_count}}</cover-view>
+          <cover-view class="about-goto">
+            <cover-view class="about-goto-btn" bindtap="followClick" wx:if="{{liveVideoData.subscribe*1 == 0}}">关注</cover-view>
+            <cover-view class="about-goto-btn" bindtap="goAnchor">主播主页</cover-view>
+          </cover-view>
+        </cover-view>
+        <cover-view class="prize-open-close" bindtap="aboutClose">
+          <cover-image class="prize-close-img" src="https://s.404.cn/applet/images/qudao/prize/prize_close.png"></cover-image>
+        </cover-view>
+      </cover-view>
+    </cover-view>
+  </block>
+</block>
+<!--海报画布-->
+<canvas canvas-id='productPost' style="width: {{canvasPosition.w}}px; height: {{canvasPosition.h}}px;position:absolute;left: -1000rpx;top:0;z-index:-1;"></canvas>
+<!-- 底部Tab -->
+<!-- <include src="/pages/public/page_footer.wxml"></include> -->
+<!-- 直播中断提示 -->
+<text class="cutoff_status_tips" wx:if="{{liveVideoData.cutoff_status==0}}">
+主播暂时离开一会，请耐心等待！\n更多惊喜即将登场~
+</text>
+<!-- //开始载入黑屏时候直播背景图 -->
+<block wx:if="{{statusBegin&&(optionsStatus==1)}}">
+  <view class="bg-begin"> </view>
+  <image class="img-cover-begin" src="{{coverImg}}" mode="aspectFill"></image>
+  <image class="img-center" src="../image/tv_loading.png"></image>
+  <view class="text-center">主播就要出来啦~</view>
+</block>
+<!-- //?开始载入黑屏时候直播背景图 -->
+<!-- 普通优惠券领取弹窗 -->
+<block wx:if="{{couponPopup}}">
+  <cover-view class="layer" bindtap="couponPopupClose" catchtouchmove="ture"></cover-view>
+  <cover-view class="couponPopup_pop">
+    <cover-view class="couponPopup">
+      <cover-view class="head">
+        领取成功
+      </cover-view>
+      <cover-view class="coupon">
+        <cover-view class="coupon_1">{{couponWindow.face_money}}</cover-view>
+        <cover-view class="coupon_2">{{couponWindow.name}}</cover-view>
+      </cover-view>
+      <cover-view class="tips">
+        <cover-view> 您已经成功领取优惠劵 </cover-view>
+        <cover-view> 快去使用喽~</cover-view>
+      </cover-view>
+      <cover-view class="goPay" bindtap="goodsListShow" data-goodslength="{{goodsData.list.length}}">
+        去使用
+      </cover-view>
+      <cover-view class="goCoupon" bindtap="couponList">
+        继续领券
+      </cover-view>
+    </cover-view>
+    <cover-view class="countDown">
+      {{codenum}}s后自动关闭
+    </cover-view>
+  </cover-view>
+</block>
+<!-- 普通优惠券领取弹窗 -->
+
+<!-- //未登陆直接进直播间需要授权登录弹窗 -->
+<cover-view class='alap_box' hidden="{{!showLoginModal}}">
+  <cover-view class='get-user-container  {{pageTheme}}'>
+    <cover-view class="get-user-text-title">登录提示</cover-view>
+    <cover-image src='{{"https://s.404.cn/applet/images/get-user.png"}}' mode="widthFix" class='get-user-img'></cover-image>
+    <cover-view class='get-user-text'>授权后即可购物，享受优惠和参与活动{{userLoginUrl}}</cover-view>
+    <cover-view class="btnbox">
+      <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+      <button type='primary' class='get-user-btn' open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall">登录
+      </button>
+    </cover-view>
+  </cover-view>
+</cover-view>
+<cover-view class="get-phone alap_box" wx:if="{{showgetPhone}}">
+  <cover-view class='get-user-container  {{pageTheme}}'>
+    <cover-view class="get-user-text-title">获取手机号</cover-view>
+      <image src='{{"https://s.404.cn/applet/images/get-user.png"}}' mode="widthFix" class='get-user-img'></image>
+      <block wx:if='{{canIUse!==false}}'>
+        <cover-view class='get-user-text'>{{modalTyepe.auth_intro}}</cover-view>
+        <cover-view class="btnbox">
+          <button type="button" class='btn-cancel-login' bindtap="closeModal">取消</button>
+          <button type='primary' class='get-user-btn' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">获取</button>
+        </cover-view>
+      </block>
+  </cover-view>
+</cover-view>
+<!-- 提示框 -->
+<cover-view class="wartning" wx:if="{{warning.warningShow}}">{{warning.warningTxt}}</cover-view>
+<web-view src="{{userLoginUrl}}" wx:if="{{userLoginUrl}}" bindload="loginLoaded" binderror="errorLoaded"></web-view>
+<!-- //未登陆直接进直播间需要授权登录弹窗 -->
+
+<!-- <分享优化> -->
+<cover-view class='bottom-modal' hidden="{{!isShow}}">
+  <cover-view class="bottom-modal-cover" bindtap='hideDialog'></cover-view>
+  <cover-view class='bottom-modal-content'>
+    <cover-view class='bottom-modal-wrap'>
+      <button class='bottom-modal-wrap-item' open-type='share' catchtap='_shareGroup'>
+        <cover-image mode="aspectFit" src="https://s.404.cn/applet/images/haoyou.png"></cover-image>
+        <cover-view class='text'>分享给好友</cover-view>
+      </button>
+      <cover-view class="bottom-modal-wrap-item" catchtap='_shareFriendsCircle' wx:if="{{showFriendCircle!=0}}">
+        <cover-image mode="aspectFit" src="https://s.404.cn/applet/images/pengyouquan.png"></cover-image>
+        <cover-view class='text'>分享海报图</cover-view>
+        <cover-view class="icon">推荐</cover-view>
+      </cover-view>
+    </cover-view>
+  </cover-view>
+</cover-view>
+<!-- <分享优化> -->

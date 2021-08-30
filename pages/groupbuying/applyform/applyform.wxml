@@ -1,0 +1,103 @@
+<import src="../../public/warning.wxml" />
+<import src="./othertel.wxml" />
+<view class='apply-form-wrap'>
+  <form bindsubmit="grouperSave" bindreset="formReset">
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>真实姓名</label>
+      <input placeholder='请输入您的姓名' bindblur="bindName" value='{{group_detail.name}}'></input>
+    </view>
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>手机号码</label>
+      <input placeholder='请输入您的电话' bindinput="bindTel" value='{{phoneNumber || group_detail.tel}}'></input>
+      <!-- <button class='getwxtel' open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber">使用微信手机号</button> -->
+    </view>
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>验证码</label>
+      <input placeholder='请输入验证码' bindblur="bindCode" value='{{group_detail.code}}'></input>
+      <button class='gecode' bindtap='getTelcode'>{{sendcodeStatus?(codenum+'秒'):'获取验证码'}}</button>
+    </view>
+    <view class='apply-form-input addressEditCentent'>
+      <text>*</text>
+      <label>申请地区</label>
+      <view class="regionSelection">
+        <picker name="province" bindchange="pickerProvince" value="{{province_index}}" range="{{province_name_arr}}">
+          <view class="picker">
+            {{province_name_arr[province_index]}}
+          </view>
+        </picker>
+        <picker name="city" bindchange="pickerCity" value="{{city_index}}" range="{{city_name_arr}}">
+          <view class="picker">
+            {{city_name_arr[city_index]}}
+          </view>
+        </picker>
+        <picker name="area" bindchange="pickerCountry" value="{{country_index}}" range="{{country_name_arr}}">
+          <view class="picker">
+            {{country_name_arr[country_index]}}
+          </view>
+        </picker>
+      </view>
+    </view>
+
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>小区/楼盘</label>
+      <input placeholder='请选择地图' bindtap="oppeMap"  bindblur="bindHousingr" value="{{group_detail.address_detail}}" disabled></input>
+      <view style="position:relative;width:80rpx;text-align: center;" bindtap="chooseLocation">
+        <text class="iconfont icon-dizhi" style="display-inline;width: 45rpx;height: 45rpx;font-size:44rpx;color:#888;"></text>
+        <text class="iconfont icon-tap flag-hide" style="font-size:44rpx;"></text>
+      </view>
+    </view>
+
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>详细地址</label>
+      <input placeholder='请输入街道门牌号' bindblur="bindHousenumber" value='{{group_detail.housenumber}}'></input>
+    </view>
+    <view class='apply-form-input addressEditCentent'>
+      <text>*</text>
+      <label>申请社区</label>
+      <!-- <picker name="community" bindchange="pickerCommunity" value="{{community_index}}" range="{{physica_list_arr}}">
+        <view class="picker">
+          {{community_name_arr[community_index].name}}
+        </view>
+      </picker> -->
+      <input placeholder='请输入社区名' bindblur='bindCommunityname' value='{{group_detail.communityname}}'></input>
+      <view class="goSelect" bindtap="goSelect">
+      </view>
+    </view>
+    <view class='apply-form-input'>
+      <text>*</text>
+      <label>微信号</label>
+      <input placeholder='请输入您的微信号' bindblur='bindWxnumber' value='{{group_detail.wxnumber}}'></input>
+    </view>
+    <!-- <view class='apply-form-input'>
+    <text>*</text>
+    <label></label>
+    <input placeholder=''></input>
+  </view> -->
+    <view class='apply-form-input margin-top-20'>
+      <text></text>
+      <label>职业</label>
+      <input placeholder='请输入您的职业（非必填）' bindblur='bindCareer' value='{{group_detail.career}}'></input>
+    </view>
+    <view class='apply-form-input'>
+      <text></text>
+      <label>小区住户数</label>
+      <input placeholder='请输入您居住小区住户数（非必填）' bindblur='bindHouseholds' value='{{group_detail.households}}'></input>
+    </view>
+    <view class='apply-form-input margin-top-20 apply-form-input-bordernone'>
+      <text>*</text>
+      <label>申请说明</label>
+
+    </view>
+    <view class='textareabj'>
+      <textarea placeholder='请输入申请说明' bindblur='bindApplynotes' value='{{group_detail.applynotes}}'></textarea>
+    </view>
+    <button class="now-apply-btn" formType="submit">立即申请</button>
+    <text class='now-apply-text'>申请后，我们将尽快与您联系，并为您开通团长身份~</text>
+  </form>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

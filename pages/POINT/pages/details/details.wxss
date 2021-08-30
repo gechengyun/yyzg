@@ -1,0 +1,62 @@
+.con {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100rpx;
+}
+
+.con .desc {
+  font-size: 24rpx;
+}
+
+.con .num {
+  font-size: 30rpx;
+}
+
+.tabel {
+  width: 600rpx;
+  margin: 0 auto;
+  height: auto;
+  font-size: 28rpx;
+  color: #000;
+  min-height: 100vh
+}
+
+.tabel .tr {
+  width: 600rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.tabel .th {
+  color: #fff;
+  font-size: 30rpx;
+}
+
+.tabel .tr .td1 {
+  width: 250rpx;
+  border-right: 1rpx solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabel .tr .td2 {
+  width: 150rpx;
+  border-right: 1rpx solid #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tabel .tr .td3 {
+  width: 200rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

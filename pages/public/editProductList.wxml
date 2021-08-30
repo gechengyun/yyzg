@@ -1,0 +1,14 @@
+<!-- 餐饮小食2 -->
+<template name="goods_group2">
+    <import src="../public/productList.wxml" />
+    <view data-page="page.public.editProductList" id='product' class="{{content.content.goods_group_list == '' ? 'hide' : '' }}" data-desc="餐饮小食2">
+        <view class="editProductList">
+            <view class="productTitle {{productList[t_index]==index ? 'active' : ''}}" wx:for="{{content.content.goods_group_list}}" wx:key="" data-t_index="{{t_index}}" data-productlist="{{index}}" bindtap="productListSwichNav">{{item.title}}</view>
+        </view>
+        <view class="editProductListCentent editProduct">
+            <view class="shopProductTable {{productList[t_index]==index ? 'active' : ''}} size_{{content.content.size}} size_type_{{content.content.size_type}} buy_btn_type_{{content.content.buy_btn_type}} buy_btn_{{content.content.buy_btn}}  show_title_{{content.content.show_title}} price_{{content.content.price}}  {{productTable}}"  wx:for="{{content.content.goods_group_list}}" wx:for-item="list" wx:key="">
+                <template is="productList" data="{{content:list,productTable:productTable,show_title:content.content.show_title,size_type:content.content.size_type,size:content.content.size,group_label:content.content.group_label,themeColorValue}}" />
+            </view>
+        </view>
+    </view>
+</template>

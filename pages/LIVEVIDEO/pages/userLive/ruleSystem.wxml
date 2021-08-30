@@ -1,0 +1,6 @@
+<!--pages/LIVEVIDEO//pages/userLive/ruleSystem.wxml-->
+<!--富文本-->
+<import src="../../../../wxParse/wxParse.wxml" />
+<view class="container {{pageTheme}}">
+  <template is="wxParse" data="{{wxParseData:pageDataContent.nodes}}" />
+</view>

@@ -1,0 +1,8 @@
+{
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "bottom-modal": "../../../../components/bottomModal/index",
+    "dialog-modal": "../../../../components/dialog/index"
+  },
+  "navigationStyle": "custom"
+}

@@ -1,0 +1,7 @@
+<!--  富文本 -->
+<template name="rich_text">
+    <import src="../../wxParse/wxParse.wxml" />
+    <view class="rich_text {{content.screen == 1 ? 'screen' : ''}}" style="background:{{content.bgcolor}};" data-page="pages.public.editText">
+        <template is="wxParse" data="{{wxParseData:content.content.nodes}}" />
+    </view>
+</template>

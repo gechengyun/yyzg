@@ -1,0 +1,83 @@
+<!--我的订单列表页面-->
+<view class="container">
+    <scroll-view class="orderState" scroll-top="" scroll-y="true" style="height:{{scrollHeight}}px;" bindscrolltolower="bindDownLoad" bindscroll="scroll" bindscrolltoupper="refresh" data-page="page.order.index">
+        <view class="clearfix orderStateHeader">
+            <view class="fixedHeader">
+                <view class="{{currentTab==0 ? 'active' : ''}}" bindtap="swichNav" data-current="0">
+                    <text data-current="0">全部</text>
+                </view>
+                <view class="{{currentTab==1 ? 'active' : ''}}" bindtap="swichNav" data-current="1">
+                    <text data-current="1">待付款</text>
+                </view>
+                <view class="{{currentTab==2 ? 'active' : ''}}" bindtap="swichNav" data-current="2">
+                    <text data-current="2">待发货</text>
+                </view>
+                <view class="{{currentTab==3 ? 'active' : ''}}" bindtap="swichNav" data-current="3">
+                    <text data-current="3">待收货</text>
+                </view>
+                <view class="{{currentTab==4 ? 'active' : ''}}" bindtap="swichNav" data-current="4">
+                    <text data-current="4">已完成</text>
+                </view>
+            </view>
+        </view>
+        <view class="orderStateList">
+            <view class="orderList" wx:for="{{orderlistData.order_list}}" wx:for-item="order" wx:if="{{order}}">
+                <view class="orderTitle">
+                    <view class="">
+                        <text class="iconfont icon-store "></text>{{order.store}}</view>
+                    <view class="orderTag">
+                        <text class="iconfont icon-jingxuan"></text>团购</view>
+                </view>
+                <view class="orderContent">
+                    <view class="orderContentList" wx:for="{{order.order_product_list}}">
+                        <navigator open-type="redirect" hover-class="none" hover-stay-time="0" hover-start-time="0" url="/pages/GOODSDETAILS/pages/details/index?tuan_id={{order.tuan_id}}">
+                        <view class="productImg">
+                            <image src="{{item.image}}"></image>
+                        </view> 
+                        <view class="productInfo">
+                            <view class="productName">{{item.name}}</view>
+                            <view class="productPrice">¥{{item.pro_price}}
+                                <text>x{{item.pro_num}}</text>
+                            </view>
+                            <view class="orderInfo">
+                                <block wx:for="{{item.sku_data_arr}}" wx:for-item="sku_data_arr">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                            </view>
+                        </view>
+                        </navigator>
+                    </view>
+                </view>
+                <view class="orderFooter clearfix">
+                    <view class="orderTotal">
+                        <text>合计: </text>
+                        <text>¥{{order.total}}</text>
+                    </view>
+                    <view class="orderButton">
+                        <text class="" wx:if="{{(order.status==1)||(order.status==0)}}" bindtap="paymentGo" data-order="{{order.order_no_txt}}">去支付</text>
+                        <text class="" wx:if="{{(order.status==1)||(order.status==0)}}" bindtap="cancelOrder" data-order="{{order.order_no_txt}}" data-index="{{index}}">取消</text>
+                        <!--                  <text class="" wx:if="{{((order.status==2)||(order.status==7))&&(order.is_return==true)&&(order.order_product_list[0].return_status!=2)}}" bindtap="applyRefundGo" data-order="{{order.order_no_txt}}" data-id="{{order.order_product_list[0].pigcms_id}}">
+           &&(order.is_return==true)申请退货</text>
+       <text class="" wx:if="{{((order.status==2)||(order.status==7))&&(order.is_return==true)&&(order.order_product_list[0].return_status!=0)}}" bindtap="returnGo" data-order="{{order.order_no_txt}}" data-id="{{order.order_product_list[0].pigcms_id}}">查看退货</text> -->
+                        <text class="" wx:if="{{order.status==3}}" bindtap="completeReceipt" data-order="{{order.order_no_txt}}" data-index="{{index}}">确认收货</text>
+                        <!--         <text class="" wx:if="{{order.status==6}}" bindtap="completeCollage" data-order="{{order.order_no_txt}}">查看退货</text> -->
+                        <text class="" wx:if="{{order.status==7}}" bindtap="completeOrder" data-order="{{order.order_no_txt}}" data-index="{{index}}"> 交易完成</text>
+                        <text class="" bindtap="orderGo" data-order="{{order.order_no_txt}}">查看订单</text>
+                    </view>
+                </view>
+            </view>
+            <view class="productdDefault" wx:if="{{orderlistData.order_list==''}}">
+                <image src="https://s.404.cn/applet/images/wxcopy/que_03.png"> </image>
+                <text>列表为空!</text>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+
+<include src="/pages/public/page_footer.wxml"></include>
+
+<bottom-modal id='shareModal'  cancelText='取消' bind:_cancelEvent="_cancelEvent" bind:_shareGroup="_shareGroup" bind:_shareFriendsCircle="_shareFriendsCircle"></bottom-modal>
+<dialog-modal
+        dialogHidden="{{dialog.dialogHidden}}"
+        titleMsg="{{dialog.titleMsg}}"
+        auth-btn="{{true}}"
+        determineBtnTxt="{{dialog.determineBtnTxt}}"
+></dialog-modal>

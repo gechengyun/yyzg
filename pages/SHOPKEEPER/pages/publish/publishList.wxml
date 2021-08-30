@@ -1,0 +1,119 @@
+<!--pages/SHOPKEEPER//pages/publish/publishList.wxml-->
+<view class="shoper-page container">
+  <!-- 页面内容 -->
+  <!-- 导航 -->
+  <block wx:if="{{way==0 || way==2}}">
+    <view class="nav-block" style="background-color:{{barType==1?'#fff':themeColorValue}};height:{{status + navHeight}}px" >
+      <view class="status-colum" style="height:{{status}}px"></view>
+      <view class="contents" style="height:{{navHeight}}px">
+        <view class="nav-left" bindtap="goBack">
+          <!-- 返回 -->
+          <view class="_centet nav_back">
+            <text class="iconfont icon-shangyibu"></text>
+          </view>
+        </view>
+        <view class="nav-title _centet">{{_barTitle}}{{way==2?'(' + publicListData.like_count + ')':''}}</view>
+      </view>
+    </view>
+    <!-- 占位 -->
+    <view class='nav-position' style="background-color:{{barType==1?'#fff':themeColorValue}}; height:{{status+navHeight}}px;">占位</view>
+  </block>
+  <view class="topic" wx:if="{{way==1}}">
+    <image class="topic-img" src="{{publicListData.talktag.talkbgimg}}" mode="widthFix" wx:if="{{publicListData.talktag.talkbgimg.length!=0}}"></image>
+    <view class="topic-img" wx:else></view>
+    <view class="topic-conten">
+      <view class="go-back" bindtap="goBack">
+        <!-- 返回 -->
+        <view class="_centet nav_back">
+          <text class="iconfont icon-shangyibu"></text>
+        </view>
+      </view>
+      <view class="topic-tex">
+        <view class="topic-name"><text class="topic-symbol">#</text>{{publicListData.talktag.talkname}}</view>
+        <view class="topic-des">{{publicListData.talktag.talkintroduce}}</view>
+      </view>
+    </view>
+  </view>
+  <scroll-view scroll-y="{{publicListData.list!=''}}" style="height:{{way==0 || way==2?scrollHeight:scrollHeight-navHeight-170}}px;" bindscrolltoupper="bindUpLoad" bindscrolltolower="bindDownLoad" bindscroll="scroll">
+    <view class="msg-list">
+      <!-- 左 -->
+      <view class="item-left">
+        <view wx:if="{{listidx%2 == 0}}" wx:for='{{publicListData.list}}' wx:key='listidx' wx:for-index="listidx" class="outlist">
+          <view class="img-block" bindtap="goDetail" data-id="{{item.id}}" data-type="{{item.filetype}}">
+            <image src="{{item.filesrc}}" mode="widthFix" wx:if="{{item.filetype==1}}"></image>
+            <view class="vedio-block videoed" wx:if='{{item.filetype==2}}'>
+              <video class="video_label" poster='{{item.vthumb}}' src="{{item.filesrc}}" controls object-fit='cover' autoplay='{{false}}'></video>
+              <view class="videoplay"></view>
+            </view>
+            <text class="publish-status" wx:if="{{item.status == 2}}">待审核</text> 
+            <text class="publish-status" wx:if="{{item.status == 3}}">已下架</text> 
+          </view>
+          <!-- 底部交互 -->
+          <view class="list-content">
+            <view class="list-title" bindtap="goDetail" data-id="{{item.id}}" data-type="{{item.filetype}}">{{item.title}}</view>
+            <view class="oprate">
+              <view>
+                <view class="publisher" wx:if="{{show_set.show_fber*1}}">
+                  <image src="{{item.fbtximg}}" mode="widthFix" data-src='{{item.fbtximg}}'></image>
+                  <text>{{item.fbname}}</text>
+                </view>
+                <view class="read">{{item.view_num}}阅读</view>
+              </view>
+              <view class="oprate-right">
+                <view style="color:{{item.like_num!=0?themeColorValue:'rgba(145,147,152,1)'}}">
+                  <text class="iconfont {{item.like_num!=0?'icon-xihuan':'icon-hert'}}"></text>{{item.like_num}}
+                </view>
+                <view class="share" style="margin-left:16rpx;color:rgba(145,147,152,1);">
+                  <text class="iconfont icon-iconzhengli_fenxiang" style="font-size:36rpx;"></text>{{item.share_num}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 右 -->
+      <view class="item-right">
+        <view wx:if="{{listidx%2 != 0}}" wx:for='{{publicListData.list}}' wx:key='listidx' wx:for-index="listidx" class="outlist">
+          <view class="img-block" bindtap="goDetail" data-id="{{item.id}}" data-type="{{item.filetype}}">
+            <image src="{{item.filesrc}}" mode="widthFix" wx:if="{{item.filetype==1}}"></image>
+            <view class="vedio-block videoed" wx:if='{{item.filetype==2}}'>
+              <video class="video_label" poster='{{item.vthumb}}' src="{{item.filesrc}}" controls object-fit='cover' autoplay='{{false}}'></video>
+              <view class="videoplay"></view>
+            </view>
+          </view>
+          <!-- 底部交互 -->
+          <view class="list-content">
+            <view class="list-title" bindtap="goDetail" data-id="{{item.id}}" data-type="{{item.filetype}}">{{item.title}}</view>
+            <view class="oprate">
+              <view>
+                <view class="publisher" wx:if="{{show_set.show_fber*1}}">
+                  <image src="{{item.fbtximg}}" mode="widthFix" data-src='{{item.fbtximg}}'></image>
+                  <text>{{item.fbname}}</text>
+                </view>
+                <view class="read">{{item.view_num}}阅读</view>
+              </view>
+              <view class="oprate-right">
+                <view style="color:{{item.like_num!=0?themeColorValue:'rgba(145,147,152,1)'}}">
+                  <text class="iconfont {{item.like_num!=0?'icon-xihuan':'icon-hert'}}"></text>{{item.like_num}}
+                </view>
+                <view class="share" style="margin-left:16rpx;color:rgba(145,147,152,1);">
+                  <text class="iconfont icon-iconzhengli_fenxiang" style="font-size:36rpx;"></text>{{item.share_num}}
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="end" style="margin:80rpx 0;" wx:if='{{publicListData.list && publicListData.list.length>0 && no_more}}'>
+      <text>THE  END</text>
+    </view>
+    <!-- 页面内容为空 -->
+    <view wx:if='{{publicListData.list.length==0}}'>
+      <view class="data_null_block">
+        <image src="https://s.404.cn/applet/images/wxcopy/empty-tip.png" style="width:520rpx;" mode="widthFix"></image>
+        <text class="tips">暂无动态，赶紧去发布吧～</text>
+      </view>
+    </view>
+  </scroll-view>  
+</view>

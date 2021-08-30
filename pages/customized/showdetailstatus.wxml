@@ -1,0 +1,24 @@
+<view class='{{pageTheme}}'> 
+
+  <view class='show-realname-part' wx:for="{{relnamePerson}}" wx:for-index="indexa" wx:if="{{relnamePerson.length>0}}" >
+    <navigator open-type='navigate' hover-class='none' url='/pages/customized/realname?realnameId={{item.id}}&addImg={{addimgStatus}}'> 
+      <view class='name'>{{item.name}}</view>
+      <view class='codenum'>身份证：{{item.id_card}}</view>
+      <view class='set-operation'>
+        <icon class='iconfont icon-xuanzhong {{item.is_default == 1?"default-color":""}}'  data-value='{{item}}' catchtap='setdefault'></icon>
+        账户默认实名人
+        <view data-value='{{item}}' catchtap='deleteRelname' >
+          <icon class='iconfont icon-shanchu'  ></icon>
+          删除
+        </view>
+      </view>
+    </navigator>
+  </view>
+  <view class='realname-none'  wx:if="{{relnamePerson.length<=0}}" >
+      <image src="../../images/imgTxtCommon.png"></image>
+      <view class='default-color'>暂时还没有实名认证信息哦!</view>
+  </view>
+  <navigator open-type='navigate' hover-class='none' url='/pages/customized/realname'> 
+    <button class='save-realname producetype'  bindtap='saveRealName' >添加实名信息</button>
+  </navigator>
+</view>

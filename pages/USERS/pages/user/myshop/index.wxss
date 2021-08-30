@@ -1,0 +1,137 @@
+/* pages/USERS//pages/user/myshop/index.wxss */
+
+@import "../../../../../wxParse/wxParse.wxss";
+@import "../../../../../wxss/public/image_ad2.wxss";
+page {
+  background: #f4f5f5;
+}
+.back-box{
+  position: absolute;
+  width: calc(100% - 64rpx);
+  left: 32rpx;
+  top: 32px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+}
+.myshop_head {
+  width: 100%;
+  height: 375rpx;
+  position: relative;
+}
+.myshop_storeLogo {
+  width: 116rpx;
+  height: 116rpx;
+  border-radius: 50%;
+  position: absolute;
+  top: 102rpx;
+  left: 37rpx;
+}
+.myshop_storeName {
+  width: auto;
+  height: 42rpx;
+  font-family: PingFang-SC-Bold;
+  font-size: 38rpx;
+  color: #ffffff;
+  position: absolute;
+  left: 175rpx;
+  top: 118rpx;
+}
+.myshop_storeUpadate {
+  height: 36rpx;
+  position: absolute;
+  top: 175rpx;
+  left: 169rpx;
+  border-radius: 18px;
+  padding: 0 20rpx;
+  line-height: 36rpx;
+}
+.myshop_share {
+  color: #fff;
+  position: absolute;
+  top: 120rpx;
+  right: 30rpx;
+  font-size: 44rpx;
+  background-color: unset;
+  border: none;
+}
+.myshop_share::after{
+  display: none;
+}
+.myshop_middleMoney {
+  position: absolute;
+  top: 276rpx;
+  left: 22rpx;
+  width: 706rpx;
+  height: 294rpx;
+  border-radius: 20rpx;
+  background: #fff;
+  display: flex;
+}
+.myshop_balance {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.myshop_balanceTop,.myshop_WithdrawalTop {
+  flex: 2;
+}
+.myshop_balanceTopTitle {
+  margin-top: 50rpx;
+  display: flex;
+  justify-content: center;
+	font-family: PingFang-SC-Medium;
+	font-size: 24rpx;
+	color: #999999;
+}
+.myshop_balanceTopPrice {
+  height: 52rpx;
+  margin-top: 30rpx;
+  display: flex;
+  justify-content: center;
+	font-family: PingFang-SC-Medium;
+	font-size: 55rpx;
+  font-weight:bold;
+  color:rgba(51,51,51,1);
+  line-height: 52rpx;
+}
+.myshop_balanceBottom,.myshop_WithdrawalBottom {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+.myshop_balanceBottomLeft {
+  flex: 1;
+}
+.myshop_bottomLeftPrice,.myshop_bottomRightPrice {
+  display: flex;
+  justify-content: center;
+  font-size:24rpx;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(51,51,51,1);
+}
+.myshop_bottomLeftTitle,.myshop_bottomRightTitle {
+  margin-top: 13rpx;
+  display: flex;
+  justify-content: center;
+  font-size:22rpx;
+  font-family:PingFang SC;
+  font-weight:500;
+  color:rgba(153,153,153,1);
+}
+.myshop_balanceBottomRight {
+  flex: 1;
+}
+.myshop_Withdrawal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.imgShare {
+  width: 706rpx;
+  height: 150rpx;
+  border-radius: 94rpx;
+  margin-bottom: 20rpx;
+}

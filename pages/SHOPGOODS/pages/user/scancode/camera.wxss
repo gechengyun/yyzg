@@ -1,0 +1,72 @@
+/* pages/user/scancode/camera.wxss */
+.scan-view {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(220, 220, 220, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+}
+/* 相机 */
+.scan-camera {
+  width: 550rpx;
+  height: 550rpx;
+  border-radius: 6rpx;
+  position: absolute;
+  top: 30rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+/* 边角 */
+.cover-corner {
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute;
+}
+
+.cover-left-top {
+  left: 0;
+  top: 0;
+}
+
+.cover-right-top {
+  right: 0;
+  top: 0;
+  transform: rotateZ(90deg);
+}
+
+.cover-left-bottom {
+  left: 0;
+  bottom: 0;
+  transform: rotateZ(270deg);
+}
+
+.cover-right-bottom {
+  right: 0;
+  bottom: 0;
+  transform: rotateZ(180deg);
+}
+/* 输入框 */
+.camera-inp{
+  position: absolute;
+  top: 650rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  text-align: left;
+  border-radius: 10rpx;
+}
+.camera-inp input{
+  margin-right: 10rpx;
+  padding: 10rpx;
+}
+.camera-inp button{
+  margin: 0;
+  background-color: rgba(237, 237, 237, 0.514);
+  border-radius: 0;
+}

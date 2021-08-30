@@ -1,0 +1,23 @@
+<view class='bottom-modal' hidden="{{!isShow}}">
+    <view class="bottom-modal-cover" catchtap='_cancelEvent'></view>
+    <view class='bottom-modal-content'>
+        <view wx:if="{{title}}" class='bottom-modal-title'>
+            {{title}}
+        </view>
+        <view class='bottom-modal-wrap'>
+            <button class='bottom-modal-wrap-item'  open-type='share' catchtap='_shareGroup'>
+                <image mode="aspectFit" src="https://s.404.cn/applet/images/haoyou.png"></image>
+                <view class='text'>分享给好友</view>
+            </button>
+            <view class="bottom-modal-wrap-item" catchtap='_shareFriendsCircle' wx:if="{{showFriendCircle!=0}}">
+                <image mode="aspectFit" src="https://s.404.cn/applet/images/pengyouquan.png"></image>
+                <view class='text'>分享海报图</view>
+                 <text class="icon">推荐</text>
+            </view>
+        </view>
+        <view class='bottom-modal-action'>
+            <view catchtap='_cancelEvent' wx:if="{{cancelText}}" class='bottom-modal-action-cancel'>{{cancelText}}</view>
+            <view wx:if="{{confirmText}}" class='bottom-modal-action-confirm'>{{confirmText}}</view>
+        </view>
+    </view>
+</view>

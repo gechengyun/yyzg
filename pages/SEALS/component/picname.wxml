@@ -1,0 +1,8 @@
+<template name="picname">
+  <view class="card-picture card-list" wx:if="{{cardData.myimages}}">
+    <view class="cp-name list-name">{{titleName.tname}}</view>
+    <block wx:for="{{cardData.myimages}}" wx:key='{{index}}'>
+      <image mode="widthFix" class="picture-img" src='{{item.fileurl}}'></image>
+    </block>
+  </view>
+</template>

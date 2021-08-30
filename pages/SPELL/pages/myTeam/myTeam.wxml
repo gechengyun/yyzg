@@ -1,0 +1,155 @@
+<!--pages/SPELL/pages/myTeam/myTeam.wxml-->
+<!--<text>pages/SPELL/pages/myTeam/myTeam.wxml</text>-->
+<import src="../../../public/warning.wxml" />
+<view class="myTit" style="background:{{navigateBarBgColor}}">
+  <view class="text">
+    <view class="team_name">
+      <view class="name"  bindtap="editTeam">
+        {{userTeamData.name}}
+      </view>
+      <view class="ranking">
+        排名：{{userTeamData.team_num}}
+      </view>
+    </view>
+
+    <view class="creator">
+      <span class="creator_icon iconfont icon-wode">
+      </span>
+      <span class="creator_compellation">
+        创建者：
+      </span>
+      <span class="creator_name">
+        {{userTeamData.auth_name}}
+      </span>
+    </view>
+
+    <view class="team_num">
+      <view class="team_sub">
+        <span class="team_m_t">
+          总营销额:
+        </span>
+        <span class="team_m_c">
+          {{userTeamData.sales}}
+        </span>
+      </view>
+      <view class="team_sub">
+        <span class="team_m_t">
+          团队成员:
+        </span>
+        <span class="team_m_c">
+          {{userTeamData.num}}
+        </span>
+      </view>
+    </view>
+  </view>
+  <view class="headImg">
+    <image src="{{userTeamData.logo}}"></image>
+  </view>
+</view>
+
+
+<view class="my_list" hidden="{{!isData}}">
+
+  <view class="item">
+    <navigator class="tit" url="/pages/SPELL/pages/details/details?level=2">
+      <span class="decs">
+        直属成员[{{userTeamData.directly_name}}]
+      </span>
+      <span class="icon iconfont icon-xiayibu">
+
+      </span>
+   </navigator>
+    <view class="com">
+      <view class="it">
+        <view class="num">
+          {{userTeamData.directly_members.member_count}}
+        </view>
+        <view class="name">
+          数量
+        </view>
+      </view>
+      <view class="it">
+        <view class="num">
+          {{userTeamData.directly_members.orders}}
+        </view>
+        <view class="name">
+          订单数量
+        </view>
+      </view>
+    </view>
+    <view class="foot">
+      累计销量：￥ {{userTeamData.directly_members.sales}}
+    </view>
+  </view>
+
+  <view class="item">
+    <navigator class="tit" url="/pages/SPELL/pages/details/details?level=3">
+      <span class="decs">
+        下级成员[{{userTeamData.second_name}}]
+      </span>
+      <span class="icon iconfont icon-xiayibu">
+
+      </span>
+    </navigator>
+    <view class="com">
+      <view class="it">
+        <view class="num">
+          {{userTeamData.second_members.member_count}}
+        </view>
+        <view class="name">
+          数量
+        </view>
+      </view>
+      <view class="it">
+        <view class="num">
+          {{userTeamData.second_members.orders}}
+        </view>
+        <view class="name">
+          订单数量
+        </view>
+      </view>
+    </view>
+    <view class="foot">
+      累计销量：￥ {{userTeamData.second_members.sales}}
+    </view>
+  </view>
+  <block wx:if="{{userTeamData.drp_level==1}}">
+    <view class="item">
+      <navigator class="tit" url="/pages/SPELL/pages/details/details">
+        <span class="decs">
+          所有成员
+        </span>
+        <span class="icon iconfont icon-xiayibu">
+
+        </span>
+      </navigator>
+      <view class="com">
+        <view class="it">
+          <view class="num">
+            {{userTeamData.members}}
+          </view>
+          <view class="name">
+            数量
+          </view>
+        </view>
+        <view class="it">
+          <view class="num">
+            {{userTeamData.orders}}
+          </view>
+          <view class="name">
+            订单数量
+          </view>
+        </view>
+      </view>
+      <view class="foot">
+        累计销量：￥ {{userTeamData.sales}}
+      </view>
+    </view>
+  </block>
+</view>
+
+<view class="noData" hidden="{{isData}}">
+  暂无数据
+</view>
+<template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt,warningColor:warning.warningColor}}" />
+<include src="/pages/public/page_footer.wxml"></include>

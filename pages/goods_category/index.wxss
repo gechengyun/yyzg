@@ -1,0 +1,247 @@
+@import "../../wxss/goods_category.wxss";
+
+/**自营标签**/
+
+.right_container .ziying {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40rpx;
+  height: 30rpx;
+  line-height: 30rpx;
+  font-size: 14rpx;
+  color: white;
+  text-align: center;
+}
+
+/* 新增 */
+
+.category_second.new-add {
+  position: relative;
+}
+
+.category_second.new-add .no-types-box {
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: 200rpx;
+  height: 200rpx;
+  margin-left: -80rpx;
+  margin-top: -100rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.no-types {
+  width: 220rpx;
+  height: 179rpx;
+  margin-bottom: 20rpx;
+  opacity: 0.4;
+}
+
+.category_second.new-add .no-types-box>text {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #bbb;
+  letter-spacing: 5rpx;
+}
+
+/* @import "/app.wxss";10.18新增商品分类 */
+
+.t_container {
+  width: 100%;
+  height: 100vh;
+}
+
+.t_container .right_banner {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 10rpx;
+  padding: 20rpx auto;
+  box-sizing: border-box;
+}
+
+.t_container .right_tips {
+  height: 80rpx;
+  font-size: 24rpx;
+  color: #898989;
+  padding-top: 20rpx;
+  white-space: nowrap;
+}
+
+.t_container .right_tips .item {
+  display: inline-block;
+  padding: 0rpx 20rpx;
+  border: 2rpx solid #f2f2f2;
+  border-radius: 5rpx;
+  margin: 0 10rpx;
+  font-family: PingFang-SC-Regular;
+	font-size: 22rpx;
+	font-weight: normal;
+	font-stretch: normal;
+	line-height: 50rpx;
+  box-sizing: border-box;
+  height: 50rpx;
+	letter-spacing: 0rpx;
+}
+
+.t_container .right_tips .item:last-child {
+  margin-right: 60rpx;
+}
+
+.right_c {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.t_container  .tips_zk {
+  background: #fff;
+  width: 60rpx;
+  height: 70rpx;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 60rpx;
+  position: absolute;
+  top: 14rpx;
+  right: 0;
+  color: #000;
+}
+.right_container .right_tips_show {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: auto;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  color: #898989;
+  width: 100%;
+  padding: 20rpx;
+  background: #fff;
+  z-index:999;
+  box-sizing: border-box
+}
+
+.right_container .right_tips_show .tit {
+  width: 100%;
+  height: 60rpx;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  position: relative;
+}
+
+
+.right_container .right_tips_show .tit_rig {
+  position: absolute;
+  right: 0rpx;
+  top: 0;
+  color: #000;
+}
+
+.right_container .right_tips_show .item {
+  display: inline-block;
+  padding: 10rpx 20rpx;
+  border: 1rpx solid #f2f2f2;
+  border-radius: 10rpx;
+  margin: 0 10rpx;
+  margin-bottom: 20rpx;
+}
+.right_container .right_tips_show .item:last-child {
+  margin-right: 60rpx;
+}
+
+.right_container {
+  position: relative;
+}
+
+.right_container .bg {
+  z-index: 99;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+}
+.dixian{
+
+  height: 44px;
+width: 100%;
+line-height: 44px;
+text-align: center;
+color: #000;
+font-size: 14px;
+
+
+}
+.zwsp{
+
+  text-align: center;
+  margin-top: 150rpx;
+  font-size: 24rpx;
+}
+
+.productPriceall {
+  height: 100rpx;
+}
+
+.productPriceall text {
+  line-height: 50rpx;
+}
+
+.productPriceall view {
+  height: 50rpx;
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.originalPriceall {
+  text-decoration: line-through;
+}
+
+.productPriceallSub {
+  font-size: 26rpx !important;
+  line-height: 70rpx !important;
+}
+
+.appointmentall {
+  border: 2rpx solid #999 ;
+  width: 120rpx !important;
+  height: 40rpx !important;
+  line-height: 40rpx !important;
+  border-radius: 4rpx !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  padding-top: 0 !important;
+}
+
+.search_area {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background: #fff;
+}
+.all_container{
+  padding-top: 90rpx;
+}
+.searchicon{
+  width: 32rpx!important;
+  height: 32rpx!important;
+}
+.textOmitted {
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #2B2F36;
+}
+.active {
+  font-weight: 500;
+  color: #333333;
+  background: url("https://yiyang-website.oss-cn-hangzhou.aliyuncs.com/yywechat/goodscategory/%E7%9F%A9%E5%BD%A2.png")no-repeat right!important;
+}
+.active .textOmitted {
+  font-weight: 500;
+  color: #333333;
+}

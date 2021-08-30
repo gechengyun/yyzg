@@ -1,0 +1,14 @@
+<template name="contact">
+  <view class="icon-btn">
+    <navigator url="/pages/SHOPKEEPER/pages/publish/publish?isvideothumb={{show_set.isvideothumb}}" wx:if="{{isUpFile && _unlogin==false}}" class="btn-out">
+        <button class="iconfont icon-bianji my-contact myEdit" hover-class="btnhover" style="color:{{themeColorValue}}"></button>
+    </navigator>
+    <navigator wx:if="{{isUpFile && _unlogin==true}}" class="btn-out">
+        <button class="iconfont icon-bianji my-contact myEdit" hover-class="btnhover" style="color:{{themeColorValue}}" open-type="getUserInfo" bindgetuserinfo="userCall" binderror="errCall"></button>
+    </navigator>    
+    <button wx:if="{{isChat}}" open-type='contact' class="iconfont icon-weixin_icon my-contact" hover-class="btnhover"></button>
+    <!-- <navigator url="/pages/shoppingCat/index" wx:if="{{shoppingCatNum}}" class="btn-out">
+        <button class="iconfont icon-gouwuche1 my-contact" hover-class="btnhover"></button>
+    </navigator> -->
+  </view>
+</template>

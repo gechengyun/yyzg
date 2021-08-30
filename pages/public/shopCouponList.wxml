@@ -1,0 +1,20 @@
+<!-- 优惠券 -->
+<wxs src="../../utils/filter.wxs" module="filter"></wxs>
+<template name="coupons">
+    <view class="shopCouponList clearfix shopCouponList-index" style='flex-wrap:wrap;' data-page="page.public.shopCouponList">
+        <view class="shopCouponList_row" style='width:100%;{{(content.content && content.content.length<=3&&contentItem[0] && contentItem[0].align==1)?"justify-content:center":""}}' wx:for="{{filter.chunk(content.content,3)}}" wx:for-item="contentItem" wx:key="index" >
+            <view class="shopCouponList_item c{{index+1}}" wx:for="{{contentItem}}" wx:key="index" >
+                <view data-golist="{{item.is_my_get_over}}" data-couponid="{{item.coupon_id}}" data-idx="{{index}}" data-tempidx="{{tempIndex}}" bindtap="userLogin" hover-class="none">
+                    <i class="cricle left"></i>
+                    <i class="cricle right"></i>
+                    <text class="face_money">￥{{item.face_money}}</text>
+                    <text>{{item.title}}</text>
+                </view>
+                <image class="coupon-bg-f" mode="widthFix" src="{{BASE_IMG_URL}}images/coupon/coupon_bg_f.png" wx:if="{{item.is_my_get_over}}"></image>
+            </view>
+        </view>
+         <!-- <navigator url="/pages/index/coupons" hover-class="none" open-type="{{filter.getOpenType('/pages/index/coupons',store_nav_list)}}">
+        <text class='getquan'>领券>></text>
+        </navigator> -->
+    </view>
+</template>

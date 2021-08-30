@@ -1,0 +1,15 @@
+<!--pages/user/scancode/camera.wxml-->
+<view class="scan-view">
+  <view class='scan-border'>
+    <camera class="scan-camera" mode="scanCode" binderror="cameraError" bindscancode='scancode' frame-size='large'>
+        <cover-image class='cover-corner cover-left-top' src='../../../../../images/scans.png'></cover-image>
+        <cover-image class='cover-corner cover-right-top' src='../../../../../images/scans.png'></cover-image>
+        <cover-image class='cover-corner cover-left-bottom' src='../../../../../images/scans.png'></cover-image>
+        <cover-image class='cover-corner cover-right-bottom' src='../../../../../images/scans.png'></cover-image>
+    </camera>
+    <view class='camera-inp' style="border: 1px solid {{themeColorValue}}">
+      <input placeholder="输入自提码" value="{{drawCode}}" bindinput="watchOrder"></input>
+      <button type="default" size="mini" bindtap="search" style='brder-color:{{themeColorValue}};color:{{themeColorValue}};'>查询</button>
+    </view>
+  </view>
+</view>

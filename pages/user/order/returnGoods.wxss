@@ -1,0 +1,29 @@
+/* pages/user/order/returnGoods.wxss */
+.show-more{
+  margin: 20rpx 0;
+  padding: 0 16rpx;
+  font-size: 30rpx;
+  text-align: right;
+}
+.write-code-list{
+  background-color: #f2f2f2;
+  padding: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10rpx;
+  font-size: 26rpx;
+  color: #353535;
+  line-height: 46rpx;
+}
+.addImgItem {
+  position: relative;
+}
+.deletImg {
+  position: absolute;
+  top:0;
+  right:0;
+  z-index: 1;
+  width:40rpx!important;
+  height:40rpx!important;
+}

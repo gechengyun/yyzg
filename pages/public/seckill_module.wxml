@@ -1,0 +1,5 @@
+<!-- 秒杀模块 -->
+<import src="./activities.wxml" />
+<template name="seckill_module">
+    <template is="activities" data="{{content,t_index}}"></template>
+</template>

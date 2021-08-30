@@ -1,0 +1,45 @@
+@import "create_distribution.wxss";
+.infoItem{
+  position: relative;
+  padding-left: 50rpx;
+}
+.rg_point{ 
+  width: 30rpx;
+  height: 30rpx;
+  position: absolute; 
+  top:40rpx;
+  right: 0rpx;
+}
+.photobox{
+  position: absolute;
+  right: 20rpx;
+  top:10rpx;
+  line-height: 80rpx;
+  display: inline-block
+}
+.photobox image{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  margin-right: 20rpx;
+}
+.listPage .fdBox{  background: linear-gradient(to right, #eb3349 , #f45c43);  }
+
+.blackTheme .fdBox{background: linear-gradient(to right, #000000 , #595959); }
+.blackTheme .border-rad{  border: 1px solid #000000}
+
+.redTheme .fdBox{background: linear-gradient(to right, #eb3349 , #f45c43); }
+.redTheme .border-rad{  border: 1px solid #FA0029}
+.orangeTheme .fdBox{background: linear-gradient(to right, #f95c42 , #f06a0b); }
+.orangeTheme .border-rad{  border: 1px solid #FF5C1C}
+.orangeTheme .activity_min_price { color: #FF5C1C; font-size: 32rpx; }
+
+.blueTheme .fdBox{background: linear-gradient(to right, #0098F8 , #43b4fc); }
+.blueTheme .border-rad{  border: 1px solid #0098F8}
+.pinkDarkTheme .fdBox{background: linear-gradient(to right, #ec008c , #fc6767); }
+.pinkDarkTheme .border-rad{  border: 1px solid #FF007C}
+
+.purpleTheme .fdBox{background: linear-gradient(to right, #7f00ff , #e100ff); }
+.purpleTheme .border-rad{  border: 1px solid #7948FD}
+.brownTheme .fdBox{background: linear-gradient(to right, #B7A392 , #cbbcaf); }
+.brownTheme .border-rad{  border: 1px solid #B7A392}

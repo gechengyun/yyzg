@@ -1,0 +1,37 @@
+<import src="../../public/warning.wxml" />
+<view>
+  <view class='apply-form-input addressEditCentent'>
+    <text>*</text>
+    <label>申请地区</label>
+     <view class="regionSelection">
+          <picker name="province" bindchange="pickerProvince" value="{{province_index}}" range="{{province_name_arr}}">
+              <view class="picker">
+                  {{province_name_arr[province_index]}}
+              </view>
+          </picker>
+          <picker name="city" bindchange="pickerCity" value="{{city_index}}" range="{{city_name_arr}}">
+              <view class="picker">
+                  {{city_name_arr[city_index]}}
+              </view>
+          </picker>
+          <picker name="area" bindchange="pickerCountry" value="{{country_index}}" range="{{country_name_arr}}">
+              <view class="picker">
+                  {{country_name_arr[country_index]}}
+              </view>
+          </picker>
+      </view>
+  </view>
+  <view class='apply-form-input'>
+    <text>*</text>
+    <label>选择地址</label>
+    <text class='addressshow'>{{edit_Address.position.name}}</text>
+    <icon class='icofont icon-dizhi' bindtap='chooseAddress'></icon>
+  </view>
+ <view class='apply-form-input'>
+    <text>*</text>
+    <label>详细地址:</label>
+    <input placeholder='请选择详细地址' value='{{edit_Address.detail}}' bindblur='saveDetailAddress'></input>
+  </view>
+  <view class='now-apply-btn' bindtap='editAddressFun'>确认地址</view>
+  <template is="warning" wx:if="{{warning.warningShow}}" data="{{warningTxt:warning.warningTxt}}" />
+</view>

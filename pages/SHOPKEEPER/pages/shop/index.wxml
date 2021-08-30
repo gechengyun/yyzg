@@ -1,0 +1,140 @@
+<!--pages/SHOPKEEPER//pages/shop/index.wxml-->
+<import src="../../../public/contact.wxml"></import>
+<import src="../../../public/customNav.wxml"></import>
+<import src="../component/articleTemp.wxml"></import>
+<!--自定义导航模板-->
+<view class="shoper-page">
+  <!-- 导航 -->
+  <template is="customNav" data="{{_unlogin,status,navHeight,themeColorValue,barType,_barTitle,user_pic:headPhoto}}" />
+  <template is="contact" data="{{_unlogin,isChat,isUpFile,themeColorValue,show_set}}"/>
+  <!-- 搜索 -->
+  <view class="search-cloth" style="background-color: {{themeColorValue}};">
+    <view class="topicSearch" style="top:{{status+navHeight}}px">
+      <view class="search-ipt">
+        <text class="iconfont icon-chazhao" style="color:#B7A392"></text>
+        <input bindconfirm="wxSearchFn" bindinput="wxSearchInput" placeholder="请输入话题或关键词" type="text" value="{{topicVal}}" confirm-type="search"></input>
+      </view>
+      <view class="go-back" bindtap="searchBtn" style="background-color: {{themeColorValue}}" wx:if="{{0}}">搜索</view>
+    </view>
+    <!-- Tab标签 -->
+    <view class="scroll-tab" wx:if="{{1}}">
+      <scroll-view scroll-x class="tab-header" scroll-into-view="{{tabFiexd}}" scroll-with-animation="true">
+        <block wx:for="{{tabName}}" wx:key="index">
+          <view class="tab-swiper {{index == tabIndex?'tab-active':''}}" data-tabinx="{{index}}" data-titleid="{{item.titleid}}" bindtap="tabSelect" id="view{{index}}">{{item.tagtitle}}</view>
+        </block>
+      </scroll-view>
+      <view class="all-tab" bindtap="showAllTab" wx:if="{{tabName.length>2}}"><text class="iconfont icon-gengduo"></text>全部</view> 
+    </view>
+    <!-- 下拉框选标签 -->
+    <view class="down-tab" wx:if="{{showAllTab}}">
+      <view class="down-tab-item {{index == tabIndex?'active':''}}" data-tabinx="{{index}}" data-titleid="{{item.titleid}}" bindtap="tabSelect" style="background-color: {{index == tabIndex?themeColorValue:''}}" wx:for="{{tabName}}" wx:key="index">{{item.tagtitle}}</view>
+    </view>
+  </view>
+  <!-- 占位符 -->
+  <view style="height: 184rpx;"></view>
+  <!-- 关注页面内容为空 -->
+  <view class="main" wx:if='{{aboutIsEmpty && tabIndex == 0}}'>
+    <view class="data_null_block data_null_block2">
+      <image src="https://s.404.cn/applet/images/wxcopy/empty-tip.png" style="width:520rpx;" mode="widthFix"></image>
+      <text class="tips">快去关注你种草的人吧～</text>
+    </view>
+    <view class="about-title" wx:if="{{lists&& lists.length!=0}}">
+      <text class="iconfont icon-good"></text>为你推荐
+    </view>
+  </view>
+  <!-- 页面内容 -->
+  <view wx:if='{{lists&& lists.length!=0}}'>
+    <view class="main">
+      <view class="msg-lists type{{show_type}}" wx:if="{{show_type==1}}">
+        <template is="articleTemp" data="{{_unlogin,lists,show_type,themeColorValue,imgwidth,imgheight,status_type,show_set,moreData,marginBM,defaultImg,imgList,imgHight,show_lay}}" />
+      </view>
+
+      <!-- 两列展示 -->
+      <view class="msg-lists type{{show_type}}" wx:else>
+        <view class="msg-list style{{show_type}}">
+          <!-- 左 -->
+          <view class="item-left">
+            <view wx:if="{{listidx%2 == 0}}" wx:for='{{lists}}' wx:key='listidx' wx:for-index="listidx">
+              <view class="img-block pic-num-{{item.files.length}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}">
+                <image src="{{item.files[0].thumb}}" mode="widthFix" data-src='{{item.files[0].thumb}}' data-urls='{{item.files}}' wx:if="{{item.files[0].type==1}}"></image>
+                <view class="vedio-block videoed" wx:if='{{status_type=="list" && item.files[0].type==2}}'>
+                  <video class="video_label" poster='{{item.files[0].video_thumb}}' src="{{item.files[0].file_path}}" controls object-fit='cover' autoplay='{{false}}' loop='{{false}}'></video>
+                  <view class="videoplay"></view>
+                </view>
+              </view>
+              <view class="list-contener">
+                <view class="soft-content style{{show_type}} {{moreData==item.id?'':'hide-more'}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}">{{item.title}}</view>
+                <!-- 底部交互 -->
+                <view class="oprate style{{show_type}}" wx:if='{{status_type=="list" || !status_type}}'>
+                  <view class="publisher" wx:if="{{show_set.show_fber*1}}">
+                    <image src="{{item.fbtximg}}" mode="widthFix" data-src='{{item.fbtximg}}'></image>
+                    <text>{{item.fbname}}</text>
+                  </view>
+                  <view class="read" wx:if="{{show_set.show_view*1}}">{{item.view_num}}阅读</view>
+                  <view class="like go-like" bindtap="clickHeart" data-id="{{item.id}}" data-idxs="{{listidx}}" style="color:{{item.liked?themeColorValue:'rgba(145,147,152,1)'}}" wx:if="{{show_set.show_like*1}}">
+                    <text class="iconfont {{item.liked?'icon-xihuan':'icon-hert'}}"></text>
+                    <text>{{item.like_num}}</text>                
+                  </view>
+                  <view class="grass-btn-ico" data-id="{{item.id}}" data-idx="{{listidx}}" data-comment="{{1}}" data-type="{{item.files[0].type}}" catchtap="goDetail" style="color:rgba(145,147,152,1);" wx:if="{{show_set.show_comment*1}}">
+                    <text class="iconfont icon-pinglun"></text>
+                    <text>{{item.comment_total*1<1000?item.comment_total:'999+'}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- 右 -->
+          <view class="item-right">
+            <view wx:if="{{listidx%2 != 0}}" wx:for='{{lists}}' wx:key='listidx' wx:for-index="listidx">
+              <view class="img-block pic-num-{{item.files.length}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}">
+                <image src="{{item.files[0].thumb}}" mode="widthFix" data-src='{{item.files[0].thumb}}' data-urls='{{item.files}}' wx:if="{{item.files[0].type==1}}"></image>
+                <view class="vedio-block videoed" wx:if='{{status_type=="list" && item.files[0].type==2}}'>
+                  <video class="video_label" poster='{{item.files[0].video_thumb}}' src="{{item.files[0].file_path}}" controls object-fit='cover' autoplay='{{false}}' loop='{{false}}'></video>
+                  <view class="videoplay"></view>
+                </view>
+              </view>
+              <view class="list-contener">
+                <view class="soft-content style{{show_type}} {{moreData==item.id?'':'hide-more'}}" bindtap="goDetail" data-id="{{item.id}}" data-idx="{{listidx}}" data-type="{{item.files[0].type}}">{{item.title}}</view>
+                <!-- 底部交互 -->
+                <view class="oprate style{{show_type}}" wx:if='{{status_type=="list" || !status_type}}'>
+                  <view class="publisher" wx:if="{{show_set.show_fber*1}}">
+                    <image src="{{item.fbtximg}}" mode="widthFix" data-src='{{item.fbtximg}}'></image>
+                    <text>{{item.fbname}}</text>
+                  </view>
+                  <view class="read" wx:if="{{show_set.show_view*1}}">{{item.view_num}}阅读</view>
+                  <view class="like go-like" bindtap="clickHeart" data-id="{{item.id}}" data-idxs="{{listidx}}" style="color:{{item.liked?themeColorValue:'rgba(145,147,152,1)'}}" wx:if="{{show_set.show_like*1}}">
+                    <text class="iconfont {{item.liked?'icon-xihuan':'icon-hert'}}"></text>
+                    <text>{{item.like_num}}</text>
+                  </view>
+                  <view class="grass-btn-ico" data-id="{{item.id}}" data-idx="{{listidx}}" data-comment="{{1}}" data-type="{{item.files[0].type}}" catchtap="goDetail" style="color:rgba(145,147,152,1);" wx:if="{{show_set.show_comment*1}}">
+                    <text class="iconfont icon-pinglun"></text>
+                    <text>{{item.comment_total*1<1000?item.comment_total:'999+'}}</text>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view> 
+
+      <!-- 上拉页面加载的圈 -->
+      <view class="loding end" style="margin:80rpx 0;" wx:if='{{lists && lists.length>9 && isLoading}}'>
+        <text class="iconfont icon-loading"></text>
+        <text>加载中</text>
+      </view>
+      <!-- The End -->
+      <view class="end" style="margin:80rpx 0;" wx:if='{{lists && lists.length>0 && no_more && !isLoading}}'>
+        <text>THE  END</text>
+      </view>
+    </view>
+  </view>
+  <!-- 页面内容为空 -->
+  <view class="main" wx:if='{{lists&& lists.length==0 && tabIndex != 0}}'>
+    <view class="data_null_block">
+      <image src="https://s.404.cn/applet/images/wxcopy/empty-tip.png" style="width:520rpx;" mode="widthFix"></image>
+      <text class="tips">暂无动态，赶紧去发布吧～</text>
+    </view>
+  </view>
+</view>
+<!-- 底部Tab -->
+<include src="/pages/public/page_footer.wxml"></include>

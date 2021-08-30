@@ -1,0 +1,23 @@
+<!--拼团--产品信息通用模板-->
+<template name="TshoppingProduct">
+    <import src="../public/TshoppingProduct.wxml" />
+    <view class="shoppingProduct clearfix" data-page="page.public.shoppingProduct">
+        <view class="shoppingImg">
+            <image src="{{product.image}}" mode="aspectFit"></image>
+        </view>
+        <view class="shoppingInfo clearfix">
+            <view class="shoppingName textOmitted2">{{product.product_name || product.name}}</view>
+            <view class="">
+                <text class="price" wx:if="{{product.price}}">¥{{product.price}}</text>
+                <text class="price" wx:if="{{product.pro_price}}">¥{{product.pro_price}}</text>
+                <text class="shoppingSole" wx:if="{{product.quantity}}">库存:{{product.quantity}}</text>
+                <text class="shoppingSole" wx:if="{{product.sku_data_arr}}">
+                    <block wx:for="{{product.sku_data_arr}}" wx:for-item="sku_data_arr" wx:key="">{{sku_data_arr.name}}:{{sku_data_arr.value}} </block>
+                </text>
+            </view>
+        </view>
+    </view>
+    <view class="shopName" wx:if="{{product.pro_num}}">
+        <text>购买数量：{{product.pro_num}}</text>
+    </view>
+</template>
